@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, StyleSheet, Image, Text} from 'react-native';
 
-const SectionCoursesItem = (props) => {
+const ListCoursesItem = (props) => {
   return (
     <View style={styles.item}>
       <Image
         style={styles.img}
-        source={require('../../../../../assets/rambutan.jpg')}
+        source={require('../../../../assets/rambutan.jpg')}
       />
       <View style={styles.content}>
         <Text>{props.item.title}</Text>
@@ -19,17 +19,15 @@ const SectionCoursesItem = (props) => {
     </View>
   );
 };
-export default SectionCoursesItem;
+export default ListCoursesItem;
 const styles = StyleSheet.create({
   item: {
     margin: 5,
-    width: 200,
-    height: 180,
-    backgroundColor: 'lightgray',
+    flexDirection: 'row',
   },
   img: {
-    width: 200,
-    height: 100,
+    width: 100,
+    height: 50,
   },
   content: {
     margin: 5,

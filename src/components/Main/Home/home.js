@@ -1,12 +1,15 @@
-import React from "react";
-import { ScrollView,StyleSheet } from "react-native";
-import SectionCourses from "./SectionCourses/section-courses";
-import ImageButton from "../../Common/image-button";
+import React from 'react';
+import {ScrollView, StyleSheet} from 'react-native';
+import SectionCourses from './SectionCourses/section-courses';
+import ImageButton from '../../Common/image-button';
 
 const Home = () => {
+  const onPressNewReleased = () => {
+    console.log('Pressed on new released');
+  };
   return (
     <ScrollView>
-      <ImageButton title='NEW\nRELEASE'/>
+      <ImageButton title="NEW RELEASE" onPress={onPressNewReleased} />
       <SectionCourses title="Continue learning" />
       <SectionCourses title="Path" />
       <SectionCourses title="Channel" />

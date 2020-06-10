@@ -14,6 +14,7 @@ import {
 
 const Login = () => {
   const txtPassword = useRef(null);
+  const btnLogin = useRef(null);
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -40,8 +41,9 @@ const Login = () => {
                 secureTextEntry
                 autoCorrect={false}
                 ref={txtPassword}
+                onSubmitEditing={() => btnLogin.current.focus()}
               />
-              <TouchableOpacity style={styles.buttonContainer}>
+              <TouchableOpacity ref={btnLogin} style={styles.buttonContainer}>
                 <Text style={styles.buttonText}>SIGN IN</Text>
               </TouchableOpacity>
             </View>

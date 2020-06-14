@@ -1,9 +1,38 @@
 import React from 'react';
-import {View, StyleSheet, Image, Text} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  TouchableOpacity,
+  Alert,
+  Share,
+} from 'react-native';
 
 const ListCoursesItem = (props) => {
+  const onPressListItem = () => {
+    props.navigation.navigate('CourseDetail', {item: props.item});
+  };
   return (
-    <View style={styles.item}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => {
+        // Alert.alert('Notification', `Pressed on ${props.item.title}`, [
+        //   {
+        //     text: 'Cancel',
+        //     onPress: () => console.log('Pressed on cancel line: 18'),
+        //   },
+        //   {
+        //     text: 'Ok',
+        //     onPress: () => {
+        //       Share.share({
+        //         message: 'React native with hook',
+        //       });
+        //     },
+        //   },
+        // ]);
+        onPressListItem();
+      }}>
       <Image
         style={styles.img}
         source={require('../../../../assets/rambutan.jpg')}
@@ -16,7 +45,7 @@ const ListCoursesItem = (props) => {
             styles.darkText
           }>{`${props.item.level} . ${props.item.released} . ${props.item.duration}`}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 export default ListCoursesItem;

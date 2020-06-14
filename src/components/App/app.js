@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View, StatusBar} from 'react-native';
-import Login from '../Authentication/Login/login';
+import {StyleSheet, Text, View, StatusBar, Button, Alert} from 'react-native';
 import SplashScreen from '../../SplashScreen/splash-screen';
+import RootStack from '../Navigation/root-stack';
 
-export default function App() {
+const App = () => {
   const [currentScreen, setCurrentScreen] = useState('SplashScreen');
   setTimeout(() => {
     setCurrentScreen('Login');
@@ -11,16 +11,14 @@ export default function App() {
   return (
     <View style={styles.container}>
       <StatusBar hidden={true} />
-      {/* <Home /> */}
-      {/* <ListCourses /> */}
-      {currentScreen === 'SplashScreen' ? <SplashScreen /> : <Login />}
+      {currentScreen === 'SplashScreen' ? <SplashScreen /> : <RootStack />}
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 24,
   },
 });
+export default App;

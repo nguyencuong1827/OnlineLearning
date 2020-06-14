@@ -3,7 +3,7 @@ import {ScrollView, StyleSheet} from 'react-native';
 import SectionCourses from './SectionCourses/section-courses';
 import ImageButton from '../../Common/image-button';
 
-const Home = () => {
+const Home = (props) => {
   const onPressNewReleased = () => {
     console.log('Pressed on new released');
   };

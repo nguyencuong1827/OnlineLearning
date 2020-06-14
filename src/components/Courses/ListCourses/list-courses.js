@@ -70,9 +70,67 @@ const ListCourses = (props) => {
         },
       ],
     },
+    {
+      title: 'Web',
+      data: [
+        {
+          id: 1,
+          title: 'React Js',
+          author: 'Hai Pham',
+          level: 'Advance',
+          released: 'May 6, 2020',
+          duration: '30 hours',
+        },
+        {
+          id: 2,
+          title: 'Angular',
+          author: 'Hai Pham',
+          level: 'Advance',
+          released: 'June 6, 2019',
+          duration: '40 hours',
+        },
+        {
+          id: 3,
+          title: 'Express Js',
+          author: 'Nguyen Cuong',
+          level: 'Advance',
+          released: 'June 5, 2019',
+          duration: '40 hours',
+        },
+      ],
+    },
+    {
+      title: 'Web',
+      data: [
+        {
+          id: 1,
+          title: 'React Js',
+          author: 'Hai Pham',
+          level: 'Advance',
+          released: 'May 6, 2020',
+          duration: '30 hours',
+        },
+        {
+          id: 2,
+          title: 'Angular',
+          author: 'Hai Pham',
+          level: 'Advance',
+          released: 'June 6, 2019',
+          duration: '40 hours',
+        },
+        {
+          id: 3,
+          title: 'Express Js',
+          author: 'Nguyen Cuong',
+          level: 'Advance',
+          released: 'June 5, 2019',
+          duration: '40 hours',
+        },
+      ],
+    },
   ];
   const renderItem = (item) => {
-    return <ListCoursesItem item={item} />;
+    return <ListCoursesItem item={item} navigation={props.navigation} />;
   };
   const renderHeader = (title) => {
     return (
@@ -124,6 +182,7 @@ const styles = StyleSheet.create({
   searchView: {
     flexDirection: 'row',
     margin: 5,
+    height: 50,
   },
   textInput: {
     borderWidth: 1,
@@ -133,6 +192,6 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   header: {
-    color: 'white',
+    backgroundColor: 'white',
   },
 });

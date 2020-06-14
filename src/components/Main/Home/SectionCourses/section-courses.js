@@ -1,7 +1,21 @@
 import React from 'react';
-import {View, StyleSheet, ScrollView, Text} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import SectionCoursesItem from '../SectionsCoursesItem/section-coueses-item';
 
+const SeeAllButton = (props) => {
+  return (
+    <TouchableOpacity style={styles.seeAllButton}>
+      <Text style={styles.title}>{props.title}</Text>
+      <Text style={styles.seeAll}>See all {'>'}</Text>
+    </TouchableOpacity>
+  );
+};
 const SectionCourses = (props) => {
   const courses = [
     {
@@ -11,6 +25,8 @@ const SectionCourses = (props) => {
       level: 'Advance',
       released: 'May 6, 2020',
       duration: '30 hours',
+      averageRating: 4.4,
+      totalRating: 200,
     },
     {
       id: 2,
@@ -19,6 +35,8 @@ const SectionCourses = (props) => {
       level: 'Advance',
       released: 'June 6, 2019',
       duration: '40 hours',
+      averageRating: 4.2,
+      totalRating: 227,
     },
     {
       id: 3,
@@ -27,6 +45,8 @@ const SectionCourses = (props) => {
       level: 'Advance',
       released: 'June 5, 2019',
       duration: '40 hours',
+      averageRating: 4.8,
+      totalRating: 600,
     },
   ];
 
@@ -35,15 +55,39 @@ const SectionCourses = (props) => {
       <SectionCoursesItem item={item} key={item.id} />
     ));
   };
-
   return (
-    <View>
-      <View>
-        <Text>{props.title}</Text>
-      </View>
+    <View style={styles.container}>
+      <SeeAllButton title={props.title} />
       <ScrollView horizontal={true}>{renderListItems(courses)}</ScrollView>
     </View>
   );
 };
 export default SectionCourses;
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginLeft: 10,
+    marginBottom: 10,
+  },
+  seeAllButton: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: 10,
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 18,
+  },
+  seeAll: {
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 10,
+    fontSize: 11,
+    height: 20,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    backgroundColor: '#d1c4e9',
+    paddingHorizontal: 10,
+  },
+});

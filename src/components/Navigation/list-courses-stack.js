@@ -8,9 +8,9 @@ import CourseDetail from '../CourseDetail/course-detail';
 const Stack = createStackNavigator();
 const screenOptions = {
   headerStyle: {
-    backgroundColor: '#34495e',
+    backgroundColor: 'white',
   },
-  headerTintColor: '#fff',
+  headerTintColor: 'black',
   headerTitleStyle: {
     fontWeight: 'bold',
   },

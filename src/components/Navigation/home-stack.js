@@ -3,14 +3,20 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Home from '../Main/Home/home';
 
 const Stack = createStackNavigator();
+const screenOptions = {
+  headerStyle: {
+    backgroundColor: 'white',
+  },
+  headerTintColor: 'black',
+  headerTitleStyle: {
+    fontWeight: 'bold',
+  },
+  headerTitleAlign: 'center',
+};
 const HomeStack = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={Home}
-        options={{title: 'Home', headerShown: false}}
-      />
+    <Stack.Navigator screenOptions={screenOptions}>
+      <Stack.Screen name="Home" component={Home} options={{title: 'Home'}} />
     </Stack.Navigator>
   );
 };

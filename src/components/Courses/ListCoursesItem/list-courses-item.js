@@ -35,7 +35,7 @@ const ListCoursesItem = (props) => {
       }}>
       <Image
         style={styles.img}
-        source={require('../../../../assets/rambutan.jpg')}
+        source={require('../../../../assets/images/rambutan.jpg')}
       />
       <View style={styles.content}>
         <Text>{props.item.title}</Text>

@@ -1,9 +1,7 @@
 import React from 'react';
-import {View} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Login from '../Authentication/Login/login';
 import HomeStack from './home-stack';
-import ListCoursesStack from './list-courses-stack';
+import DownloadStack from './download-stack';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const Tab = createBottomTabNavigator();
@@ -17,6 +15,9 @@ const RootTab = () => {
           if (route.name === 'Home') {
             iconName = 'home';
           }
+          if (route.name === 'Downloads') {
+            iconName = 'clouddownloado';
+          }
 
           // You can return any component that you like here!
           return <Icon name={iconName} size={size} color={color} />;
@@ -27,7 +28,7 @@ const RootTab = () => {
         inactiveTintColor: 'gray',
       }}>
       <Tab.Screen name="Home" component={HomeStack} options={{title: 'Home'}} />
-      <Tab.Screen name="ListCourses" component={ListCoursesStack} />
+      <Tab.Screen name="Downloads" component={DownloadStack} />
     </Tab.Navigator>
   );
 };

@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  Image,
-  Text,
-  TouchableOpacity,
-  Alert,
-  Share,
-} from 'react-native';
+import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
+import {Rating} from 'react-native-elements';
 
 const ListCoursesItem = (props) => {
   const onPressListItem = () => {
@@ -44,6 +37,16 @@ const ListCoursesItem = (props) => {
           style={
             styles.darkText
           }>{`${props.item.level} . ${props.item.released} . ${props.item.duration}`}</Text>
+        <View style={styles.rating}>
+          <Rating
+            imageSize={20}
+            readonly
+            startingValue={props.item.averageRating}
+          />
+          <Text style={styles.darkText}>
+            {'   '}({props.item.totalRating})
+          </Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -51,17 +54,21 @@ const ListCoursesItem = (props) => {
 export default ListCoursesItem;
 const styles = StyleSheet.create({
   item: {
-    margin: 5,
+    margin: 10,
     flexDirection: 'row',
   },
   img: {
-    width: 100,
-    height: 50,
+    width: 150,
+    height: 80,
   },
   content: {
-    margin: 5,
+    height: 80,
+    paddingLeft: 10,
   },
   darkText: {
-    color: 'darkgray',
+    color: 'gray',
+  },
+  rating: {
+    flexDirection: 'row',
   },
 });

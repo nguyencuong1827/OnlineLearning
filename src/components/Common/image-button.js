@@ -8,14 +8,12 @@ import {
 
 const ImageButton = (props) => {
   return (
-    <ImageBackground
-      style={styles.button}
-      source={{
-        uri:
-          'https://cdn4.vectorstock.com/i/1000x1000/24/13/brick-wall-room-background-neon-light-vector-27852413.jpg',
-      }}>
+    <ImageBackground style={props.buttonStyle.button} source={props.source}>
       <TouchableOpacity style={styles.touch} onPress={props.onPress}>
-        <Text style={styles.text}>{props.title}</Text>
+        <Text style={props.title1Style.title1}>{props.title1}</Text>
+        {props.title2 ? (
+          <Text style={props.title2Style.title2}>{props.title2}</Text>
+        ) : null}
       </TouchableOpacity>
     </ImageBackground>
   );
@@ -24,19 +22,9 @@ const ImageButton = (props) => {
 export default ImageButton;
 
 const styles = StyleSheet.create({
-  button: {
-    height: 100,
-    margin: 5,
-  },
   touch: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: 'white',
-    textAlign: 'center',
   },
 });

@@ -36,7 +36,7 @@ const ListCoursesItem = (props) => {
         <Text
           style={
             styles.darkText
-          }>{`${props.item.level} . ${props.item.released} . ${props.item.duration}`}</Text>
+          }>{`${props.item.level} . ${props.item.released} . ${props.item.duration} hours`}</Text>
         <View style={styles.rating}>
           <Rating
             imageSize={20}

@@ -4,7 +4,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import Login from '../Authentication/Login/login';
 import RootTab from './root-tab';
-import CourseDetail from '../CourseDetail/course-detail';
+import CourseDetail from '../Courses/CourseDetail/course-detail';
+import PathDetail from '../Paths/PathDetail/path-detail';
 
 const Stack = createStackNavigator();
 const RootStack = () => {
@@ -25,6 +26,11 @@ const RootStack = () => {
           name="CourseDetail"
           component={CourseDetail}
           options={{title: 'Course Detail'}}
+        />
+        <Stack.Screen
+          name="PathDetail"
+          component={PathDetail}
+          options={{title: 'Path Detail'}}
         />
       </Stack.Navigator>
     </NavigationContainer>

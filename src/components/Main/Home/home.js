@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView, StyleSheet, ImageBackground, Text} from 'react-native';
-import SectionCourses from './SectionCourses/section-courses';
+import SectionCourses from '../../Courses/SectionCourses/section-courses';
 
 import MyPaths from './MyPaths/my-paths';
 import MyChannels from './MyChannels/my-channels';
@@ -9,10 +9,7 @@ import Bookmarks from './Bookmarks/bookmarks';
 const WelcomeImage = () => (
   <ImageBackground
     style={styles.image}
-    source={{
-      uri:
-        'https://cdn4.vectorstock.com/i/1000x1000/24/13/brick-wall-room-background-neon-light-vector-27852413.jpg',
-    }}>
+    source={require('../../../../assets/images/welcome.jpg')}>
     <Text style={styles.text}>Welcome to DoubleSeven</Text>
   </ImageBackground>
 );

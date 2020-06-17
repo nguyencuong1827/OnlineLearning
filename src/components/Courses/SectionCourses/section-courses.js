@@ -24,7 +24,7 @@ const SectionCourses = (props) => {
       author: 'Hai Pham',
       level: 'Advance',
       released: 'May 6, 2020',
-      duration: '30 hours',
+      duration: 30,
       averageRating: 4.4,
       totalRating: 200,
     },
@@ -34,7 +34,7 @@ const SectionCourses = (props) => {
       author: 'Hai Pham',
       level: 'Advance',
       released: 'June 6, 2019',
-      duration: '40 hours',
+      duration: 40,
       averageRating: 4.2,
       totalRating: 227,
     },
@@ -44,21 +44,25 @@ const SectionCourses = (props) => {
       author: 'Nguyen Cuong',
       level: 'Advance',
       released: 'June 5, 2019',
-      duration: '40 hours',
+      duration: 40,
       averageRating: 4.8,
       totalRating: 600,
     },
   ];
 
-  const renderListItems = (courses) => {
+  const renderListItems = () => {
     return courses.map((item) => (
-      <SectionCoursesItem item={item} key={item.id} />
+      <SectionCoursesItem
+        item={item}
+        key={item.id}
+        navigation={props.navigation}
+      />
     ));
   };
   return (
     <View style={styles.container}>
       <SeeAllButton title={props.title} />
-      <ScrollView horizontal={true}>{renderListItems(courses)}</ScrollView>
+      <ScrollView horizontal={true}>{renderListItems()}</ScrollView>
     </View>
   );
 };

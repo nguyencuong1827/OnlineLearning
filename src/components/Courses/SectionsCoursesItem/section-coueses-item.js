@@ -7,7 +7,7 @@ const SectionCoursesItem = (props) => {
     <View style={styles.item}>
       <Image
         style={styles.img}
-        source={require('../../../../../assets/images/watermelon.jpg')}
+        source={require('../../../../assets/images/watermelon.jpg')}
       />
       <View style={styles.content}>
         <Text style={styles.title}>{props.item.title}</Text>
@@ -15,7 +15,7 @@ const SectionCoursesItem = (props) => {
         <Text
           style={
             styles.darkText
-          }>{`${props.item.level} . ${props.item.released} . ${props.item.duration}`}</Text>
+          }>{`${props.item.level} . ${props.item.released} . ${props.item.duration} hours`}</Text>
         <View style={styles.rating}>
           <Rating
             imageSize={20}

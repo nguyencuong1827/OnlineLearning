@@ -26,9 +26,9 @@ const ListTopAuthors = () => {
     },
   ];
 
-  const renderAuthor = (author) => {
+  const renderAuthor = (author, index) => {
     return (
-      <View style={styles.author}>
+      <View key={index} style={styles.author}>
         <Avatar
           rounded
           size="large"
@@ -43,7 +43,7 @@ const ListTopAuthors = () => {
     );
   };
   const renderListTopAutor = () => {
-    return topAuthor.map((author, index) => renderAuthor(author));
+    return topAuthor.map((author, index) => renderAuthor(author, index));
   };
   return (
     <View style={styles.container}>

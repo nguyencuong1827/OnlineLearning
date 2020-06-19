@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-const AllResults = () => {
+const AllResults = (props) => {
   return (
     <View>
       <Text>All result</Text>

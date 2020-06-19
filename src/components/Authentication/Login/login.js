@@ -31,6 +31,7 @@ const Login = () => {
                 placeholder="Username"
                 placeholderTextColor="gray"
                 keyboardType="email-address"
+                returnKeyType="next"
                 onSubmitEditing={() => txtPassword.current.focus()}
               />
               <TextInput

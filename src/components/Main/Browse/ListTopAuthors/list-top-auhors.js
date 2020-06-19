@@ -6,23 +6,23 @@ const ListTopAuthors = () => {
   const topAuthor = [
     {
       name: 'Cristiano Ronaldo',
-      imgUrl: require('../../../../../assets/images/cristiano-ronaldo.jpg'),
+      urlAvatar: require('../../../../../assets/images/cristiano-ronaldo.jpg'),
     },
     {
       name: 'Barack Obamaa',
-      imgUrl: require('../../../../../assets/images/barack-obama.jpg'),
+      urlAvatar: require('../../../../../assets/images/barack-obama.jpg'),
     },
     {
       name: 'Taylor Swift',
-      imgUrl: require('../../../../../assets/images/taylor-swift.jpg'),
+      urlAvatar: require('../../../../../assets/images/taylor-swift.jpg'),
     },
     {
       name: 'Kaká',
-      imgUrl: require('../../../../../assets/images/kaka.jpg'),
+      urlAvatar: require('../../../../../assets/images/kaka.jpg'),
     },
     {
       name: 'John Boyds',
-      imgUrl: require('../../../../../assets/images/john-boyd.jpg'),
+      urlAvatar: require('../../../../../assets/images/john-boyd.jpg'),
     },
   ];
 
@@ -32,7 +32,7 @@ const ListTopAuthors = () => {
         <Avatar
           rounded
           size="large"
-          source={author.imgUrl}
+          source={author.urlAvatar}
           containerStyle={styles.avatar}
         />
         <View style={styles.groupName}>

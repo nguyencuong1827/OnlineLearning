@@ -15,7 +15,7 @@ const screenOptions = {
 };
 const HomeStack = () => {
   return (
-    <Stack.Navigator screenOptions={screenOptions}>
+    <Stack.Navigator screenOptions={screenOptions} initialRouteName="Home">
       <Stack.Screen name="Home" component={Home} options={{title: 'Home'}} />
     </Stack.Navigator>
   );

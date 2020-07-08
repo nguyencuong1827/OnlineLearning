@@ -2,7 +2,7 @@ export const courses = [
   {
     id: 1,
     title: 'React Native',
-    author: 'Hai Pham',
+    author: 'Nhu Daika',
     level: 'Advance',
     released: 'May 6, 2020',
     duration: 30,
@@ -13,7 +13,7 @@ export const courses = [
   {
     id: 2,
     title: 'Swift',
-    author: 'Hai Pham',
+    author: 'Nhu Daika',
     level: 'Advance',
     released: 'June 6, 2019',
     duration: 40,
@@ -57,7 +57,7 @@ export const courses = [
   {
     id: 6,
     title: 'Node Js',
-    author: 'Hai pham',
+    author: 'Nhu Daika',
     level: 'Advance',
     released: 'May 2, 2020',
     duration: 40,
@@ -69,29 +69,39 @@ export const courses = [
 
 export const authors = [
   {
-    name: 'Cristiano Ronaldo',
+    name: 'Nguyen Cuong',
     intro: '',
     urlAvatar: require('../../assets/images/cristiano-ronaldo.jpg'),
+    skills: 'React JS',
+    paths: 'React',
   },
   {
-    name: 'Barack Obamaa',
+    name: 'Nhu Daika',
     intro: '',
     urlAvatar: require('../../assets/images/barack-obama.jpg'),
+    skills: 'React JS',
+    paths: 'Node js',
   },
   {
     name: 'Taylor Swift',
     intro: '',
     urlAvatar: require('../../assets/images/taylor-swift.jpg'),
+    skills: 'Android',
+    paths: 'Android X',
   },
   {
     name: 'Kaká',
     intro: '',
     urlAvatar: require('../../assets/images/kaka.jpg'),
+    skills: 'Swift',
+    paths: 'iOS',
   },
   {
     name: 'John Boyds',
     intro: '',
     urlAvatar: require('../../assets/images/john-boyd.jpg'),
+    skills: 'Docker',
+    paths: 'CICD',
   },
 ];
 
@@ -114,6 +124,14 @@ export const paths = [
   {
     id: 3,
     title: 'Android',
+    numberCourses: 12,
+    duration: 30,
+    averageRating: 4.2,
+    urlImg: '',
+  },
+  {
+    id: 4,
+    title: 'CICD',
     numberCourses: 12,
     duration: 30,
     averageRating: 4.2,

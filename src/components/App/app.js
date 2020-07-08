@@ -1,13 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, StatusBar, Button, Alert} from 'react-native';
 import SplashScreen from '../../SplashScreen/splash-screen';
-import RootStack from '../Navigation/root-stack';
+import RootStack from '../../Navigation';
 
 const App = () => {
   const [currentScreen, setCurrentScreen] = useState('SplashScreen');
-  setTimeout(() => {
-    setCurrentScreen('Login');
-  }, 3000);
+  useEffect(() => {
+    const time = setTimeout(() => {
+      setCurrentScreen('Login');
+    }, 2000);
+    return () => clearTimeout(time);
+  }, []);
   return (
     <View style={styles.container}>
       <StatusBar hidden={true} />

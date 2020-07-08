@@ -9,6 +9,7 @@ import {
   Text,
 } from 'react-native';
 import ListCoursesItem from '../ListCoursesItem/list-courses-item';
+import Separator from '../../Separator';
 
 const ListCourses = (props) => {
   const courses = [
@@ -49,9 +50,6 @@ const ListCourses = (props) => {
   const renderHeader = (title) => {
     return <Text style={styles.header}>{title}</Text>;
   };
-  const renderSeparator = () => {
-    return <View style={styles.separator} />;
-  };
   const searchView = () => {
     return (
       <View style={styles.searchView}>
@@ -69,7 +67,7 @@ const ListCourses = (props) => {
         keyExtractor={(item, index) => index.toString()}
         data={courses}
         renderItem={({item}) => renderItem(item)}
-        ItemSeparatorComponent={renderSeparator}
+        ItemSeparatorComponent={Separator}
         // ListHeaderComponent={searchView}
       />
       {/* <SectionList
@@ -85,17 +83,6 @@ export default ListCourses;
 const styles = StyleSheet.create({
   container: {
     margin: 10,
-  },
-  separator: {
-    height: 1,
-    width: '90%',
-    backgroundColor: '#CED0CE',
-    alignSelf: 'center',
-  },
-  searchView: {
-    flexDirection: 'row',
-    margin: 5,
-    height: 50,
   },
   textInput: {
     borderWidth: 1,

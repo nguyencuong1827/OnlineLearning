@@ -30,7 +30,7 @@ const RootTab = () => {
         activeTintColor: '#1565c0',
         inactiveTintColor: 'gray',
         style: {
-          backgroundColor: '#f2f2f2',
+          backgroundColor: '#fff',
         },
       }}
       navigationOptions={{

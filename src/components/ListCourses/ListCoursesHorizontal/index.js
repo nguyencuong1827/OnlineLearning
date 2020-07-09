@@ -1,13 +1,13 @@
 import React from 'react';
-import {View, StyleSheet, ScrollView, FlatList, Alert} from 'react-native';
-import CourseItem from './CourseItem';
+import {View, StyleSheet, FlatList, Alert} from 'react-native';
+import CourseItemHorizontal from './CourseItem';
 import SeeAllButton from '../../SeeAllButton';
 import {courses} from '../../../globals/fake-data';
 import {ScaleSize} from '../../../globals/styles';
 
 const ListCoursesHorizontal = (props) => {
   const renderCourseItem = (item) => (
-    <CourseItem item={item} navigation={props.navigation} />
+    <CourseItemHorizontal item={item} navigation={props.navigation} />
   );
   const showAllCourses = () => {
     Alert.alert('Comming soon');
@@ -20,7 +20,7 @@ const ListCoursesHorizontal = (props) => {
         showsHorizontalScrollIndicator={false}
         data={courses}
         renderItem={({item}) => renderCourseItem(item)}
-        keyExtractor={(item, index) => item.id + index.toString()}
+        keyExtractor={(item, index) => index.toString()}
         getItemLayout={(data, index) => ({
           length: ScaleSize.scaleSizeWidth(210),
           offset: ScaleSize.scaleSizeWidth(210) * index,

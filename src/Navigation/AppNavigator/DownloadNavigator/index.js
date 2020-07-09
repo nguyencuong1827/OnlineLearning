@@ -1,13 +1,13 @@
 import React from 'react';
 import {Button, Alert} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import Downloads from '../../../components/Downloads/downloads';
+import Downloads from '../../../components/Downloads';
 import {DownloadScreen} from '../../../globals/constants/screen-name';
 
 const Stack = createStackNavigator();
 const screenOptions = {
   headerStyle: {
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
   },
   headerTintColor: 'black',
   headerTitleStyle: {

@@ -1,25 +1,42 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Alert, StyleSheet} from 'react-native';
-import ListCourses from '../Courses/ListCourses/list-courses';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Alert,
+  StyleSheet,
+  SafeAreaView,
+} from 'react-native';
+import {ListCoursesVertical} from '../ListCourses';
 
 const Downloads = (props) => {
-  return (
-    <View>
+  const Header = () => {
+    return (
       <View style={styles.title}>
         <Text style={styles.downloads}>Downloads</Text>
         <TouchableOpacity onPress={() => Alert.alert('Comming soon!!!')}>
           <Text style={styles.remove}>Remove all</Text>
         </TouchableOpacity>
       </View>
-      <ListCourses {...props} />
-    </View>
+    );
+  };
+  return (
+    <SafeAreaView style={styles.container}>
+      <Header />
+      <ListCoursesVertical {...props} />
+    </SafeAreaView>
   );
 };
 
 export default Downloads;
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginBottom: 25,
+  },
   title: {
-    margin: 10,
+    marginRight: 10,
+    marginLeft: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -30,5 +47,8 @@ const styles = StyleSheet.create({
   remove: {
     color: '#1565c0',
     fontSize: 14,
+  },
+  list: {
+    flex: 9,
   },
 });

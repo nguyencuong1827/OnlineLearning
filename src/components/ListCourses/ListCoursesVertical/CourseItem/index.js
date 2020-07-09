@@ -1,18 +1,38 @@
 import React from 'react';
 import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
-import {ScaleSize} from '../../../../globals/styles';
 import Rating from 'react-native-star-rating';
+import {ScaleSize} from '../../../../globals/styles';
 
-const CourseItemHorizontal = (props) => {
+const CourseItemVertical = (props) => {
+  const onPressListItem = () => {
+    props.navigation.navigate('CourseDetail', {item: props.item});
+  };
   return (
-    <TouchableOpacity style={styles.item}>
+    <TouchableOpacity
+      style={styles.item}
+      onPress={() => {
+        // Alert.alert('Notification', `Pressed on ${props.item.title}`, [
+        //   {
+        //     text: 'Cancel',
+        //     onPress: () => console.log('Pressed on cancel line: 18'),
+        //   },
+        //   {
+        //     text: 'Ok',
+        //     onPress: () => {
+        //       Share.share({
+        //         message: 'React native with hook',
+        //       });
+        //     },
+        //   },
+        // ]);
+        onPressListItem();
+      }}>
       <Image
         style={styles.img}
-        activeOpacity={0.6}
-        source={require('../../../../../assets/images/watermelon.jpg')}
+        source={require('../../../../../assets/images/rambutan.jpg')}
       />
       <View style={styles.content}>
-        <Text style={styles.title}>{props.item.title}</Text>
+        <Text>{props.item.title}</Text>
         <Text style={styles.darkText}>{props.item.author}</Text>
         <Text
           style={
@@ -35,39 +55,22 @@ const CourseItemHorizontal = (props) => {
     </TouchableOpacity>
   );
 };
-export default CourseItemHorizontal;
+export default CourseItemVertical;
 const styles = StyleSheet.create({
   item: {
-    marginRight: 15,
-    marginLeft: 10,
-    width: ScaleSize.scaleSizeWidth(210),
-    height: ScaleSize.scaleSizeWidth(200),
-    backgroundColor: '#fff',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 5,
-      height: 10,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 5,
-    elevation: 10,
+    margin: 10,
+    flexDirection: 'row',
+    height: ScaleSize.scaleSizeWidth(65),
   },
   img: {
-    width: ScaleSize.scaleSizeWidth(210),
-    height: ScaleSize.scaleSizeWidth(100),
-    resizeMode: 'cover',
+    width: ScaleSize.scaleSizeWidth(80),
+    height: ScaleSize.scaleSizeWidth(60),
   },
   content: {
-    padding: 10,
-    backgroundColor: '#d9d9d9',
-    height: ScaleSize.scaleSizeWidth(200),
+    paddingLeft: 10,
   },
   darkText: {
     color: 'gray',
-    marginBottom: 3,
-  },
-  title: {
-    marginBottom: 3,
   },
   ratingContainer: {
     flexDirection: 'row',

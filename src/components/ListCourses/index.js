@@ -1,2 +1,3 @@
 import ListCoursesHorizontal from './ListCoursesHorizontal';
-export {ListCoursesHorizontal};
+import ListCoursesVertical from './ListCoursesVertical';
+export {ListCoursesHorizontal, ListCoursesVertical};

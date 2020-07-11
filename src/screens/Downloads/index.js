@@ -7,7 +7,7 @@ import {
   StyleSheet,
   SafeAreaView,
 } from 'react-native';
-import {ListCoursesVertical} from '../ListCourses';
+import {ListCoursesVertical} from '../../components/ListCourses';
 
 const Downloads = (props) => {
   const Header = () => {
@@ -32,7 +32,6 @@ export default Downloads;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 25,
   },
   title: {
     marginRight: 10,

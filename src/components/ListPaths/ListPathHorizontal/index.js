@@ -1,48 +1,57 @@
 import React from 'react';
-import {View, TouchableOpacity, StyleSheet, Text, Alert} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import {View, StyleSheet, ScrollView, FlatList} from 'react-native';
+import SeeAllButton from '../../../components/SeeAllButton';
+import PathItem from './PathItem';
+import {paths} from '../../../globals/fake-data';
+import {ScaleSize} from '../../../globals/styles';
 
-const ListPathHorizontal = (props) => {
+const ListPathsHorizontal = (props) => {
+  const renderListItems = (item) => (
+    <PathItem item={item} key={item.id} navigation={props.navigation} />
+  );
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>My paths</Text>
-      <View style={styles.content}>
-        <Icon name="vibration" size={40} color="gray" />
-        <Text style={styles.textCenter}>
-          Path will guide you in learning a specific skill or teachnology
-        </Text>
-        <TouchableOpacity onPress={() => Alert.alert('Comming soon!')}>
-          <Text style={styles.viewAllPath}>View all paths</Text>
-        </TouchableOpacity>
-      </View>
+      <SeeAllButton title="Paths" />
+      <FlatList
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        data={paths}
+        renderItem={({item}) => renderListItems(item)}
+        keyExtractor={(item, index) => index.toString()}
+        getItemLayout={(data, index) => ({
+          length: ScaleSize.scaleSizeWidth(210),
+          offset: ScaleSize.scaleSizeWidth(210) * index,
+          index,
+        })}
+      />
     </View>
   );
 };
-
-export default ListPathHorizontal;
-
+export default ListPathsHorizontal;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 20,
+    margin: 5,
+  },
+  seeAllButton: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: 5,
   },
   title: {
-    fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 10,
+    fontSize: 18,
   },
-  content: {
+  seeAll: {
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 10,
     fontSize: 11,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    padding: 10,
-    height: 200,
-  },
-  textCenter: {
+    height: 20,
     textAlign: 'center',
-  },
-  viewAllPath: {
-    color: '#1565c0',
+    textAlignVertical: 'center',
+    backgroundColor: '#d1c4e9',
+    paddingHorizontal: 10,
   },
 });

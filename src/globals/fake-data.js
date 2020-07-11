@@ -123,14 +123,14 @@ export const paths = [
     numberCourses: 12,
     duration: 30,
     averageRating: 4.2,
-    urlImg: '',
+    urlImg: require('../../assets/images/jackfruit.jpg'),
   },
   {
     id: 2,
     title: 'Swift',
     numberCourses: 16,
     duration: 50,
-    urlImg: '',
+    urlImg: require('../../assets/images/jackfruit.jpg'),
   },
   {
     id: 3,
@@ -138,7 +138,7 @@ export const paths = [
     numberCourses: 12,
     duration: 30,
     averageRating: 4.2,
-    urlImg: '',
+    urlImg: require('../../assets/images/jackfruit.jpg'),
   },
   {
     id: 4,
@@ -146,6 +146,114 @@ export const paths = [
     numberCourses: 12,
     duration: 30,
     averageRating: 4.2,
-    urlImg: '',
+    urlImg: require('../../assets/images/jackfruit.jpg'),
+  },
+];
+
+export const topics = [
+  {
+    id: '1',
+    name: 'conferences',
+    urlImg: require('../../assets/images/conference.jpg'),
+  },
+  {
+    id: '2',
+    name: 'business professional',
+    urlImg: require('../../assets/images/conference.jpg'),
+  },
+  {
+    id: '3',
+    name: 'software development',
+    urlImg: require('../../assets/images/conference.jpg'),
+  },
+  {
+    id: '4',
+    name: 'creative professional',
+    urlImg: require('../../assets/images/conference.jpg'),
+  },
+  {
+    id: '5',
+    name: 'it ops',
+    urlImg: require('../../assets/images/conference.jpg'),
+  },
+  {
+    id: '6',
+    name: 'manufacturing and design',
+    urlImg: require('../../assets/images/conference.jpg'),
+  },
+  {
+    id: '7',
+    name: 'information and cyber security',
+    urlImg: require('../../assets/images/conference.jpg'),
+  },
+  {
+    id: '8',
+    name: 'Architecture and construction',
+    urlImg: require('../../assets/images/conference.jpg'),
+  },
+  {
+    id: '9',
+    name: 'Data professional',
+    urlImg: require('../../assets/images/conference.jpg'),
+  },
+  {
+    id: '10',
+    name: 'certification',
+    urlImg: require('../../assets/images/conference.jpg'),
+  },
+];
+
+export const skills = [
+  {
+    id: '1',
+    name: 'Angular',
+  },
+  {
+    id: '2',
+    name: 'javascript',
+  },
+  {
+    id: '3',
+    name: 'C#',
+  },
+  {
+    id: '4',
+    name: 'Java',
+  },
+  {
+    id: '5',
+    name: 'Data analyst',
+  },
+  {
+    id: '6',
+    name: 'ASP.NET',
+  },
+  {
+    id: '7',
+    name: 'Node js',
+  },
+  {
+    id: '8',
+    name: 'Design Patterns',
+  },
+  {
+    id: '9',
+    name: 'Python',
+  },
+  {
+    id: '10',
+    name: 'React',
+  },
+  {
+    id: '11',
+    name: 'Ios',
+  },
+  {
+    id: '12',
+    name: 'Android ',
+  },
+  {
+    id: '13',
+    name: 'Machine Learning',
   },
 ];

@@ -1,2 +1,3 @@
 import ListChannelsHorizontal from './ListChannelsHorizontal';
-export {ListChannelsHorizontal};
+import EmptyChannel from './EmptyChannel';
+export {ListChannelsHorizontal, EmptyChannel};

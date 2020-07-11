@@ -1,2 +1,3 @@
 import ListPathsHorizontal from './ListPathHorizontal';
-export {ListPathsHorizontal};
+import EmptyPath from './EmptyPath';
+export {ListPathsHorizontal, EmptyPath};

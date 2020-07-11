@@ -1,15 +1,9 @@
 import React from 'react';
-import {
-  View,
-  FlatList,
-  StyleSheet,
-  TextInput,
-  Button,
-  Text,
-} from 'react-native';
+import {View, FlatList, StyleSheet} from 'react-native';
 import Separator from '../../Separator';
 import {courses} from '../../../globals/fake-data';
 import CourseItemVertical from './CourseItem';
+import {ScaleSize} from '../../../globals/styles';
 
 const ListCoursesVertical = (props) => {
   const renderItem = (item) => {
@@ -24,6 +18,11 @@ const ListCoursesVertical = (props) => {
         ItemSeparatorComponent={Separator}
         keyExtractor={(item, index) => index.toString()}
         ListHeaderComponent={props.Header}
+        getItemLayout={(data, index) => ({
+          length: ScaleSize.scaleSizeWidth(65),
+          offset: ScaleSize.scaleSizeWidth(65) * index,
+          index,
+        })}
       />
     </View>
   );

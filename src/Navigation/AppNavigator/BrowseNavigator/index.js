@@ -1,12 +1,13 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import Browse from '../../../components/Browse/browse';
+// import Browse from '../../../components/Browse/browse';
+import Browse from '../../../screens/Browse';
 import {BrowseScreen} from '../../../globals/constants/screen-name';
 
 const Stack = createStackNavigator();
 const screenOptions = {
   headerStyle: {
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
   },
   headerTintColor: 'black',
   headerTitleStyle: {

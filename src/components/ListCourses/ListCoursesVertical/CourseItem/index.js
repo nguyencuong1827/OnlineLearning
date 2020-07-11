@@ -60,11 +60,11 @@ const styles = StyleSheet.create({
   item: {
     margin: 10,
     flexDirection: 'row',
-    height: ScaleSize.scaleSizeWidth(65),
+    height: ScaleSize.scaleSizeWidth(80),
   },
   img: {
     width: ScaleSize.scaleSizeWidth(80),
-    height: ScaleSize.scaleSizeWidth(60),
+    height: ScaleSize.scaleSizeWidth(50),
   },
   content: {
     paddingLeft: 10,

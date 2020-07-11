@@ -14,7 +14,7 @@ export default SeeAllButton;
 const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 14,
   },
   seeAllButton: {
     flex: 1,
@@ -26,8 +26,8 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     borderWidth: 1,
     borderRadius: 10,
-    fontSize: 11,
-    height: 20,
+    fontSize: 10,
+    height: 16,
     textAlign: 'center',
     textAlignVertical: 'center',
     backgroundColor: '#d9d9d9',

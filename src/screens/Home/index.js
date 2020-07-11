@@ -7,9 +7,9 @@ import {
   SafeAreaView,
 } from 'react-native';
 import {ListCoursesHorizontal} from '../../components/ListCourses';
-import {BookmarksHorizontal} from '../../components/ListBookmarks';
-import {ListPathsHorizontal} from '../../components/ListPaths';
-import {ListChannelsHorizontal} from '../../components/ListChannels';
+import {EmptyBookmark} from '../../components/ListBookmarks';
+import {EmptyPath} from '../../components/ListPaths';
+import {EmptyChannel} from '../../components/ListChannels';
 
 const WelcomeImage = () => (
   <ImageBackground
@@ -28,9 +28,9 @@ const Home = (props) => {
         <ListCoursesHorizontal title="IT operation" />
         <ListCoursesHorizontal title="Data professional" />
         <ListCoursesHorizontal title="Security professional" />
-        <BookmarksHorizontal />
-        <ListPathsHorizontal />
-        <ListChannelsHorizontal />
+        <EmptyBookmark />
+        <EmptyPath />
+        <EmptyChannel />
       </ScrollView>
     </SafeAreaView>
   );
@@ -40,10 +40,10 @@ export default Home;
 
 const styles = StyleSheet.create({
   image: {
-    height: 100,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    height: 100,
   },
   text: {
     fontSize: 24,

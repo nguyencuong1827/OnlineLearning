@@ -1,7 +1,8 @@
 import React from 'react';
 import {Button, Alert} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import Downloads from '../../../components/Downloads';
+//import Downloads from '../../../components/Downloads';
+import Downloads from '../../../screens/Downloads';
 import {DownloadScreen} from '../../../globals/constants/screen-name';
 
 const Stack = createStackNavigator();

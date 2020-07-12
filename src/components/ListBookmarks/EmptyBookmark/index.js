@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     fontSize: 11,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#fafafa',
     padding: 10,
     height: 200,
   },

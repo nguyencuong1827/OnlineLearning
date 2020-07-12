@@ -32,6 +32,7 @@ export default Downloads;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#f2f2f2',
   },
   title: {
     marginRight: 10,
@@ -46,8 +47,5 @@ const styles = StyleSheet.create({
   remove: {
     color: '#1565c0',
     fontSize: 14,
-  },
-  list: {
-    flex: 9,
   },
 });

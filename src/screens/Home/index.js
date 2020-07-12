@@ -21,7 +21,7 @@ const WelcomeImage = () => (
 
 const Home = (props) => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <ScrollView>
         <WelcomeImage />
         <ListCoursesHorizontal title="Software development" />
@@ -39,6 +39,10 @@ const Home = (props) => {
 export default Home;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f2f2f2',
+  },
   image: {
     flex: 1,
     justifyContent: 'center',

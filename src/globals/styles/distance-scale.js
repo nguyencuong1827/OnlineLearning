@@ -1,5 +1,6 @@
 import {scaleSizeWidth} from './scale-size';
 
+export const spacing_5 = scaleSizeWidth(5);
 export const spacing_8 = scaleSizeWidth(8);
 export const spacing_10 = scaleSizeWidth(10);
 export const spacing_12 = scaleSizeWidth(12);

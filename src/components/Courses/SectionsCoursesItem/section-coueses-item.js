@@ -15,7 +15,7 @@ const SectionCoursesItem = (props) => {
         <Text
           style={
             styles.darkText
-          }>{`${props.item.level} . ${props.item.released} . ${props.item.duration} hours`}</Text>
+          }>{`${props.item.level} . ${props.item.releasedDate} . ${props.item.duration} hours`}</Text>
         <View style={styles.rating}>
           <Rating
             imageSize={20}

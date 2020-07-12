@@ -17,7 +17,6 @@ const RecentSearches = (props) => {
     if (listSearches.length > 0) {
       setRecentSearches([...recentSearches, ...listSearches]);
     }
-    console.log('react-search.js', recentSearches);
   }, []);
   const renderItem = (item) => {
     return (

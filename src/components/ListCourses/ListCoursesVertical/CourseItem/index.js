@@ -37,7 +37,7 @@ const CourseItemVertical = (props) => {
         <Text
           style={
             styles.darkText
-          }>{`${props.item.level} . ${props.item.released} . ${props.item.duration} hours`}</Text>
+          }>{`${props.item.level} . ${props.item.releasedDate} . ${props.item.duration} hours`}</Text>
         <View style={styles.ratingContainer}>
           <Rating
             disabled={true}

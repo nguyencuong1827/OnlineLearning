@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
-import {ScaleSize} from '../../../../globals/styles';
+import {ScaleSize, Colors} from '../../../../globals/styles';
 import Rating from 'react-native-star-rating';
 
 const CourseItemHorizontal = (props) => {
@@ -17,14 +17,14 @@ const CourseItemHorizontal = (props) => {
         <Text
           style={
             styles.darkText
-          }>{`${props.item.level} . ${props.item.released} . ${props.item.duration} hours`}</Text>
+          }>{`${props.item.level} . ${props.item.releasedDate} . ${props.item.duration} hours`}</Text>
         <View style={styles.ratingContainer}>
           <Rating
             disabled={true}
             maxStars={5}
             rating={props.item.averageRating}
             starSize={15}
-            fullStarColor="#f39c12"
+            fullStarColor={Colors.yellow}
             starStyle={styles.starRating}
           />
           <Text style={styles.darkText}>

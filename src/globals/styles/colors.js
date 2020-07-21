@@ -21,6 +21,8 @@ export const gray = '#757678';
 export const orange = '#f39c12';
 export const yellow = '#fad200';
 export const grayBold = '#5a5b5d';
+export const blue = '#2980b9';
+export const green = '#27ae60';
 
 export const backgroundSeeAllButton = '#d1c4e9';
 export const borderSeeAllButtonColor = '#808080';

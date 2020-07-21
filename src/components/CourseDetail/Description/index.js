@@ -35,7 +35,7 @@ export default Description;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignContent: 'center',
     padding: DistanceScale.spacing_5,
     marginHorizontal: DistanceScale.spacing_12,

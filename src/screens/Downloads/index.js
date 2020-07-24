@@ -8,8 +8,10 @@ import {
   SafeAreaView,
 } from 'react-native';
 import {ListCoursesVertical} from '../../components/ListCourses';
+import {courses} from '../../globals/fake-data';
 
 const Downloads = (props) => {
+  const {navigation} = props;
   const Header = () => {
     return (
       <View style={styles.title}>
@@ -23,7 +25,7 @@ const Downloads = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <Header />
-      <ListCoursesVertical {...props} />
+      <ListCoursesVertical data={courses} navigation={navigation} />
     </SafeAreaView>
   );
 };

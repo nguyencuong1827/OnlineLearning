@@ -7,17 +7,18 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {ScaleSize, Colors} from '../../../globals/styles';
-const VideoPlayer = () => {
+const VideoPlayer = (props) => {
+  const {closeCourseDetail, shareCourseDetail} = props;
   return (
     <View style={styles.container}>
       <ImageBackground
         style={styles.videoPlayer}
         source={require('../../../../assets/images/video-player.jpg')}>
         <View style={styles.blurContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={closeCourseDetail}>
             <Icon name="close" size={25} color="#fff" />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={shareCourseDetail}>
             <Icon name="sharealt" size={25} color="#fff" />
           </TouchableOpacity>
         </View>

@@ -1,28 +1,20 @@
 import React, {useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  ScrollView,
-  SectionList,
-  Text,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
-import VideoPlayer from './VideoPlayer';
-import {ScaleSize} from '../../globals/styles';
-import HeaderTitle from './HeaderTitle';
-import AuthorsOfCourse from './Authors';
+import {View, StyleSheet, ScrollView, Share} from 'react-native';
+import VideoPlayer from '../../components/CourseDetail/VideoPlayer';
+import HeaderTitle from '../../components/CourseDetail/HeaderTitle';
 import {courseDetail, lessons} from '../../globals/fake-data';
-import {Colors} from '../../globals/styles';
-import InfoCourse from './Info';
-import OptionButtons from './OptionButtons';
+import AuthorsOfCourse from '../../components/CourseDetail/Authors';
+import InfoCourse from '../../components/CourseDetail/Info';
+import OptionButtons from '../../components/CourseDetail/OptionButtons';
 import Separator from '../../components/Separator';
-import Description from './Description';
-import RelateCoursesAndPaths from './Relate';
-import LearningCheck from './LearningCheck';
-import TabViewControl from './TabViewControl';
+import Description from '../../components/CourseDetail/Description';
+import RelateCoursesAndPaths from '../../components/CourseDetail/Relate';
+import LearningCheck from '../../components/CourseDetail/LearningCheck';
+import TabViewControl from '../../components/CourseDetail/TabViewControl';
+import {Colors} from '../../globals/styles';
 
 const CourseDetail = (props) => {
+  const {navigation} = props;
   const [parentScroll, setParentScroll] = useState(true);
   const [childScroll, setChildScroll] = useState(false);
   const isScrollEnd = (event) => {
@@ -47,9 +39,35 @@ const CourseDetail = (props) => {
       setChildScroll(true);
     }
   };
+  const closeCourseDetail = () => {
+    navigation.goBack();
+  };
+  const shareCourseDetail = async () => {
+    try {
+      const result = await Share.share({
+        title: 'Share course',
+        message: 'This course is helpful',
+        url: 'https://reactjs.org/logo-og.png',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <View style={styles.container}>
-      <VideoPlayer />
+      <VideoPlayer
+        closeCourseDetail={closeCourseDetail}
+        shareCourseDetail={shareCourseDetail}
+      />
       <ScrollView
         scrollEnabled={parentScroll}
         onScrollEndDrag={(event) => isScrollEnd(event)}>
@@ -78,19 +96,6 @@ const CourseDetail = (props) => {
           />
         </View>
       </ScrollView>
-      {/* <SectionList
-        sections={lessons}
-        ItemSeparatorComponent={Separator}
-        keyExtractor={(item, index) => item + index}
-        renderSectionHeader={({section}) =>
-          renderSectionHeader(section.title, section.hour, 1111)
-        }
-        renderItem={({item}) => (
-          <LessonItem subTitle={item.subTitle} isCheck={item.isCheck} />
-        )}
-        showsVerticalScrollIndicator={false}
-        stickySectionHeadersEnabled={true}
-      /> */}
     </View>
   );
 };
@@ -100,8 +105,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-  },
-  sectionHeader: {
-    backgroundColor: 'skyblue',
   },
 });

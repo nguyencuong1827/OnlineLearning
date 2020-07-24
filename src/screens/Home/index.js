@@ -24,10 +24,22 @@ const Home = (props) => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <WelcomeImage />
-        <ListCoursesHorizontal title="Software development" />
-        <ListCoursesHorizontal title="IT operation" />
-        <ListCoursesHorizontal title="Data professional" />
-        <ListCoursesHorizontal title="Security professional" />
+        <ListCoursesHorizontal
+          title="Software development"
+          navigation={props.navigation}
+        />
+        <ListCoursesHorizontal
+          title="IT operation"
+          navigation={props.navigation}
+        />
+        <ListCoursesHorizontal
+          title="Data professional"
+          navigation={props.navigation}
+        />
+        <ListCoursesHorizontal
+          title="Security professional"
+          navigation={props.navigation}
+        />
         <EmptyBookmark />
         <EmptyPath />
         <EmptyChannel />

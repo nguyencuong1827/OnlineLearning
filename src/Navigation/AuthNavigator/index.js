@@ -1,13 +1,14 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import Login from '../../components/Authentication/Login/login';
+import {LoginScreen} from '../../globals/constants/screen-name';
+import Login from '../../screens/Login';
 
 const AuthStack = createStackNavigator();
 const AuthNavigator = () => {
   return (
-    <AuthStack>
-      <AuthStack.Screen name="LoginScreen" component={Login} />
-    </AuthStack>
+    <AuthStack.Navigator headerMode="none">
+      <AuthStack.Screen name={LoginScreen} component={Login} />
+    </AuthStack.Navigator>
   );
 };
 

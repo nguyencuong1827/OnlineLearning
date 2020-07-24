@@ -2,31 +2,15 @@ import React from 'react';
 import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
 import Rating from 'react-native-star-rating';
 import {ScaleSize} from '../../../../globals/styles';
+import {CourseDetailScreen} from '../../../../globals/constants/screen-name';
 
 const CourseItemVertical = (props) => {
-  const onPressListItem = () => {
-    props.navigation.navigate('CourseDetail', {item: props.item});
+  const {navigation} = props;
+  const showCourseDetail = () => {
+    navigation.navigate(CourseDetailScreen);
   };
   return (
-    <TouchableOpacity
-      style={styles.item}
-      onPress={() => {
-        // Alert.alert('Notification', `Pressed on ${props.item.title}`, [
-        //   {
-        //     text: 'Cancel',
-        //     onPress: () => console.log('Pressed on cancel line: 18'),
-        //   },
-        //   {
-        //     text: 'Ok',
-        //     onPress: () => {
-        //       Share.share({
-        //         message: 'React native with hook',
-        //       });
-        //     },
-        //   },
-        // ]);
-        onPressListItem();
-      }}>
+    <TouchableOpacity style={styles.item} onPress={showCourseDetail}>
       <Image
         style={styles.img}
         source={require('../../../../../assets/images/rambutan.jpg')}

@@ -6,15 +6,16 @@ import {courses} from '../../../globals/fake-data';
 import {ScaleSize} from '../../../globals/styles';
 
 const ListCoursesHorizontal = (props) => {
+  const {navigation, title} = props;
   const renderCourseItem = (item) => (
-    <CourseItemHorizontal item={item} navigation={props.navigation} />
+    <CourseItemHorizontal item={item} navigation={navigation} />
   );
   const showAllCourses = () => {
     Alert.alert('Comming soon');
   };
   return (
     <View style={styles.container}>
-      <SeeAllButton title={props.title} onPress={showAllCourses} />
+      <SeeAllButton title={title} onPress={showAllCourses} />
       <FlatList
         horizontal={true}
         showsHorizontalScrollIndicator={false}

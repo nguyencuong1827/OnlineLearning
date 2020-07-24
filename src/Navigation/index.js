@@ -3,31 +3,40 @@ import {View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import RootTab from './AppNavigator';
-import CourseDetail from '../components/CourseDetail';
 import PathDetail from '../components/Paths/PathDetail/path-detail';
 import AuthNavigator from './AuthNavigator';
+import * as ScreenName from '../globals/constants/screen-name';
+import AuthorDetail from '../screens/AuthorDetail';
+import CourseDetail from '../screens/CourseDetail';
 const Stack = createStackNavigator();
 const RootStack = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator mode="modal" initialRouteName="CourseDetail">
+      <Stack.Navigator
+        mode="modal"
+        initialRouteName={ScreenName.AuthNavigatorScreen}>
         <Stack.Screen
-          name="AuthNavigator"
+          name={ScreenName.AuthNavigatorScreen}
           component={AuthNavigator}
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="RootTab"
+          name={ScreenName.RooTabScreen}
           component={RootTab}
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="CourseDetail"
+          name={ScreenName.CourseDetailScreen}
           component={CourseDetail}
-          options={{title: 'Course Detail', headerShown: false}}
+          options={{headerShown: false}}
         />
         <Stack.Screen
-          name="PathDetail"
+          name={ScreenName.AuthorDetailScreen}
+          component={AuthorDetail}
+          options={{title: ''}}
+        />
+        <Stack.Screen
+          name="PathDetailScreen"
           component={PathDetail}
           options={{title: 'Path Detail'}}
         />

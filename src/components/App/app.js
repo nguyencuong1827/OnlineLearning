@@ -5,16 +5,17 @@ import RootStack from '../../Navigation';
 
 const App = () => {
   const [currentScreen, setCurrentScreen] = useState('SplashScreen');
-  useEffect(() => {
-    const time = setTimeout(() => {
-      setCurrentScreen('Login');
-    }, 2000);
-    return () => clearTimeout(time);
-  }, []);
+  // useEffect(() => {
+  //   const time = setTimeout(() => {
+  //     setCurrentScreen('Login');
+  //   }, 2000);
+  //   return () => clearTimeout(time);
+  // }, []);
   return (
     <View style={styles.container}>
       <StatusBar hidden={true} />
-      {currentScreen === 'SplashScreen' ? <SplashScreen /> : <RootStack />}
+      {/* {currentScreen === 'SplashScreen' ? <SplashScreen /> : <RootStack />} */}
+      <RootStack />
     </View>
   );
 };

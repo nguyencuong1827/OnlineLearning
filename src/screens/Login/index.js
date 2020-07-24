@@ -1,20 +1,33 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState, useContext, useEffect} from 'react';
 import {
   View,
   StyleSheet,
   Image,
   SafeAreaView,
-  TextInput,
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
-  TouchableOpacity,
-  Text,
+  ToastAndroid,
+  Alert,
 } from 'react-native';
+import FormInput from '../../components/Authentication/FormInput';
+import ButtonSubmit from '../../components/Authentication/ButtonSubmit';
+import {RooTabScreen} from '../../globals/constants/screen-name';
 
-const Login = () => {
+const Login = (props) => {
   const txtPassword = useRef(null);
   const btnLogin = useRef(null);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  //   useEffect(() => {
+  //     if (state.messageError) {
+  //       ToastAndroid.showWithGravity(
+  //         state.messageError,
+  //         ToastAndroid.LONG,
+  //         ToastAndroid.TOP,
+  //       );
+  //     }
+  //   }, [state.messageError]);
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
@@ -23,30 +36,38 @@ const Login = () => {
           onPress={Keyboard.dismiss}>
           <View style={styles.logoContainer}>
             <View style={styles.logoContainer}>
-              <Image source={require('../../../../assets/images/logo3.png')} />
+              <Image source={require('../../../assets/images/logo3.png')} />
             </View>
             <View style={styles.infoContainer}>
-              <TextInput
-                style={styles.input}
+              <FormInput
+                styleInput={styles.input}
                 placeholder="Username"
                 placeholderTextColor="gray"
                 keyboardType="email-address"
                 returnKeyType="next"
+                defaultValue={username}
+                onChangeText={(text) => setUsername(text)}
                 onSubmitEditing={() => txtPassword.current.focus()}
               />
-              <TextInput
-                style={styles.input}
+              <FormInput
+                styleInput={styles.input}
                 placeholder="Password"
                 placeholderTextColor="gray"
                 returnKeyType="go"
                 secureTextEntry
                 autoCorrect={false}
                 ref={txtPassword}
+                defaultValue={password}
+                onChangeText={(text) => setPassword(text)}
                 onSubmitEditing={() => btnLogin.current.focus()}
               />
-              <TouchableOpacity ref={btnLogin} style={styles.buttonContainer}>
-                <Text style={styles.buttonText}>SIGN IN</Text>
-              </TouchableOpacity>
+              <ButtonSubmit
+                ref={btnLogin}
+                buttonSubmitStyle={styles.buttonContainer}
+                titleSubmitStyle={styles.buttonText}
+                title="SIGN IN"
+                onSubmit={() => props.navigation.navigate(RooTabScreen)}
+              />
             </View>
           </View>
         </TouchableWithoutFeedback>

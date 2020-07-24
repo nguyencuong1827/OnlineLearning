@@ -2,10 +2,15 @@ import React from 'react';
 import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
 import {ScaleSize, Colors} from '../../../../globals/styles';
 import Rating from 'react-native-star-rating';
+import {CourseDetailScreen} from '../../../../globals/constants/screen-name';
 
 const CourseItemHorizontal = (props) => {
+  const {navigation} = props;
+  const showCourseDetail = () => {
+    navigation.navigate(CourseDetailScreen);
+  };
   return (
-    <TouchableOpacity style={styles.item}>
+    <TouchableOpacity style={styles.item} onPress={showCourseDetail}>
       <Image
         style={styles.img}
         activeOpacity={0.6}

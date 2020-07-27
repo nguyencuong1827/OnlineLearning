@@ -1,23 +1,30 @@
-import React from 'react';
-import {StyleSheet, Text, View, StatusBar} from 'react-native';
-import Login from './src/components/Authentication/Login/login';
-// import ListCourses from './src/components/Courses/ListCourses/list-courses';
-//import Home from './src/components/Main/Home/home';
-
-export default function App() {
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, Text, View, StatusBar, Button, Alert} from 'react-native';
+import RootStack from './src/navigation';
+// import SplashScreen from './src/screens/SplashScreen';
+import {AuthenticationProvider} from './src/providers/authentication-provider';
+const App = () => {
+  const [currentScreen, setCurrentScreen] = useState('SplashScreen');
+  // useEffect(() => {
+  //   const time = setTimeout(() => {
+  //     setCurrentScreen('Login');
+  //   }, 2000);
+  //   return () => clearTimeout(time);
+  // }, []);
   return (
-    <View style={styles.container}>
-      <StatusBar hidden={true} />
-      {/* <Home /> */}
-      {/* <ListCourses /> */}
-      <Login />
-    </View>
+    <AuthenticationProvider>
+      <View style={styles.container}>
+        <StatusBar hidden={true} />
+        {/* {currentScreen === 'SplashScreen' ? <SplashScreen /> : <RootStack />} */}
+        <RootStack />
+      </View>
+    </AuthenticationProvider>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 24,
   },
 });
+export default App;

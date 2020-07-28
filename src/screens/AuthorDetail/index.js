@@ -7,10 +7,15 @@ import {courses} from '../../globals/fake-data';
 import {DistanceScale} from '../../globals/styles';
 
 const AuthorDetail = (props) => {
+  const {authorDetail} = props.route.params;
   const renderHeader = () => {
     return (
       <View>
-        <HeaderAuthorDetail />
+        <HeaderAuthorDetail
+          name={authorDetail.name}
+          description={authorDetail.description}
+          urlAvatar={authorDetail.urlAvatar}
+        />
         <View style={styles.separator}>
           <Separator />
         </View>

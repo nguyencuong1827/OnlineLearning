@@ -83,7 +83,6 @@ target 'OnlineLearning' do
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
-  pod 'react-native-viewpager', :path => '../node_modules/@react-native-community/viewpager'
 
   target 'OnlineLearningTests' do
     inherit! :complete

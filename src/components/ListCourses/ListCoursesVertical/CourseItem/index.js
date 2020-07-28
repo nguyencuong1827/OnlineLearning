@@ -5,34 +5,31 @@ import {ScaleSize} from '../../../../globals/styles';
 import {CourseDetailScreen} from '../../../../globals/constants/screen-name';
 
 const CourseItemVertical = (props) => {
-  const {navigation} = props;
+  const {navigation, item} = props;
   const showCourseDetail = () => {
     navigation.navigate(CourseDetailScreen);
   };
   return (
     <TouchableOpacity style={styles.item} onPress={showCourseDetail}>
-      <Image
-        style={styles.img}
-        source={require('../../../../../assets/images/rambutan.jpg')}
-      />
+      <Image style={styles.img} source={item.urlImg} />
       <View style={styles.content}>
-        <Text>{props.item.title}</Text>
-        <Text style={styles.darkText}>{props.item.author}</Text>
+        <Text>{item.name}</Text>
+        <Text style={styles.darkText}>{item.author}</Text>
         <Text
           style={
             styles.darkText
-          }>{`${props.item.level} . ${props.item.releasedDate} . ${props.item.duration} hours`}</Text>
+          }>{`${item.level} . ${item.releasedDate} . ${item.duration} hours`}</Text>
         <View style={styles.ratingContainer}>
           <Rating
             disabled={true}
             maxStars={5}
-            rating={props.item.averageRating}
+            rating={item.averageRating}
             starSize={15}
             fullStarColor="#f39c12"
             starStyle={styles.starRating}
           />
           <Text style={styles.darkText}>
-            {'   '}({props.item.totalRating})
+            {'   '}({item.totalRating})
           </Text>
         </View>
       </View>

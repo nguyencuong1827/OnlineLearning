@@ -7,7 +7,7 @@ import {ListSkillsHorizontal} from '../../components/ListSkills';
 import ListTopicsHorizontal from '../../components/ListTopics/ListTopicsHorizontal';
 import {ListPathsHorizontal} from '../../components/ListPaths';
 
-const Browse = () => {
+const Browse = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -32,7 +32,10 @@ const Browse = () => {
         <ListSkillsHorizontal />
         <ListTopicsHorizontal />
         <ListPathsHorizontal />
-        <ListAuthorsHorizontal />
+        <ListAuthorsHorizontal
+          navigation={props.navigation}
+          title="Top Authors"
+        />
       </ScrollView>
     </SafeAreaView>
   );

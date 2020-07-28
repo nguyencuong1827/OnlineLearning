@@ -1,139 +1,124 @@
 export const courses = [
   {
     id: 1,
-    title: 'React Native',
+    name: 'React Native',
     author: 'Nguyen Cuong',
     level: 'Advance',
     releasedDate: 'May 6, 2020',
     duration: 30,
     averageRating: 4.4,
     totalRating: 200,
-    urlImg: '',
+    urlImg: require('../../assets/images/watermelon.jpg'),
+    description:
+      'React Native has become one of the most widely used web development frameworks. This course, Angular Fundamentals, will teach you the fundamentals of writing applications with Angular - whether or not you are had past experience with Angular You will learn how to bootstrap an application and how to build pages and reusable elements using Angular Components and the new Angular syntax. You will also learn the fundamentals of: routing, creating reusable services and dependency injection, building forms with validation, and communicating with the server using HTTP and observables. You will even learn how to test all of this using unit tests and end-to-end UI tests. When you finish this course, you will have the fundamental knowledge necessary to create professional and personal websites using Angular.',
   },
   {
     id: 2,
-    title: 'Swift',
+    name: 'Swift',
     author: 'Nhu Daika',
     level: 'Advance',
     releasedDate: 'June 6, 2019',
     duration: 40,
     averageRating: 4.2,
     totalRating: 227,
-    urlImg: '',
+    urlImg: require('../../assets/images/bonbon.jpg'),
+    description:
+      'Swift has become one of the most widely used web development frameworks. This course, Angular Fundamentals, will teach you the fundamentals of writing applications with Angular - whether or not you are had past experience with Angular You will learn how to bootstrap an application and how to build pages and reusable elements using Angular Components and the new Angular syntax. You will also learn the fundamentals of: routing, creating reusable services and dependency injection, building forms with validation, and communicating with the server using HTTP and observables. You will even learn how to test all of this using unit tests and end-to-end UI tests. When you finish this course, you will have the fundamental knowledge necessary to create professional and personal websites using Angular.',
   },
   {
     id: 3,
-    title: 'Android',
+    name: 'Android',
     author: 'Nguyen Cuong',
     level: 'Advance',
     releasedDate: 'June 5, 2019',
     duration: 40,
     averageRating: 4.8,
     totalRating: 600,
-    urlImg: '',
+    urlImg: require('../../assets/images/breast_milk.jpg'),
+    description:
+      'Android has become one of the most widely used web development frameworks. This course, Angular Fundamentals, will teach you the fundamentals of writing applications with Angular - whether or not you are had past experience with Angular You will learn how to bootstrap an application and how to build pages and reusable elements using Angular Components and the new Angular syntax. You will also learn the fundamentals of: routing, creating reusable services and dependency injection, building forms with validation, and communicating with the server using HTTP and observables. You will even learn how to test all of this using unit tests and end-to-end UI tests. When you finish this course, you will have the fundamental knowledge necessary to create professional and personal websites using Angular.',
   },
   {
     id: 4,
-    title: 'Docker',
+    name: 'Docker',
     author: 'Cuong Joker',
     level: 'Advance',
     releasedDate: 'June 5, 2020',
     duration: 40,
     averageRating: 4.2,
     totalRating: 700,
-    urlImg: '',
+    urlImg: require('../../assets/images/durian.jpg'),
+    description:
+      'Docker has become one of the most widely used web development frameworks. This course, Angular Fundamentals, will teach you the fundamentals of writing applications with Angular - whether or not you are had past experience with Angular You will learn how to bootstrap an application and how to build pages and reusable elements using Angular Components and the new Angular syntax. You will also learn the fundamentals of: routing, creating reusable services and dependency injection, building forms with validation, and communicating with the server using HTTP and observables. You will even learn how to test all of this using unit tests and end-to-end UI tests. When you finish this course, you will have the fundamental knowledge necessary to create professional and personal websites using Angular.',
   },
   {
     id: 5,
-    title: 'Express Js',
+    name: 'Express Js',
     author: 'Nhu Daika',
     level: 'Advance',
     releasedDate: 'June 5, 2020',
     duration: 60,
     averageRating: 4.5,
     totalRating: 1200,
-    urlImg: '',
+    urlImg: require('../../assets/images/guava.jpg'),
+    description:
+      'Express Js has become one of the most widely used web development frameworks. This course, Angular Fundamentals, will teach you the fundamentals of writing applications with Angular - whether or not you are had past experience with Angular You will learn how to bootstrap an application and how to build pages and reusable elements using Angular Components and the new Angular syntax. You will also learn the fundamentals of: routing, creating reusable services and dependency injection, building forms with validation, and communicating with the server using HTTP and observables. You will even learn how to test all of this using unit tests and end-to-end UI tests. When you finish this course, you will have the fundamental knowledge necessary to create professional and personal websites using Angular.',
   },
   {
     id: 6,
-    title: 'Node Js',
+    name: 'Node Js',
     author: 'Nhu Daika',
     level: 'Advance',
     releasedDate: 'May 2, 2020',
     duration: 40,
     averageRating: 4.2,
     totalRating: 589,
-    urlImg: '',
-  },
-  {
-    id: 6,
-    title: 'C++',
-    author: 'Taylor Swift',
-    level: 'Advance',
-    releasedDate: 'May 2, 2020',
-    duration: 40,
-    averageRating: 4.2,
-    totalRating: 589,
-    urlImg: '',
+    urlImg: require('../../assets/images/longan.jpg'),
+    description:
+      'Node Js has become one of the most widely used web development frameworks. This course, Angular Fundamentals, will teach you the fundamentals of writing applications with Angular - whether or not you are had past experience with Angular You will learn how to bootstrap an application and how to build pages and reusable elements using Angular Components and the new Angular syntax. You will also learn the fundamentals of: routing, creating reusable services and dependency injection, building forms with validation, and communicating with the server using HTTP and observables. You will even learn how to test all of this using unit tests and end-to-end UI tests. When you finish this course, you will have the fundamental knowledge necessary to create professional and personal websites using Angular.',
   },
 ];
 
 export const authors = [
   {
     name: 'Nguyen Cuong',
-    intro: '',
     urlAvatar: require('../../assets/images/cristiano-ronaldo.jpg'),
     skills: 'React JS',
     paths: 'React',
+    description:
+      'Nguyen Cuong is a software developer, consultant, conference speaker,  and Pluralsight author. Her courses include: Angular: Getting Started, Angular Routing, and Object-Oriented Programming Fundamentals in C#. For her work in support of software developers, she has been recognized with Microsoft Most Valuable Professional (MVP) award, and is a Google Developer Expert (GDE)',
   },
   {
     name: 'Nhu Daika',
-    intro: '',
     urlAvatar: require('../../assets/images/barack-obama.jpg'),
     skills: 'React JS',
     paths: 'Node js',
+    description:
+      'Nhu Daika is a software developer, consultant, conference speaker,  and Pluralsight author. Her courses include: Angular: Getting Started, Angular Routing, and Object-Oriented Programming Fundamentals in C#. For her work in support of software developers, she has been recognized with Microsoft Most Valuable Professional (MVP) award, and is a Google Developer Expert (GDE)',
   },
   {
     name: 'Taylor Swift',
-    intro: '',
     urlAvatar: require('../../assets/images/taylor-swift.jpg'),
     skills: 'Android',
     paths: 'Android X',
+    description:
+      'Taylor Swift is a software developer, consultant, conference speaker,  and Pluralsight author. Her courses include: Angular: Getting Started, Angular Routing, and Object-Oriented Programming Fundamentals in C#. For her work in support of software developers, she has been recognized with Microsoft Most Valuable Professional (MVP) award, and is a Google Developer Expert (GDE)',
   },
   {
     name: 'Kaká',
-    intro: '',
     urlAvatar: require('../../assets/images/kaka.jpg'),
     skills: 'Swift',
     paths: 'iOS',
+    description:
+      'Kaká is a software developer, consultant, conference speaker,  and Pluralsight author. Her courses include: Angular: Getting Started, Angular Routing, and Object-Oriented Programming Fundamentals in C#. For her work in support of software developers, she has been recognized with Microsoft Most Valuable Professional (MVP) award, and is a Google Developer Expert (GDE)',
   },
   {
     name: 'John Boyds',
-    intro: '',
     urlAvatar: require('../../assets/images/john-boyd.jpg'),
     skills: 'Docker',
     paths: 'CICD',
-  },
-  {
-    name: 'John Boyds',
-    intro: '',
-    urlAvatar: require('../../assets/images/john-boyd.jpg'),
-    skills: 'Docker',
-    paths: 'CICD',
-  },
-  {
-    name: 'John Boyds',
-    intro: '',
-    urlAvatar: require('../../assets/images/john-boyd.jpg'),
-    skills: 'Docker',
-    paths: 'CICD',
-  },
-  {
-    name: 'John Boyds',
-    intro: '',
-    urlAvatar: require('../../assets/images/john-boyd.jpg'),
-    skills: 'Docker',
-    paths: 'CICD',
+    description:
+      'John Boyds is a software developer, consultant, conference speaker,  and Pluralsight author. Her courses include: Angular: Getting Started, Angular Routing, and Object-Oriented Programming Fundamentals in C#. For her work in support of software developers, she has been recognized with Microsoft Most Valuable Professional (MVP) award, and is a Google Developer Expert (GDE)',
   },
 ];
 
@@ -175,52 +160,52 @@ export const topics = [
   {
     id: '1',
     name: 'conferences',
-    urlImg: require('../../assets/images/creative.jpg'),
+    urlImg: require('../../assets/images/conference.jpg'),
   },
   {
     id: '2',
     name: 'business professional',
-    urlImg: require('../../assets/images/conference.jpg'),
+    urlImg: require('../../assets/images/business.jpg'),
   },
   {
     id: '3',
     name: 'software development',
-    urlImg: require('../../assets/images/conference.jpg'),
+    urlImg: require('../../assets/images/software.jpg'),
   },
   {
     id: '4',
     name: 'creative professional',
-    urlImg: require('../../assets/images/conference.jpg'),
+    urlImg: require('../../assets/images/creative.jpg'),
   },
   {
     id: '5',
     name: 'it ops',
-    urlImg: require('../../assets/images/conference.jpg'),
+    urlImg: require('../../assets/images/software.jpg'),
   },
   {
     id: '6',
     name: 'manufacturing and design',
-    urlImg: require('../../assets/images/conference.jpg'),
+    urlImg: require('../../assets/images/creative.jpg'),
   },
   {
     id: '7',
     name: 'information and cyber security',
-    urlImg: require('../../assets/images/conference.jpg'),
+    urlImg: require('../../assets/images/software.jpg'),
   },
   {
     id: '8',
     name: 'Architecture and construction',
-    urlImg: require('../../assets/images/conference.jpg'),
+    urlImg: require('../../assets/images/business.jpg'),
   },
   {
     id: '9',
     name: 'Data professional',
-    urlImg: require('../../assets/images/conference.jpg'),
+    urlImg: require('../../assets/images/software.jpg'),
   },
   {
     id: '10',
     name: 'certification',
-    urlImg: require('../../assets/images/conference.jpg'),
+    urlImg: require('../../assets/images/creative.jpg'),
   },
 ];
 
@@ -282,18 +267,19 @@ export const skills = [
 export const courseDetail = {
   id: '1',
   name: 'Angular Fundamentals',
-  numberOfCourse: '5 course',
+  numberOfCourse: '5 courses',
   authors: [
     {
       name: 'Nguyen Cuong',
-      intro: '',
+      description:
+        'Taylor Swift is a software developer, consultant, conference speaker,  and Pluralsight author. Her courses include: Angular: Getting Started, Angular Routing, and Object-Oriented Programming Fundamentals in C#. For her work in support of software developers, she has been recognized with Microsoft Most Valuable Professional (MVP) award, and is a Google Developer Expert (GDE)',
       urlAvatar: require('../../assets/images/cristiano-ronaldo.jpg'),
       skills: 'React JS',
       paths: 'React',
     },
     {
       name: 'Nhu Daika',
-      intro: '',
+      description: '',
       urlAvatar: require('../../assets/images/barack-obama.jpg'),
       skills: 'React JS',
       paths: 'Node js',
@@ -317,9 +303,9 @@ const randomCheck = () => {
   }
 };
 var subtitles = [
-  'Introduction',
+  'descriptionduction',
   'Practice Exercises',
-  'Introduction to TypeScript',
+  'descriptionduction to TypeScript',
   'Comparing Angular to AngularJS',
   'A Conceptual Overview of Angular',
   'Installing Git and Node',

@@ -18,7 +18,7 @@ const AuthorElement = (props) => {
   }
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={props.showAuthorDetail}>
       <View style={styles.author}>
         <Avatar
           rounded

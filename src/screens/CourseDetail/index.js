@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useLayoutEffect, useRef} from 'react';
 import {View, StyleSheet, ScrollView, Share} from 'react-native';
 import VideoPlayer from '../../components/CourseDetail/VideoPlayer';
 import HeaderTitle from '../../components/CourseDetail/HeaderTitle';
-import {courseDetail, lessons} from '../../globals/fake-data';
+import {lessons, authors} from '../../globals/fake-data';
 import AuthorsOfCourse from '../../components/CourseDetail/Authors';
 import InfoCourse from '../../components/CourseDetail/Info';
 import OptionButtons from '../../components/CourseDetail/OptionButtons';
@@ -12,11 +12,15 @@ import RelateCoursesAndPaths from '../../components/CourseDetail/Relate';
 import LearningCheck from '../../components/CourseDetail/LearningCheck';
 import TabViewControl from '../../components/CourseDetail/TabViewControl';
 import {Colors} from '../../globals/styles';
+import {AuthorDetailScreen} from '../../globals/constants/screen-name';
 
 const CourseDetail = (props) => {
   const {navigation} = props;
   const [parentScroll, setParentScroll] = useState(true);
   const [childScroll, setChildScroll] = useState(false);
+  const [authorDetail, setAuthorDetail] = useState(null);
+  const willMount = useRef(true);
+  const {course} = props.route.params;
   const isScrollEnd = (event) => {
     const contentOffsetY = event.nativeEvent.contentOffset.y;
     const heightLayout = event.nativeEvent.layoutMeasurement.height;
@@ -62,6 +66,18 @@ const CourseDetail = (props) => {
       console.log(error);
     }
   };
+  const findAuthor = (name) => {
+    return name === course.author;
+  };
+  if (willMount.current) {
+    const temp = authors.find((author) => findAuthor(author.name));
+    setAuthorDetail(temp);
+    willMount.current = false;
+  }
+  const showAuthorDetail = () => {
+    props.navigation.navigate(AuthorDetailScreen, {authorDetail});
+  };
+
   return (
     <View style={styles.container}>
       <VideoPlayer
@@ -72,18 +88,21 @@ const CourseDetail = (props) => {
         scrollEnabled={parentScroll}
         onScrollEndDrag={(event) => isScrollEnd(event)}>
         <View>
-          <HeaderTitle name={courseDetail.name} />
-          <AuthorsOfCourse authors={courseDetail.authors} />
+          <HeaderTitle name={course.name} />
+          <AuthorsOfCourse
+            authorDetail={authorDetail}
+            showAuthorDetail={showAuthorDetail}
+          />
           <InfoCourse
-            level={courseDetail.level}
-            releasedDate={courseDetail.releasedDate}
-            duration={courseDetail.duration}
-            averageRating={courseDetail.averageRating}
-            totalRating={courseDetail.totalRating}
+            level={course.level}
+            releasedDate={course.releasedDate}
+            duration={course.duration}
+            averageRating={course.averageRating}
+            totalRating={course.totalRating}
           />
           <OptionButtons />
           <Separator />
-          <Description description={courseDetail.description} />
+          <Description description={course.description} />
           <RelateCoursesAndPaths />
           <LearningCheck />
         </View>

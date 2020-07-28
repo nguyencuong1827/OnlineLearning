@@ -1,29 +1,40 @@
-import React from 'react';
-import {View, ScrollView, StyleSheet, Alert} from 'react-native';
-import AuthorElement from './AuthorElement';
-import {DistanceScale} from '../../../globals/styles';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useEffect, useState} from 'react';
+import {Text, TouchableOpacity, StyleSheet, View} from 'react-native';
+import {Avatar} from 'react-native-elements';
+import {Colors, Typography, DistanceScale} from '../../../globals/styles';
 
-const AuthorsOfCourse = (props) => {
-  const renderListAuthors = () => {
-    return props.authors.map((author, index) => (
-      <AuthorElement key={index} author={author} onPress={handleClickAuthor} />
-    ));
-  };
-  const handleClickAuthor = () => {
-    Alert.alert('Comming soon');
-  };
+const AuthorOfCourse = (props) => {
+  const {authorDetail, showAuthorDetail} = props;
   return (
     <View style={styles.container}>
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        {renderListAuthors()}
-      </ScrollView>
+      <TouchableOpacity
+        style={styles.authorContainer}
+        onPress={showAuthorDetail}>
+        <Avatar rounded={true} size={25} source={authorDetail.urlAvatar} />
+        <Text style={styles.name}>{authorDetail.name}</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
-export default AuthorsOfCourse;
+export default AuthorOfCourse;
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: DistanceScale.spacing_14,
+    flex: 1,
+    alignItems: 'flex-start',
+    paddingHorizontal: DistanceScale.spacing_10,
+  },
+  authorContainer: {
+    flexDirection: 'row',
+    backgroundColor: Colors.silver,
+    borderRadius: 30,
+    alignItems: 'center',
+    padding: 3,
+  },
+  name: {
+    marginHorizontal: DistanceScale.spacing_5,
+    fontSize: Typography.fontSize14,
+    color: Colors.black,
   },
 });

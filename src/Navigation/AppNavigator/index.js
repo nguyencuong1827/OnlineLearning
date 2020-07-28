@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import BrowseStack from './BrowseNavigator';
 import Search from '../../components/Search/search';
 const Tab = createBottomTabNavigator();
-const RootTab = () => {
+const AppNavigator = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -46,4 +46,4 @@ const RootTab = () => {
   );
 };
 
-export default RootTab;
+export default AppNavigator;

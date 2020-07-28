@@ -5,35 +5,31 @@ import Rating from 'react-native-star-rating';
 import {CourseDetailScreen} from '../../../../globals/constants/screen-name';
 
 const CourseItemHorizontal = (props) => {
-  const {navigation} = props;
+  const {navigation, item} = props;
   const showCourseDetail = () => {
-    navigation.navigate(CourseDetailScreen);
+    navigation.navigate(CourseDetailScreen, {course: props.item});
   };
   return (
     <TouchableOpacity style={styles.item} onPress={showCourseDetail}>
-      <Image
-        style={styles.img}
-        activeOpacity={0.6}
-        source={require('../../../../../assets/images/watermelon.jpg')}
-      />
+      <Image style={styles.img} activeOpacity={0.6} source={item.urlImg} />
       <View style={styles.content}>
-        <Text style={styles.title}>{props.item.title}</Text>
-        <Text style={styles.darkText}>{props.item.author}</Text>
+        <Text style={styles.name}>{item.name}</Text>
+        <Text style={styles.darkText}>{item.author}</Text>
         <Text
           style={
             styles.darkText
-          }>{`${props.item.level} . ${props.item.releasedDate} . ${props.item.duration} hours`}</Text>
+          }>{`${item.level} . ${item.releasedDate} . ${item.duration} hours`}</Text>
         <View style={styles.ratingContainer}>
           <Rating
             disabled={true}
             maxStars={5}
-            rating={props.item.averageRating}
+            rating={item.averageRating}
             starSize={15}
             fullStarColor={Colors.yellow}
             starStyle={styles.starRating}
           />
           <Text style={styles.darkText}>
-            {'   '}({props.item.totalRating})
+            {'   '}({item.totalRating})
           </Text>
         </View>
       </View>
@@ -71,7 +67,7 @@ const styles = StyleSheet.create({
     color: 'gray',
     marginBottom: 3,
   },
-  title: {
+  name: {
     marginBottom: 3,
   },
   ratingContainer: {

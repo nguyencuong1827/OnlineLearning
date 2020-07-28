@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, StatusBar, Button, Alert} from 'react-native';
-import RootStack from './src/navigation';
+import RootNavigator from './src/navigation';
 // import SplashScreen from './src/screens/SplashScreen';
 import {AuthenticationProvider} from './src/providers/authentication-provider';
 const App = () => {
@@ -16,7 +16,7 @@ const App = () => {
       <View style={styles.container}>
         <StatusBar hidden={true} />
         {/* {currentScreen === 'SplashScreen' ? <SplashScreen /> : <RootStack />} */}
-        <RootStack />
+        <RootNavigator />
       </View>
     </AuthenticationProvider>
   );

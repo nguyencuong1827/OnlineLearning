@@ -2,16 +2,24 @@ import React from 'react';
 import {View, Text, ScrollView, StyleSheet} from 'react-native';
 import {authors} from '../../../globals/fake-data';
 import AuthorElement from './AuthorElement';
+import {AuthorDetailScreen} from '../../../globals/constants/screen-name';
 
-const ListAuthorsHorizontal = () => {
+const ListAuthorsHorizontal = (props) => {
+  const showAuthorDetail = (author) => {
+    props.navigation.navigate(AuthorDetailScreen, {authorDetail: author});
+  };
   const renderListTopAutor = () => {
     return authors.map((author, index) => (
-      <AuthorElement key={index} author={author} />
+      <AuthorElement
+        key={index}
+        author={author}
+        showAuthorDetail={() => showAuthorDetail(author)}
+      />
     ));
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Top Authors</Text>
+      <Text style={styles.title}>{props.title}</Text>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {renderListTopAutor()}
       </ScrollView>

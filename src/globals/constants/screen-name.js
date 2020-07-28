@@ -14,5 +14,5 @@ export const AuthorDetailScreen = 'AuthorDetailScreen';
 
 export const ListCourseScreen = 'ListCourseScreen';
 
-export const RooTabScreen = 'RooTabScreen';
+export const AppNavigatorScreen = 'AppNavigatorScreen';
 export const AuthNavigatorScreen = 'AuthNavigatorScreen';

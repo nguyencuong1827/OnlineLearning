@@ -12,7 +12,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import Contacts from '../Contacts';
 import Separator from '../../Separator';
 
-const HeaderAuthorDetail = () => {
+const HeaderAuthorDetail = (props) => {
+  const {name, description, urlAvatar} = props;
   const moveToLink = (url) => {
     Linking.canOpenURL(url).then((supported) => {
       if (supported) {
@@ -27,9 +28,9 @@ const HeaderAuthorDetail = () => {
       <Avatar
         rounded={true}
         size={ScaleSize.scaleSizeWidth(77)}
-        source={require('../../../../assets/images/taylor-swift.jpg')}
+        source={urlAvatar}
       />
-      <Text style={styles.txtName}>Taylor Swift</Text>
+      <Text style={styles.txtName}>{name}</Text>
       <Text style={styles.txtJob}>Pluralsight Author</Text>
       <TouchableOpacity style={styles.btnFollow}>
         <Text style={styles.txtFollow}>Follow</Text>
@@ -40,14 +41,7 @@ const HeaderAuthorDetail = () => {
         </Text>
       </View>
       <View>
-        <Text style={styles.txtDescription}>
-          Taylor Swift is a software developer, consultant, conference speaker,
-          and Pluralsight author. Her courses include: Angular: Getting Started,
-          Angular Routing, and Object-Oriented Programming Fundamentals in C#.
-          For her work in support of software developers, she has been
-          recognized with Microsoft Most Valuable Professional (MVP) award, and
-          is a Google Developer Expert (GDE)
-        </Text>
+        <Text style={styles.txtDescription}>{description}</Text>
       </View>
       <View style={styles.link}>
         <Icon name="insert-link" size={20} />

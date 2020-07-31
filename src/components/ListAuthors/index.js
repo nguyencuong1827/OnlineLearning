@@ -1,2 +1,3 @@
 import ListAuthorsHorizontal from './ListAuthorsHorizontal';
-export {ListAuthorsHorizontal};
+import ListAuthorsVertical from './ListAuthorsVertical';
+export {ListAuthorsHorizontal, ListAuthorsVertical};

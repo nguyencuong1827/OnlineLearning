@@ -82,6 +82,7 @@ export const courses = [
 export const authors = [
   {
     name: 'Nguyen Cuong',
+    numberCourses: 8,
     urlAvatar: require('../../assets/images/cristiano-ronaldo.jpg'),
     skills: 'React JS',
     paths: 'React',
@@ -90,6 +91,7 @@ export const authors = [
   },
   {
     name: 'Nhu Daika',
+    numberCourses: 9,
     urlAvatar: require('../../assets/images/barack-obama.jpg'),
     skills: 'React JS',
     paths: 'Node js',
@@ -98,6 +100,7 @@ export const authors = [
   },
   {
     name: 'Taylor Swift',
+    numberCourses: 2,
     urlAvatar: require('../../assets/images/taylor-swift.jpg'),
     skills: 'Android',
     paths: 'Android X',
@@ -106,6 +109,7 @@ export const authors = [
   },
   {
     name: 'Kaká',
+    numberCourses: 12,
     urlAvatar: require('../../assets/images/kaka.jpg'),
     skills: 'Swift',
     paths: 'iOS',
@@ -114,6 +118,7 @@ export const authors = [
   },
   {
     name: 'John Boyds',
+    numberCourses: 13,
     urlAvatar: require('../../assets/images/john-boyd.jpg'),
     skills: 'Docker',
     paths: 'CICD',
@@ -125,7 +130,7 @@ export const authors = [
 export const paths = [
   {
     id: 1,
-    title: 'React Native',
+    name: 'React Native',
     numberCourses: 12,
     duration: 30,
     averageRating: 4.2,
@@ -133,14 +138,14 @@ export const paths = [
   },
   {
     id: 2,
-    title: 'Swift',
+    name: 'Swift',
     numberCourses: 16,
     duration: 50,
     urlImg: require('../../assets/images/jackfruit.jpg'),
   },
   {
     id: 3,
-    title: 'Android',
+    name: 'Android',
     numberCourses: 12,
     duration: 30,
     averageRating: 4.2,
@@ -148,7 +153,7 @@ export const paths = [
   },
   {
     id: 4,
-    title: 'CICD',
+    name: 'CICD',
     numberCourses: 12,
     duration: 30,
     averageRating: 4.2,

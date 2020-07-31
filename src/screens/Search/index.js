@@ -1,20 +1,47 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput, Platform} from 'react-native';
+import {View, StyleSheet, Platform} from 'react-native';
 import {SearchBar} from 'react-native-elements';
-import SearchResults from './SearchResults/search-results';
-import RecentSearches from './RecentSearches/recent-searches';
-import {createStackNavigator} from '@react-navigation/stack';
-const Stack = createStackNavigator();
+import SearchResults from '../../components/Search/SearchResults';
+import RecentSearches from '../../components/Search/RecentSearches';
 
 const Search = (props) => {
   const [searchContent, setSearchContent] = useState('');
-  const [listSearches, setListSearches] = useState([]);
   const [isShowRealSearch, setIsShowRealSearch] = useState(false);
+  const [recentSearches, setRecentSearches] = useState([]);
+  const [isShowRecentSearch, setIsShowRecentSearch] = useState(true);
   const handleChange = (content) => {
     setSearchContent(content);
   };
-  const screenOptions = {
-    headerShown: false,
+  const clearAllRecentSearches = () => {
+    setRecentSearches([]);
+  };
+  const handleClear = () => {
+    setSearchContent('');
+    setIsShowRecentSearch(true);
+    console.log('clear', searchContent);
+  };
+  const handleCancel = () => {
+    setSearchContent('');
+    setIsShowRealSearch(false);
+    setIsShowRecentSearch(true);
+    console.log('cancel', searchContent);
+  };
+  const isExistRecentSearch = () => {
+    const temp = recentSearches.find(
+      (contentSearch) => contentSearch === searchContent.toLowerCase(),
+    );
+    return temp ? true : false;
+  };
+  const handleEditing = () => {
+    if (!isExistRecentSearch()) {
+      setRecentSearches([...recentSearches, searchContent.toLowerCase()]);
+    }
+    setIsShowRecentSearch(false);
+  };
+  const chooseRecentSearch = (content) => {
+    setIsShowRecentSearch(false);
+    setIsShowRealSearch(true);
+    setSearchContent(content);
   };
   return (
     <View style={styles.container}>
@@ -43,33 +70,22 @@ const Search = (props) => {
             styles.inputContainerReal,
           ]}
           containerStyle={styles.searchContainer}
-          onCancel={() => {
-            setIsShowRealSearch(false);
-            props.navigation.navigate('RecentSearches', {listSearches});
-            setListSearches([]);
-            setSearchContent('');
-            console.log('search.js', listSearches, searchContent);
-          }}
+          onCancel={handleCancel}
+          onClear={handleClear}
           returnKeyType="search"
-          onSubmitEditing={() => {
-            setListSearches([...listSearches, searchContent]);
-            props.navigation.navigate('SearchResults', {searchContent});
-            console.log('search.js', listSearches, searchContent);
-          }}
+          onSubmitEditing={handleEditing}
         />
       )}
-
       <View style={styles.separator} />
-      <Stack.Navigator
-        screenOptions={screenOptions}
-        initialRouteName="RecentSearches">
-        <Stack.Screen
-          name="RecentSearches"
-          component={RecentSearches}
-          initialParams={{listSearches}}
+      {isShowRecentSearch === true ? (
+        <RecentSearches
+          recentSearches={recentSearches}
+          clearAllRecentSearches={clearAllRecentSearches}
+          chooseRecentSearch={chooseRecentSearch}
         />
-        <Stack.Screen name="SearchResults" component={SearchResults} />
-      </Stack.Navigator>
+      ) : (
+        <SearchResults searchContent={searchContent} />
+      )}
     </View>
   );
 };

@@ -7,7 +7,7 @@ import {CourseDetailScreen} from '../../../../globals/constants/screen-name';
 const CourseItemHorizontal = (props) => {
   const {navigation, item} = props;
   const showCourseDetail = () => {
-    navigation.navigate(CourseDetailScreen, {course: props.item});
+    navigation.navigate(CourseDetailScreen, {course: item});
   };
   return (
     <TouchableOpacity style={styles.item} onPress={showCourseDetail}>

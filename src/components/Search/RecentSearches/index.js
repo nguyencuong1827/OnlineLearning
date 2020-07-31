@@ -1,39 +1,24 @@
-import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
+import React from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const RecentSearches = (props) => {
-  const [recentSearches, setRecentSearches] = useState([]);
-  const {listSearches} = props.route.params;
-  useEffect(() => {
-    console.log('recent search.js', listSearches);
-    if (listSearches.length > 0) {
-      setRecentSearches([...recentSearches, ...listSearches]);
-    }
-  }, []);
+  const {recentSearches, clearAllRecentSearches, chooseRecentSearch} = props;
   const renderItem = (item) => {
     return (
-      <View style={styles.item}>
+      <TouchableOpacity
+        style={styles.item}
+        onPress={() => chooseRecentSearch(item)}>
         <Icon name="search1" size={18} color="#bdc3c7" />
         <Text style={styles.itemTitle}>
           {'    '}
           {item}
         </Text>
-      </View>
+      </TouchableOpacity>
     );
   };
   const renderSeparator = () => {
     return <View style={styles.separator} />;
-  };
-  const clearAllRecentSearches = () => {
-    setRecentSearches([]);
   };
   return (
     <View style={styles.container}>

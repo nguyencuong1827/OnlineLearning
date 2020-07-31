@@ -8,7 +8,7 @@ const PathsItem = (props) => {
       <TouchableOpacity>
         <Image style={styles.img} source={props.item.urlImg} />
         <View style={styles.content}>
-          <Text style={styles.title}>{props.item.title}</Text>
+          <Text style={styles.title}>{props.item.name}</Text>
           <Text style={styles.darkText}>{props.item.numberCourses} hours</Text>
         </View>
       </TouchableOpacity>

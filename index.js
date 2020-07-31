@@ -2,8 +2,8 @@
  * @format
  */
 
-import {AppRegistry, YellowBox} from 'react-native';
-import {name as appName} from './app.json';
+import {AppRegistry, LogBox} from 'react-native';
 import App from './App';
-YellowBox.ignoreWarnings(['VirtualizedLists']);
+import {name as appName} from './app.json';
+LogBox.ignoreLogs(['VirtualizedLists']);
 AppRegistry.registerComponent(appName, () => App);

@@ -4,7 +4,7 @@ import HomeStack from './HomeNavigator';
 import DownloadStack from './DownloadNavigator';
 import Icon from 'react-native-vector-icons/AntDesign';
 import BrowseStack from './BrowseNavigator';
-import Search from '../../components/Search/search';
+import Search from '../../components/Search';
 const Tab = createBottomTabNavigator();
 const AppNavigator = () => {
   return (

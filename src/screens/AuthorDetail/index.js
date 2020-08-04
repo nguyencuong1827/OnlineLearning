@@ -1,13 +1,24 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
 import HeaderAuthorDetail from '../../components/AuthorDetail/Header';
 import Separator from '../../components/Separator';
 import {ListCoursesVertical} from '../../components/ListCourses';
 import {courses} from '../../globals/fake-data';
 import {DistanceScale} from '../../globals/styles';
+import {ThemeContext} from '../../providers/theme-propvider';
+
+const setStyleWithTheme = (theme) => {
+  styles.container = {
+    ...styles.container,
+    backgroundColor: theme.backgroundColor,
+  };
+};
 
 const AuthorDetail = (props) => {
   const {authorDetail} = props.route.params;
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   const renderHeader = () => {
     return (
       <View>
@@ -22,8 +33,9 @@ const AuthorDetail = (props) => {
       </View>
     );
   };
+
   return (
-    <View>
+    <View style={styles.container}>
       <ListCoursesVertical
         navigation={props.navigation}
         data={courses}
@@ -35,6 +47,9 @@ const AuthorDetail = (props) => {
 
 export default AuthorDetail;
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   separator: {
     marginVertical: DistanceScale.spacing_8,
   },

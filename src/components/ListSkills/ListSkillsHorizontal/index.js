@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,20 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
+import {ThemeContext} from '../../../providers/theme-propvider';
+import {Typography, DistanceScale, ScaleSize} from '../../../globals/styles';
+
+const setStyleWithTheme = (theme) => {
+  styles.title = {
+    ...styles.title,
+    color: theme.colorMainText,
+  };
+  styles.seeAll = {
+    ...styles.seeAll,
+    backgroundColor: theme.buttonSeeAllBackground,
+    color: theme.colorMainText,
+  };
+};
 
 const SkillButton = (props) => {
   return (
@@ -19,6 +33,9 @@ const SkillButton = (props) => {
 };
 
 const ListSkillsHorizontal = () => {
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   const popularSkills = [
     'Angular',
     'React JS',
@@ -49,24 +66,30 @@ const ListSkillsHorizontal = () => {
 export default ListSkillsHorizontal;
 const styles = StyleSheet.create({
   container: {
-    margin: 5,
+    marginHorizontal: DistanceScale.spacing_12,
+    marginVertical: DistanceScale.spacing_18,
   },
   seeAllButton: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    margin: 5,
+    marginHorizontal: DistanceScale.superSmall,
+    marginTop: DistanceScale.spacing_8,
   },
   title: {
-    fontWeight: 'bold',
-    fontSize: 14,
+    fontWeight: Typography.fontWeightBold,
+    fontSize: Typography.fontSize18,
   },
   seeAll: {
-    borderRadius: 12,
-    fontSize: 12,
-    height: 25,
+    fontSize: Typography.fontSize14,
+
     textAlignVertical: 'center',
-    backgroundColor: '#d9d9d9',
-    paddingHorizontal: 10,
+    textAlign: 'center',
+
+    borderRadius: 12,
+    paddingHorizontal: DistanceScale.spacing_10,
+
+    height: ScaleSize.scaleSizeWidth(18),
+    minWidth: ScaleSize.scaleSizeWidth(38),
   },
 });

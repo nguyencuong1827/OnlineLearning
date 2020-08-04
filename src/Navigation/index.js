@@ -7,12 +7,24 @@ import CourseDetail from '../screens/CourseDetail';
 import {AuthenticationContext} from '../providers/authentication-provider';
 import AppNavigator from './AppNavigator';
 import Login from '../screens/Login';
+import Profile from '../screens/Profile';
+import {ThemeContext} from '../providers/theme-propvider';
 const Stack = createStackNavigator();
 const RootNavigator = () => {
   const {state} = useContext(AuthenticationContext);
+  const {theme} = useContext(ThemeContext);
+
+  const screenOptions = {
+    headerStyle: {
+      backgroundColor: theme.headerFooterBackground,
+    },
+    headerTintColor: theme.colorMainText,
+    headerTitleAlign: 'center',
+  };
+
   return (
     <NavigationContainer>
-      <Stack.Navigator mode="modal">
+      <Stack.Navigator mode="modal" screenOptions={screenOptions}>
         {/* {!state.isLoggedIn ? (
           <Stack.Screen
             name={ScreenName.LoginScreen}

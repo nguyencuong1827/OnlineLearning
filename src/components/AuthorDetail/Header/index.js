@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet, Linking} from 'react-native';
 import {Avatar} from 'react-native-elements';
 import {
@@ -10,10 +10,23 @@ import {
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Contacts from '../Contacts';
-import Separator from '../../Separator';
+import {ThemeContext} from '../../../providers/theme-propvider';
+
+const setStyleWithTheme = (theme) => {
+  styles.txtName = {...styles.txtName, color: theme.colorMainText};
+  styles.txtJob = {...styles.txtJob, color: theme.colorSubText};
+  styles.txtDescription = {
+    ...styles.txtDescription,
+    color: theme.colorMainText,
+  };
+  styles.txtLink = {...styles.txtLink, color: theme.colorMainText};
+};
 
 const HeaderAuthorDetail = (props) => {
   const {name, description, urlAvatar} = props;
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   const moveToLink = (url) => {
     Linking.canOpenURL(url).then((supported) => {
       if (supported) {
@@ -23,6 +36,7 @@ const HeaderAuthorDetail = (props) => {
       }
     });
   };
+
   return (
     <View style={styles.container}>
       <Avatar
@@ -44,7 +58,11 @@ const HeaderAuthorDetail = (props) => {
         <Text style={styles.txtDescription}>{description}</Text>
       </View>
       <View style={styles.link}>
-        <Icon name="insert-link" size={20} />
+        <Icon
+          name="insert-link"
+          size={Typography.fontSize20}
+          color={theme.colorMainText}
+        />
         <TouchableOpacity>
           <Text style={styles.txtLink}>https://reactnative.dev</Text>
         </TouchableOpacity>
@@ -62,13 +80,11 @@ const styles = StyleSheet.create({
     marginHorizontal: DistanceScale.spacing_8,
   },
   txtName: {
-    color: Colors.black,
     fontSize: Typography.fontSize18,
     marginTop: DistanceScale.spacing_8,
     fontWeight: Typography.fontWeightBold,
   },
   txtJob: {
-    color: Colors.gray,
     fontSize: Typography.fontSize14,
     marginVertical: DistanceScale.spacing_5,
   },
@@ -86,8 +102,7 @@ const styles = StyleSheet.create({
     fontSize: Typography.fontSize16,
   },
   txtDescription: {
-    color: Colors.black,
-    fontSize: Typography.fontSize14,
+    fontSize: Typography.fontSize16,
     lineHeight: DistanceScale.spacing_18,
     marginVertical: DistanceScale.spacing_5,
   },
@@ -98,8 +113,7 @@ const styles = StyleSheet.create({
     marginVertical: DistanceScale.spacing_5,
   },
   txtLink: {
-    color: Colors.black,
-    fontSize: Typography.fontSize14,
+    fontSize: Typography.fontSize16,
     marginLeft: DistanceScale.spacing_8,
   },
 });

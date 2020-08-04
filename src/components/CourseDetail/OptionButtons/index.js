@@ -1,29 +1,58 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {DistanceScale, ScaleSize, Colors} from '../../../globals/styles';
+import {
+  DistanceScale,
+  ScaleSize,
+  Colors,
+  Typography,
+} from '../../../globals/styles';
+import {ThemeContext} from '../../../providers/theme-propvider';
+
+const setStyleWithTheme = (theme) => {
+  styles.title = {...styles.title, color: theme.colorMainText};
+  styles.button = {
+    ...styles.button,
+    backgroundColor: theme.buttonSeeAllBackground,
+  };
+};
 
 const OptionButtons = () => {
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
         <TouchableOpacity style={styles.button}>
-          <Icon name="bookmark-multiple-outline" size={22} />
+          <Icon
+            name="bookmark-multiple-outline"
+            size={Typography.fontSize20}
+            color={theme.colorMainText}
+          />
         </TouchableOpacity>
-        <Text>Bookmark</Text>
+        <Text style={styles.title}>Bookmark</Text>
       </View>
 
       <View style={styles.mainContainer}>
         <TouchableOpacity style={styles.button}>
-          <Icon name="radio-tower" size={22} />
+          <Icon
+            name="radio-tower"
+            size={Typography.fontSize20}
+            color={theme.colorMainText}
+          />
         </TouchableOpacity>
-        <Text>Add to channel</Text>
+        <Text style={styles.title}>Add to channel</Text>
       </View>
       <View style={styles.mainContainer}>
         <TouchableOpacity style={styles.button}>
-          <Icon name="download-outline" size={22} />
+          <Icon
+            name="download-outline"
+            size={Typography.fontSize20}
+            color={theme.colorMainText}
+          />
         </TouchableOpacity>
-        <Text>Download</Text>
+        <Text style={styles.title}>Download</Text>
       </View>
     </View>
   );
@@ -44,7 +73,10 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: DistanceScale.spacing_10,
-    backgroundColor: Colors.silver,
-    borderRadius: 25,
+    borderRadius: 12.5,
+  },
+  title: {
+    marginTop: DistanceScale.superSmall,
+    fontSize: Typography.fontSize14,
   },
 });

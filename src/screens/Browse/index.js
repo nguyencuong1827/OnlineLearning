@@ -1,13 +1,29 @@
-import React from 'react';
-import {View, SafeAreaView, ScrollView, StyleSheet, Alert} from 'react-native';
+import React, {useContext} from 'react';
+import {SafeAreaView, ScrollView, StyleSheet, Alert, View} from 'react-native';
 import Banner from '../../components/Banner';
 import {ListAuthorsHorizontal} from '../../components/ListAuthors';
-import {ScaleSize} from '../../globals/styles';
+import {
+  ScaleSize,
+  DistanceScale,
+  Typography,
+  Colors,
+} from '../../globals/styles';
 import {ListSkillsHorizontal} from '../../components/ListSkills';
 import ListTopicsHorizontal from '../../components/ListTopics/ListTopicsHorizontal';
 import {ListPathsHorizontal} from '../../components/ListPaths';
+import {ThemeContext} from '../../providers/theme-propvider';
+
+const setStyleWithTheme = (theme) => {
+  styles.container = {
+    ...styles.container,
+    backgroundColor: theme.backgroundColor,
+  };
+};
 
 const Browse = (props) => {
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -44,35 +60,33 @@ const Browse = (props) => {
 export default Browse;
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
-    backgroundColor: '#f2f2f2',
+    flex: 1,
   },
   newAndRecommendButton: {
+    marginHorizontal: DistanceScale.spacing_12,
+    marginTop: DistanceScale.spacing_10,
     height: ScaleSize.scaleSizeHeight(65),
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: 10,
   },
   newAndRecommendTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'white',
+    fontSize: Typography.fontSize18,
+    fontWeight: Typography.fontWeightBold,
+    color: Colors.white,
   },
   topicImgButton: {
     height: ScaleSize.scaleSizeHeight(65),
-    margin: 5,
+    margin: DistanceScale.spacing_5,
   },
   title1: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: 'white',
+    fontSize: Typography.fontSize18,
+    fontWeight: Typography.fontWeightBold,
+    color: Colors.white,
   },
   title2: {
-    fontSize: 12,
-    color: 'white',
+    fontSize: Typography.fontSize14,
+    color: Colors.white,
   },
   groupImgButton: {
-    margin: 5,
+    margin: DistanceScale.spacing_5,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',

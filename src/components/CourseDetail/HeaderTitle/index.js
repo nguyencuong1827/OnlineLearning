@@ -1,8 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {Colors, Typography, DistanceScale} from '../../../globals/styles';
+import {Typography, DistanceScale} from '../../../globals/styles';
+import {ThemeContext} from '../../../providers/theme-propvider';
+
+const setStyleWithTheme = (theme) => {
+  styles.header = {
+    ...styles.header,
+    color: theme.colorMainText,
+  };
+};
 
 const HeaderTitle = (props) => {
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{props.name}</Text>
@@ -18,7 +29,6 @@ const styles = StyleSheet.create({
     marginHorizontal: DistanceScale.spacing_12,
   },
   header: {
-    color: Colors.black,
     fontSize: Typography.fontSize20,
     fontWeight: Typography.fontWeightBold,
   },

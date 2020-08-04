@@ -3,7 +3,7 @@ import {View, StyleSheet, FlatList, Alert} from 'react-native';
 import CourseItemHorizontal from './CourseItem';
 import SeeAllButton from '../../SeeAllButton';
 import {courses} from '../../../globals/fake-data';
-import {ScaleSize} from '../../../globals/styles';
+import {ScaleSize, DistanceScale} from '../../../globals/styles';
 
 const ListCoursesHorizontal = (props) => {
   const {navigation, title} = props;
@@ -35,7 +35,7 @@ export default ListCoursesHorizontal;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginLeft: 10,
-    marginBottom: 10,
+    marginLeft: DistanceScale.spacing_14,
+    marginBottom: DistanceScale.spacing_10,
   },
 });

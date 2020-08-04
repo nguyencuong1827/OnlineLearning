@@ -1,7 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {DistanceScale, Typography, Colors} from '../../../../globals/styles';
+import {ThemeContext} from '../../../../providers/theme-propvider';
+
+const setStyleWithTheme = (theme) => {
+  styles.subTitle = {...styles.subTitle, color: theme.colorMainText};
+};
 
 const completeLesson = (isCheck) => (
   <Icon
@@ -10,7 +15,11 @@ const completeLesson = (isCheck) => (
     color={Colors.green}
   />
 );
+
 const LessonItem = (props) => {
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   return (
     <TouchableOpacity style={styles.container} underlayColor="blue">
       {completeLesson(props.isCheck)}
@@ -30,6 +39,5 @@ const styles = StyleSheet.create({
   subTitle: {
     marginLeft: DistanceScale.spacing_10,
     fontSize: Typography.fontSize14,
-    color: Colors.black,
   },
 });

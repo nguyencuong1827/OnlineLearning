@@ -1,10 +1,21 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import {Text, TouchableOpacity, StyleSheet, View} from 'react-native';
 import {Avatar} from 'react-native-elements';
-import {Colors, Typography, DistanceScale} from '../../../globals/styles';
+import {Typography, DistanceScale} from '../../../globals/styles';
+import {ThemeContext} from '../../../providers/theme-propvider';
+
+const setStyleWithTheme = (theme) => {
+  styles.authorContainer = {
+    ...styles.authorContainer,
+    backgroundColor: theme.buttonSeeAllBackground,
+  };
+  styles.name = {...styles.name, color: theme.colorMainText};
+};
 
 const AuthorOfCourse = (props) => {
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   const {authorDetail, showAuthorDetail} = props;
   return (
     <View style={styles.container}>
@@ -27,7 +38,6 @@ const styles = StyleSheet.create({
   },
   authorContainer: {
     flexDirection: 'row',
-    backgroundColor: Colors.silver,
     borderRadius: 30,
     alignItems: 'center',
     padding: 3,
@@ -35,6 +45,5 @@ const styles = StyleSheet.create({
   name: {
     marginHorizontal: DistanceScale.spacing_5,
     fontSize: Typography.fontSize14,
-    color: Colors.black,
   },
 });

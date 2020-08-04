@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeStack from './HomeNavigator';
 import DownloadStack from './DownloadNavigator';
 import Icon from 'react-native-vector-icons/AntDesign';
 import BrowseStack from './BrowseNavigator';
-import Search from '../../components/Search';
+import Search from '../../screens/Search';
+import {ThemeContext} from '../../providers/theme-propvider';
+import {Typography} from '../../globals/styles';
 const Tab = createBottomTabNavigator();
 const AppNavigator = () => {
+  const {theme} = useContext(ThemeContext);
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -27,10 +30,13 @@ const AppNavigator = () => {
         },
       })}
       tabBarOptions={{
-        activeTintColor: '#1565c0',
-        inactiveTintColor: 'gray',
+        activeTintColor: theme.colorIconActiveTab,
+        inactiveTintColor: theme.colorIconTab,
         style: {
-          backgroundColor: '#fff',
+          backgroundColor: theme.headerFooterBackground,
+        },
+        labelStyle: {
+          fontSize: Typography.fontSize14,
         },
       }}
       navigationOptions={{

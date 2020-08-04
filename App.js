@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, StatusBar, Button, Alert} from 'react-native';
 import RootNavigator from './src/navigation';
 // import SplashScreen from './src/screens/SplashScreen';
 import {AuthenticationProvider} from './src/providers/authentication-provider';
+import {ThemeProvider} from './src/providers/theme-propvider';
 const App = () => {
   const [currentScreen, setCurrentScreen] = useState('SplashScreen');
   // useEffect(() => {
@@ -12,13 +13,15 @@ const App = () => {
   //   return () => clearTimeout(time);
   // }, []);
   return (
-    <AuthenticationProvider>
-      <View style={styles.container}>
-        <StatusBar hidden={true} />
-        {/* {currentScreen === 'SplashScreen' ? <SplashScreen /> : <RootStack />} */}
-        <RootNavigator />
-      </View>
-    </AuthenticationProvider>
+    <ThemeProvider>
+      <AuthenticationProvider>
+        <View style={styles.container}>
+          <StatusBar hidden={true} />
+          {/* {currentScreen === 'SplashScreen' ? <SplashScreen /> : <RootStack />} */}
+          <RootNavigator />
+        </View>
+      </AuthenticationProvider>
+    </ThemeProvider>
   );
 };
 

@@ -39,5 +39,6 @@ export default ListAuthorsVertical;
 const styles = StyleSheet.create({
   container: {
     padding: DistanceScale.spacing_10,
+    margin: DistanceScale.spacing_10,
   },
 });

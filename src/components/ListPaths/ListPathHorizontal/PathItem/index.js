@@ -1,15 +1,28 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
-import {ScaleSize} from '../../../../globals/styles';
+import {ScaleSize, DistanceScale, Typography} from '../../../../globals/styles';
+import {ThemeContext} from '../../../../providers/theme-propvider';
+
+const setStyleWithTheme = (theme) => {
+  styles.content = {
+    ...styles.content,
+    backgroundColor: theme.buttonSeeAllBackground,
+  };
+  styles.name = {...styles.name, color: theme.colorMainText};
+  styles.info = {...styles.info, color: theme.colorSubText};
+};
 
 const PathsItem = (props) => {
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   return (
-    <View style={styles.item}>
+    <View style={styles.container}>
       <TouchableOpacity>
         <Image style={styles.img} source={props.item.urlImg} />
         <View style={styles.content}>
-          <Text style={styles.title}>{props.item.name}</Text>
-          <Text style={styles.darkText}>{props.item.numberCourses} hours</Text>
+          <Text style={styles.name}>{props.item.name}</Text>
+          <Text style={styles.info}>{props.item.numberCourses} hours</Text>
         </View>
       </TouchableOpacity>
     </View>
@@ -17,12 +30,11 @@ const PathsItem = (props) => {
 };
 export default PathsItem;
 const styles = StyleSheet.create({
-  item: {
-    marginRight: 5,
-    marginLeft: 5,
+  container: {
+    marginRight: DistanceScale.spacing_5,
+    marginLeft: DistanceScale.spacing_5,
     width: ScaleSize.scaleSizeWidth(210),
     height: ScaleSize.scaleSizeWidth(160),
-    backgroundColor: '#fff',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -38,7 +50,6 @@ const styles = StyleSheet.create({
     height: ScaleSize.scaleSizeWidth(100),
   },
   content: {
-    backgroundColor: '#d9d9d9',
     width: ScaleSize.scaleSizeWidth(210),
     padding: 10,
     shadowColor: '#000',
@@ -51,11 +62,12 @@ const styles = StyleSheet.create({
 
     elevation: 7,
   },
-  darkText: {
-    color: 'gray',
+  info: {
     marginBottom: 3,
+    fontSize: Typography.fontSize14,
   },
-  title: {
+  name: {
     marginBottom: 3,
+    fontSize: Typography.fontSize16,
   },
 });

@@ -1,34 +1,52 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
-import {ScaleSize, Colors} from '../../../../globals/styles';
+import {
+  ScaleSize,
+  Colors,
+  DistanceScale,
+  Typography,
+} from '../../../../globals/styles';
 import Rating from 'react-native-star-rating';
 import {CourseDetailScreen} from '../../../../globals/constants/screen-name';
+import {ThemeContext} from '../../../../providers/theme-propvider';
 
+const setStyleWithTheme = (theme) => {
+  styles.content = {
+    ...styles.content,
+    backgroundColor: theme.buttonSeeAllBackground,
+  };
+  styles.name = {...styles.name, color: theme.colorMainText};
+  styles.info = {...styles.info, color: theme.colorSubText};
+};
 const CourseItemHorizontal = (props) => {
   const {navigation, item} = props;
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   const showCourseDetail = () => {
     navigation.navigate(CourseDetailScreen, {course: item});
   };
+
   return (
-    <TouchableOpacity style={styles.item} onPress={showCourseDetail}>
+    <TouchableOpacity style={styles.container} onPress={showCourseDetail}>
       <Image style={styles.img} activeOpacity={0.6} source={item.urlImg} />
       <View style={styles.content}>
         <Text style={styles.name}>{item.name}</Text>
-        <Text style={styles.darkText}>{item.author}</Text>
+        <Text style={styles.info}>{item.author}</Text>
         <Text
           style={
-            styles.darkText
+            styles.info
           }>{`${item.level} . ${item.releasedDate} . ${item.duration} hours`}</Text>
         <View style={styles.ratingContainer}>
           <Rating
             disabled={true}
             maxStars={5}
             rating={item.averageRating}
-            starSize={15}
+            starSize={Typography.fontSize16}
             fullStarColor={Colors.yellow}
             starStyle={styles.starRating}
           />
-          <Text style={styles.darkText}>
+          <Text style={styles.info}>
             {'   '}({item.totalRating})
           </Text>
         </View>
@@ -38,12 +56,10 @@ const CourseItemHorizontal = (props) => {
 };
 export default CourseItemHorizontal;
 const styles = StyleSheet.create({
-  item: {
-    marginRight: 15,
-    marginLeft: 10,
+  container: {
+    marginRight: DistanceScale.spacing_12,
     width: ScaleSize.scaleSizeWidth(210),
     height: ScaleSize.scaleSizeWidth(200),
-    backgroundColor: '#fff',
     shadowColor: '#000',
     shadowOffset: {
       width: 5,
@@ -59,20 +75,21 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   content: {
-    padding: 10,
-    backgroundColor: '#d9d9d9',
+    padding: DistanceScale.spacing_10,
     height: ScaleSize.scaleSizeWidth(200),
   },
-  darkText: {
+  info: {
     color: 'gray',
-    marginBottom: 3,
+    marginBottom: DistanceScale.superSmall,
+    fontSize: Typography.fontSize14,
   },
   name: {
-    marginBottom: 3,
+    marginBottom: DistanceScale.superSmall,
+    fontSize: Typography.fontSize16,
   },
   ratingContainer: {
     flexDirection: 'row',
-    marginTop: 3,
+    marginTop: DistanceScale.superSmall,
   },
   starRating: {
     padding: 2,

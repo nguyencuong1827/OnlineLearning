@@ -1,13 +1,25 @@
-import React from 'react';
-import {View, Text} from 'react-native';
+import React, {useContext} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
 import {ListCoursesVertical} from '../../../ListCourses';
+import {ThemeContext} from '../../../../providers/theme-propvider';
+import {Typography} from '../../../../globals/styles';
+
+const setStyleWithTheme = (theme) => {
+  styles.result = {
+    ...styles.result,
+    color: theme.colorMainText,
+  };
+};
+
 const PathResults = (props) => {
   const {pathResults} = props.route.params;
-  console.log(props.route);
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   const renderHeader = () => {
     return (
       <View>
-        <Text>{pathResults.length} results</Text>
+        <Text style={styles.result}>{pathResults.length} results</Text>
       </View>
     );
   };
@@ -19,3 +31,9 @@ const PathResults = (props) => {
 };
 
 export default PathResults;
+const styles = StyleSheet.create({
+  result: {
+    fontSize: Typography.fontSize18,
+    fontWeight: Typography.fontWeightBold,
+  },
+});

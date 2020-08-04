@@ -1,10 +1,20 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {ListAuthorsVertical} from '../../../ListAuthors';
 import {Typography, DistanceScale} from '../../../../globals/styles';
+import {ThemeContext} from '../../../../providers/theme-propvider';
+
+const setStyleWithTheme = (theme) => {
+  styles.header = {
+    ...styles.header,
+    color: theme.colorMainText,
+  };
+};
 const AuthorResults = (props) => {
   const {authorResults} = props.route.params;
-  console.log(props.route);
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   const renderHeader = () => {
     return (
       <View>
@@ -12,6 +22,7 @@ const AuthorResults = (props) => {
       </View>
     );
   };
+
   return (
     <View>
       <ListAuthorsVertical data={authorResults} renderHeader={renderHeader} />
@@ -22,7 +33,7 @@ const AuthorResults = (props) => {
 export default AuthorResults;
 const styles = StyleSheet.create({
   header: {
-    fontSize: Typography.fontSize16,
+    fontSize: Typography.fontSize18,
     fontWeight: Typography.fontWeightBold,
     marginBottom: DistanceScale.spacing_10,
   },

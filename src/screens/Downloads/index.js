@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   Text,
@@ -9,9 +9,23 @@ import {
 } from 'react-native';
 import {ListCoursesVertical} from '../../components/ListCourses';
 import {courses} from '../../globals/fake-data';
+import {ThemeContext} from '../../providers/theme-propvider';
+import {DistanceScale, Typography} from '../../globals/styles';
+
+const setStyleWithTheme = (theme) => {
+  styles.container = {
+    ...styles.container,
+    backgroundColor: theme.backgroundColor,
+  };
+  styles.downloads = {...styles.downloads, color: theme.colorMainText};
+  styles.remove = {...styles.remove, color: theme.colorIconActiveTab};
+};
 
 const Downloads = (props) => {
   const {navigation} = props;
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   const Header = () => {
     return (
       <View style={styles.title}>
@@ -34,20 +48,19 @@ export default Downloads;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2f2f2',
   },
   title: {
-    marginRight: 10,
-    marginLeft: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: DistanceScale.spacing_10,
+    marginTop: DistanceScale.spacing_5,
   },
   downloads: {
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: Typography.fontSize18,
+    fontWeight: Typography.fontWeightBold,
   },
   remove: {
-    color: '#1565c0',
-    fontSize: 14,
+    fontSize: Typography.fontSize14,
   },
 });

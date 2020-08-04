@@ -8,12 +8,10 @@ import {
 import Icon from 'react-native-vector-icons/AntDesign';
 import {ScaleSize, Colors} from '../../../globals/styles';
 const VideoPlayer = (props) => {
-  const {closeCourseDetail, shareCourseDetail} = props;
+  const {closeCourseDetail, shareCourseDetail, urlImg} = props;
   return (
     <View style={styles.container}>
-      <ImageBackground
-        style={styles.videoPlayer}
-        source={require('../../../../assets/images/video-player.jpg')}>
+      <ImageBackground style={styles.videoPlayer} source={urlImg}>
         <View style={styles.blurContainer}>
           <TouchableOpacity onPress={closeCourseDetail}>
             <Icon name="close" size={25} color="#fff" />

@@ -90,7 +90,7 @@ export const authors = [
       'Nguyen Cuong is a software developer, consultant, conference speaker,  and Pluralsight author. Her courses include: Angular: Getting Started, Angular Routing, and Object-Oriented Programming Fundamentals in C#. For her work in support of software developers, she has been recognized with Microsoft Most Valuable Professional (MVP) award, and is a Google Developer Expert (GDE)',
   },
   {
-    name: 'Nhu Daika',
+    name: 'Cuong Joker',
     numberCourses: 9,
     urlAvatar: require('../../assets/images/barack-obama.jpg'),
     skills: 'React JS',
@@ -99,7 +99,7 @@ export const authors = [
       'Nhu Daika is a software developer, consultant, conference speaker,  and Pluralsight author. Her courses include: Angular: Getting Started, Angular Routing, and Object-Oriented Programming Fundamentals in C#. For her work in support of software developers, she has been recognized with Microsoft Most Valuable Professional (MVP) award, and is a Google Developer Expert (GDE)',
   },
   {
-    name: 'Taylor Swift',
+    name: 'Nhu Daika',
     numberCourses: 2,
     urlAvatar: require('../../assets/images/taylor-swift.jpg'),
     skills: 'Android',

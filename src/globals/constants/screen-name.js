@@ -9,6 +9,7 @@ export const DownloadScreen = 'DownloadScreen';
 export const SearchScreen = 'SearchScreen';
 
 export const ProfileScreen = 'ProfileScreen';
+export const ThemeScreen = 'ThemeScreen';
 export const CourseDetailScreen = 'CourseDetailScreen';
 export const AuthorDetailScreen = 'AuthorDetailScreen';
 

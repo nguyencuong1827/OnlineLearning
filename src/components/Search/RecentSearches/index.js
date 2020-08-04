@@ -1,24 +1,46 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
+import Separator from '../../Separator';
+import {Typography, DistanceScale} from '../../../globals/styles';
+import {ThemeContext} from '../../../providers/theme-propvider';
+
+const setStyleWithTheme = (theme) => {
+  styles.recent = {
+    ...styles.recent,
+    color: theme.colorMainText,
+  };
+  styles.clear = {
+    ...styles.clear,
+    color: theme.colorIconActiveTab,
+  };
+  styles.itemTitle = {
+    ...styles.itemTitle,
+    color: theme.colorMainText,
+  };
+};
 
 const RecentSearches = (props) => {
   const {recentSearches, clearAllRecentSearches, chooseRecentSearch} = props;
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   const renderItem = (item) => {
     return (
       <TouchableOpacity
         style={styles.item}
         onPress={() => chooseRecentSearch(item)}>
-        <Icon name="search1" size={18} color="#bdc3c7" />
+        <Icon
+          name="search1"
+          size={Typography.fontSize18}
+          color={theme.colorMainText}
+        />
         <Text style={styles.itemTitle}>
           {'    '}
           {item}
         </Text>
       </TouchableOpacity>
     );
-  };
-  const renderSeparator = () => {
-    return <View style={styles.separator} />;
   };
   return (
     <View style={styles.container}>
@@ -32,7 +54,7 @@ const RecentSearches = (props) => {
         keyExtractor={(item, index) => index.toString()}
         data={recentSearches}
         renderItem={({item}) => renderItem(item)}
-        ItemSeparatorComponent={renderSeparator}
+        ItemSeparatorComponent={() => <Separator />}
         // ListHeaderComponent={searchView}
       />
     </View>
@@ -44,33 +66,27 @@ export default RecentSearches;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 5,
+    margin: DistanceScale.spacing_5,
   },
   title: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    margin: 10,
+    margin: DistanceScale.spacing_10,
   },
   recent: {
-    fontWeight: 'bold',
-    fontSize: 18,
+    fontWeight: Typography.fontWeightBold,
+    fontSize: Typography.fontSize18,
   },
   clear: {
-    color: '#1565c0',
-  },
-  separator: {
-    height: 1,
-    width: '90%',
-    backgroundColor: '#CED0CE',
-    alignSelf: 'center',
+    fontSize: Typography.fontSize16,
   },
   item: {
     flexDirection: 'row',
-    margin: 10,
-    marginLeft: 20,
+    margin: DistanceScale.spacing_10,
+    marginLeft: DistanceScale.spacing_20,
   },
   itemTitle: {
-    fontSize: 18,
+    fontSize: Typography.fontSize18,
   },
 });

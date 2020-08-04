@@ -13,6 +13,15 @@ export const white95 = '#f2f2f2';
 export const white90 = '#e6e6e6';
 export const white85 = '#d9d9d9';
 export const white80 = '#cccccc';
+export const white52 = '#818689';
+export const white47 = '#797979';
+export const white40 = '#62676b';
+
+export const black5 = '#0b0b0f';
+export const black14 = '#1f242a';
+
+export const blue36 = '#0c71ac';
+export const blue50 = '#0aa7f5';
 
 export const white = '#f8f9fb';
 export const black = '#0c0c0c';

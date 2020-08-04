@@ -1,10 +1,18 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Avatar} from 'react-native-elements';
 import {DistanceScale, Typography, Colors} from '../../../../globals/styles';
+import {ThemeContext} from '../../../../providers/theme-propvider';
+
+const setStyleWithTheme = (theme) => {
+  styles.name = {...styles.name, color: theme.colorMainText};
+};
 
 const AuthorElement = (props) => {
   const {name, numberCourses, urlAvatar} = props;
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   return (
     <TouchableOpacity style={styles.container} onPress={props.showAuthorDetail}>
       <Avatar

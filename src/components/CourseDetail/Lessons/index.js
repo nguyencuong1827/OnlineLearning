@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   Text,
@@ -14,6 +14,16 @@ import {
   Typography,
   ScaleSize,
 } from '../../../globals/styles';
+import {ThemeContext} from '../../../providers/theme-propvider';
+
+const setStyleWithTheme = (theme) => {
+  styles.header = {
+    ...styles.header,
+    backgroundColor: theme.backgroundColor,
+  };
+  styles.title = {...styles.title, color: theme.colorMainText};
+  styles.hour = {...styles.hour, color: theme.colorSubText};
+};
 
 const ProgressLesson = (props) => {
   return (
@@ -39,6 +49,9 @@ const renderSectionHeader = (title, hour, index) => {
 };
 const Lessons = (props) => {
   const {lessons} = props;
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   return (
     <View style={styles.container}>
       <SectionList
@@ -67,10 +80,10 @@ const Lessons = (props) => {
 export default Lessons;
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white95,
+    flex: 1,
   },
   header: {
-    backgroundColor: Colors.white95,
+    padding: 5,
   },
   touchHeader: {
     flexDirection: 'row',
@@ -81,21 +94,19 @@ const styles = StyleSheet.create({
     marginRight: DistanceScale.spacing_12,
   },
   title: {
-    color: Colors.black,
     fontSize: Typography.fontSize16,
   },
   hour: {
-    color: Colors.gray,
     fontSize: Typography.fontSize14,
   },
   progressLesson: {
+    justifyContent: 'center',
+    alignItems: 'center',
     height: ScaleSize.scaleSizeWidth(20),
     width: ScaleSize.scaleSizeWidth(20),
     marginRight: DistanceScale.spacing_12,
     borderRadius: 12.5,
     borderColor: Colors.green,
     borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });

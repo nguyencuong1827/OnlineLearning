@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     marginVertical: DistanceScale.spacing_8,
   },
   subTitle: {
-    marginLeft: DistanceScale.spacing_10,
+    marginLeft: DistanceScale.spacing_12,
     fontSize: Typography.fontSize14,
   },
 });

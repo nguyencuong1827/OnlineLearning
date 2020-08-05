@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {
   useState,
   useEffect,
@@ -20,6 +21,7 @@ import TabViewControl from '../../components/CourseDetail/TabViewControl';
 import {Colors} from '../../globals/styles';
 import {AuthorDetailScreen} from '../../globals/constants/screen-name';
 import {ThemeContext} from '../../providers/theme-propvider';
+import {BookmarkContext} from '../../providers/bookmark-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.container = {
@@ -31,9 +33,11 @@ const setStyleWithTheme = (theme) => {
 const CourseDetail = (props) => {
   const {navigation} = props;
   const {theme} = useContext(ThemeContext);
+  const {listBookmarks, setListBookmarks} = useContext(BookmarkContext);
   const [parentScroll, setParentScroll] = useState(true);
   const [childScroll, setChildScroll] = useState(false);
   const [authorDetail, setAuthorDetail] = useState(null);
+  const [indexBookmarked, setIndexBookmarked] = useState(-1);
   const willMount = useRef(true);
   const {course} = props.route.params;
 
@@ -102,6 +106,24 @@ const CourseDetail = (props) => {
     props.navigation.navigate(AuthorDetailScreen, {authorDetail});
   };
 
+  useLayoutEffect(() => {
+    const index = listBookmarks.findIndex(
+      (bookmark) => bookmark.name === course.name,
+    );
+    setIndexBookmarked(index);
+  }, []);
+
+  const addBookmark = () => {
+    if (indexBookmarked === -1) {
+      setListBookmarks([...listBookmarks, course]);
+      setIndexBookmarked(listBookmarks.length - 1);
+    } else {
+      let listTemp = listBookmarks;
+      listTemp.splice(indexBookmarked, 1);
+      setIndexBookmarked(-1);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <VideoPlayer
@@ -125,7 +147,10 @@ const CourseDetail = (props) => {
             averageRating={course.averageRating}
             totalRating={course.totalRating}
           />
-          <OptionButtons />
+          <OptionButtons
+            addBookmark={addBookmark}
+            indexBookmarked={indexBookmarked}
+          />
           <Separator />
           <Description description={course.description} />
           <RelateCoursesAndPaths />

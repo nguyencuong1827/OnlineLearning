@@ -9,12 +9,12 @@ const setStyleWithTheme = (theme) => {
 };
 
 const AuthorElement = (props) => {
-  const {name, numberCourses, urlAvatar} = props;
+  const {name, numberCourses, urlAvatar, showAuthorDetail} = props;
   const {theme} = useContext(ThemeContext);
   setStyleWithTheme(theme);
 
   return (
-    <TouchableOpacity style={styles.container} onPress={props.showAuthorDetail}>
+    <TouchableOpacity style={styles.container} onPress={showAuthorDetail}>
       <Avatar
         rounded
         size="medium"
@@ -38,10 +38,11 @@ const styles = StyleSheet.create({
     margin: DistanceScale.spacing_10,
   },
   name: {
-    fontSize: Typography.fontSize14,
+    fontSize: Typography.fontSize16,
   },
   numnerCourses: {
-    fontSize: Typography.fontSize12,
+    marginTop: DistanceScale.superSmall,
+    fontSize: Typography.fontSize14,
     color: Colors.gray,
   },
 });

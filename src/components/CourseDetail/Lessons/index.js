@@ -28,7 +28,7 @@ const setStyleWithTheme = (theme) => {
 const ProgressLesson = (props) => {
   return (
     <View style={styles.progressLesson}>
-      <Text>{props.index}</Text>
+      <Text style={styles.title}>{props.index}</Text>
     </View>
   );
 };
@@ -83,15 +83,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    padding: 5,
+    padding: DistanceScale.spacing_5,
   },
   touchHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: DistanceScale.spacing_14,
+    padding: DistanceScale.spacing_8,
   },
   index: {
-    marginRight: DistanceScale.spacing_12,
+    fontSize: Typography.fontSize14,
   },
   title: {
     fontSize: Typography.fontSize16,
@@ -102,8 +102,8 @@ const styles = StyleSheet.create({
   progressLesson: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: ScaleSize.scaleSizeWidth(20),
-    width: ScaleSize.scaleSizeWidth(20),
+    height: ScaleSize.scaleSizeWidth(18),
+    width: ScaleSize.scaleSizeWidth(18),
     marginRight: DistanceScale.spacing_12,
     borderRadius: 12.5,
     borderColor: Colors.green,

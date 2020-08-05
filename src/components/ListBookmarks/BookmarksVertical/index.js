@@ -1,11 +1,22 @@
-import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import React, {useContext} from 'react';
+import {View, StyleSheet} from 'react-native';
+import {ListCoursesVertical} from '../../ListCourses';
+import {ThemeContext} from '../../../providers/theme-propvider';
 
+const setStyleWithTheme = (theme) => {
+  styles.container = {
+    ...styles.container,
+    backgroundColor: theme.backgroundColor,
+  };
+};
 const BookmarksVertical = (props) => {
+  const {theme} = useContext(ThemeContext);
+  const {listBookmarks, navigation} = props.route.params;
+  setStyleWithTheme(theme);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>This this all bookmarks screen</Text>
+      <ListCoursesVertical data={listBookmarks} navigation={navigation} />
     </View>
   );
 };
@@ -15,19 +26,5 @@ export default BookmarksVertical;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 20,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  content: {
-    fontSize: 11,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    padding: 10,
-    height: 200,
   },
 });

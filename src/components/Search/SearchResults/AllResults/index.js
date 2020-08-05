@@ -19,6 +19,7 @@ const setStyleWithTheme = (theme) => {
 
 const AllResult = (props) => {
   const {courseResults, authorResults} = props.route.params;
+  const {navigation} = props;
   const {theme} = useContext(ThemeContext);
   setStyleWithTheme(theme);
 
@@ -44,6 +45,7 @@ const AllResult = (props) => {
         <ListCoursesVertical
           data={courseResults}
           renderHeader={renderHeader('Courses', courseResults.length)}
+          navigation={navigation}
         />
       ) : null}
       {authorResults.length !== [] ? (
@@ -52,6 +54,7 @@ const AllResult = (props) => {
           <ListAuthorsVertical
             data={authorResults}
             renderHeader={renderHeader('Authors', authorResults.length)}
+            navigation={navigation}
           />
         </View>
       ) : null}

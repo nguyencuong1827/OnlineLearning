@@ -12,6 +12,7 @@ const setStyleWithTheme = (theme) => {
 };
 const AuthorResults = (props) => {
   const {authorResults} = props.route.params;
+  const {navigation} = props;
   const {theme} = useContext(ThemeContext);
   setStyleWithTheme(theme);
 
@@ -25,7 +26,11 @@ const AuthorResults = (props) => {
 
   return (
     <View>
-      <ListAuthorsVertical data={authorResults} renderHeader={renderHeader} />
+      <ListAuthorsVertical
+        data={authorResults}
+        renderHeader={renderHeader}
+        navigation={navigation}
+      />
     </View>
   );
 };

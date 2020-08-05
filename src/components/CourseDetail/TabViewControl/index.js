@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {StyleSheet} from 'react-native';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
-import {DistanceScale} from '../../../globals/styles';
+import {DistanceScale, Typography} from '../../../globals/styles';
 import Lessons from '../Lessons';
 import EmptyTranscript from '../Transcript/EmptyTranscript';
 import {ThemeContext} from '../../../providers/theme-propvider';
@@ -22,6 +22,7 @@ const TabViewControl = (props) => {
       tabBarActiveTextColor={theme.colorIconActiveTab}
       tabBarInactiveTextColor={theme.colorMainText}
       tabBarUnderlineStyle={styles.underLine}
+      tabBarTextStyle={styles.title}
       style={styles.container}>
       <Lessons
         tabLabel="Content"
@@ -43,5 +44,8 @@ const styles = StyleSheet.create({
   },
   underLine: {
     height: 2,
+  },
+  title: {
+    fontSize: Typography.fontSize16,
   },
 });

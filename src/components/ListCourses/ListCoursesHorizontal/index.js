@@ -1,25 +1,21 @@
 import React from 'react';
-import {View, StyleSheet, FlatList, Alert} from 'react-native';
+import {View, StyleSheet, FlatList} from 'react-native';
 import CourseItemHorizontal from './CourseItem';
 import SeeAllButton from '../../SeeAllButton';
-import {courses} from '../../../globals/fake-data';
 import {ScaleSize, DistanceScale} from '../../../globals/styles';
 
 const ListCoursesHorizontal = (props) => {
-  const {navigation, title} = props;
+  const {data, navigation, title, showAll} = props;
   const renderCourseItem = (item) => (
     <CourseItemHorizontal item={item} navigation={navigation} />
   );
-  const showAllCourses = () => {
-    Alert.alert('Comming soon');
-  };
   return (
     <View style={styles.container}>
-      <SeeAllButton title={title} onPress={showAllCourses} />
+      <SeeAllButton title={title} onPress={showAll} />
       <FlatList
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        data={courses}
+        data={data}
         renderItem={({item}) => renderCourseItem(item)}
         keyExtractor={(item, index) => index.toString()}
         getItemLayout={(data, index) => ({

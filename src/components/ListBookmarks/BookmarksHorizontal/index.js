@@ -1,15 +1,30 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {BookmarkContext} from '../../../providers/bookmark-provider';
+import EmptyBookmark from '../EmptyBookmark';
+import {ListCoursesHorizontal} from '../../ListCourses';
+import {BookmarkScreen} from '../../../globals/constants/screen-name';
 
 const BookmarksHorizontal = (props) => {
+  const {navigation} = props;
+  const {listBookmarks} = useContext(BookmarkContext);
+  const showAllBookmarks = () => {
+    navigation.navigate(BookmarkScreen, {listBookmarks});
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Bookmarks</Text>
-      <View style={styles.content}>
-        <Icon name="bookmark-border" size={40} color="gray" />
-        <Text>Use bookmarks to quickly save courses for later.</Text>
-      </View>
+      {listBookmarks.length === 0 ? (
+        <EmptyBookmark />
+      ) : (
+        <ListCoursesHorizontal
+          data={listBookmarks}
+          title="Bookmarks"
+          navigation={navigation}
+          showAll={showAllBookmarks}
+        />
+      )}
     </View>
   );
 };
@@ -19,7 +34,6 @@ export default BookmarksHorizontal;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: 20,
   },
   title: {
     fontSize: 18,

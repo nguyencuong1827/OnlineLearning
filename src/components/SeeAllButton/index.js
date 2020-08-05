@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
   seeAllButton: {
     flex: 1,
     marginVertical: DistanceScale.spacing_10,
+    marginRight: DistanceScale.spacing_10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

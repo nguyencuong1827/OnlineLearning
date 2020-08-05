@@ -12,6 +12,7 @@ export const ProfileScreen = 'ProfileScreen';
 export const ThemeScreen = 'ThemeScreen';
 export const CourseDetailScreen = 'CourseDetailScreen';
 export const AuthorDetailScreen = 'AuthorDetailScreen';
+export const BookmarkScreen = 'BookmarkScreen';
 
 export const ListCourseScreen = 'ListCourseScreen';
 

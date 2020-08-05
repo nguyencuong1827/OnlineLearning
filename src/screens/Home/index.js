@@ -8,7 +8,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {ListCoursesHorizontal} from '../../components/ListCourses';
-import {EmptyBookmark} from '../../components/ListBookmarks';
+import {
+  EmptyBookmark,
+  BookmarksHorizontal,
+} from '../../components/ListBookmarks';
 import {EmptyPath} from '../../components/ListPaths';
 import {EmptyChannel} from '../../components/ListChannels';
 import Icon from 'react-native-vector-icons/EvilIcons';
@@ -20,6 +23,7 @@ import {
 } from '../../globals/styles';
 import {ProfileScreen} from '../../globals/constants/screen-name';
 import {ThemeContext} from '../../providers/theme-propvider';
+import {courses} from '../../globals/fake-data';
 
 const WelcomeImage = () => (
   <ImageBackground
@@ -63,19 +67,22 @@ const Home = (props) => {
       <ScrollView>
         <WelcomeImage />
         <ListCoursesHorizontal
+          data={courses}
           title="Software development"
           navigation={navigation}
         />
         <ListCoursesHorizontal title="IT operation" navigation={navigation} />
         <ListCoursesHorizontal
+          data={courses}
           title="Data professional"
           navigation={navigation}
         />
         <ListCoursesHorizontal
+          data={courses}
           title="Security professional"
           navigation={navigation}
         />
-        <EmptyBookmark />
+        <BookmarksHorizontal navigation={navigation} />
         <EmptyChannel />
       </ScrollView>
     </SafeAreaView>

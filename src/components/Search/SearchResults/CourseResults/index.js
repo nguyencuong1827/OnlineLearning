@@ -13,6 +13,7 @@ const setStyleWithTheme = (theme) => {
 
 const CourseResults = (props) => {
   const {courseResults} = props.route.params;
+  const {navigation} = props;
   const {theme} = useContext(ThemeContext);
   setStyleWithTheme(theme);
 
@@ -26,7 +27,11 @@ const CourseResults = (props) => {
 
   return (
     <View>
-      <ListCoursesVertical data={courseResults} renderHeader={renderHeader} />
+      <ListCoursesVertical
+        data={courseResults}
+        renderHeader={renderHeader}
+        navigation={navigation}
+      />
     </View>
   );
 };

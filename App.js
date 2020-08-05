@@ -4,6 +4,7 @@ import RootNavigator from './src/navigation';
 // import SplashScreen from './src/screens/SplashScreen';
 import {AuthenticationProvider} from './src/providers/authentication-provider';
 import {ThemeProvider} from './src/providers/theme-propvider';
+import {BookmarkProvider} from './src/providers/bookmark-provider';
 const App = () => {
   const [currentScreen, setCurrentScreen] = useState('SplashScreen');
   // useEffect(() => {
@@ -15,11 +16,13 @@ const App = () => {
   return (
     <ThemeProvider>
       <AuthenticationProvider>
-        <View style={styles.container}>
-          <StatusBar hidden={true} />
-          {/* {currentScreen === 'SplashScreen' ? <SplashScreen /> : <RootStack />} */}
-          <RootNavigator />
-        </View>
+        <BookmarkProvider>
+          <View style={styles.container}>
+            <StatusBar hidden={true} />
+            {/* {currentScreen === 'SplashScreen' ? <SplashScreen /> : <RootStack />} */}
+            <RootNavigator />
+          </View>
+        </BookmarkProvider>
       </AuthenticationProvider>
     </ThemeProvider>
   );

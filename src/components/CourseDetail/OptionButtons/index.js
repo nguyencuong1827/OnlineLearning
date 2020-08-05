@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useLayoutEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
@@ -17,21 +17,29 @@ const setStyleWithTheme = (theme) => {
   };
 };
 
-const OptionButtons = () => {
+const OptionButtons = (props) => {
   const {theme} = useContext(ThemeContext);
   setStyleWithTheme(theme);
+
+  const {addBookmark, indexBookmarked} = props;
 
   return (
     <View style={styles.container}>
       <View style={styles.mainContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={addBookmark}>
           <Icon
-            name="bookmark-multiple-outline"
+            name={
+              indexBookmarked === -1
+                ? 'bookmark-multiple-outline'
+                : 'bookmark-multiple'
+            }
             size={Typography.fontSize20}
             color={theme.colorMainText}
           />
         </TouchableOpacity>
-        <Text style={styles.title}>Bookmark</Text>
+        <Text style={styles.title}>
+          {indexBookmarked === -1 ? 'Bookmark' : 'Bookmarked'}
+        </Text>
       </View>
 
       <View style={styles.mainContainer}>

@@ -1,16 +1,16 @@
 import React, {useContext} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-// import Home from '../../../components/Home/home';
 import Home from '../../../screens/Home';
 import {
   HomeScreen,
   ProfileScreen,
   ThemeScreen,
+  BookmarkScreen,
 } from '../../../globals/constants/screen-name';
 import Profile from '../../../screens/Profile';
-import {Colors, Typography} from '../../../globals/styles';
 import Theme from '../../../screens/Theme';
 import {ThemeContext} from '../../../providers/theme-propvider';
+import {BookmarksVertical} from '../../../components/ListBookmarks';
 
 const Stack = createStackNavigator();
 
@@ -39,6 +39,11 @@ const HomeStack = () => {
         name={ThemeScreen}
         component={Theme}
         options={{title: 'Theme'}}
+      />
+      <Stack.Screen
+        name={BookmarkScreen}
+        component={BookmarksVertical}
+        options={{title: 'Bookmarks'}}
       />
     </Stack.Navigator>
   );

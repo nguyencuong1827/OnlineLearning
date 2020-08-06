@@ -1,6 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Avatar} from 'react-native-elements';
+import {ScaleSize, DistanceScale, Typography} from '../../../../globals/styles';
+import {ThemeContext} from '../../../../providers/theme-propvider';
+
+const setStyleWithTheme = (theme) => {
+  styles.name = {...styles.name, color: theme.colorMainText};
+};
 
 const sliceString = (string, standardLength) => {
   let subString = string.slice(0, standardLength - 1);
@@ -11,6 +17,9 @@ const sliceString = (string, standardLength) => {
 };
 
 const AuthorElement = (props) => {
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   const standardLength = 8;
   let subName = props.author.name;
   if (subName.length > standardLength) {
@@ -18,11 +27,11 @@ const AuthorElement = (props) => {
   }
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={props.showAuthorDetail}>
       <View style={styles.author}>
         <Avatar
           rounded
-          size="medium"
+          size="large"
           source={props.author.urlAvatar}
           containerStyle={styles.avatar}
         />
@@ -38,14 +47,14 @@ const styles = StyleSheet.create({
   author: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 65,
+    width: ScaleSize.scaleSizeWidth(68),
   },
   avatar: {
-    margin: 10,
+    margin: DistanceScale.spacing_10,
   },
   name: {
-    height: 20,
+    height: ScaleSize.scaleSizeHeight(18),
     textAlign: 'center',
-    fontSize: 12,
+    fontSize: Typography.fontSize16,
   },
 });

@@ -1,38 +1,45 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
 import Rating from 'react-native-star-rating';
-import {ScaleSize} from '../../../../globals/styles';
+import {ScaleSize, Typography, DistanceScale} from '../../../../globals/styles';
 import {CourseDetailScreen} from '../../../../globals/constants/screen-name';
+import {ThemeContext} from '../../../../providers/theme-propvider';
+
+const setStyleWithTheme = (theme) => {
+  styles.name = {...styles.name, color: theme.colorMainText};
+  styles.info = {...styles.info, color: theme.colorSubText};
+};
 
 const CourseItemVertical = (props) => {
-  const {navigation} = props;
+  const {navigation, item} = props;
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   const showCourseDetail = () => {
-    navigation.navigate(CourseDetailScreen);
+    navigation.navigate(CourseDetailScreen, {course: item});
   };
+
   return (
-    <TouchableOpacity style={styles.item} onPress={showCourseDetail}>
-      <Image
-        style={styles.img}
-        source={require('../../../../../assets/images/rambutan.jpg')}
-      />
+    <TouchableOpacity style={styles.container} onPress={showCourseDetail}>
+      <Image style={styles.img} source={item.urlImg} />
       <View style={styles.content}>
-        <Text>{props.item.title}</Text>
-        <Text style={styles.darkText}>{props.item.author}</Text>
+        <Text style={styles.name}>{item.name}</Text>
+        <Text style={styles.info}>{item.author}</Text>
         <Text
           style={
-            styles.darkText
-          }>{`${props.item.level} . ${props.item.releasedDate} . ${props.item.duration} hours`}</Text>
+            styles.info
+          }>{`${item.level} . ${item.releasedDate} . ${item.duration} hours`}</Text>
         <View style={styles.ratingContainer}>
           <Rating
             disabled={true}
             maxStars={5}
-            rating={props.item.averageRating}
-            starSize={15}
+            rating={item.averageRating}
+            starSize={Typography.fontSize14}
             fullStarColor="#f39c12"
             starStyle={styles.starRating}
           />
-          <Text style={styles.darkText}>
-            {'   '}({props.item.totalRating})
+          <Text style={styles.info}>
+            {'   '}({item.totalRating})
           </Text>
         </View>
       </View>
@@ -41,9 +48,9 @@ const CourseItemVertical = (props) => {
 };
 export default CourseItemVertical;
 const styles = StyleSheet.create({
-  item: {
-    margin: 10,
+  container: {
     flexDirection: 'row',
+    margin: DistanceScale.spacing_8,
     height: ScaleSize.scaleSizeWidth(80),
   },
   img: {
@@ -53,14 +60,20 @@ const styles = StyleSheet.create({
   content: {
     paddingLeft: 10,
   },
-  darkText: {
-    color: 'gray',
+  name: {
+    fontSize: Typography.fontSize16,
+  },
+  info: {
+    marginTop: DistanceScale.superSmall,
+    fontSize: Typography.fontSize14,
   },
   ratingContainer: {
     flexDirection: 'row',
-    marginTop: 3,
+    alignItems: 'center',
+    marginTop: DistanceScale.superSmall,
   },
   starRating: {
+    marginTop: DistanceScale.superSmall,
     padding: 2,
   },
 });

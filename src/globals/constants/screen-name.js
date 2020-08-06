@@ -9,10 +9,12 @@ export const DownloadScreen = 'DownloadScreen';
 export const SearchScreen = 'SearchScreen';
 
 export const ProfileScreen = 'ProfileScreen';
+export const ThemeScreen = 'ThemeScreen';
 export const CourseDetailScreen = 'CourseDetailScreen';
 export const AuthorDetailScreen = 'AuthorDetailScreen';
+export const BookmarkScreen = 'BookmarkScreen';
 
 export const ListCourseScreen = 'ListCourseScreen';
 
-export const RooTabScreen = 'RooTabScreen';
+export const AppNavigatorScreen = 'AppNavigatorScreen';
 export const AuthNavigatorScreen = 'AuthNavigatorScreen';

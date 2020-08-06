@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {
   View,
   Text,
@@ -6,17 +6,36 @@ import {
   StyleSheet,
   LayoutAnimation,
 } from 'react-native';
-import {DistanceScale, Colors, ScaleSize} from '../../../globals/styles';
+import {
+  DistanceScale,
+  Colors,
+  ScaleSize,
+  Typography,
+} from '../../../globals/styles';
 import Icon from 'react-native-vector-icons/AntDesign';
+import {ThemeContext} from '../../../providers/theme-propvider';
+
+const setStyleWithTheme = (theme) => {
+  styles.expandButton = {
+    ...styles.expandButton,
+    backgroundColor: theme.buttonSeeAllBackground,
+  };
+  styles.content = {...styles.content, color: theme.colorSubText};
+};
 
 const Description = (props) => {
+  const {theme} = useContext(ThemeContext);
   const [isExpand, setIsExpand] = useState(false);
   const [heightValue, setHeightValue] = useState(100);
+
+  setStyleWithTheme(theme);
+
   const onExpand = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setHeightValue(isExpand === false ? -1 : 100);
     setIsExpand(!isExpand);
   };
+
   return (
     <View style={[styles.container, {height: heightValue}]}>
       <Text style={styles.content}>{props.description}</Text>
@@ -44,11 +63,10 @@ const styles = StyleSheet.create({
   expandButton: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: Colors.silver,
     borderRadius: 5,
   },
   content: {
-    color: Colors.grayBold,
     lineHeight: ScaleSize.scaleSizeHeight(15),
+    fontSize: Typography.fontSize16,
   },
 });

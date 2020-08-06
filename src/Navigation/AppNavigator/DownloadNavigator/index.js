@@ -1,22 +1,21 @@
-import React from 'react';
-import {Button, Alert} from 'react-native';
+import React, {useContext} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-//import Downloads from '../../../components/Downloads';
 import Downloads from '../../../screens/Downloads';
 import {DownloadScreen} from '../../../globals/constants/screen-name';
+import {ThemeContext} from '../../../providers/theme-propvider';
 
 const Stack = createStackNavigator();
-const screenOptions = {
-  headerStyle: {
-    backgroundColor: '#fff',
-  },
-  headerTintColor: 'black',
-  headerTitleStyle: {
-    fontWeight: 'bold',
-  },
-  headerTitleAlign: 'center',
-};
+
 const DownloadStack = () => {
+  const {theme} = useContext(ThemeContext);
+  const screenOptions = {
+    headerStyle: {
+      backgroundColor: theme.headerFooterBackground,
+    },
+    headerTintColor: theme.colorMainText,
+    headerTitleAlign: 'center',
+  };
+
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen

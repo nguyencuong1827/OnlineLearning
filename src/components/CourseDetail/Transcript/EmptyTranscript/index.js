@@ -1,9 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {Colors, Typography} from '../../../../globals/styles';
-import {fontSize20} from '../../../../globals/styles/typography';
+import {Typography} from '../../../../globals/styles';
+import {ThemeContext} from '../../../../providers/theme-propvider';
 
-const Transcript = () => {
+const setStyleWithTheme = (theme) => {
+  styles.container = {
+    ...styles.container,
+    backgroundColor: theme.backgroundColor,
+  };
+  styles.title = {...styles.title, color: theme.colorSubText};
+  styles.subTitle = {...styles.subTitle, color: theme.colorSubText};
+};
+
+const EmptyTranscript = () => {
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Upgrade Subscription</Text>
@@ -14,21 +26,18 @@ const Transcript = () => {
   );
 };
 
-export default Transcript;
+export default EmptyTranscript;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white95,
     justifyContent: 'center',
     alignItems: 'center',
   },
   title: {
-    color: Colors.gray,
     fontWeight: Typography.fontWeightBold,
     fontSize: Typography.fontSize20,
   },
   subTitle: {
-    color: Colors.gray,
     fontSize: Typography.fontSize16,
   },
 });

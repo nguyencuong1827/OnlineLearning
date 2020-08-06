@@ -1,14 +1,32 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, {useContext} from 'react';
+import {View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {DistanceScale} from '../../../globals/styles';
+import {DistanceScale, Typography} from '../../../globals/styles';
+import {ThemeContext} from '../../../providers/theme-propvider';
 
 const Contacts = () => {
+  const {theme} = useContext(ThemeContext);
+
   return (
     <View style={styles.container}>
-      <Icon style={styles.icon} name="facebook-square" size={20} />
-      <Icon style={styles.icon} name="twitter" size={20} />
-      <Icon style={styles.icon} name="linkedin-square" size={20} />
+      <Icon
+        style={styles.icon}
+        name="facebook-square"
+        size={Typography.fontSize20}
+        color={theme.colorMainText}
+      />
+      <Icon
+        style={styles.icon}
+        name="twitter"
+        size={Typography.fontSize20}
+        color={theme.colorMainText}
+      />
+      <Icon
+        style={styles.icon}
+        name="linkedin-square"
+        size={Typography.fontSize20}
+        color={theme.colorMainText}
+      />
     </View>
   );
 };

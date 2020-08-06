@@ -1,23 +1,40 @@
-import React from 'react';
-import {StyleSheet, Text, View, StatusBar} from 'react-native';
-import Login from './src/components/Authentication/Login/login';
-// import ListCourses from './src/components/Courses/ListCourses/list-courses';
-//import Home from './src/components/Main/Home/home';
+import React, {useState, useLayoutEffect} from 'react';
+import {StyleSheet, View, StatusBar} from 'react-native';
+import RootNavigator from './src/navigation';
+import {AuthenticationProvider} from './src/providers/authentication-provider';
+import {ThemeProvider} from './src/providers/theme-propvider';
+import {BookmarkProvider} from './src/providers/bookmark-provider';
+import SplashScreen from './src/screens/SplashScreen';
 
-export default function App() {
+const App = () => {
+  const [currentScreen, setCurrentScreen] = useState('SplashScreen');
+  useLayoutEffect(() => {
+    const time = setTimeout(() => {
+      setCurrentScreen('Login');
+    }, 1500);
+    return () => clearTimeout(time);
+  }, []);
   return (
-    <View style={styles.container}>
-      <StatusBar hidden={true} />
-      {/* <Home /> */}
-      {/* <ListCourses /> */}
-      <Login />
-    </View>
+    <ThemeProvider>
+      <AuthenticationProvider>
+        <BookmarkProvider>
+          <View style={styles.container}>
+            <StatusBar hidden={true} />
+            {currentScreen === 'SplashScreen' ? (
+              <SplashScreen />
+            ) : (
+              <RootNavigator />
+            )}
+          </View>
+        </BookmarkProvider>
+      </AuthenticationProvider>
+    </ThemeProvider>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 24,
   },
 });
+export default App;

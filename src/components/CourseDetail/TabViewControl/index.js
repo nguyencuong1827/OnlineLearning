@@ -1,17 +1,28 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, LayoutAnimation} from 'react-native';
+import React, {useContext} from 'react';
+import {StyleSheet} from 'react-native';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
-import {Colors, DistanceScale} from '../../../globals/styles';
+import {DistanceScale, Typography} from '../../../globals/styles';
 import Lessons from '../Lessons';
-import Transcript from '../Transcript';
 import EmptyTranscript from '../Transcript/EmptyTranscript';
+import {ThemeContext} from '../../../providers/theme-propvider';
+
+const setStyleWithTheme = (theme) => {
+  styles.underLine = {
+    ...styles.underLine,
+    backgroundColor: theme.colorIconActiveTab,
+  };
+};
 
 const TabViewControl = (props) => {
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   return (
     <ScrollableTabView
-      tabBarActiveTextColor={Colors.black}
-      tabBarInactiveTextColor={Colors.gray}
+      tabBarActiveTextColor={theme.colorIconActiveTab}
+      tabBarInactiveTextColor={theme.colorMainText}
       tabBarUnderlineStyle={styles.underLine}
+      tabBarTextStyle={styles.title}
       style={styles.container}>
       <Lessons
         tabLabel="Content"
@@ -28,12 +39,13 @@ export default TabViewControl;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: DistanceScale.spacing_10,
     height: 600,
+    marginTop: DistanceScale.spacing_10,
   },
   underLine: {
-    backgroundColor: Colors.blue,
-    borderWidth: 0,
     height: 2,
+  },
+  title: {
+    fontSize: Typography.fontSize16,
   },
 });

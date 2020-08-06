@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {Colors, DistanceScale} from '../../../globals/styles';
+import {Colors, DistanceScale, Typography} from '../../../globals/styles';
 import Rating from 'react-native-star-rating';
 
 const InfoCourse = (props) => {
@@ -13,7 +13,7 @@ const InfoCourse = (props) => {
         disabled={true}
         maxStars={5}
         rating={props.averageRating}
-        starSize={10}
+        starSize={Typography.fontSize12}
         fullStarColor={Colors.yellow}
         starStyle={styles.starRating}
         containerStyle={styles.containerStarRating}

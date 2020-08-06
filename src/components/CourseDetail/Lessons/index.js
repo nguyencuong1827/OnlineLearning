@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   View,
   Text,
@@ -14,11 +14,21 @@ import {
   Typography,
   ScaleSize,
 } from '../../../globals/styles';
+import {ThemeContext} from '../../../providers/theme-propvider';
+
+const setStyleWithTheme = (theme) => {
+  styles.header = {
+    ...styles.header,
+    backgroundColor: theme.backgroundColor,
+  };
+  styles.title = {...styles.title, color: theme.colorMainText};
+  styles.hour = {...styles.hour, color: theme.colorSubText};
+};
 
 const ProgressLesson = (props) => {
   return (
     <View style={styles.progressLesson}>
-      <Text>{props.index}</Text>
+      <Text style={styles.title}>{props.index}</Text>
     </View>
   );
 };
@@ -39,6 +49,9 @@ const renderSectionHeader = (title, hour, index) => {
 };
 const Lessons = (props) => {
   const {lessons} = props;
+  const {theme} = useContext(ThemeContext);
+  setStyleWithTheme(theme);
+
   return (
     <View style={styles.container}>
       <SectionList
@@ -67,35 +80,33 @@ const Lessons = (props) => {
 export default Lessons;
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.white95,
+    flex: 1,
   },
   header: {
-    backgroundColor: Colors.white95,
+    padding: DistanceScale.spacing_5,
   },
   touchHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: DistanceScale.spacing_14,
+    padding: DistanceScale.spacing_8,
   },
   index: {
-    marginRight: DistanceScale.spacing_12,
+    fontSize: Typography.fontSize14,
   },
   title: {
-    color: Colors.black,
     fontSize: Typography.fontSize16,
   },
   hour: {
-    color: Colors.gray,
     fontSize: Typography.fontSize14,
   },
   progressLesson: {
-    height: ScaleSize.scaleSizeWidth(20),
-    width: ScaleSize.scaleSizeWidth(20),
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: ScaleSize.scaleSizeWidth(18),
+    width: ScaleSize.scaleSizeWidth(18),
     marginRight: DistanceScale.spacing_12,
     borderRadius: 12.5,
     borderColor: Colors.green,
     borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });

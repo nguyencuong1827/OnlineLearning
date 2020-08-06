@@ -25,7 +25,7 @@ const RootNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator mode="modal" screenOptions={screenOptions}>
-        {/* {!state.isLoggedIn ? (
+        {!state.isLoggedIn ? (
           <Stack.Screen
             name={ScreenName.LoginScreen}
             component={Login}
@@ -49,8 +49,8 @@ const RootNavigator = () => {
               options={{title: ''}}
             />
           </>
-        )} */}
-        <Stack.Screen
+        )}
+        {/* <Stack.Screen
           name={ScreenName.AppNavigatorScreen}
           component={AppNavigator}
           options={{headerShown: false}}
@@ -64,7 +64,7 @@ const RootNavigator = () => {
           name={ScreenName.AuthorDetailScreen}
           component={AuthorDetail}
           options={{title: ''}}
-        />
+        /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );

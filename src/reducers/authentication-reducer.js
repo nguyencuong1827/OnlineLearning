@@ -2,6 +2,7 @@ import {
   LOGIN_SUCCESSED,
   LOGIN_REQUEST,
   LOGIN_FAILED,
+  LOGOUT_REQUEST,
 } from '../globals/constants/actions-constant';
 const AuthenticationReducer = (prevState, action) => {
   switch (action.type) {
@@ -26,6 +27,14 @@ const AuthenticationReducer = (prevState, action) => {
         isLoggedIn: false,
         isLoggingIn: false,
         messageError: action.messageError,
+      };
+    }
+    case LOGOUT_REQUEST: {
+      return {
+        isLoggedIn: false,
+        isLoggingIn: false,
+        userInfo: null,
+        messageError: null,
       };
     }
     default: {

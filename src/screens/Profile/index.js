@@ -9,8 +9,9 @@ import {
 } from '../../globals/styles';
 import SettingItem from '../../components/SettingItem';
 import ButtonSubmit from '../../components/Authentication/ButtonSubmit';
-import {ThemeScreen} from '../../globals/constants/screen-name';
+import {ThemeScreen, LoginScreen} from '../../globals/constants/screen-name';
 import {ThemeContext} from '../../providers/theme-propvider';
+import {AuthenticationContext} from '../../providers/authentication-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.container = {
@@ -26,9 +27,14 @@ const setStyleWithTheme = (theme) => {
 };
 const Profile = (props) => {
   const {theme} = useContext(ThemeContext);
+  const {logout} = useContext(AuthenticationContext);
   setStyleWithTheme(theme);
 
   const {navigation} = props;
+
+  const signOut = () => {
+    logout();
+  };
   return (
     <ScrollView style={styles.container}>
       <View style={styles.info}>
@@ -76,6 +82,7 @@ const Profile = (props) => {
         buttonSubmitStyle={styles.buttonContainer}
         titleSubmitStyle={styles.buttonText}
         title="SIGN OUT"
+        onSubmit={signOut}
       />
     </ScrollView>
   );

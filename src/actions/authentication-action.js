@@ -2,6 +2,7 @@ import {
   LOGIN_SUCCESSED,
   LOGIN_REQUEST,
   LOGIN_FAILED,
+  LOGOUT_REQUEST,
 } from '../globals/constants/actions-constant';
 import authenticationApi from '../api/authentication-api';
 const loginRequest = () => {
@@ -29,4 +30,15 @@ export const login = (dispatch) => (username, password) => {
   } else {
     dispatch(loginFailed('Username or password not correct'));
   }
+};
+
+const logoutRequest = () => {
+  return {
+    type: LOGOUT_REQUEST,
+  };
+};
+export const logout = (dispatch) => () => {
+  // Delete token, info user
+  // ...
+  dispatch(logoutRequest());
 };

@@ -11,7 +11,7 @@ const App = () => {
   useLayoutEffect(() => {
     const time = setTimeout(() => {
       setCurrentScreen('Login');
-    }, 1500);
+    }, 1600);
     return () => clearTimeout(time);
   }, []);
   return (

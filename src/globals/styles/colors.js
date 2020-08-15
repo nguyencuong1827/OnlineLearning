@@ -33,6 +33,7 @@ export const grayBold = '#5a5b5d';
 export const blue = '#2980b9';
 export const green = '#27ae60';
 export const darkBlue = '#2c3e50';
+export const red = '#e74c3c';
 
 export const backgroundSeeAllButton = '#d1c4e9';
 export const borderSeeAllButtonColor = '#808080';

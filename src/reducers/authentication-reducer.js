@@ -19,6 +19,7 @@ const AuthenticationReducer = (prevState, action) => {
         isLoggedIn: true,
         isLoggingIn: false,
         userInfo: action.userInfo,
+        token: action.token,
       };
     }
     case LOGIN_FAILED: {
@@ -30,12 +31,7 @@ const AuthenticationReducer = (prevState, action) => {
       };
     }
     case LOGOUT_REQUEST: {
-      return {
-        isLoggedIn: false,
-        isLoggingIn: false,
-        userInfo: null,
-        messageError: null,
-      };
+      return {};
     }
     default: {
       throw new Error();

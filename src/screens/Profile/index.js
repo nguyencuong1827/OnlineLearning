@@ -27,11 +27,11 @@ const setStyleWithTheme = (theme) => {
 };
 const Profile = (props) => {
   const {theme} = useContext(ThemeContext);
-  const {logout} = useContext(AuthenticationContext);
+  const {userState, logout} = useContext(AuthenticationContext);
   setStyleWithTheme(theme);
 
   const {navigation} = props;
-
+  const {userInfo} = userState;
   const signOut = () => {
     logout();
   };
@@ -41,10 +41,11 @@ const Profile = (props) => {
         <Avatar
           rounded={true}
           size={ScaleSize.scaleSizeWidth(77)}
-          source={require('../../../assets/images/profile.png')}
+          source={{uri: userInfo.avatar}}
         />
-        <Text style={styles.name}>Nguyễn Cường</Text>
-        <Text style={styles.email}>nguyencuong1827@gmail.com</Text>
+        <Text style={styles.name}>{userInfo.name}</Text>
+        <Text style={styles.email}>{userInfo.email}</Text>
+        <Text style={styles.email}>{userInfo.type}</Text>
       </View>
       <View style={styles.groupSetting}>
         <SettingItem
@@ -104,6 +105,7 @@ const styles = StyleSheet.create({
     marginTop: DistanceScale.spacing_10,
   },
   email: {
+    marginTop: DistanceScale.superSmall,
     fontSize: Typography.fontSize14,
   },
   groupSetting: {

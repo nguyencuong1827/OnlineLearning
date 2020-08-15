@@ -24,6 +24,8 @@ import {
 import {ProfileScreen} from '../../globals/constants/screen-name';
 import {ThemeContext} from '../../providers/theme-propvider';
 import {courses} from '../../globals/fake-data';
+import localStorage from '../../helpers/local-storage';
+import { userInfoKey } from '../../globals/constants/key-storage';
 
 const WelcomeImage = () => (
   <ImageBackground
@@ -58,6 +60,7 @@ const Home = (props) => {
   setStyleWithTheme(theme);
 
   useLayoutEffect(() => {
+    console.log(localStorage._getData(userInfoKey));
     navigation.setOptions({
       headerRight: () => headerRight(navigation, theme),
     });

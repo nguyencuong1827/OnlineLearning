@@ -33,7 +33,7 @@ const Login = (props) => {
   const [password, setPassword] = useState('');
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
-  const {state, login} = useContext(AuthenticationContext);
+  const {userState, login} = useContext(AuthenticationContext);
 
   const handleSubmit = () => {
     if (!email || !password) {
@@ -47,14 +47,14 @@ const Login = (props) => {
     login(email, password);
   };
   useEffect(() => {
-    if (state.messageError) {
+    if (userState.messageError) {
       ToastAndroid.showWithGravity(
-        state.messageError,
+        userState.messageError,
         ToastAndroid.LONG,
         ToastAndroid.TOP,
       );
     }
-  }, [state.messageError]);
+  }, [userState.messageError]);
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
@@ -96,6 +96,7 @@ const Login = (props) => {
                 onPress={() => setShowForgotPasswordModal(true)}>
                 <Text style={styles.txtForgotPassword}>Forgot password?</Text>
               </TouchableOpacity>
+
               <ButtonSubmit
                 ref={btnLogin}
                 buttonSubmitStyle={styles.buttonContainer}
@@ -170,7 +171,7 @@ const styles = StyleSheet.create({
     color: Colors.black,
   },
   forgotPassword: {
-    alignItems: 'flex-end',
+    alignSelf: 'flex-end',
     marginTop: DistanceScale.spacing_5,
   },
   txtForgotPassword: {

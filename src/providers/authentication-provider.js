@@ -6,14 +6,15 @@ const initState = {
   isLoggedIn: false,
   isLoggingIn: false,
   userInfo: null,
+  token: null,
   messageError: null,
 };
 export const AuthenticationContext = React.createContext();
 export const AuthenticationProvider = (props) => {
-  const [state, dispatch] = useReducer(AuthenticationReducer, initState);
+  const [userState, dispatch] = useReducer(AuthenticationReducer, initState);
   return (
     <AuthenticationContext.Provider
-      value={{state, login: login(dispatch), logout: logout(dispatch)}}>
+      value={{userState, login: login(dispatch), logout: logout(dispatch)}}>
       {props.children}
     </AuthenticationContext.Provider>
   );

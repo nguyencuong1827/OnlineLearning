@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
 import Rating from 'react-native-star-rating';
-import {ScaleSize, Typography, DistanceScale} from '../../../../globals/styles';
+import {ScaleSize, Typography, Distance} from '../../../../globals/styles';
 import {CourseDetailScreen} from '../../../../globals/constants/screen-name';
 import {ThemeContext} from '../../../../providers/theme-propvider';
 
@@ -50,7 +50,7 @@ export default CourseItemVertical;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    margin: DistanceScale.spacing_8,
+    margin: Distance.spacing_8,
     height: ScaleSize.scaleSizeWidth(80),
   },
   img: {
@@ -64,16 +64,16 @@ const styles = StyleSheet.create({
     fontSize: Typography.fontSize16,
   },
   info: {
-    marginTop: DistanceScale.superSmall,
+    marginTop: Distance.superSmall,
     fontSize: Typography.fontSize14,
   },
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: DistanceScale.superSmall,
+    marginTop: Distance.superSmall,
   },
   starRating: {
-    marginTop: DistanceScale.superSmall,
+    marginTop: Distance.superSmall,
     padding: 2,
   },
 });

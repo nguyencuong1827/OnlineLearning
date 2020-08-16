@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {Avatar} from 'react-native-elements';
 import {
   ScaleSize,
-  DistanceScale,
+  Distance,
   Typography,
   Colors,
 } from '../../globals/styles';
@@ -65,21 +65,21 @@ const styles = StyleSheet.create({
   info: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: DistanceScale.spacing_10,
+    marginVertical: Distance.spacing_10,
   },
   name: {
     fontSize: Typography.fontSize20,
     fontWeight: Typography.fontWeightBold,
-    marginTop: DistanceScale.spacing_10,
+    marginTop: Distance.spacing_10,
   },
   email: {
-    marginTop: DistanceScale.superSmall,
+    marginTop: Distance.superSmall,
     fontSize: Typography.fontSize14,
   },
 
   groupSetting: {
     backgroundColor: Colors.white,
-    marginBottom: DistanceScale.spacing_16,
-    padding: DistanceScale.spacing_8,
+    marginBottom: Distance.spacing_16,
+    padding: Distance.spacing_8,
   },
 });

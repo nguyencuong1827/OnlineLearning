@@ -2,7 +2,7 @@ import React from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
 import Separator from '../../Separator';
 import CourseItemVertical from './CourseItem';
-import {ScaleSize, DistanceScale} from '../../../globals/styles';
+import {ScaleSize, Distance} from '../../../globals/styles';
 
 const ListCoursesVertical = (props) => {
   const {navigation, data, renderHeader} = props;
@@ -31,6 +31,6 @@ const ListCoursesVertical = (props) => {
 export default ListCoursesVertical;
 const styles = StyleSheet.create({
   container: {
-    margin: DistanceScale.spacing_10,
+    margin: Distance.spacing_10,
   },
 });

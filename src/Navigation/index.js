@@ -11,6 +11,8 @@ import {ThemeContext} from '../providers/theme-propvider';
 import SplashScreen from '../screens/SplashScreen';
 import {useAsyncStorage} from '@react-native-community/async-storage';
 import {AuthenticationContext} from '../providers/authentication-provider';
+import LessonCourseNavigatorStack from './AppNavigator/CourseDetailNavigator';
+import PlayReview from '../screens/PlayReview';
 
 const Stack = createStackNavigator();
 
@@ -56,19 +58,24 @@ const RootNavigator = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name={ScreenName.AppNavigatorScreen}
-          component={AppNavigator}
-          options={{headerShown: false}}
+          name={ScreenName.LessonCourseScreenStack}
+          component={LessonCourseNavigatorStack}
+          options={{animationEnabled: true}}
         />
         <Stack.Screen
-          name={ScreenName.CourseDetailScreen}
-          component={CourseDetail}
+          name={ScreenName.AppNavigatorScreen}
+          component={AppNavigator}
           options={{headerShown: false}}
         />
         <Stack.Screen
           name={ScreenName.AuthorDetailScreen}
           component={AuthorDetail}
           options={{title: ''}}
+        />
+        <Stack.Screen
+          name={ScreenName.PlayVideoScreen}
+          component={PlayReview}
+          options={{headerShown: false}}
         />
 
         {/* <Stack.Screen

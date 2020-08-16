@@ -3,7 +3,7 @@ import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
 import {
   ScaleSize,
   Colors,
-  DistanceScale,
+  Distance,
   Typography,
 } from '../../../../globals/styles';
 import Rating from 'react-native-star-rating';
@@ -25,7 +25,7 @@ const CourseItemHorizontal = (props) => {
   setStyleWithTheme(theme);
 
   const showCourseDetail = () => {
-    navigation.navigate(CourseDetailScreen, {course: item});
+    navigation.navigate(CourseDetailScreen, {id: item.id});
   };
 
   return (
@@ -68,7 +68,7 @@ const CourseItemHorizontal = (props) => {
 export default CourseItemHorizontal;
 const styles = StyleSheet.create({
   container: {
-    marginRight: DistanceScale.spacing_12,
+    marginRight: Distance.spacing_12,
     width: ScaleSize.scaleSizeWidth(210),
     height: ScaleSize.scaleSizeWidth(200),
     shadowColor: '#000',
@@ -86,21 +86,21 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   content: {
-    padding: DistanceScale.spacing_10,
+    padding: Distance.spacing_10,
     height: ScaleSize.scaleSizeWidth(200),
   },
   info: {
     color: 'gray',
-    marginBottom: DistanceScale.superSmall,
+    marginBottom: Distance.superSmall,
     fontSize: Typography.fontSize14,
   },
   name: {
-    marginBottom: DistanceScale.superSmall,
+    marginBottom: Distance.superSmall,
     fontSize: Typography.fontSize16,
   },
   ratingContainer: {
     flexDirection: 'row',
-    marginTop: DistanceScale.superSmall,
+    marginTop: Distance.superSmall,
   },
   starRating: {
     padding: 2,

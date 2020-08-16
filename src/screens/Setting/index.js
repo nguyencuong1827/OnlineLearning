@@ -1,12 +1,7 @@
 import React, {useState, useContext, useLayoutEffect, useEffect} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {Avatar} from 'react-native-elements';
-import {
-  ScaleSize,
-  DistanceScale,
-  Typography,
-  Colors,
-} from '../../globals/styles';
+import {ScaleSize, Distance, Typography, Colors} from '../../globals/styles';
 import SettingItem from '../../components/SettingItem';
 import ButtonSubmit from '../../components/Authentication/ButtonSubmit';
 import {ThemeScreen, LoginScreen} from '../../globals/constants/screen-name';
@@ -98,15 +93,15 @@ const styles = StyleSheet.create({
   },
   groupSetting: {
     backgroundColor: Colors.white,
-    marginBottom: DistanceScale.spacing_16,
-    padding: DistanceScale.spacing_8,
+    marginBottom: Distance.spacing_16,
+    padding: Distance.spacing_8,
   },
   buttonContainer: {
     backgroundColor: Colors.orange,
-    paddingVertical: DistanceScale.spacing_12,
+    paddingVertical: Distance.spacing_12,
     borderRadius: 10,
-    marginBottom: DistanceScale.spacing_16,
-    marginHorizontal: DistanceScale.spacing_12,
+    marginBottom: Distance.spacing_16,
+    marginHorizontal: Distance.spacing_12,
   },
   buttonText: {
     textAlign: 'center',

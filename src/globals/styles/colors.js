@@ -2,6 +2,8 @@ export const separatorColor = '#CED0CE';
 export const activeTintColor = '#1565c0';
 export const inactiveTineColor = '#CED0CE';
 export const borderTextInputColor = '#808080';
+export const backgroundColor = '#F6F6F9';
+export const primaryTextColor = '#000000';
 
 export const blackWith08OpacityColor = 'rgba(0,0,0,0.8)';
 export const blackWith05OpacityColor = 'rgba(0,0,0,0.5)';
@@ -34,6 +36,7 @@ export const blue = '#2980b9';
 export const green = '#27ae60';
 export const darkBlue = '#2c3e50';
 export const red = '#e74c3c';
+export const grayDark = '#8a8a8a';
 
 export const backgroundSeeAllButton = '#d1c4e9';
 export const borderSeeAllButtonColor = '#808080';

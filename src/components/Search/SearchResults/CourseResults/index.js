@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {ListCoursesVertical} from '../../../ListCourses';
-import {Typography, DistanceScale} from '../../../../globals/styles';
+import {Typography, Distance} from '../../../../globals/styles';
 import {ThemeContext} from '../../../../providers/theme-propvider';
 
 const setStyleWithTheme = (theme) => {
@@ -41,6 +41,6 @@ const styles = StyleSheet.create({
   header: {
     fontSize: Typography.fontSize18,
     fontWeight: Typography.fontWeightBold,
-    marginBottom: DistanceScale.spacing_10,
+    marginBottom: Distance.spacing_10,
   },
 });

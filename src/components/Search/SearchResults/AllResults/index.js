@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {ListCoursesVertical} from '../../../ListCourses';
 import {ListAuthorsVertical} from '../../../ListAuthors';
-import {Typography, DistanceScale} from '../../../../globals/styles';
+import {Typography, Distance} from '../../../../globals/styles';
 import {ThemeContext} from '../../../../providers/theme-propvider';
 import Separator from '../../../Separator';
 
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: Typography.fontSize18,
     fontWeight: Typography.fontWeightBold,
-    marginBottom: DistanceScale.spacing_10,
+    marginBottom: Distance.spacing_10,
   },
   result: {
     fontSize: Typography.fontSize16,

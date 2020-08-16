@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Separator from '../../Separator';
-import {Typography, DistanceScale} from '../../../globals/styles';
+import {Typography, Distance} from '../../../globals/styles';
 import {ThemeContext} from '../../../providers/theme-propvider';
 
 const setStyleWithTheme = (theme) => {
@@ -66,13 +66,13 @@ export default RecentSearches;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: DistanceScale.spacing_5,
+    margin: Distance.spacing_5,
   },
   title: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    margin: DistanceScale.spacing_10,
+    margin: Distance.spacing_10,
   },
   recent: {
     fontWeight: Typography.fontWeightBold,
@@ -83,8 +83,8 @@ const styles = StyleSheet.create({
   },
   item: {
     flexDirection: 'row',
-    margin: DistanceScale.spacing_10,
-    marginLeft: DistanceScale.spacing_20,
+    margin: Distance.spacing_10,
+    marginLeft: Distance.spacing_20,
   },
   itemTitle: {
     fontSize: Typography.fontSize18,

@@ -3,7 +3,7 @@ import {View, Text, ScrollView, StyleSheet} from 'react-native';
 import {authors} from '../../../globals/fake-data';
 import AuthorElement from './AuthorElement';
 import {AuthorDetailScreen} from '../../../globals/constants/screen-name';
-import {DistanceScale, Typography} from '../../../globals/styles';
+import {Distance, Typography} from '../../../globals/styles';
 import {ThemeContext} from '../../../providers/theme-propvider';
 
 const setStyleWithTheme = (theme) => {
@@ -41,10 +41,10 @@ export default ListAuthorsHorizontal;
 
 const styles = StyleSheet.create({
   container: {
-    margin: DistanceScale.spacing_12,
+    margin: Distance.spacing_12,
   },
   title: {
-    margin: DistanceScale.spacing_5,
+    margin: Distance.spacing_5,
     fontWeight: Typography.fontWeightBold,
     fontSize: Typography.fontSize18,
   },

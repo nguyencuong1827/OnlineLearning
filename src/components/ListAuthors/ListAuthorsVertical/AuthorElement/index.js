@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Avatar} from 'react-native-elements';
-import {DistanceScale, Typography, Colors} from '../../../../globals/styles';
+import {Distance, Typography, Colors} from '../../../../globals/styles';
 import {ThemeContext} from '../../../../providers/theme-propvider';
 
 const setStyleWithTheme = (theme) => {
@@ -35,13 +35,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   avatar: {
-    margin: DistanceScale.spacing_10,
+    margin: Distance.spacing_10,
   },
   name: {
     fontSize: Typography.fontSize16,
   },
   numnerCourses: {
-    marginTop: DistanceScale.superSmall,
+    marginTop: Distance.superSmall,
     fontSize: Typography.fontSize14,
     color: Colors.gray,
   },

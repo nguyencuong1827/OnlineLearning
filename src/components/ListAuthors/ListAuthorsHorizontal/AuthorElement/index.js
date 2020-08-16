@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Avatar} from 'react-native-elements';
-import {ScaleSize, DistanceScale, Typography} from '../../../../globals/styles';
+import {ScaleSize, Distance, Typography} from '../../../../globals/styles';
 import {ThemeContext} from '../../../../providers/theme-propvider';
 
 const setStyleWithTheme = (theme) => {
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     width: ScaleSize.scaleSizeWidth(68),
   },
   avatar: {
-    margin: DistanceScale.spacing_10,
+    margin: Distance.spacing_10,
   },
   name: {
     height: ScaleSize.scaleSizeHeight(18),

@@ -10,15 +10,9 @@ import {
 } from 'react-native';
 import {ListCoursesHorizontal} from '../../components/ListCourses';
 import {BookmarksHorizontal} from '../../components/ListBookmarks';
-import {EmptyChannel} from '../../components/ListChannels';
 import IconEvil from 'react-native-vector-icons/EvilIcons';
 import IconAnt from 'react-native-vector-icons/AntDesign';
-import {
-  DistanceScale,
-  Typography,
-  Colors,
-  ScaleSize,
-} from '../../globals/styles';
+import {Distance, Typography, Colors, ScaleSize} from '../../globals/styles';
 import {
   ProfileScreen,
   SettingScreen,
@@ -79,7 +73,6 @@ const Home = (props) => {
   const [state2, setState2] = useState([]);
   const [state3, setState3] = useState([]);
   const [state4, setState4] = useState([]);
-  const [listInstructor, setLIstInstructor] = useState([]);
   const body = {
     limit: 7,
     offset: 0,
@@ -140,7 +133,7 @@ const Home = (props) => {
         `${url}/${userState.userInfo.id}/${limit}/${offset}`,
       );
 
-      if (response.isSuccess) {
+      if (response.status === 200) {
         setState4(response.data.payload);
       }
     } catch (response) {
@@ -210,6 +203,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   buttonHeader: {
-    marginHorizontal: DistanceScale.spacing_12,
+    marginHorizontal: Distance.spacing_12,
   },
 });

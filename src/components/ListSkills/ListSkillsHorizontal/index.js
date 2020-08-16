@@ -8,7 +8,7 @@ import {
   Alert,
 } from 'react-native';
 import {ThemeContext} from '../../../providers/theme-propvider';
-import {Typography, DistanceScale, ScaleSize} from '../../../globals/styles';
+import {Typography, Distance, ScaleSize} from '../../../globals/styles';
 
 const setStyleWithTheme = (theme) => {
   styles.title = {
@@ -66,15 +66,15 @@ const ListSkillsHorizontal = () => {
 export default ListSkillsHorizontal;
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: DistanceScale.spacing_12,
-    marginVertical: DistanceScale.spacing_18,
+    marginHorizontal: Distance.spacing_12,
+    marginVertical: Distance.spacing_18,
   },
   seeAllButton: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginHorizontal: DistanceScale.superSmall,
-    marginTop: DistanceScale.spacing_8,
+    marginHorizontal: Distance.superSmall,
+    marginTop: Distance.spacing_8,
   },
   title: {
     fontWeight: Typography.fontWeightBold,
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
 
     borderRadius: 12,
-    paddingHorizontal: DistanceScale.spacing_10,
+    paddingHorizontal: Distance.spacing_10,
 
     height: ScaleSize.scaleSizeWidth(18),
     minWidth: ScaleSize.scaleSizeWidth(38),

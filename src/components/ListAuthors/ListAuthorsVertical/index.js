@@ -2,7 +2,7 @@ import React from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
 import Separator from '../../Separator';
 import AuthorElement from './AuthorElement';
-import {ScaleSize, DistanceScale} from '../../../globals/styles';
+import {ScaleSize, Distance} from '../../../globals/styles';
 import {AuthorDetailScreen} from '../../../globals/constants/screen-name';
 
 const ListAuthorsVertical = (props) => {
@@ -43,6 +43,6 @@ const ListAuthorsVertical = (props) => {
 export default ListAuthorsVertical;
 const styles = StyleSheet.create({
   container: {
-    margin: DistanceScale.spacing_10,
+    margin: Distance.spacing_10,
   },
 });

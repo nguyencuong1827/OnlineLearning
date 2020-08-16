@@ -7,12 +7,14 @@ import {
   ThemeScreen,
   BookmarkScreen,
   SettingScreen,
+  CourseDetailScreen,
 } from '../../../globals/constants/screen-name';
 import Profile from '../../../screens/Profile';
 import Theme from '../../../screens/Theme';
 import {ThemeContext} from '../../../providers/theme-propvider';
 import {BookmarksVertical} from '../../../components/ListBookmarks';
 import Setting from '../../../screens/Setting';
+import CourseDetail from '../../../screens/CourseDetail';
 
 const Stack = createStackNavigator();
 
@@ -36,6 +38,11 @@ const HomeStack = () => {
         name={ProfileScreen}
         component={Profile}
         options={{title: 'Profile'}}
+      />
+      <Stack.Screen
+        name={CourseDetailScreen}
+        component={CourseDetail}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name={SettingScreen}

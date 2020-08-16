@@ -1,7 +1,13 @@
 import React, {useContext} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {ScaleSize, DistanceScale, Typography} from '../../globals/styles';
+import {
+  ScaleSize,
+  Distance,
+  Typography,
+  lightTheme,
+  darkTheme,
+} from '../../globals/styles';
 import Separator from '../../components/Separator';
 import {ThemeContext} from '../../providers/theme-propvider';
 import themes from '../../globals/styles/themes';
@@ -14,7 +20,7 @@ const setStyleWithTheme = (theme) => {
   styles.title = {...styles.title, color: theme.colorMainText};
 };
 const Theme = () => {
-  const {theme, setTheme} = useContext(ThemeContext);
+  const {theme, setTheme, setTheme2} = useContext(ThemeContext);
 
   const checkAndSetTheme = (name) => {
     if (name === theme.name) {
@@ -22,13 +28,16 @@ const Theme = () => {
     }
     if (name === 'system') {
       setTheme(themes.system);
+      setTheme2(lightTheme);
       return;
     }
     if (name === 'light') {
       setTheme(themes.light);
+      setTheme2(lightTheme);
       return;
     }
     setTheme(themes.dark);
+    setTheme2(darkTheme);
   };
 
   setStyleWithTheme(theme);
@@ -82,13 +91,13 @@ export default Theme;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: DistanceScale.spacing_10,
+    padding: Distance.spacing_10,
   },
   option: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginVertical: DistanceScale.spacing_12,
-    marginHorizontal: DistanceScale.spacing_10,
+    marginVertical: Distance.spacing_12,
+    marginHorizontal: Distance.spacing_10,
   },
   title: {
     fontSize: Typography.fontSize18,

@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
-import {ScaleSize, DistanceScale, Typography} from '../../../../globals/styles';
+import {ScaleSize, Distance, Typography} from '../../../../globals/styles';
 import {ThemeContext} from '../../../../providers/theme-propvider';
 
 const setStyleWithTheme = (theme) => {
@@ -31,8 +31,8 @@ const PathsItem = (props) => {
 export default PathsItem;
 const styles = StyleSheet.create({
   container: {
-    marginRight: DistanceScale.spacing_5,
-    marginLeft: DistanceScale.spacing_5,
+    marginRight: Distance.spacing_5,
+    marginLeft: Distance.spacing_5,
     width: ScaleSize.scaleSizeWidth(210),
     height: ScaleSize.scaleSizeWidth(160),
     shadowColor: '#000',

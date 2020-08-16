@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {ThemeContext} from '../../../../providers/theme-propvider';
-import {Typography, DistanceScale, ScaleSize} from '../../../../globals/styles';
+import {Typography, Distance, ScaleSize} from '../../../../globals/styles';
 
 const setStyleWithTheme = (theme) => {
   styles.content = {
@@ -36,12 +36,12 @@ export default EmptyCourse;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginRight: DistanceScale.spacing_14,
+    marginRight: Distance.spacing_14,
   },
   title: {
     fontSize: Typography.fontSize18,
     fontWeight: Typography.fontWeightBold,
-    marginBottom: DistanceScale.spacing_8,
+    marginBottom: Distance.spacing_8,
   },
   content: {
     justifyContent: 'center',
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     height: ScaleSize.scaleSizeHeight(180),
   },
   contentText: {
-    marginTop: DistanceScale.spacing_8,
+    marginTop: Distance.spacing_8,
     fontSize: Typography.fontSize16,
   },
 });

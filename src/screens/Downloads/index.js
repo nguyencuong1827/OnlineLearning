@@ -10,7 +10,7 @@ import {
 import {ListCoursesVertical} from '../../components/ListCourses';
 import {courses} from '../../globals/fake-data';
 import {ThemeContext} from '../../providers/theme-propvider';
-import {DistanceScale, Typography} from '../../globals/styles';
+import {Distance, Typography} from '../../globals/styles';
 
 const setStyleWithTheme = (theme) => {
   styles.container = {
@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: DistanceScale.spacing_10,
-    marginTop: DistanceScale.spacing_5,
+    marginHorizontal: Distance.spacing_10,
+    marginTop: Distance.spacing_5,
   },
   downloads: {
     fontSize: Typography.fontSize18,

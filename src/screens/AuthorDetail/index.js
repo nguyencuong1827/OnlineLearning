@@ -4,7 +4,7 @@ import HeaderAuthorDetail from '../../components/AuthorDetail/Header';
 import Separator from '../../components/Separator';
 import {ListCoursesVertical} from '../../components/ListCourses';
 import {courses} from '../../globals/fake-data';
-import {DistanceScale} from '../../globals/styles';
+import {Distance} from '../../globals/styles';
 import {ThemeContext} from '../../providers/theme-propvider';
 
 const setStyleWithTheme = (theme) => {
@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   separator: {
-    marginVertical: DistanceScale.spacing_8,
+    marginVertical: Distance.spacing_8,
   },
 });

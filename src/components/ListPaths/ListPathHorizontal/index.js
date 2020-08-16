@@ -3,7 +3,7 @@ import {View, StyleSheet, ScrollView, FlatList} from 'react-native';
 import SeeAllButton from '../../../components/SeeAllButton';
 import PathItem from './PathItem';
 import {paths} from '../../../globals/fake-data';
-import {ScaleSize, DistanceScale, Typography} from '../../../globals/styles';
+import {ScaleSize, Distance, Typography} from '../../../globals/styles';
 
 const ListPathsHorizontal = (props) => {
   const renderListItems = (item) => (
@@ -32,7 +32,7 @@ export default ListPathsHorizontal;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: DistanceScale.spacing_10,
+    margin: Distance.spacing_10,
   },
   seeAllButton: {
     flexDirection: 'row',

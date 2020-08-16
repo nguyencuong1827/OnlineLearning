@@ -2,7 +2,7 @@ import React from 'react';
 import {View, StyleSheet, ScrollView, FlatList, Alert} from 'react-native';
 import {topics} from '../../../globals/fake-data';
 import Banner from '../../../components/Banner';
-import {ScaleSize, DistanceScale} from '../../../globals/styles';
+import {ScaleSize, Distance} from '../../../globals/styles';
 const ListTopicsHorizontal = () => {
   const renderItem = (item) => {
     const indexSpace = item.name.indexOf(' ');
@@ -41,9 +41,9 @@ export default ListTopicsHorizontal;
 const styles = StyleSheet.create({
   topicImgButton: {
     height: ScaleSize.scaleSizeHeight(80),
-    width: (ScaleSize.WIDTH - DistanceScale.spacing_12 * 3) / 2,
-    marginLeft: DistanceScale.spacing_12,
-    marginBottom: DistanceScale.spacing_12,
+    width: (ScaleSize.WIDTH - Distance.spacing_12 * 3) / 2,
+    marginLeft: Distance.spacing_12,
+    marginBottom: Distance.spacing_12,
   },
   title1: {
     fontSize: 18,

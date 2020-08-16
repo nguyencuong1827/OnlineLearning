@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import {View, Text, Modal, TouchableOpacity, StyleSheet} from 'react-native';
 import {
-  DistanceScale,
+  Distance,
   ScaleSize,
   Colors,
   Typography,
@@ -58,18 +58,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: DistanceScale.spacing_40,
+    marginBottom: Distance.spacing_40,
   },
   modalView: {
     backgroundColor: Colors.white,
     borderRadius: 20,
-    padding: DistanceScale.spacing_10,
+    padding: Distance.spacing_10,
     alignItems: 'center',
     height: ScaleSize.scaleSizeHeight(170),
     width: ScaleSize.scaleSizeWidth(280),
   },
   title: {
-    marginTop: DistanceScale.spacing_5,
+    marginTop: Distance.spacing_5,
 
     color: Colors.black,
     fontSize: Typography.fontSize20,
@@ -78,9 +78,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    top: DistanceScale.spacing_30,
+    top: Distance.spacing_30,
 
-    padding: DistanceScale.spacing_16,
+    padding: Distance.spacing_16,
   },
   input: {
     borderColor: Colors.black,
@@ -88,18 +88,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
 
     height: ScaleSize.scaleSizeHeight(30),
-    paddingHorizontal: DistanceScale.spacing_10,
-    marginTop: DistanceScale.spacing_10,
+    paddingHorizontal: Distance.spacing_10,
+    marginTop: Distance.spacing_10,
 
     color: Colors.black,
     fontSize: Typography.fontSize16,
   },
   buttonContainer: {
     backgroundColor: Colors.orange,
-    paddingVertical: DistanceScale.spacing_12,
+    paddingVertical: Distance.spacing_12,
     borderRadius: 10,
 
-    marginTop: DistanceScale.spacing_12,
+    marginTop: Distance.spacing_12,
   },
   buttonText: {
     textAlign: 'center',
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
   },
   btnCancel: {
     alignItems: 'flex-end',
-    marginTop: DistanceScale.spacing_30,
+    marginTop: Distance.spacing_30,
   },
   txtCancel: {
     textAlign: 'center',

@@ -17,7 +17,7 @@ import ButtonSubmit from '../../components/Authentication/ButtonSubmit';
 import {AuthenticationContext} from '../../providers/authentication-provider';
 import {
   Colors,
-  DistanceScale,
+  Distance,
   ScaleSize,
   Typography,
 } from '../../globals/styles';
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     bottom: 0,
 
     height: ScaleSize.scaleSizeHeight(180),
-    padding: DistanceScale.spacing_16,
+    padding: Distance.spacing_16,
   },
   input: {
     borderColor: Colors.white,
@@ -155,18 +155,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
 
     height: ScaleSize.scaleSizeHeight(30),
-    paddingHorizontal: DistanceScale.spacing_10,
-    marginTop: DistanceScale.spacing_10,
+    paddingHorizontal: Distance.spacing_10,
+    marginTop: Distance.spacing_10,
 
     color: Colors.white,
     fontSize: Typography.fontSize16,
   },
   buttonContainer: {
     backgroundColor: Colors.orange,
-    paddingVertical: DistanceScale.spacing_12,
+    paddingVertical: Distance.spacing_12,
     borderRadius: 10,
 
-    marginTop: DistanceScale.spacing_12,
+    marginTop: Distance.spacing_12,
   },
   buttonText: {
     textAlign: 'center',
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
   },
   forgotPassword: {
     alignSelf: 'flex-end',
-    marginTop: DistanceScale.spacing_5,
+    marginTop: Distance.spacing_5,
   },
   txtForgotPassword: {
     color: Colors.orange,
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'center',
 
-    marginTop: DistanceScale.spacing_10,
+    marginTop: Distance.spacing_10,
   },
   txtSignUp: {
     color: Colors.white,

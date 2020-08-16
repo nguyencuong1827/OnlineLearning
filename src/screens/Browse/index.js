@@ -4,7 +4,7 @@ import Banner from '../../components/Banner';
 import {ListAuthorsHorizontal} from '../../components/ListAuthors';
 import {
   ScaleSize,
-  DistanceScale,
+  Distance,
   Typography,
   Colors,
 } from '../../globals/styles';
@@ -63,8 +63,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   newAndRecommendButton: {
-    marginHorizontal: DistanceScale.spacing_12,
-    marginTop: DistanceScale.spacing_10,
+    marginHorizontal: Distance.spacing_12,
+    marginTop: Distance.spacing_10,
     height: ScaleSize.scaleSizeHeight(65),
   },
   newAndRecommendTitle: {
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
   topicImgButton: {
     height: ScaleSize.scaleSizeHeight(65),
-    margin: DistanceScale.spacing_5,
+    margin: Distance.spacing_5,
   },
   title1: {
     fontSize: Typography.fontSize18,
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     color: Colors.white,
   },
   groupImgButton: {
-    margin: DistanceScale.spacing_5,
+    margin: Distance.spacing_5,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',

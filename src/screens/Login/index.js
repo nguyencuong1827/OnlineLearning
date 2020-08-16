@@ -25,8 +25,10 @@ import logo from '../../../assets/images/logo.png';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Register from '../Register';
 import ForgotPassword from '../ForgotPassword';
+import {AppNavigatorScreen} from '../../globals/constants/screen-name';
 
 const Login = (props) => {
+  const {navigation} = props;
   const txtPassword = useRef(null);
   const btnLogin = useRef(null);
   const [email, setemail] = useState('');
@@ -45,16 +47,18 @@ const Login = (props) => {
       return;
     }
     login(email, password);
-  };
-  useEffect(() => {
-    if (userState.messageError) {
+    if (userState.token) {
+      navigation.replace(AppNavigatorScreen);
+    }
+    if (userState.token === null && userState.messageError !== '') {
       ToastAndroid.showWithGravity(
-        userState.messageError,
+        'Email or password not correct',
         ToastAndroid.LONG,
         ToastAndroid.TOP,
       );
     }
-  }, [userState.messageError]);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView

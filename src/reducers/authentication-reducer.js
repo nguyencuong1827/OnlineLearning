@@ -10,28 +10,33 @@ const AuthenticationReducer = (prevState, action) => {
       return {
         ...prevState,
         isLoggingIn: true,
-        messageError: null,
       };
     }
     case LOGIN_SUCCESSED: {
       return {
         ...prevState,
-        isLoggedIn: true,
         isLoggingIn: false,
         userInfo: action.userInfo,
         token: action.token,
+        messageError: '',
       };
     }
     case LOGIN_FAILED: {
       return {
         ...prevState,
-        isLoggedIn: false,
         isLoggingIn: false,
+        userInfo: null,
+        token: null,
         messageError: action.messageError,
       };
     }
     case LOGOUT_REQUEST: {
-      return {};
+      return {
+        isLoggingIn: false,
+        userInfo: null,
+        token: null,
+        message: '',
+      };
     }
     default: {
       throw new Error();

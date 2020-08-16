@@ -2,7 +2,9 @@ export const LoginScreen = 'LoginScreen';
 export const RegisterScreen = 'RegisterScreen';
 export const ForgotPasswordScreen = 'ForgotPasswordScreen';
 
+export const SplashScreen = 'SplashScreen';
 export const HomeScreen = 'HomeScreen';
+export const SettingScreen = 'SettingScreen';
 
 export const BrowseScreen = 'BrowseScreen';
 export const DownloadScreen = 'DownloadScreen';

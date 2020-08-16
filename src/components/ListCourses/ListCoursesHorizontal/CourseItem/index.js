@@ -9,6 +9,7 @@ import {
 import Rating from 'react-native-star-rating';
 import {CourseDetailScreen} from '../../../../globals/constants/screen-name';
 import {ThemeContext} from '../../../../providers/theme-propvider';
+import Moment from 'moment';
 
 const setStyleWithTheme = (theme) => {
   styles.content = {
@@ -29,25 +30,35 @@ const CourseItemHorizontal = (props) => {
 
   return (
     <TouchableOpacity style={styles.container} onPress={showCourseDetail}>
-      <Image style={styles.img} activeOpacity={0.6} source={item.urlImg} />
+      <Image
+        style={styles.img}
+        activeOpacity={0.6}
+        source={{uri: item.imageUrl}}
+      />
       <View style={styles.content}>
-        <Text style={styles.name}>{item.name}</Text>
-        <Text style={styles.info}>{item.author}</Text>
-        <Text
-          style={
-            styles.info
-          }>{`${item.level} . ${item.releasedDate} . ${item.duration} hours`}</Text>
+        <Text style={styles.name}>{item.title}</Text>
+        <Text style={styles.info}>
+          {item['instructor.user.name'] || item.instructorName || item.name}
+        </Text>
+        <Text style={styles.info}>{`${Moment(item.createdAt).format(
+          'MMMM Do',
+        )}  ${item.totalHours} hours`}</Text>
         <View style={styles.ratingContainer}>
           <Rating
             disabled={true}
             maxStars={5}
-            rating={item.averageRating}
+            rating={
+              (item.presentationPoint +
+                item.formalityPoint +
+                item.contentPoint) /
+              3
+            }
             starSize={Typography.fontSize16}
             fullStarColor={Colors.yellow}
             starStyle={styles.starRating}
           />
           <Text style={styles.info}>
-            {'   '}({item.totalRating})
+            {'   '}({item.ratedNumber})
           </Text>
         </View>
       </View>

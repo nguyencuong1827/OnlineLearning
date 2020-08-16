@@ -5,9 +5,7 @@ import {
   LOGOUT_REQUEST,
 } from '../globals/constants/actions-constant';
 import authenticationApi from '../api/authentication-api';
-import localStorage from '../helpers/local-storage';
-import {userInfoKey, tokenKey} from '../globals/constants/key-storage';
-import AsyncStorage from '@react-native-community/async-storage';
+import {useAsyncStorage} from '@react-native-community/async-storage';
 
 const loginRequest = () => {
   return {
@@ -27,21 +25,31 @@ const loginFailed = (messageError) => {
     messageError,
   };
 };
+
 export const login = (dispatch) => async (email, password) => {
+  const {setItem} = useAsyncStorage('@userLogin');
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await setItem(jsonValue);
+    } catch (e) {
+      // saving error
+    }
+  };
+
   dispatch(loginRequest());
-  const res = await authenticationApi.login(email, password);
-  const {data, status} = res;
-  //  localStorage._storeData(userInfoKey, data.userInfo);
-  // await localStorage._storeData(tokenKey, data.token);
-  //await AsyncStorage.setItem('userInfo', JSON.stringify(data.userInfo));
-  if (status === 200) {
-    dispatch(loginSuccess(data.userInfo, data.token));
-  } else {
-    dispatch(
-      loginFailed(
-        'Email or password is incorrect or you have not activated your account',
-      ),
-    );
+  try {
+    const res = await authenticationApi.login(email, password);
+    const {data, status} = res;
+    if (status === 200) {
+      let value = {email, password};
+      storeData(value);
+      dispatch(loginSuccess(data.userInfo, data.token));
+    } else {
+      dispatch(loginFailed(data.message));
+    }
+  } catch ({response}) {
+    dispatch(loginFailed(response.data.message));
   }
 };
 
@@ -50,7 +58,13 @@ const logoutRequest = () => {
     type: LOGOUT_REQUEST,
   };
 };
-export const logout = (dispatch) => () => {
-  
+export const logout = (dispatch) => async () => {
+  const {removeItem} = useAsyncStorage('@userLogin');
+
+  try {
+    await removeItem();
+  } catch (error) {
+    console.log('Logout fail: ', error);
+  }
   dispatch(logoutRequest());
 };

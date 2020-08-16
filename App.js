@@ -1,30 +1,17 @@
-import React, {useState, useLayoutEffect} from 'react';
-import {StyleSheet, View, StatusBar} from 'react-native';
-import RootNavigator from './src/navigation';
+import React from 'react';
+import {StyleSheet, View, StatusBar, Text} from 'react-native';
 import {AuthenticationProvider} from './src/providers/authentication-provider';
 import {ThemeProvider} from './src/providers/theme-propvider';
 import {BookmarkProvider} from './src/providers/bookmark-provider';
-import SplashScreen from './src/screens/SplashScreen';
-
+import RootNavigator from './src/navigation';
 const App = () => {
-  const [currentScreen, setCurrentScreen] = useState('SplashScreen');
-  useLayoutEffect(() => {
-    const time = setTimeout(() => {
-      setCurrentScreen('Login');
-    }, 1600);
-    return () => clearTimeout(time);
-  }, []);
   return (
     <ThemeProvider>
       <AuthenticationProvider>
         <BookmarkProvider>
           <View style={styles.container}>
             <StatusBar hidden={true} />
-            {currentScreen === 'SplashScreen' ? (
-              <SplashScreen />
-            ) : (
-              <RootNavigator />
-            )}
+            <RootNavigator />
           </View>
         </BookmarkProvider>
       </AuthenticationProvider>

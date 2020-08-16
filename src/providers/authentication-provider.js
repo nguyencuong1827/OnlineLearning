@@ -3,11 +3,10 @@ import AuthenticationReducer from '../reducers/authentication-reducer';
 import {login, logout} from '../actions/authentication-action';
 
 const initState = {
-  isLoggedIn: false,
   isLoggingIn: false,
   userInfo: null,
   token: null,
-  messageError: null,
+  messageError: '',
 };
 export const AuthenticationContext = React.createContext();
 export const AuthenticationProvider = (props) => {

@@ -198,11 +198,15 @@ const styles = StyleSheet.create({
   backgroundVideo: {
     flex: 1,
     backgroundColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   videoContainer: {
-    height: Size.HEIGHT - Size.scaleSize(150),
+    height: Size.HEIGHT - Size.scaleSize(10),
     width: Size.WIDTH,
     backgroundColor: 'black',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   container: {
     position: 'absolute',

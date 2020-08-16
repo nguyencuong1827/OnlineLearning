@@ -4,6 +4,7 @@ import CourseItemHorizontal from './CourseItem';
 import SeeAllButton from '../../SeeAllButton';
 import {ScaleSize, Distance} from '../../../globals/styles';
 import EmptyCourse from './EmptyCourse';
+import {ShowListCourseScreen} from '../../../globals/constants/screen-name';
 
 const ListCoursesHorizontal = (props) => {
   const {data, navigation, title, showAll} = props;

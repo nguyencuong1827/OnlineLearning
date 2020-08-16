@@ -28,7 +28,7 @@ const StudentFeedback = (props) => {
       {ratings ? <RatingComponent ratings={ratings} /> : undefined}
       <PrimaryButton
         title="See All Feedback"
-        onPress={() => onPress(ratings)}
+        onPress={() => onPress()}
         active={true}
         icon="star-o"
         style={[styles.buttonContainer, {backgroundColor: theme2.primaryColor}]}

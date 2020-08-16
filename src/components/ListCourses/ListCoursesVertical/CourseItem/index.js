@@ -1,9 +1,15 @@
 import React, {useContext} from 'react';
 import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
 import Rating from 'react-native-star-rating';
-import {ScaleSize, Typography, Distance} from '../../../../globals/styles';
+import {
+  ScaleSize,
+  Typography,
+  Distance,
+  Colors,
+} from '../../../../globals/styles';
 import {CourseDetailScreen} from '../../../../globals/constants/screen-name';
 import {ThemeContext} from '../../../../providers/theme-propvider';
+import Moment from 'moment';
 
 const setStyleWithTheme = (theme) => {
   styles.name = {...styles.name, color: theme.colorMainText};
@@ -16,30 +22,36 @@ const CourseItemVertical = (props) => {
   setStyleWithTheme(theme);
 
   const showCourseDetail = () => {
-    navigation.navigate(CourseDetailScreen, {course: item});
+    navigation.navigate(CourseDetailScreen, {id: item.id});
   };
 
   return (
     <TouchableOpacity style={styles.container} onPress={showCourseDetail}>
-      <Image style={styles.img} source={item.urlImg} />
+      <Image style={styles.img} source={{uri: item.imageUrl}} />
       <View style={styles.content}>
-        <Text style={styles.name}>{item.name}</Text>
-        <Text style={styles.info}>{item.author}</Text>
-        <Text
-          style={
-            styles.info
-          }>{`${item.level} . ${item.releasedDate} . ${item.duration} hours`}</Text>
+        <Text style={styles.name}>{item.title}</Text>
+        <Text style={styles.info}>
+          {item['instructor.user.name'] || item.name || item.instructorName}
+        </Text>
+        <Text style={styles.info}>{`${Moment(item.updatedAt).format(
+          'MMMM Do',
+        )} . ${item.totalHours} hours`}</Text>
         <View style={styles.ratingContainer}>
           <Rating
             disabled={true}
             maxStars={5}
-            rating={item.averageRating}
+            rating={
+              (item.presentationPoint +
+                item.formalityPoint +
+                item.contentPoint) /
+              3
+            }
             starSize={Typography.fontSize14}
-            fullStarColor="#f39c12"
+            fullStarColor={Colors.yellow}
             starStyle={styles.starRating}
           />
           <Text style={styles.info}>
-            {'   '}({item.totalRating})
+            {'   '}({item.ratedNumber})
           </Text>
         </View>
       </View>

@@ -15,12 +15,7 @@ import {
 import FormInput from '../../components/Authentication/FormInput';
 import ButtonSubmit from '../../components/Authentication/ButtonSubmit';
 import {AuthenticationContext} from '../../providers/authentication-provider';
-import {
-  Colors,
-  Distance,
-  ScaleSize,
-  Typography,
-} from '../../globals/styles';
+import {Colors, Distance, ScaleSize, Typography} from '../../globals/styles';
 import logo from '../../../assets/images/logo.png';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Register from '../Register';

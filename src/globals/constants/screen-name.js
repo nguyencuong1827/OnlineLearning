@@ -27,6 +27,11 @@ export const LessonCourseScreenStack = 'LessonCourseScreenStack';
 export const LessonCourseScreen = 'LessonCourseScreen';
 export const FeedBackStack = 'FeedBackStack';
 export const PlayVideoScreen = 'PlayVideoScreen';
-
+export const WriteFeedBackScreen = 'WriteFeedBackScreen';
+export const ShowListCourseScreen = 'ShowListCourseScreen';
+export const BestSeller = 'BestSeller';
+export const RecommendCourse = 'RecommendCourse';
+export const TopRating = 'TopRating';
+export const NewRelease = 'NewRelease';
 export const AppNavigatorScreen = 'AppNavigatorScreen';
 export const AuthNavigatorScreen = 'AuthNavigatorScreen';

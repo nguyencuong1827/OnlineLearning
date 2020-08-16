@@ -16,12 +16,14 @@ import {Distance, Typography, Colors, ScaleSize} from '../../globals/styles';
 import {
   ProfileScreen,
   SettingScreen,
+  ShowListCourseScreen,
 } from '../../globals/constants/screen-name';
 import {ThemeContext} from '../../providers/theme-propvider';
 import {courses} from '../../globals/fake-data';
 import axiosClient from '../../api/axiosClient';
 import configToken from '../../api/config-token';
 import {AuthenticationContext} from '../../providers/authentication-provider';
+import * as screenName from '../../globals/constants/screen-name';
 import p from 'pretty-format';
 
 const WelcomeImage = () => (
@@ -76,6 +78,9 @@ const Home = (props) => {
   const body = {
     limit: 7,
     offset: 0,
+  };
+  const showListCourse = (id) => {
+    navigation.navigate(id, {id});
   };
   const fetchDataState1 = async () => {
     const url = '/course/top-new';
@@ -161,21 +166,28 @@ const Home = (props) => {
           data={state1}
           title="New releases"
           navigation={navigation}
+          showAll={() => showListCourse(screenName.NewRelease)}
         />
         <ListCoursesHorizontal
           data={state2}
           title="Best seller"
           navigation={navigation}
+          id={screenName.BestSeller}
+          showAll={() => showListCourse(screenName.BestSeller)}
         />
         <ListCoursesHorizontal
           data={state3}
           title="Top rating"
           navigation={navigation}
+          id={screenName.TopRating}
+          showAll={() => showListCourse(screenName.TopRating)}
         />
         <ListCoursesHorizontal
           data={state4}
           title="Recommend for you"
           navigation={navigation}
+          id={screenName.RecommendCourse}
+          showAll={() => showListCourse(screenName.RecommendCourse)}
         />
         <BookmarksHorizontal navigation={navigation} />
       </ScrollView>

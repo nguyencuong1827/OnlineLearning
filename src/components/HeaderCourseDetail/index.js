@@ -134,23 +134,15 @@ const HeaderCourseDetail = (props) => {
       console.log(err);
     }
   };
-  const onPressStudentFeedback = (
-    ratings,
-    averagePoint,
-    contentPoint,
-    presentationPoint,
-    formalityPoint,
-    courseId,
-  ) => {
+  const onPressStudentFeedback = () => {
     navigation.navigate(screenName.FeedBackStack, {
-      screen: screenName.FeedBackStack,
       params: {
-        item: ratings,
-        averagePoint: averagePoint,
-        contentPoint: contentPoint,
-        presentationPoint: presentationPoint,
-        formalityPoint: formalityPoint,
-        courseId: courseId,
+        item: item.ratings,
+        averagePoint: item.averagePoint,
+        contentPoint: item.contentPoint,
+        presentationPoint: item.presentationPoint,
+        formalityPoint: item.formalityPoint,
+        courseId: item.id,
       },
     });
   };
@@ -273,16 +265,6 @@ const HeaderCourseDetail = (props) => {
       <StudentFeedBack
         averagePoint={item.averagePoint}
         ratings={item.ratings}
-        onPress={() =>
-          onPressStudentFeedback(
-            item.ratings,
-            item.averagePoint,
-            item.contentPoint,
-            item.presentationPoint,
-            item.formalityPoint,
-            item.id,
-          )
-        }
       />
       <Text style={[styles.title, {color: theme2.primaryTextColor}]}>
         Curriculum

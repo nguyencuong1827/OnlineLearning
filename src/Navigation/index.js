@@ -13,6 +13,7 @@ import {useAsyncStorage} from '@react-native-community/async-storage';
 import {AuthenticationContext} from '../providers/authentication-provider';
 import LessonCourseNavigatorStack from './AppNavigator/CourseDetailNavigator';
 import PlayReview from '../screens/PlayReview';
+import SeeFeedBack from '../screens/SeeFeedback';
 
 const Stack = createStackNavigator();
 
@@ -77,7 +78,23 @@ const RootNavigator = () => {
           component={PlayReview}
           options={{headerShown: false}}
         />
-
+        <Stack.Screen
+          name={ScreenName.CourseDetailScreen}
+          component={CourseDetail}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name={ScreenName.FeedBackStack}
+          component={SeeFeedBack}
+          options={{title: 'Feedback'}}
+          initialParams={{
+            item: 'item',
+            averagePoint: 0,
+            contentPoint: 0,
+            presentationPoint: 0,
+            formalityPoint: 0,
+          }}
+        />
         {/* <Stack.Screen
           name={ScreenName.AppNavigatorScreen}
           component={AppNavigator}

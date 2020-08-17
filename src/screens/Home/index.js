@@ -26,6 +26,7 @@ import {AuthenticationContext} from '../../providers/authentication-provider';
 import * as screenName from '../../globals/constants/screen-name';
 import p from 'pretty-format';
 import ListCategory from '../../components/Category';
+import {ListAuthorsHorizontal} from '../../components/ListAuthors';
 
 const WelcomeImage = () => (
   <ImageBackground
@@ -76,6 +77,7 @@ const Home = (props) => {
   const [state2, setState2] = useState([]);
   const [state3, setState3] = useState([]);
   const [state4, setState4] = useState([]);
+  const [listInstructor, setListInstructor] = useState([]);
   const body = {
     limit: 7,
     offset: 0,
@@ -152,11 +154,23 @@ const Home = (props) => {
       console.log(p(response));
     }
   };
+  const getInstructor = async () => {
+    try {
+      const response = await axiosClient.get('/instructor');
+      // const response = await listInstructorAPI();]
+      if (response.status === 200) {
+        setListInstructor(response.data.payload);
+      }
+    } catch ({response}) {
+      console.log(response);
+    }
+  };
   useEffect(() => {
     fetchDataState1();
     fetchDataState2();
     fetchDataState3();
     fetchDataState4();
+    getInstructor();
   }, [userState, setState1, setState2, setState3, setState4]);
 
   useLayoutEffect(() => {
@@ -197,7 +211,10 @@ const Home = (props) => {
           id={screenName.RecommendCourse}
           showAll={() => showListCourse(screenName.RecommendCourse)}
         />
-        <BookmarksHorizontal navigation={navigation} />
+        <ListAuthorsHorizontal
+          data={listInstructor.slice(0, 7)}
+          title="Top authors"
+        />
       </ScrollView>
     </SafeAreaView>
   );

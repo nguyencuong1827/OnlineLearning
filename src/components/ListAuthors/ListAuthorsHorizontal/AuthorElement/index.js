@@ -19,9 +19,12 @@ const sliceString = (string, standardLength) => {
 const AuthorElement = (props) => {
   const {theme} = useContext(ThemeContext);
   setStyleWithTheme(theme);
+  const {author} = props;
 
   const standardLength = 8;
-  let subName = props.author.name;
+  let subName = author['user.name']
+    ? author['user.name']
+    : author['user.email'];
   if (subName.length > standardLength) {
     subName = sliceString(subName, standardLength);
   }
@@ -32,7 +35,7 @@ const AuthorElement = (props) => {
         <Avatar
           rounded
           size="large"
-          source={props.author.urlAvatar}
+          source={{uri: author['user.avatar']}}
           containerStyle={styles.avatar}
         />
         <View>

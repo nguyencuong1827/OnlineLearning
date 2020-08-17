@@ -14,12 +14,13 @@ const ListAuthorsHorizontal = (props) => {
   const {theme} = useContext(ThemeContext);
   setStyleWithTheme(theme);
 
+  const {data} = props;
   const showAuthorDetail = (author) => {
-    props.navigation.navigate(AuthorDetailScreen, {authorDetail: author});
+    props.navigation.navigate(AuthorDetailScreen, {id: author.id});
   };
 
   const renderListTopAutor = () => {
-    return authors.map((author, index) => (
+    return data.map((author, index) => (
       <AuthorElement
         key={index}
         author={author}

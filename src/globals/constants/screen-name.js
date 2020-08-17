@@ -33,5 +33,7 @@ export const BestSeller = 'BestSeller';
 export const RecommendCourse = 'RecommendCourse';
 export const TopRating = 'TopRating';
 export const NewRelease = 'NewRelease';
+export const PopularSkillScreen = 'PopularSkillScreen';
+export const RelateSkillScreen = 'RelateSkillScreen';
 export const AppNavigatorScreen = 'AppNavigatorScreen';
 export const AuthNavigatorScreen = 'AuthNavigatorScreen';

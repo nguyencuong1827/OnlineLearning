@@ -25,6 +25,7 @@ import configToken from '../../api/config-token';
 import {AuthenticationContext} from '../../providers/authentication-provider';
 import * as screenName from '../../globals/constants/screen-name';
 import p from 'pretty-format';
+import ListCategory from '../../components/Category';
 
 const WelcomeImage = () => (
   <ImageBackground
@@ -81,6 +82,12 @@ const Home = (props) => {
   };
   const showListCourse = (id) => {
     navigation.navigate(id, {id});
+  };
+  const onPressCategory = (item) => {
+    navigation.navigate(screenName.ShowListCourseScreenName, {
+      title: item.name,
+      id: item.id,
+    });
   };
   const fetchDataState1 = async () => {
     const url = '/course/top-new';
@@ -168,6 +175,7 @@ const Home = (props) => {
           navigation={navigation}
           showAll={() => showListCourse(screenName.NewRelease)}
         />
+        <ListCategory onPress={onPressCategory} />
         <ListCoursesHorizontal
           data={state2}
           title="Best seller"

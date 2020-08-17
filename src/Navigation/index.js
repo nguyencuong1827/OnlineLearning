@@ -14,8 +14,64 @@ import {AuthenticationContext} from '../providers/authentication-provider';
 import LessonCourseNavigatorStack from './AppNavigator/CourseDetailNavigator';
 import PlayReview from '../screens/PlayReview';
 import SeeFeedBack from '../screens/SeeFeedback';
+import {CategoryProvider} from '../providers/category-provider';
 
 const Stack = createStackNavigator();
+
+const RootScreen = (props) => {
+  const {screenOptions} = props;
+  return (
+    <Stack.Navigator mode="modal" screenOptions={screenOptions}>
+      <Stack.Screen
+        name={ScreenName.SplashScreen}
+        component={SplashScreen}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={ScreenName.LoginScreen}
+        component={Login}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={ScreenName.LessonCourseScreenStack}
+        component={LessonCourseNavigatorStack}
+        options={{animationEnabled: true}}
+      />
+      <Stack.Screen
+        name={ScreenName.AppNavigatorScreen}
+        component={AppNavigator}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={ScreenName.AuthorDetailScreen}
+        component={AuthorDetail}
+        options={{title: ''}}
+      />
+      <Stack.Screen
+        name={ScreenName.PlayVideoScreen}
+        component={PlayReview}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={ScreenName.CourseDetailScreen}
+        component={CourseDetail}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name={ScreenName.FeedBackStack}
+        component={SeeFeedBack}
+        options={{title: 'Feedback'}}
+        initialParams={{
+          item: 'item',
+          averagePoint: 0,
+          contentPoint: 0,
+          presentationPoint: 0,
+          formalityPoint: 0,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
 
 const RootNavigator = () => {
   const {theme} = useContext(ThemeContext);
@@ -46,72 +102,11 @@ const RootNavigator = () => {
     readItemFromStorage();
   }, []);
   return (
-    <NavigationContainer>
-      <Stack.Navigator mode="modal" screenOptions={screenOptions}>
-        <Stack.Screen
-          name={ScreenName.SplashScreen}
-          component={SplashScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name={ScreenName.LoginScreen}
-          component={Login}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name={ScreenName.LessonCourseScreenStack}
-          component={LessonCourseNavigatorStack}
-          options={{animationEnabled: true}}
-        />
-        <Stack.Screen
-          name={ScreenName.AppNavigatorScreen}
-          component={AppNavigator}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name={ScreenName.AuthorDetailScreen}
-          component={AuthorDetail}
-          options={{title: ''}}
-        />
-        <Stack.Screen
-          name={ScreenName.PlayVideoScreen}
-          component={PlayReview}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name={ScreenName.CourseDetailScreen}
-          component={CourseDetail}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name={ScreenName.FeedBackStack}
-          component={SeeFeedBack}
-          options={{title: 'Feedback'}}
-          initialParams={{
-            item: 'item',
-            averagePoint: 0,
-            contentPoint: 0,
-            presentationPoint: 0,
-            formalityPoint: 0,
-          }}
-        />
-        {/* <Stack.Screen
-          name={ScreenName.AppNavigatorScreen}
-          component={AppNavigator}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name={ScreenName.CourseDetailScreen}
-          component={CourseDetail}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name={ScreenName.AuthorDetailScreen}
-          component={AuthorDetail}
-          options={{title: ''}}
-        /> */}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <CategoryProvider>
+      <NavigationContainer>
+        <RootScreen screenOptions={screenOptions} />
+      </NavigationContainer>
+    </CategoryProvider>
   );
 };
 

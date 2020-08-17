@@ -1,11 +1,6 @@
 import React, {useRef} from 'react';
 import {View, Text, Modal, TouchableOpacity, StyleSheet} from 'react-native';
-import {
-  Distance,
-  ScaleSize,
-  Colors,
-  Typography,
-} from '../../globals/styles';
+import {Distance, ScaleSize, Colors, Typography} from '../../globals/styles';
 import FormInput from '../../components/Authentication/FormInput';
 import {useState} from 'react';
 import ButtonSubmit from '../../components/Authentication/ButtonSubmit';

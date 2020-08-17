@@ -17,8 +17,8 @@ const AppNavigator = () => {
           let iconName;
           if (route.name === 'Home') {
             iconName = 'home';
-          } else if (route.name === 'Downloads') {
-            iconName = 'clouddownloado';
+          } else if (route.name === 'MyCourses') {
+            iconName = 'profile';
           } else if (route.name === 'Browse') {
             iconName = 'creditcard';
           } else {
@@ -45,8 +45,12 @@ const AppNavigator = () => {
         },
       }}>
       <Tab.Screen name="Home" component={HomeStack} />
-      <Tab.Screen name="Downloads" component={DownloadStack} />
       <Tab.Screen name="Browse" component={BrowseStack} />
+      <Tab.Screen
+        name="MyCourses"
+        component={DownloadStack}
+        options={{title: 'My Courses'}}
+      />
       <Tab.Screen name="Search" component={Search} />
     </Tab.Navigator>
   );

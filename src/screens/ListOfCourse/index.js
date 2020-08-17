@@ -7,13 +7,14 @@ import {ThemeContext} from '../../providers/theme-propvider';
 import {AuthenticationContext} from '../../providers/authentication-provider';
 import axiosClient from '../../api/axiosClient';
 import {ListCoursesVertical} from '../../components/ListCourses';
+import EmptyCourse from '../../components/ListCourses/ListCoursesHorizontal/EmptyCourse';
 
 const ListOfCourse = (props) => {
   const {navigation, route} = props;
   const {theme2} = useContext(ThemeContext);
   const {id, keyword} = route.params;
   const [data, setData] = useState([]);
-  const {state} = useContext(AuthenticationContext);
+  const {userState} = useContext(AuthenticationContext);
 
   const body = {
     limit: 10,
@@ -44,7 +45,7 @@ const ListOfCourse = (props) => {
           let userFavorite = await axiosClient.post(
             '/course/courses-user-favorite-categories',
             {
-              userId: state.userInfo.id,
+              userId: userState.userInfo.id,
             },
           );
           if (userFavorite.status === 200) {
@@ -53,7 +54,7 @@ const ListOfCourse = (props) => {
           break;
         case screenName.RecommendCourse:
           let recommendCourse = await axiosClient.get(
-            `${'/user/recommend-course'}/${state.userInfo.id}/10/0`,
+            `${'/user/recommend-course'}/${userState.userInfo.id}/10/0`,
           );
           if (recommendCourse.status === 200) {
             setData(recommendCourse.data.payload);
@@ -92,7 +93,11 @@ const ListOfCourse = (props) => {
   return (
     <SafeAreaView
       style={[styles.container, {backgroundColor: theme2.backgroundColor}]}>
-      <ListCoursesVertical navigation={navigation} data={data} />
+      {data.length === 0 ? (
+        <EmptyCourse />
+      ) : (
+        <ListCoursesVertical navigation={navigation} data={data} />
+      )}
     </SafeAreaView>
   );
 };

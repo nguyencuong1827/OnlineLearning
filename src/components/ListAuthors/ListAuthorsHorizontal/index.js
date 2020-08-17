@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import {View, Text, ScrollView, StyleSheet} from 'react-native';
-import {authors} from '../../../globals/fake-data';
 import AuthorElement from './AuthorElement';
 import {AuthorDetailScreen} from '../../../globals/constants/screen-name';
 import {Distance, Typography} from '../../../globals/styles';

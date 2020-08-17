@@ -768,7 +768,7 @@ export const lessons = [
 
 export const categoryImage = [
   {
-    id: '4eb0c150-8212-44ef-a90b-fcd40130ac01',
+    id: 'a4015252-542a-4482-b087-4cfa85f2b953',
     image:
       'https://pluralsight.imgix.net/course-images/react-js-getting-started-v2.png',
   },
@@ -783,7 +783,7 @@ export const categoryImage = [
       'https://pluralsight.imgix.net/course-images/microsoft-azure-data-securing-v1.png',
   },
   {
-    id: 'a4015252-542a-4482-b087-4cfa85f2b953',
+    id: '4eb0c150-8212-44ef-a90b-fcd40130ac01',
     image:
       'https://pluralsight.imgix.net/course-images/game-environment-concept-design-v2.jpg',
   },
@@ -793,12 +793,12 @@ export const categoryImage = [
       'https://pluralsight.imgix.net/course-images/tsql-functions-playbook-v1.png',
   },
   {
-    id: '93959023-5ff2-4bb8-beb2-c42dbe3dc2dd',
+    id: '8d919542-d44d-444c-8623-4d9c4063ed82',
     image:
       'https://pluralsight.imgix.net/course-images/microsoft-azure-unit-integration-testing-performing-v1.jpg',
   },
   {
-    id: '8d919542-d44d-444c-8623-4d9c4063ed82',
+    id: '93959023-5ff2-4bb8-beb2-c42dbe3dc2dd',
     image:
       'https://pluralsight.imgix.net/course-images/exploring-partnering-tech-leads-v1.png',
   },

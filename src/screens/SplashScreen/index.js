@@ -1,17 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {View, StyleSheet, Animated, Easing} from 'react-native';
 import {HEIGHT} from '../../globals/styles/scale-size';
 import {Colors} from '../../globals/styles';
 import {useAsyncStorage} from '@react-native-community/async-storage';
 import * as ScreenName from '../../globals/constants/screen-name';
 import {userTokenKey} from '../../globals/constants/key-storage';
+import axiosClient from '../../api/axiosClient';
+import {CategoryContext} from '../../providers/category-provider';
 
 const SplashScreen = (props) => {
   const yValue = new Animated.Value(0);
   const springValue = new Animated.Value(0.1);
   const {navigation} = props;
   const {getItem} = useAsyncStorage('@userLogin');
+  const {setListCategory} = useContext(CategoryContext);
   let timer;
 
   const getData = async () => {
@@ -31,6 +34,22 @@ const SplashScreen = (props) => {
       );
     }
   };
+  const fetchCategory = async () => {
+    const url = '/category/all';
+    try {
+      let response = await axiosClient.get(url);
+      if (response.status === 200) {
+        setListCategory(response.data.payload);
+      }
+    } catch ({response}) {
+      console.log(response);
+    }
+  };
+  useEffect(() => {
+    getData();
+    fetchCategory();
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     Animated.timing(yValue, {
@@ -52,11 +71,6 @@ const SplashScreen = (props) => {
       friction: 1,
       useNativeDriver: false,
     }).start();
-  }, []);
-
-  useEffect(() => {
-    getData();
-    return () => clearTimeout(timer);
   }, []);
 
   return (

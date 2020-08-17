@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, FlatList} from 'react-native';
+import {View, StyleSheet, FlatList, Text} from 'react-native';
 import CourseItemHorizontal from './CourseItem';
 import SeeAllButton from '../../SeeAllButton';
 import {ScaleSize, Distance} from '../../../globals/styles';
@@ -7,7 +7,7 @@ import EmptyCourse from './EmptyCourse';
 import {ShowListCourseScreen} from '../../../globals/constants/screen-name';
 
 const ListCoursesHorizontal = (props) => {
-  const {data, navigation, title, showAll} = props;
+  const {data, navigation, title, showAll, turnOffSeeAll} = props;
   const renderCourseItem = (item) => (
     <CourseItemHorizontal item={item} navigation={navigation} />
   );
@@ -17,8 +17,11 @@ const ListCoursesHorizontal = (props) => {
         <EmptyCourse title={title} />
       ) : (
         <>
-          <SeeAllButton title={title} onPress={showAll} />
-
+          <SeeAllButton
+            title={title}
+            onPress={showAll}
+            turnOffSeeAll={turnOffSeeAll}
+          />
           <FlatList
             horizontal={true}
             showsHorizontalScrollIndicator={false}

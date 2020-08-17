@@ -39,9 +39,8 @@ const PLayVideo = (props) => {
 };
 const styles = StyleSheet.create({
   videoYoutube: {
-    alignSelf: 'stretch',
     flex: 1,
-    resizeMode: 'contain',
+    alignSelf: 'stretch',
   },
 
   videoContainer: {

@@ -3,9 +3,11 @@ import {
   LOGIN_REQUEST,
   LOGIN_FAILED,
   LOGOUT_REQUEST,
+  UPDATE_FAVORITE_CATEGORY,
 } from '../globals/constants/actions-constant';
 import authenticationApi from '../api/authentication-api';
 import {useAsyncStorage} from '@react-native-community/async-storage';
+import axiosClient from '../api/axiosClient';
 
 const loginRequest = () => {
   return {
@@ -67,4 +69,8 @@ export const logout = (dispatch) => async () => {
     console.log('Logout fail: ', error);
   }
   dispatch(logoutRequest());
+};
+
+export const updateListFavoriteCategory = (dispatch) => (listNewFavorite) => {
+  dispatch({type: UPDATE_FAVORITE_CATEGORY, listNewFavorite});
 };

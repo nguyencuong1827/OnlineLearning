@@ -9,24 +9,19 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {ListCoursesHorizontal} from '../../components/ListCourses';
-import {BookmarksHorizontal} from '../../components/ListBookmarks';
 import IconEvil from 'react-native-vector-icons/EvilIcons';
 import IconAnt from 'react-native-vector-icons/AntDesign';
 import {Distance, Typography, Colors, ScaleSize} from '../../globals/styles';
 import {
   ProfileScreen,
   SettingScreen,
-  ShowListCourseScreen,
 } from '../../globals/constants/screen-name';
 import {ThemeContext} from '../../providers/theme-propvider';
-import {courses} from '../../globals/fake-data';
 import axiosClient from '../../api/axiosClient';
 import configToken from '../../api/config-token';
 import {AuthenticationContext} from '../../providers/authentication-provider';
 import * as screenName from '../../globals/constants/screen-name';
 import p from 'pretty-format';
-import ListCategory from '../../components/Category';
-import {ListAuthorsHorizontal} from '../../components/ListAuthors';
 
 const WelcomeImage = () => (
   <ImageBackground
@@ -76,8 +71,6 @@ const Home = (props) => {
   const [state1, setState1] = useState([]);
   const [state2, setState2] = useState([]);
   const [state3, setState3] = useState([]);
-  const [state4, setState4] = useState([]);
-  const [listInstructor, setListInstructor] = useState([]);
   const body = {
     limit: 7,
     offset: 0,
@@ -85,12 +78,7 @@ const Home = (props) => {
   const showListCourse = (id) => {
     navigation.navigate(id, {id});
   };
-  const onPressCategory = (item) => {
-    navigation.navigate(screenName.ShowListCourseScreenName, {
-      title: item.name,
-      id: item.id,
-    });
-  };
+
   const fetchDataState1 = async () => {
     const url = '/course/top-new';
     try {
@@ -137,41 +125,12 @@ const Home = (props) => {
       console.log(p(response));
     }
   };
-  const fetchDataState4 = async () => {
-    try {
-      const url = '/user/recommend-course';
-      const limit = 6;
-      const offset = 0;
 
-      let response = await axiosClient.get(
-        `${url}/${userState.userInfo.id}/${limit}/${offset}`,
-      );
-
-      if (response.status === 200) {
-        setState4(response.data.payload);
-      }
-    } catch (response) {
-      console.log(p(response));
-    }
-  };
-  const getInstructor = async () => {
-    try {
-      const response = await axiosClient.get('/instructor');
-      // const response = await listInstructorAPI();]
-      if (response.status === 200) {
-        setListInstructor(response.data.payload);
-      }
-    } catch ({response}) {
-      console.log(response);
-    }
-  };
   useEffect(() => {
     fetchDataState1();
     fetchDataState2();
     fetchDataState3();
-    fetchDataState4();
-    getInstructor();
-  }, [userState, setState1, setState2, setState3, setState4]);
+  }, [userState, setState1, setState2, setState3]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -184,13 +143,6 @@ const Home = (props) => {
       <ScrollView>
         <WelcomeImage />
         <ListCoursesHorizontal
-          data={state1}
-          title="New releases"
-          navigation={navigation}
-          showAll={() => showListCourse(screenName.NewRelease)}
-        />
-        <ListCategory onPress={onPressCategory} />
-        <ListCoursesHorizontal
           data={state2}
           title="Best seller"
           navigation={navigation}
@@ -198,22 +150,17 @@ const Home = (props) => {
           showAll={() => showListCourse(screenName.BestSeller)}
         />
         <ListCoursesHorizontal
+          data={state1}
+          title="New releases"
+          navigation={navigation}
+          showAll={() => showListCourse(screenName.NewRelease)}
+        />
+        <ListCoursesHorizontal
           data={state3}
           title="Top rating"
           navigation={navigation}
           id={screenName.TopRating}
           showAll={() => showListCourse(screenName.TopRating)}
-        />
-        <ListCoursesHorizontal
-          data={state4}
-          title="Recommend for you"
-          navigation={navigation}
-          id={screenName.RecommendCourse}
-          showAll={() => showListCourse(screenName.RecommendCourse)}
-        />
-        <ListAuthorsHorizontal
-          data={listInstructor.slice(0, 7)}
-          title="Top authors"
         />
       </ScrollView>
     </SafeAreaView>

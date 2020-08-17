@@ -109,6 +109,7 @@ const HeaderCourseDetail = (props) => {
           navigation.navigate(screenName.LessonCourseScreenStack, {
             screen: screenName.LessonCourseScreen,
             params: {id: item.id},
+            title: item.title,
           });
         }
       } catch ({response}) {

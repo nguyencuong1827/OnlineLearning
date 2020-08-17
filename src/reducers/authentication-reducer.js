@@ -3,6 +3,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_FAILED,
   LOGOUT_REQUEST,
+  UPDATE_FAVORITE_CATEGORY,
 } from '../globals/constants/actions-constant';
 const AuthenticationReducer = (prevState, action) => {
   switch (action.type) {
@@ -36,6 +37,16 @@ const AuthenticationReducer = (prevState, action) => {
         userInfo: null,
         token: null,
         message: '',
+      };
+    }
+    case UPDATE_FAVORITE_CATEGORY: {
+      console.log(action);
+      return {
+        ...prevState,
+        userInfo: {
+          ...prevState.userInfo,
+          favoriteCategories: action.listNewFavorite,
+        },
       };
     }
     default: {

@@ -35,7 +35,10 @@ const RootScreen = (props) => {
       <Stack.Screen
         name={ScreenName.LessonCourseScreenStack}
         component={LessonCourseNavigatorStack}
-        options={{animationEnabled: true}}
+        options={({route}) => ({
+          title: route.params.title,
+          animationEnabled: true,
+        })}
       />
       <Stack.Screen
         name={ScreenName.AppNavigatorScreen}
@@ -45,7 +48,7 @@ const RootScreen = (props) => {
       <Stack.Screen
         name={ScreenName.AuthorDetailScreen}
         component={AuthorDetail}
-        options={{title: ''}}
+        options={{title: 'Instructor'}}
       />
       <Stack.Screen
         name={ScreenName.PlayVideoScreen}

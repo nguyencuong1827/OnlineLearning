@@ -38,8 +38,7 @@ const LessonCourseNavigatorStack = (props) => {
               ? 10
               : undefined,
           ...TransitionPresets.ModalPresentationIOS,
-        }}
-        initialRouteName={screenName.LessonCourseScreenStack}>
+        }}>
         <LessonCourseStack.Screen
           name={screenName.LessonCourseScreen}
           component={LessonCourse}

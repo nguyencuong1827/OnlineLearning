@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginRight: Distance.spacing_14,
+    justifyContent: 'center',
   },
   title: {
     fontSize: Typography.fontSize18,

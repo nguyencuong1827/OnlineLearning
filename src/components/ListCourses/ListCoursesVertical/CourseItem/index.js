@@ -24,18 +24,22 @@ const CourseItemVertical = (props) => {
   const showCourseDetail = () => {
     navigation.navigate(CourseDetailScreen, {id: item.id});
   };
+  const unit = item.totalHours ? 'hours' : 'students';
 
   return (
     <TouchableOpacity style={styles.container} onPress={showCourseDetail}>
-      <Image style={styles.img} source={{uri: item.imageUrl}} />
+      <Image
+        style={styles.img}
+        source={{uri: item.imageUrl || item.courseImage}}
+      />
       <View style={styles.content}>
-        <Text style={styles.name}>{item.title}</Text>
+        <Text style={styles.name}>{item.title || item.courseTitle}</Text>
         <Text style={styles.info}>
           {item['instructor.user.name'] || item.name || item.instructorName}
         </Text>
         <Text style={styles.info}>{`${Moment(item.updatedAt).format(
           'MMMM Do',
-        )} . ${item.totalHours} hours`}</Text>
+        )} . ${item.totalHours || item.courseSoldNumber} ${unit}`}</Text>
         <View style={styles.ratingContainer}>
           <Rating
             disabled={true}
@@ -44,14 +48,14 @@ const CourseItemVertical = (props) => {
               (item.presentationPoint +
                 item.formalityPoint +
                 item.contentPoint) /
-              3
+                3 || item.coursePresentationPoint
             }
             starSize={Typography.fontSize14}
             fullStarColor={Colors.yellow}
             starStyle={styles.starRating}
           />
           <Text style={styles.info}>
-            {'   '}({item.ratedNumber})
+            {'   '}({item.ratedNumber || item.courseSoldNumber - 5})
           </Text>
         </View>
       </View>

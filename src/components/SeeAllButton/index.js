@@ -18,7 +18,9 @@ const SeeAllButton = (props) => {
   return (
     <TouchableOpacity style={styles.seeAllButton} onPress={props.onPress}>
       <Text style={styles.title}>{props.title}</Text>
-      <Text style={styles.seeAll}>See all {'>'}</Text>
+      {props.turnOffSeeAll ? null : (
+        <Text style={styles.seeAll}>See all {'>'}</Text>
+      )}
     </TouchableOpacity>
   );
 };

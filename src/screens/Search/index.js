@@ -1,11 +1,11 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {View, StyleSheet, Platform} from 'react-native';
 import {SearchBar} from 'react-native-elements';
 import SearchResults from '../../components/Search/SearchResults';
 import RecentSearches from '../../components/Search/RecentSearches';
 import {ThemeContext} from '../../providers/theme-propvider';
-import {courses, authors, paths} from '../../globals/fake-data';
 import {Typography, Colors} from '../../globals/styles';
+import axiosClient from '../../api/axiosClient';
 
 const setStyleWithTheme = (theme) => {
   styles.searchContainer = {
@@ -32,8 +32,8 @@ const Search = (props) => {
   const [recentSearches, setRecentSearches] = useState([]);
   const [isShowRecentSearch, setIsShowRecentSearch] = useState(true);
   const [courseResults, setCourseReults] = useState([]);
-  const [pathResults, setPathReults] = useState([]);
   const [authorResults, setAuthorReults] = useState([]);
+  const [listAuthor, setListAuthor] = useState([]);
 
   setStyleWithTheme(theme);
 
@@ -68,6 +68,8 @@ const Search = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setAuthorReults([]);
+    setCourseReults([]);
     if (!isExistRecentSearch()) {
       setRecentSearches([...recentSearches, searchContent.toLowerCase()]);
     }
@@ -82,30 +84,63 @@ const Search = (props) => {
     setSearchContent(content);
   };
 
-  const searchFilter = (data) => {
-    const ResultsFilter = [];
-    data.forEach((item) => {
-      const plusString = `${item.name.toUpperCase()} ${
-        item.author ? item.author.toUpperCase() : ''
-      } ${item.skills ? item.skills.toUpperCase() : ''} ${
-        item.paths ? item.paths.toUpperCase() : ''
-      }`;
-      if (plusString.search(searchContent.toUpperCase()) > -1) {
-        ResultsFilter.push(item);
+  const searchCourse = async () => {
+    try {
+      const response = await axiosClient.post('/course/search', {
+        keyword: searchContent,
+        opt: {},
+        limit: 10,
+        offset: 0,
+      });
+      if (response.status === 200) {
+        const list = await searchAuthorFromCourse(response.data.payload.rows);
+        setAuthorReults(list);
+        return response.data.payload.rows;
+      } else {
+        console.log(response.data.message);
       }
-    });
-    return ResultsFilter;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const searchAuthor = (name) => {
+    let isExist = authorResults.find((author) => author['user.name'] === name);
+    if (isExist === undefined) {
+      isExist = listAuthor.find((author) => author['user.name'] === name);
+      return isExist;
+    }
+    return null;
   };
 
-  const search = () => {
-    const CourseResultsFilter = searchFilter(courses);
-    setCourseReults(CourseResultsFilter);
+  const searchAuthorFromCourse = async (listCourse) => {
+    const list = [];
+    for (let i = 0; i < listCourse.length; i++) {
+      const result = await searchAuthor(listCourse[i].name);
+      list.push(result);
+    }
+    return list;
+  };
 
-    const PathResultsFilter = searchFilter(paths);
-    setPathReults(PathResultsFilter);
+  const getListAuthor = async () => {
+    const url = '/instructor';
+    try {
+      const response = await axiosClient.get(url);
+      if (response.status === 200) {
+        setListAuthor(response.data.payload);
+      } else {
+        console.log(response.data.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    getListAuthor();
+  }, []);
 
-    const AuthorResultsFilter = searchFilter(authors);
-    setAuthorReults(AuthorResultsFilter);
+  const search = async () => {
+    const courses = await searchCourse();
+    setCourseReults(courses);
   };
 
   return (
@@ -155,7 +190,6 @@ const Search = (props) => {
           searchContent={searchContentTemp}
           courseResults={courseResults}
           authorResults={authorResults}
-          pathResults={pathResults}
         />
       )}
     </View>

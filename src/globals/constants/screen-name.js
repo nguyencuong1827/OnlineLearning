@@ -36,5 +36,6 @@ export const NewRelease = 'NewRelease';
 export const PopularSkillScreen = 'PopularSkillScreen';
 export const RelateSkillScreen = 'RelateSkillScreen';
 export const CategoryScreen = 'CategoryScreen';
+export const MyCoursesScreen = 'MyCoursesScreen';
 export const AppNavigatorScreen = 'AppNavigatorScreen';
 export const AuthNavigatorScreen = 'AuthNavigatorScreen';

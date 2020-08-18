@@ -1,12 +1,13 @@
 import React, {useContext} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeStack from './HomeNavigator';
-import DownloadStack from './DownloadNavigator';
 import Icon from 'react-native-vector-icons/AntDesign';
 import BrowseStack from './BrowseNavigator';
 import Search from '../../screens/Search';
 import {ThemeContext} from '../../providers/theme-propvider';
 import {Typography} from '../../globals/styles';
+import MyCoursesStack from './MyCoursesNavigator';
+
 const Tab = createBottomTabNavigator();
 const AppNavigator = () => {
   const {theme} = useContext(ThemeContext);
@@ -48,7 +49,7 @@ const AppNavigator = () => {
       <Tab.Screen name="Browse" component={BrowseStack} />
       <Tab.Screen
         name="MyCourses"
-        component={DownloadStack}
+        component={MyCoursesStack}
         options={{title: 'My Courses'}}
       />
       <Tab.Screen name="Search" component={Search} />

@@ -12,7 +12,7 @@ import {Typography} from '../../../globals/styles';
 const Tab = createMaterialTopTabNavigator();
 
 const SearchResults = (props) => {
-  const {searchContent, courseResults, authorResults, pathResults} = props;
+  const {searchContent, courseResults, authorResults} = props;
   const {theme} = useContext(ThemeContext);
 
   return (
@@ -33,9 +33,7 @@ const SearchResults = (props) => {
       <Tab.Screen
         name="All"
         component={
-          courseResults.length === 0 &&
-          authorResults.length === 0 &&
-          pathResults.length === 0
+          courseResults.length === 0 && authorResults.length === 0
             ? NoResults
             : AllResults
         }
@@ -51,14 +49,6 @@ const SearchResults = (props) => {
         initialParams={{
           searchContent,
           courseResults,
-        }}
-      />
-      <Tab.Screen
-        name="Paths"
-        component={pathResults.length === 0 ? NoResults : PathResults}
-        initialParams={{
-          searchContent,
-          pathResults,
         }}
       />
       <Tab.Screen

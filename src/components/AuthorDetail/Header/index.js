@@ -1,12 +1,7 @@
 import React, {useContext} from 'react';
 import {View, Text, StyleSheet, Linking} from 'react-native';
 import {Avatar} from 'react-native-elements';
-import {
-  Colors,
-  ScaleSize,
-  Distance,
-  Typography,
-} from '../../../globals/styles';
+import {Colors, ScaleSize, Distance, Typography} from '../../../globals/styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Contacts from '../Contacts';

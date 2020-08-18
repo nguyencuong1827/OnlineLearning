@@ -58,7 +58,7 @@ const CourseItemHorizontal = (props) => {
             starStyle={styles.starRating}
           />
           <Text style={styles.info}>
-            {'   '}({item.ratedNumber || item.courseSoldNumber - 5})
+            {'   '}({item.ratedNumber || 0})
           </Text>
         </View>
       </View>

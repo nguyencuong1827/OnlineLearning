@@ -1,12 +1,12 @@
 import React, {useContext} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import Downloads from '../../../screens/Downloads';
-import {DownloadScreen} from '../../../globals/constants/screen-name';
+import {MyCoursesScreen} from '../../../globals/constants/screen-name';
 import {ThemeContext} from '../../../providers/theme-propvider';
+import MyCourses from '../../../screens/MyCourses';
 
 const Stack = createStackNavigator();
 
-const DownloadStack = () => {
+const MyCoursesStack = () => {
   const {theme} = useContext(ThemeContext);
   const screenOptions = {
     headerStyle: {
@@ -19,14 +19,14 @@ const DownloadStack = () => {
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen
-        name={DownloadScreen}
-        component={Downloads}
+        name={MyCoursesScreen}
+        component={MyCourses}
         options={{
-          title: 'Downloads',
+          title: 'My Courses',
         }}
       />
     </Stack.Navigator>
   );
 };
 
-export default DownloadStack;
+export default MyCoursesStack;

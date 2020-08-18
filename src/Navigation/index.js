@@ -15,6 +15,7 @@ import LessonCourseNavigatorStack from './AppNavigator/CourseDetailNavigator';
 import PlayReview from '../screens/PlayReview';
 import SeeFeedBack from '../screens/SeeFeedback';
 import {CategoryProvider} from '../providers/category-provider';
+import {SearchProvider} from '../providers/search-provider';
 
 const Stack = createStackNavigator();
 
@@ -106,9 +107,11 @@ const RootNavigator = () => {
   }, []);
   return (
     <CategoryProvider>
-      <NavigationContainer>
-        <RootScreen screenOptions={screenOptions} />
-      </NavigationContainer>
+      <SearchProvider>
+        <NavigationContainer>
+          <RootScreen screenOptions={screenOptions} />
+        </NavigationContainer>
+      </SearchProvider>
     </CategoryProvider>
   );
 };

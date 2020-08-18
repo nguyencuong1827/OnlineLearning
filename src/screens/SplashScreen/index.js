@@ -10,12 +10,34 @@ import axiosClient from '../../api/axiosClient';
 import {CategoryContext} from '../../providers/category-provider';
 
 const SplashScreen = (props) => {
-  const yValue = new Animated.Value(0);
-  const springValue = new Animated.Value(0.1);
+  const yValue = new Animated.Value(HEIGHT / 2 - 100);
+  const springValue = new Animated.Value(1);
   const {navigation} = props;
   const {getItem} = useAsyncStorage('@userLogin');
   const {setListCategory} = useContext(CategoryContext);
   let timer;
+
+  const animatedLogo = () => {
+    Animated.timing(yValue, {
+      toValue: HEIGHT / 2,
+      duration: 4000,
+      asing: Easing.cubic,
+      useNativeDriver: false,
+    }).start(() => {
+      Animated.timing(yValue, {
+        toValue: HEIGHT / 2 - 100,
+        duration: 2000,
+        asing: Easing.back(),
+        useNativeDriver: false,
+      }).start();
+    });
+
+    Animated.spring(springValue, {
+      toValue: 1,
+      friction: 1,
+      useNativeDriver: false,
+    }).start();
+  };
 
   const getData = async () => {
     const userLogin = await getItem();
@@ -25,12 +47,12 @@ const SplashScreen = (props) => {
           navigation.replace(ScreenName.AppNavigatorScreen, {
             screen: ScreenName.HomeScreen,
           }),
-        2000,
+        2500,
       );
     } else {
       timer = setTimeout(
         () => navigation.replace(ScreenName.LoginScreen),
-        2000,
+        2500,
       );
     }
   };
@@ -45,34 +67,12 @@ const SplashScreen = (props) => {
       console.log(response);
     }
   };
+
   useEffect(() => {
-    getData();
     fetchCategory();
+    getData();
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    Animated.timing(yValue, {
-      toValue: HEIGHT / 2,
-      duration: 1000,
-      asing: Easing.cubic,
-      useNativeDriver: false,
-    }).start(() => {
-      Animated.timing(yValue, {
-        toValue: HEIGHT / 2 - 100,
-        duration: 500,
-        asing: Easing.back(),
-        useNativeDriver: false,
-      }).start();
-    });
-
-    Animated.spring(springValue, {
-      toValue: 1,
-      friction: 1,
-      useNativeDriver: false,
-    }).start();
-  }, []);
-
   return (
     <View style={styles.container}>
       <Animated.Image

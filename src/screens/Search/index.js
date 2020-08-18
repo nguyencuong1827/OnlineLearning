@@ -1,11 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useContext, useEffect} from 'react';
 import {View, StyleSheet, Platform} from 'react-native';
 import {SearchBar} from 'react-native-elements';
-import SearchResults from '../../components/Search/SearchResults';
-import RecentSearches from '../../components/Search/RecentSearches';
 import {ThemeContext} from '../../providers/theme-propvider';
-import {Typography, Colors} from '../../globals/styles';
+import {Typography} from '../../globals/styles';
 import axiosClient from '../../api/axiosClient';
+import SearchPage from '../../components/Search';
+import {SearchContext} from '../../providers/search-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.searchContainer = {
@@ -26,75 +27,58 @@ const setStyleWithTheme = (theme) => {
 
 const Search = (props) => {
   const {theme} = useContext(ThemeContext);
-  const [searchContent, setSearchContent] = useState('');
-  const [searchContentTemp, setSearchContentTemp] = useState('');
+  const [keyword, setKeywork] = useState('');
   const [isShowRealSearch, setIsShowRealSearch] = useState(false);
-  const [recentSearches, setRecentSearches] = useState([]);
-  const [isShowRecentSearch, setIsShowRecentSearch] = useState(true);
-  const [courseResults, setCourseReults] = useState([]);
-  const [authorResults, setAuthorReults] = useState([]);
-  const [listAuthor, setListAuthor] = useState([]);
+
+  let listAuhthorTemp = [];
+  const {
+    searchContent,
+    listSearch,
+    setListSearch,
+    listAllAuthor,
+    setListAllAuthor,
+    setListCourseResult,
+    setListAuthorResult,
+    setSearchContent,
+  } = useContext(SearchContext);
 
   setStyleWithTheme(theme);
 
   const handleChange = (content) => {
-    if (searchContent.length === 1) {
-      setIsShowRecentSearch(true);
+    if (content === 1) {
+      setSearchContent('');
     }
-    setSearchContent(content);
-  };
-
-  const clearAllRecentSearches = () => {
-    setRecentSearches([]);
+    setKeywork(content);
   };
 
   const handleClear = (e) => {
+    setKeywork('');
     setSearchContent('');
-    setIsShowRecentSearch(true);
   };
 
   const handleCancel = () => {
-    setSearchContent('');
+    setKeywork('');
     setIsShowRealSearch(false);
-    setIsShowRecentSearch(true);
-  };
-
-  const isExistRecentSearch = () => {
-    const temp = recentSearches.find(
-      (contentSearch) => contentSearch === searchContent.toLowerCase(),
-    );
-    return temp ? true : false;
+    setSearchContent('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setAuthorReults([]);
-    setCourseReults([]);
-    if (!isExistRecentSearch()) {
-      setRecentSearches([...recentSearches, searchContent.toLowerCase()]);
-    }
+    setListSearch([...listSearch, keyword]);
     await search();
-    setSearchContentTemp(searchContent);
-    setIsShowRecentSearch(false);
-  };
-
-  const chooseRecentSearch = (content) => {
-    setIsShowRecentSearch(false);
-    setIsShowRealSearch(true);
-    setSearchContent(content);
+    setSearchContent(keyword);
   };
 
   const searchCourse = async () => {
     try {
       const response = await axiosClient.post('/course/search', {
-        keyword: searchContent,
+        keyword: keyword,
         opt: {},
         limit: 10,
         offset: 0,
       });
       if (response.status === 200) {
-        const list = await searchAuthorFromCourse(response.data.payload.rows);
-        setAuthorReults(list);
+        await searchAuthorFromCourse(response.data.payload.rows);
         return response.data.payload.rows;
       } else {
         console.log(response.data.message);
@@ -103,22 +87,27 @@ const Search = (props) => {
       console.log(error);
     }
   };
+
+  const searchAuthorFromCourse = async (listCourse) => {
+    for (let i = 0; i < listCourse.length; i++) {
+      const result = await searchAuthor(listCourse[i].name);
+      if (result !== null) {
+        listAuhthorTemp.push(result);
+      }
+    }
+    setListAuthorResult(listAuhthorTemp);
+    listAuhthorTemp = [];
+  };
+
   const searchAuthor = (name) => {
-    let isExist = authorResults.find((author) => author['user.name'] === name);
+    let isExist = listAuhthorTemp.find(
+      (author) => author['user.name'] === name,
+    );
     if (isExist === undefined) {
-      isExist = listAuthor.find((author) => author['user.name'] === name);
+      isExist = listAllAuthor.find((author) => author['user.name'] === name);
       return isExist;
     }
     return null;
-  };
-
-  const searchAuthorFromCourse = async (listCourse) => {
-    const list = [];
-    for (let i = 0; i < listCourse.length; i++) {
-      const result = await searchAuthor(listCourse[i].name);
-      list.push(result);
-    }
-    return list;
   };
 
   const getListAuthor = async () => {
@@ -126,7 +115,7 @@ const Search = (props) => {
     try {
       const response = await axiosClient.get(url);
       if (response.status === 200) {
-        setListAuthor(response.data.payload);
+        setListAllAuthor(response.data.payload);
       } else {
         console.log(response.data.message);
       }
@@ -134,13 +123,20 @@ const Search = (props) => {
       console.log(err);
     }
   };
+
   useEffect(() => {
     getListAuthor();
   }, []);
 
+  useEffect(() => {
+    if (keyword === '') {
+      setKeywork(searchContent);
+    }
+  }, [searchContent]);
+
   const search = async () => {
     const courses = await searchCourse();
-    setCourseReults(courses);
+    setListCourseResult(courses);
   };
 
   return (
@@ -149,7 +145,7 @@ const Search = (props) => {
         <SearchBar
           platform={Platform.OS}
           placeholder="Search"
-          value={searchContent}
+          value={keyword}
           showCancel={Platform.OS === 'ios'}
           inputContainerStyle={[
             styles.inputContainer,
@@ -164,7 +160,7 @@ const Search = (props) => {
           platform={Platform.OS}
           placeholder="Search"
           onChangeText={(e) => handleChange(e)}
-          value={searchContent}
+          value={keyword}
           showCancel={Platform.OS === 'ios'}
           inputContainerStyle={[
             styles.inputContainer,
@@ -179,7 +175,7 @@ const Search = (props) => {
         />
       )}
       <View style={styles.separator} />
-      {isShowRecentSearch === true ? (
+      {/* {isShowRecentSearch === true ? (
         <RecentSearches
           recentSearches={recentSearches}
           clearAllRecentSearches={clearAllRecentSearches}
@@ -191,7 +187,8 @@ const Search = (props) => {
           courseResults={courseResults}
           authorResults={authorResults}
         />
-      )}
+      )} */}
+      <SearchPage />
     </View>
   );
 };

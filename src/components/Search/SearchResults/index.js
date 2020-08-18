@@ -1,4 +1,5 @@
-import React, {useContext} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useContext, useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import CourseResults from './CourseResults';
@@ -8,13 +9,19 @@ import AuthorResults from './AuthorResults';
 import NoResults from './NoResults';
 import {ThemeContext} from '../../../providers/theme-propvider';
 import {Typography} from '../../../globals/styles';
+import {SearchContext} from '../../../providers/search-provider';
 
 const Tab = createMaterialTopTabNavigator();
 
 const SearchResults = (props) => {
-  const {searchContent, courseResults, authorResults} = props;
+  const {navigation} = props;
   const {theme} = useContext(ThemeContext);
-
+  const {searchContent} = useContext(SearchContext);
+  useEffect(() => {
+    if (searchContent === '') {
+      navigation.navigate('RecentSearchScreen');
+    }
+  }, [searchContent]);
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -30,35 +37,9 @@ const SearchResults = (props) => {
       }}
       sceneContainerStyle={{backgroundColor: theme.backgroundColor}}
       initialRouteName="All">
-      <Tab.Screen
-        name="All"
-        component={
-          courseResults.length === 0 && authorResults.length === 0
-            ? NoResults
-            : AllResults
-        }
-        initialParams={{
-          searchContent,
-          courseResults,
-          authorResults,
-        }}
-      />
-      <Tab.Screen
-        name="Courses"
-        component={courseResults.length === 0 ? NoResults : CourseResults}
-        initialParams={{
-          searchContent,
-          courseResults,
-        }}
-      />
-      <Tab.Screen
-        name="Authors"
-        component={!authorResults ? NoResults : AuthorResults}
-        initialParams={{
-          searchContent,
-          authorResults,
-        }}
-      />
+      <Tab.Screen name="All" component={AllResults} />
+      <Tab.Screen name="Courses" component={CourseResults} />
+      <Tab.Screen name="Authors" component={AuthorResults} />
     </Tab.Navigator>
   );
 };

@@ -60,17 +60,6 @@ const ListOfCourse = (props) => {
             setData(recommendCourse.data.payload);
           }
           break;
-        case screenName.searchCourseScreen:
-          let searchCoursePrice = await axiosClient.post('/course/search', {
-            keyword: '',
-            opt: {price: [keyword.price]},
-            limit: 12,
-            offset: 0,
-          });
-          if (searchCoursePrice.status === 200) {
-            setData(searchCoursePrice.data.payload.rows);
-          }
-          break;
         default:
           let searchCourse = await axiosClient.post('/course/search', {
             keyword: '',

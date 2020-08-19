@@ -5,17 +5,25 @@ import QuestionComponent from '../QuestionComponent';
 import {ThemeContext} from '../../../providers/theme-propvider';
 import {LessonContext} from '../../../providers/lesson-provider';
 import {AuthenticationContext} from '../../../providers/authentication-provider';
-import {BoxModel, Styles, Size, Distance} from '../../../globals/styles';
+import {
+  BoxModel,
+  Styles,
+  Size,
+  Distance,
+  Colors,
+  Typography,
+} from '../../../globals/styles';
 import axiosClient from '../../../api/axiosClient';
 import PrimaryButton from '../../Authentication/PrimaryButton';
 import SubPrimaryButton from '../../Authentication/SubPrimaryButton';
 import configToken from '../../../api/config-token';
+import ButtonSubmit from '../../Authentication/ButtonSubmit';
 
 const onPressAddQuestion = () => {};
 const onPressForumQuestion = () => {};
 
 const QuestionView = (props) => {
-  const {theme} = useContext(ThemeContext);
+  const {theme2} = useContext(ThemeContext);
   const {itemCourse} = useContext(LessonContext);
   const {userState} = useContext(AuthenticationContext);
   const [question, setQuestion] = useState({});
@@ -56,24 +64,20 @@ const QuestionView = (props) => {
     }
   };
   return (
-    <ScrollView style={{backgroundColor: theme.themeColor}}>
+    <ScrollView style={{backgroundColor: theme2.themeColor}}>
       {questionContent()}
       <PrimaryButton
         title="Forum Question"
         onPress={onPressForumQuestion}
         active={true}
         icon="star-o"
-        style={[styles.buttonContainer, {backgroundColor: theme.primaryColor}]}
+        style={[styles.buttonContainer, {backgroundColor: theme2.primaryColor}]}
       />
-      <SubPrimaryButton
+      <ButtonSubmit
         title="Add Question"
         onPress={onPressAddQuestion}
-        active={true}
-        style={[
-          styles.buttonContainer,
-          styles.subButtonContainer,
-          {borderColor: theme.primaryColor},
-        ]}
+        buttonSubmitStyle={styles.buttonContainerSb}
+        titleSubmitStyle={styles.buttonText}
       />
       <View style={styles.footer} />
     </ScrollView>
@@ -85,7 +89,7 @@ const styles = StyleSheet.create({
     height: Size.scaleSize(40),
     alignSelf: 'center',
     justifyContent: 'center',
-    borderRadius: 5,
+    borderRadius: 10,
     ...BoxModel.marginVertical,
   },
   subButtonContainer: {
@@ -98,6 +102,21 @@ const styles = StyleSheet.create({
 
   footer: {
     height: Size.scaleSize(50),
+  },
+  buttonContainerSb: {
+    backgroundColor: Colors.orange,
+    paddingVertical: Distance.spacing_12,
+    borderRadius: 10,
+    width: Size.scaleSize(200),
+    height: Size.scaleSize(40),
+    marginTop: Distance.spacing_12,
+    alignSelf: 'center',
+  },
+  buttonText: {
+    textAlign: 'center',
+    fontSize: Typography.fontSize18,
+    fontWeight: Typography.fontWeightBold,
+    color: Colors.black,
   },
 });
 export default QuestionView;

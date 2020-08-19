@@ -28,6 +28,7 @@ const CourseItemHorizontal = (props) => {
     navigation.navigate(CourseDetailScreen, {id: item.id});
   };
   const unit = item.totalHours ? 'hours' : 'students';
+  const price = `${item.price} đ`;
   return (
     <TouchableOpacity style={styles.container} onPress={showCourseDetail}>
       <Image
@@ -61,6 +62,9 @@ const CourseItemHorizontal = (props) => {
             {'   '}({item.ratedNumber || 0})
           </Text>
         </View>
+        <Text style={styles.price}>
+          {item.prince !== '0' ? 'Miễn phí' : price}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -70,7 +74,7 @@ const styles = StyleSheet.create({
   container: {
     marginRight: Distance.spacing_12,
     width: ScaleSize.scaleSizeWidth(210),
-    height: ScaleSize.scaleSizeWidth(200),
+    height: ScaleSize.scaleSizeHeight(220),
     shadowColor: '#000',
     shadowOffset: {
       width: 5,
@@ -82,7 +86,7 @@ const styles = StyleSheet.create({
   },
   img: {
     width: ScaleSize.scaleSizeWidth(210),
-    height: ScaleSize.scaleSizeWidth(100),
+    height: ScaleSize.scaleSizeHeight(110),
     resizeMode: 'cover',
   },
   content: {
@@ -104,5 +108,10 @@ const styles = StyleSheet.create({
   },
   starRating: {
     padding: 2,
+  },
+  price: {
+    color: Colors.red,
+    fontSize: Typography.fontSize18,
+    marginLeft: Distance.superSmall,
   },
 });

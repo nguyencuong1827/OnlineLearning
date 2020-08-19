@@ -85,7 +85,10 @@ const ForumQuestion = (props) => {
           <View
             style={[
               BoxModel.marginVertical,
-              {height: Size.scaleSize(1), backgroundColor: theme2.DialogColor},
+              {
+                height: Size.scaleSize(1),
+                backgroundColor: theme2.DialogColor,
+              },
             ]}
           />
         </View>

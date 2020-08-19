@@ -29,20 +29,27 @@ const CourseItemVertical = (props) => {
   const unit = item.totalHours ? 'hours' : 'students';
   const renderViewRating = () => {
     return (
-      <View style={styles.ratingContainer}>
-        <Rating
-          disabled={true}
-          maxStars={5}
-          rating={
-            (item.presentationPoint + item.formalityPoint + item.contentPoint) /
-              3 || item.coursePresentationPoint
-          }
-          starSize={Typography.fontSize14}
-          fullStarColor={Colors.yellow}
-          starStyle={styles.starRating}
-        />
-        <Text style={styles.info}>
-          {'   '}({item.ratedNumber || 0})
+      <View>
+        <View style={styles.ratingContainer}>
+          <Rating
+            disabled={true}
+            maxStars={5}
+            rating={
+              (item.presentationPoint +
+                item.formalityPoint +
+                item.contentPoint) /
+                3 || item.coursePresentationPoint
+            }
+            starSize={Typography.fontSize14}
+            fullStarColor={Colors.yellow}
+            starStyle={styles.starRating}
+          />
+          <Text style={styles.info}>
+            {'   '}({item.ratedNumber || 0})
+          </Text>
+        </View>
+        <Text style={styles.price}>
+          {item.prince !== '0' ? 'Miễn phí' : price}
         </Text>
       </View>
     );
@@ -75,7 +82,7 @@ const CourseItemVertical = (props) => {
       </View>
     );
   };
-
+  const price = `${item.price} đ`;
   return (
     <TouchableOpacity style={styles.container} onPress={showCourseDetail}>
       <Image
@@ -102,7 +109,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     margin: Distance.spacing_8,
-    height: ScaleSize.scaleSizeWidth(80),
+    height: ScaleSize.scaleSizeWidth(90),
   },
   img: {
     width: ScaleSize.scaleSizeWidth(80),
@@ -135,5 +142,10 @@ const styles = StyleSheet.create({
     fontSize: Typography.fontSize20,
     fontWeight: Typography.fontWeightBold,
     color: Colors.orange,
+  },
+  price: {
+    color: Colors.red,
+    fontSize: Typography.fontSize18,
+    marginLeft: Distance.superSmall,
   },
 });

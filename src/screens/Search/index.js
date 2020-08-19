@@ -3,7 +3,7 @@ import React, {useState, useContext, useEffect} from 'react';
 import {View, StyleSheet, Platform} from 'react-native';
 import {SearchBar} from 'react-native-elements';
 import {ThemeContext} from '../../providers/theme-propvider';
-import {Typography} from '../../globals/styles';
+import {Typography, Colors} from '../../globals/styles';
 import axiosClient from '../../api/axiosClient';
 import SearchPage from '../../components/Search';
 import {SearchContext} from '../../providers/search-provider';
@@ -16,10 +16,6 @@ const setStyleWithTheme = (theme) => {
   styles.container = {
     ...styles.container,
     backgroundColor: theme.backgroundColor,
-  };
-  styles.inputContainer = {
-    ...styles.inputContainer,
-    backgroundColor: theme.searchBarBackground,
   };
   styles.inputStyle = {...styles.inputStyle, color: theme.colorMainText};
   // styles.email = {...styles.email, color: theme.colorSubText};
@@ -151,7 +147,7 @@ const Search = (props) => {
             styles.inputContainer,
             styles.inputContainerFake,
           ]}
-          text
+          inputStyle={styles.inputStyle}
           containerStyle={styles.searchContainer}
           onFocus={() => setIsShowRealSearch(true)}
         />
@@ -213,7 +209,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     height: 35,
     borderRadius: 10,
-    color: 'red',
+    backgroundColor: Colors.grayBold,
   },
   inputStyle: {
     fontSize: Typography.fontSize16,

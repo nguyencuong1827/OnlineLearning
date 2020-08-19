@@ -25,6 +25,7 @@ const WriteFeedBack = (props) => {
   const [formality, setFormality] = useState(3);
   const {userState} = useContext(AuthenticationContext);
   const {theme2} = useContext(ThemeContext);
+  const {theme} = useContext(ThemeContext);
   const onChangeFeedback = (text) => {
     setFeedback(text);
   };
@@ -54,12 +55,15 @@ const WriteFeedBack = (props) => {
     }
   };
   return (
-    <ScrollView style={{backgroundColor: Colors.white}}>
+    <ScrollView style={{backgroundColor: theme.backgroundColor}}>
       <View style={styles.rating}>
         <View style={[Styles.fillRowStart]}>
           <FontAwesome name="bookmark" size={20} color={theme2.primaryColor} />
           <Text
-            style={[Typography.fontRegular, {fontSize: Typography.fontSize20}]}>
+            style={[
+              Typography.fontRegular,
+              {fontSize: Typography.fontSize20, color: theme.colorMainText},
+            ]}>
             {' '}
             Content
           </Text>
@@ -78,7 +82,10 @@ const WriteFeedBack = (props) => {
         <View style={[Styles.fillRow]}>
           <FontAwesome name="bookmark" size={20} color={theme2.primaryColor} />
           <Text
-            style={[Typography.fontRegular, {fontSize: Typography.fontSize20}]}>
+            style={[
+              Typography.fontRegular,
+              {fontSize: Typography.fontSize20, color: theme.colorMainText},
+            ]}>
             {' '}
             Presentation
           </Text>
@@ -97,7 +104,10 @@ const WriteFeedBack = (props) => {
         <View style={[Styles.fillRow]}>
           <FontAwesome name="bookmark" size={20} color={theme2.primaryColor} />
           <Text
-            style={[Typography.fontRegular, {fontSize: Typography.fontSize20}]}>
+            style={[
+              Typography.fontRegular,
+              {fontSize: Typography.fontSize20, color: theme.colorMainText},
+            ]}>
             {' '}
             Formality
           </Text>

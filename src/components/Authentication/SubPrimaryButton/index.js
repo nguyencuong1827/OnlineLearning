@@ -24,7 +24,7 @@ const SubPrimaryButton = (props) => {
       onPress={onPress}
       underlayColor={Colors.primaryBackgroundColor}
       {...props}>
-      <Text style={[styles.text, {color: Colors.primaryColor}]}>{title}</Text>
+      <Text style={[styles.text, {color: Colors.black}]}>{title}</Text>
     </TouchableHighlight>
   );
 };

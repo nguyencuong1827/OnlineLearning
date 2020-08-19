@@ -30,17 +30,15 @@ const AuthorElement = (props) => {
   }
 
   return (
-    <TouchableOpacity onPress={props.showAuthorDetail}>
-      <View style={styles.author}>
-        <Avatar
-          rounded
-          size="large"
-          source={{uri: author['user.avatar']}}
-          containerStyle={styles.avatar}
-        />
-        <View>
-          <Text style={styles.name}>{subName}</Text>
-        </View>
+    <TouchableOpacity style={styles.author} onPress={props.showAuthorDetail}>
+      <Avatar
+        rounded
+        size="large"
+        source={{uri: author['user.avatar']}}
+        containerStyle={styles.avatar}
+      />
+      <View>
+        <Text style={styles.name}>{subName}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -51,6 +49,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: ScaleSize.scaleSizeWidth(68),
+    marginHorizontal: Distance.spacing_8,
   },
   avatar: {
     margin: Distance.spacing_10,

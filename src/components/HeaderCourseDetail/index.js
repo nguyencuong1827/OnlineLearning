@@ -165,7 +165,7 @@ const HeaderCourseDetail = (props) => {
     try {
       const result = await Share.share({
         title: `${item.title}`,
-        message: 'This course is helpful',
+        message: `This course is helpful! https://itedu.me/course-detail/${item.id}`,
         url: `https://itedu.me/course-detail/${item.id}`,
       });
       if (result.action === Share.sharedAction) {

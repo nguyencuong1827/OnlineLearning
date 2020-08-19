@@ -10,7 +10,7 @@ const darkTheme = {
   whiteWith07OpacityColor: 'rgba(255,255,255,0.7)',
   whiteWith03OpacityColor: 'rgba(255,255,255,0.3)',
   blackSubTextColor: 'rgba(255,255,255,0.5)',
-  themeColor: '#252931',
+  themeColor: '#0b0b0f',
   backgroundColor: '#181619',
   searchBackgroundColor: '#545863',
 

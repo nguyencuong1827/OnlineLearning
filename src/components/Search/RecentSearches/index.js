@@ -8,6 +8,10 @@ import {ThemeContext} from '../../../providers/theme-propvider';
 import {SearchContext} from '../../../providers/search-provider';
 
 const setStyleWithTheme = (theme) => {
+  styles.container = {
+    ...styles.container,
+    backgroundColor: theme.backgroundColor,
+  };
   styles.recent = {
     ...styles.recent,
     color: theme.colorMainText,
@@ -91,7 +95,6 @@ export default RecentSearches;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    margin: Distance.spacing_5,
   },
   title: {
     flexDirection: 'row',

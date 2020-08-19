@@ -11,7 +11,7 @@ const lightTheme = {
   whiteWith03OpacityColor: 'rgba(255,255,255,0.3)',
 
   backgroundColor: '#F6F6F9',
-  themeColor: '#FFFFFF',
+  themeColor: '#f2f2f2',
   searchBackgroundColor: '#DEE2E9',
 
   backgroundSeeAllButton: '#DEE2E9',

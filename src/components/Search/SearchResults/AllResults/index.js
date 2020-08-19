@@ -12,6 +12,7 @@ import {Typography, Distance} from '../../../../globals/styles';
 import {ThemeContext} from '../../../../providers/theme-propvider';
 import Separator from '../../../Separator';
 import {SearchContext} from '../../../../providers/search-provider';
+import NoResults from '../NoResults';
 
 const setStyleWithTheme = (theme) => {
   styles.header = {
@@ -49,7 +50,7 @@ const AllResult = (props) => {
   };
   return (
     <ScrollView>
-      {listCourseResult !== 0 ? (
+      {listCourseResult.length !== 0 ? (
         <ListCoursesVertical
           data={listCourseResult}
           renderHeader={renderHeader('Courses', listCourseResult.length)}
@@ -65,6 +66,9 @@ const AllResult = (props) => {
             navigation={navigation}
           />
         </View>
+      ) : null}
+      {listAuthorResult.length === 0 && listCourseResult.length === 0 ? (
+        <NoResults />
       ) : null}
     </ScrollView>
   );

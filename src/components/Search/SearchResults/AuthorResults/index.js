@@ -4,6 +4,7 @@ import {ListAuthorsVertical} from '../../../ListAuthors';
 import {Typography, Distance} from '../../../../globals/styles';
 import {ThemeContext} from '../../../../providers/theme-propvider';
 import {SearchContext} from '../../../../providers/search-provider';
+import NoResults from '../NoResults';
 
 const setStyleWithTheme = (theme) => {
   styles.header = {
@@ -27,11 +28,15 @@ const AuthorResults = (props) => {
 
   return (
     <View>
-      <ListAuthorsVertical
-        data={listAuthorResult}
-        renderHeader={renderHeader}
-        navigation={navigation}
-      />
+      {listAuthorResult.length === 0 ? (
+        <NoResults />
+      ) : (
+        <ListAuthorsVertical
+          data={listAuthorResult}
+          renderHeader={renderHeader}
+          navigation={navigation}
+        />
+      )}
     </View>
   );
 };

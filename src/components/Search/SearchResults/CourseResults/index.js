@@ -4,6 +4,7 @@ import {ListCoursesVertical} from '../../../ListCourses';
 import {Typography, Distance} from '../../../../globals/styles';
 import {ThemeContext} from '../../../../providers/theme-propvider';
 import {SearchContext} from '../../../../providers/search-provider';
+import NoResults from '../NoResults';
 
 const setStyleWithTheme = (theme) => {
   styles.header = {
@@ -29,11 +30,15 @@ const CourseResults = (props) => {
 
   return (
     <View>
-      <ListCoursesVertical
-        data={listCourseResult}
-        renderHeader={renderHeader}
-        navigation={navigation}
-      />
+      {listCourseResult.length === 0 ? (
+        <NoResults />
+      ) : (
+        <ListCoursesVertical
+          data={listCourseResult}
+          renderHeader={renderHeader}
+          navigation={navigation}
+        />
+      )}
     </View>
   );
 };

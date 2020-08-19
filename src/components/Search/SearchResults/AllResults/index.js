@@ -1,10 +1,17 @@
 import React, {useContext} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import {ListCoursesVertical} from '../../../ListCourses';
 import {ListAuthorsVertical} from '../../../ListAuthors';
-import {Typography, DistanceScale} from '../../../../globals/styles';
+import {Typography, Distance} from '../../../../globals/styles';
 import {ThemeContext} from '../../../../providers/theme-propvider';
 import Separator from '../../../Separator';
+import {SearchContext} from '../../../../providers/search-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.header = {
@@ -18,10 +25,11 @@ const setStyleWithTheme = (theme) => {
 };
 
 const AllResult = (props) => {
-  const {courseResults, authorResults} = props.route.params;
   const {navigation} = props;
   const {theme} = useContext(ThemeContext);
   setStyleWithTheme(theme);
+
+  const {listCourseResult, listAuthorResult} = useContext(SearchContext);
 
   const showAll = (screenName) => {
     props.navigation.navigate(screenName);
@@ -40,25 +48,25 @@ const AllResult = (props) => {
     );
   };
   return (
-    <View>
-      {courseResults !== [] ? (
+    <ScrollView>
+      {listCourseResult !== 0 ? (
         <ListCoursesVertical
-          data={courseResults}
-          renderHeader={renderHeader('Courses', courseResults.length)}
+          data={listCourseResult}
+          renderHeader={renderHeader('Courses', listCourseResult.length)}
           navigation={navigation}
         />
       ) : null}
-      {authorResults.length !== [] ? (
+      {listAuthorResult.length !== 0 ? (
         <View>
           <Separator />
           <ListAuthorsVertical
-            data={authorResults}
-            renderHeader={renderHeader('Authors', authorResults.length)}
+            data={listAuthorResult}
+            renderHeader={renderHeader('Authors', listAuthorResult.length)}
             navigation={navigation}
           />
         </View>
       ) : null}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -71,7 +79,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: Typography.fontSize18,
     fontWeight: Typography.fontWeightBold,
-    marginBottom: DistanceScale.spacing_10,
+    marginBottom: Distance.spacing_10,
   },
   result: {
     fontSize: Typography.fontSize16,

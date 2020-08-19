@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {ThemeContext} from '../../providers/theme-propvider';
-import {Typography, DistanceScale, ScaleSize} from '../../globals/styles';
+import {Typography, Distance, ScaleSize} from '../../globals/styles';
 
 const setStyleWithTheme = (theme) => {
   styles.title = {...styles.title, color: theme.colorMainText};
@@ -18,7 +18,9 @@ const SeeAllButton = (props) => {
   return (
     <TouchableOpacity style={styles.seeAllButton} onPress={props.onPress}>
       <Text style={styles.title}>{props.title}</Text>
-      <Text style={styles.seeAll}>See all {'>'}</Text>
+      {props.turnOffSeeAll ? null : (
+        <Text style={styles.seeAll}>See all {'>'}</Text>
+      )}
     </TouchableOpacity>
   );
 };
@@ -31,8 +33,8 @@ const styles = StyleSheet.create({
   },
   seeAllButton: {
     flex: 1,
-    marginVertical: DistanceScale.spacing_10,
-    marginRight: DistanceScale.spacing_10,
+    marginVertical: Distance.spacing_10,
+    marginRight: Distance.spacing_10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -43,6 +45,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     fontSize: Typography.fontSize12,
     height: ScaleSize.scaleSizeHeight(10),
-    paddingHorizontal: DistanceScale.spacing_8,
+    paddingHorizontal: Distance.spacing_8,
   },
 });

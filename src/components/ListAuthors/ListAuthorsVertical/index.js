@@ -2,20 +2,20 @@ import React from 'react';
 import {View, FlatList, StyleSheet} from 'react-native';
 import Separator from '../../Separator';
 import AuthorElement from './AuthorElement';
-import {ScaleSize, DistanceScale} from '../../../globals/styles';
+import {ScaleSize, Distance} from '../../../globals/styles';
 import {AuthorDetailScreen} from '../../../globals/constants/screen-name';
 
 const ListAuthorsVertical = (props) => {
   const {navigation, data, renderHeader} = props;
   const showAuthorDetail = (author) => {
-    props.navigation.navigate(AuthorDetailScreen, {authorDetail: author});
+    props.navigation.navigate(AuthorDetailScreen, {id: author.id});
   };
   const renderItem = (item) => {
     return (
       <AuthorElement
-        name={item.name}
-        numberCourses={item.numberCourses}
-        urlAvatar={item.urlAvatar}
+        name={item.name || item['user.name']}
+        point={item['user.point']}
+        urlAvatar={item['user.avatar'] || item.avatar}
         navigation={navigation}
         showAuthorDetail={() => showAuthorDetail(item)}
       />
@@ -43,6 +43,6 @@ const ListAuthorsVertical = (props) => {
 export default ListAuthorsVertical;
 const styles = StyleSheet.create({
   container: {
-    margin: DistanceScale.spacing_10,
+    margin: Distance.spacing_10,
   },
 });

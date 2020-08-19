@@ -1,12 +1,7 @@
 import React, {useContext} from 'react';
 import {View, Text, StyleSheet, Linking} from 'react-native';
 import {Avatar} from 'react-native-elements';
-import {
-  Colors,
-  ScaleSize,
-  DistanceScale,
-  Typography,
-} from '../../../globals/styles';
+import {Colors, ScaleSize, Distance, Typography} from '../../../globals/styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Contacts from '../Contacts';
@@ -77,25 +72,25 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginHorizontal: DistanceScale.spacing_8,
+    marginHorizontal: Distance.spacing_8,
   },
   txtName: {
     fontSize: Typography.fontSize18,
-    marginTop: DistanceScale.spacing_8,
+    marginTop: Distance.spacing_8,
     fontWeight: Typography.fontWeightBold,
   },
   txtJob: {
     fontSize: Typography.fontSize14,
-    marginVertical: DistanceScale.spacing_5,
+    marginVertical: Distance.spacing_5,
   },
   btnFollow: {
     borderRadius: 3,
     backgroundColor: Colors.blue,
-    marginVertical: DistanceScale.spacing_5,
+    marginVertical: Distance.spacing_5,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingHorizontal: DistanceScale.spacing_40,
-    paddingVertical: DistanceScale.superSmall,
+    paddingHorizontal: Distance.spacing_40,
+    paddingVertical: Distance.superSmall,
   },
   txtFollow: {
     color: Colors.white,
@@ -103,17 +98,17 @@ const styles = StyleSheet.create({
   },
   txtDescription: {
     fontSize: Typography.fontSize16,
-    lineHeight: DistanceScale.spacing_18,
-    marginVertical: DistanceScale.spacing_5,
+    lineHeight: Distance.spacing_18,
+    marginVertical: Distance.spacing_5,
   },
   link: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignSelf: 'flex-start',
-    marginVertical: DistanceScale.spacing_5,
+    marginVertical: Distance.spacing_5,
   },
   txtLink: {
     fontSize: Typography.fontSize16,
-    marginLeft: DistanceScale.spacing_8,
+    marginLeft: Distance.spacing_8,
   },
 });

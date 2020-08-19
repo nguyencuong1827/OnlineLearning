@@ -1,56 +1,61 @@
-import React, {useContext} from 'react';
-import {View, StyleSheet} from 'react-native';
-import HeaderAuthorDetail from '../../components/AuthorDetail/Header';
-import Separator from '../../components/Separator';
-import {ListCoursesVertical} from '../../components/ListCourses';
-import {courses} from '../../globals/fake-data';
-import {DistanceScale} from '../../globals/styles';
+import React, {useContext, useState, useEffect} from 'react';
+import {StyleSheet, View, FlatList, SafeAreaView} from 'react-native';
+import CourseVerticalItem from '../../components/ListCourses/ListCoursesVertical/CourseItem';
+import HeaderAuthorDetail from '../../components/HeaderAuthorDetail';
 import {ThemeContext} from '../../providers/theme-propvider';
-
-const setStyleWithTheme = (theme) => {
-  styles.container = {
-    ...styles.container,
-    backgroundColor: theme.backgroundColor,
-  };
-};
-
+import axiosClient from '../../api/axiosClient';
+import {Size} from '../../globals/styles';
 const AuthorDetail = (props) => {
-  const {authorDetail} = props.route.params;
-  const {theme} = useContext(ThemeContext);
-  setStyleWithTheme(theme);
+  const {navigation, route} = props;
+  const {theme2} = useContext(ThemeContext);
+  const [data, setData] = useState({});
+  useEffect(() => {
+    const fetchInstructorDetail = async () => {
+      try {
+        let response = await axiosClient.get(
+          `${'/instructor/detail/'}${route.params.id}`,
+        );
+        setData(response.data.payload);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchInstructorDetail();
+  }, [route.params.id]);
 
-  const renderHeader = () => {
+  const flatListSeparator = () => {
     return (
-      <View>
-        <HeaderAuthorDetail
-          name={authorDetail.name}
-          description={authorDetail.description}
-          urlAvatar={authorDetail.urlAvatar}
-        />
-        <View style={styles.separator}>
-          <Separator />
-        </View>
-      </View>
+      <View
+        style={[styles.separator, {backgroundColor: theme2.backgroundColor}]}
+      />
     );
   };
-
   return (
-    <View style={styles.container}>
-      <ListCoursesVertical
-        navigation={props.navigation}
-        data={courses}
-        renderHeader={renderHeader}
+    <SafeAreaView
+      style={{backgroundColor: theme2.backgroundColor, height: '100%'}}>
+      <FlatList
+        data={data.courses}
+        ItemSeparatorComponent={flatListSeparator}
+        showsVerticalScrollIndicator={false}
+        renderItem={({item}) => (
+          <CourseVerticalItem item={item} navigation={navigation} />
+        )}
+        keyExtractor={(item, index) => item + index}
+        ListHeaderComponent={() => {
+          return <HeaderAuthorDetail data={data} />;
+        }}
+        getItemLayout={(data, index) => ({
+          length: Size.scaleSize(100),
+          offset: Size.scaleSize(100) * index,
+          index,
+        })}
       />
-    </View>
+    </SafeAreaView>
   );
 };
-
-export default AuthorDetail;
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   separator: {
-    marginVertical: DistanceScale.spacing_8,
+    height: 1,
   },
 });
+export default AuthorDetail;

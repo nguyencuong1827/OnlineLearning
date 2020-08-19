@@ -129,11 +129,12 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.onlinelearning"
+        applicationId "com.onlinelearning.nguyencuong1827"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
     }
     splits {
         abi {

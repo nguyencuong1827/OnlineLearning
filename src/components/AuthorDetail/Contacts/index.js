@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {DistanceScale, Typography} from '../../../globals/styles';
+import {Distance, Typography} from '../../../globals/styles';
 import {ThemeContext} from '../../../providers/theme-propvider';
 
 const Contacts = () => {
@@ -36,9 +36,9 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignSelf: 'flex-start',
-    marginVertical: DistanceScale.spacing_5,
+    marginVertical: Distance.spacing_5,
   },
   icon: {
-    marginEnd: DistanceScale.spacing_8,
+    marginEnd: Distance.spacing_8,
   },
 });

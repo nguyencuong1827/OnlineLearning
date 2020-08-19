@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {ThemeContext} from '../../../providers/theme-propvider';
-import {Typography, DistanceScale, ScaleSize} from '../../../globals/styles';
+import {Typography, Distance, ScaleSize} from '../../../globals/styles';
 
 const setStyleWithTheme = (theme) => {
   styles.content = {
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: Typography.fontSize18,
     fontWeight: Typography.fontWeightBold,
-    marginBottom: DistanceScale.spacing_8,
+    marginBottom: Distance.spacing_8,
   },
   content: {
     justifyContent: 'center',
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   },
   contentText: {
     textAlign: 'center',
-    marginTop: DistanceScale.spacing_8,
+    marginTop: Distance.spacing_8,
     fontSize: Typography.fontSize16,
   },
 });

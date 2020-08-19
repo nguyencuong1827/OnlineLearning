@@ -1,8 +1,9 @@
 import React, {useContext} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {ListCoursesVertical} from '../../../ListCourses';
-import {Typography, DistanceScale} from '../../../../globals/styles';
+import {Typography, Distance} from '../../../../globals/styles';
 import {ThemeContext} from '../../../../providers/theme-propvider';
+import {SearchContext} from '../../../../providers/search-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.header = {
@@ -12,15 +13,16 @@ const setStyleWithTheme = (theme) => {
 };
 
 const CourseResults = (props) => {
-  const {courseResults} = props.route.params;
   const {navigation} = props;
   const {theme} = useContext(ThemeContext);
   setStyleWithTheme(theme);
 
+  const {listCourseResult} = useContext(SearchContext);
+
   const renderHeader = () => {
     return (
       <View>
-        <Text style={styles.header}>{courseResults.length} results</Text>
+        <Text style={styles.header}>{listCourseResult.length} results</Text>
       </View>
     );
   };
@@ -28,7 +30,7 @@ const CourseResults = (props) => {
   return (
     <View>
       <ListCoursesVertical
-        data={courseResults}
+        data={listCourseResult}
         renderHeader={renderHeader}
         navigation={navigation}
       />
@@ -41,6 +43,6 @@ const styles = StyleSheet.create({
   header: {
     fontSize: Typography.fontSize18,
     fontWeight: Typography.fontWeightBold,
-    marginBottom: DistanceScale.spacing_10,
+    marginBottom: Distance.spacing_10,
   },
 });

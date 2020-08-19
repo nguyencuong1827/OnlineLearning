@@ -15,25 +15,22 @@ import {
 import FormInput from '../../components/Authentication/FormInput';
 import ButtonSubmit from '../../components/Authentication/ButtonSubmit';
 import {AuthenticationContext} from '../../providers/authentication-provider';
-import {
-  Colors,
-  DistanceScale,
-  ScaleSize,
-  Typography,
-} from '../../globals/styles';
+import {Colors, Distance, ScaleSize, Typography} from '../../globals/styles';
 import logo from '../../../assets/images/logo.png';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Register from '../Register';
 import ForgotPassword from '../ForgotPassword';
+import {AppNavigatorScreen} from '../../globals/constants/screen-name';
 
 const Login = (props) => {
+  const {navigation} = props;
   const txtPassword = useRef(null);
   const btnLogin = useRef(null);
   const [email, setemail] = useState('');
   const [password, setPassword] = useState('');
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
-  const {state, login} = useContext(AuthenticationContext);
+  const {userState, login} = useContext(AuthenticationContext);
 
   const handleSubmit = () => {
     if (!email || !password) {
@@ -45,16 +42,18 @@ const Login = (props) => {
       return;
     }
     login(email, password);
-  };
-  useEffect(() => {
-    if (state.messageError) {
+    if (userState.token) {
+      navigation.replace(AppNavigatorScreen);
+    }
+    if (userState.token === null && userState.messageError !== '') {
       ToastAndroid.showWithGravity(
-        state.messageError,
+        'Email or password not correct',
         ToastAndroid.LONG,
         ToastAndroid.TOP,
       );
     }
-  }, [state.messageError]);
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
@@ -96,6 +95,7 @@ const Login = (props) => {
                 onPress={() => setShowForgotPasswordModal(true)}>
                 <Text style={styles.txtForgotPassword}>Forgot password?</Text>
               </TouchableOpacity>
+
               <ButtonSubmit
                 ref={btnLogin}
                 buttonSubmitStyle={styles.buttonContainer}
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     bottom: 0,
 
     height: ScaleSize.scaleSizeHeight(180),
-    padding: DistanceScale.spacing_16,
+    padding: Distance.spacing_16,
   },
   input: {
     borderColor: Colors.white,
@@ -150,18 +150,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
 
     height: ScaleSize.scaleSizeHeight(30),
-    paddingHorizontal: DistanceScale.spacing_10,
-    marginTop: DistanceScale.spacing_10,
+    paddingHorizontal: Distance.spacing_10,
+    marginTop: Distance.spacing_10,
 
     color: Colors.white,
     fontSize: Typography.fontSize16,
   },
   buttonContainer: {
     backgroundColor: Colors.orange,
-    paddingVertical: DistanceScale.spacing_12,
+    paddingVertical: Distance.spacing_12,
     borderRadius: 10,
 
-    marginTop: DistanceScale.spacing_12,
+    marginTop: Distance.spacing_12,
   },
   buttonText: {
     textAlign: 'center',
@@ -170,8 +170,8 @@ const styles = StyleSheet.create({
     color: Colors.black,
   },
   forgotPassword: {
-    alignItems: 'flex-end',
-    marginTop: DistanceScale.spacing_5,
+    alignSelf: 'flex-end',
+    marginTop: Distance.spacing_5,
   },
   txtForgotPassword: {
     color: Colors.orange,
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'center',
 
-    marginTop: DistanceScale.spacing_10,
+    marginTop: Distance.spacing_10,
   },
   txtSignUp: {
     color: Colors.white,

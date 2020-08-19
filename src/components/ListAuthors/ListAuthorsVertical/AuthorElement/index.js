@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Avatar} from 'react-native-elements';
-import {DistanceScale, Typography, Colors} from '../../../../globals/styles';
+import {Distance, Typography, Colors} from '../../../../globals/styles';
 import {ThemeContext} from '../../../../providers/theme-propvider';
 
 const setStyleWithTheme = (theme) => {
@@ -9,7 +9,7 @@ const setStyleWithTheme = (theme) => {
 };
 
 const AuthorElement = (props) => {
-  const {name, numberCourses, urlAvatar, showAuthorDetail} = props;
+  const {name, point, urlAvatar, showAuthorDetail} = props;
   const {theme} = useContext(ThemeContext);
   setStyleWithTheme(theme);
 
@@ -18,12 +18,12 @@ const AuthorElement = (props) => {
       <Avatar
         rounded
         size="medium"
-        source={urlAvatar}
+        source={{uri: urlAvatar}}
         containerStyle={styles.avatar}
       />
       <View>
         <Text style={styles.name}>{name}</Text>
-        <Text style={styles.numnerCourses}>{numberCourses} courses</Text>
+        <Text style={styles.point}>{point} point</Text>
       </View>
     </TouchableOpacity>
   );
@@ -35,13 +35,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   avatar: {
-    margin: DistanceScale.spacing_10,
+    margin: Distance.spacing_10,
   },
   name: {
     fontSize: Typography.fontSize16,
   },
-  numnerCourses: {
-    marginTop: DistanceScale.superSmall,
+  point: {
+    marginTop: Distance.superSmall,
     fontSize: Typography.fontSize14,
     color: Colors.gray,
   },

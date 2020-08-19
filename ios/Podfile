@@ -22,6 +22,14 @@ target 'OnlineLearning' do
 
   pod 'react-native-viewpager', :path => '../node_modules/@react-native-community/viewpager'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
+  pod 'RNFastImage', :path => '../node_modules/react-native-fast-image'
+
+  pod 'react-native-video', :path => '../node_modules/react-native-video'
+
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
   target 'OnlineLearningTests' do
     inherit! :complete
     # Pods for testing

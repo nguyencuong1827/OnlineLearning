@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {ScaleSize, DistanceScale, Typography} from '../../globals/styles';
+import {ScaleSize, Distance, Typography} from '../../globals/styles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Separator from '../Separator';
 import {ThemeContext} from '../../providers/theme-propvider';
@@ -41,23 +41,23 @@ const SettingItem = (props) => {
 export default SettingItem;
 const styles = StyleSheet.create({
   container: {
-    marginVertical: DistanceScale.spacing_5,
+    marginVertical: Distance.spacing_5,
   },
   button: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginHorizontal: DistanceScale.spacing_14,
+    marginHorizontal: Distance.spacing_14,
   },
   viewIconTitle: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   title: {
-    marginLeft: DistanceScale.spacing_16,
+    marginLeft: Distance.spacing_16,
     fontSize: Typography.fontSize16,
   },
   separator: {
-    marginHorizontal: DistanceScale.spacing_10,
-    marginTop: DistanceScale.spacing_5,
+    marginHorizontal: Distance.spacing_10,
+    marginTop: Distance.spacing_5,
   },
 });

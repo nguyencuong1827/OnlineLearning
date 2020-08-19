@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {ThemeContext} from '../../../providers/theme-propvider';
 import PrimaryButton from '../../Authentication/PrimaryButton';
-import {Styles, BoxModel, Size} from '../../../globals/styles';
+import {Styles, BoxModel, Size, Colors} from '../../../globals/styles';
 
 const Feature = (props) => {
   const {onPressLike, onPressJoin, isOwnCourse, isLike} = props;
@@ -38,7 +38,7 @@ const Feature = (props) => {
           onPress={onPressLike}
           active={true}
           icon="heart-o"
-          style={[styles.buttonContainer, {backgroundColor: theme2.alertColor}]}
+          style={[styles.buttonContainer, {backgroundColor: Colors.orange}]}
         />
       </View>
     </View>

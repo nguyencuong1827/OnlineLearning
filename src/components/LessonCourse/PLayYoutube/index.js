@@ -11,7 +11,7 @@ const getYouTubeID = (str) => {
 const PLayYouTube = (props) => {
   const {urlVideo} = props;
   const playerRef = useRef();
-  const {itemLesson, setTime} = useContext(LessonContext);
+  // const {itemLesson, setTime} = useContext(LessonContext);
   const [widthVid, setWidth] = useState(0);
   const [heightVid, setHeight] = useState(0);
 
@@ -34,12 +34,12 @@ const PLayYouTube = (props) => {
     return 300;
   };
 
-  const readyPLayVideo = () => {
-    if (itemLesson.currentTime) {
-      playerRef.current.seekTo(itemLesson.currentTime);
-      setTime(itemLesson.currentTime);
-    }
-  };
+  // const readyPLayVideo = () => {
+  //   if (itemLesson && itemLesson.currentTime) {
+  //     playerRef.current.seekTo(itemLesson.currentTime);
+  //     setTime(itemLesson.currentTime);
+  //   }
+  // };
 
   return (
     <View style={styles.backgroundVideo}>
@@ -52,7 +52,7 @@ const PLayYouTube = (props) => {
         volume={50}
         playbackRate={1}
         webViewStyle={styles.videoYoutube}
-        onReady={readyPLayVideo}
+        // onReady={readyPLayVideo}
         initialPlayerParams={{
           cc_lang_pref: 'us',
           controls: true,

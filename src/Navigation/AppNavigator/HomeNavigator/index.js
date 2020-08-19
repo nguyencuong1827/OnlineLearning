@@ -7,9 +7,6 @@ import {
   ThemeScreen,
   BookmarkScreen,
   SettingScreen,
-  CourseDetailScreen,
-  FeedBackStack,
-  ShowListCourseScreen,
   NewRelease,
   TopRating,
   RecommendCourse,
@@ -20,8 +17,6 @@ import Theme from '../../../screens/Theme';
 import {ThemeContext} from '../../../providers/theme-propvider';
 import {BookmarksVertical} from '../../../components/ListBookmarks';
 import Setting from '../../../screens/Setting';
-import CourseDetail from '../../../screens/CourseDetail';
-import SeeFeedBack from '../../../screens/SeeFeedback';
 import ListOfCourse from '../../../screens/ListOfCourse';
 
 const Stack = createStackNavigator();

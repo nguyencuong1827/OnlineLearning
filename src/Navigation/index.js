@@ -11,11 +11,12 @@ import {ThemeContext} from '../providers/theme-propvider';
 import SplashScreen from '../screens/SplashScreen';
 import {useAsyncStorage} from '@react-native-community/async-storage';
 import {AuthenticationContext} from '../providers/authentication-provider';
-import LessonCourseNavigatorStack from './AppNavigator/CourseDetailNavigator';
+import LessonCourseNavigatorStack from './AppNavigator/LessonNavigator';
 import PlayReview from '../screens/PlayReview';
 import SeeFeedBack from '../screens/SeeFeedback';
 import {CategoryProvider} from '../providers/category-provider';
 import {SearchProvider} from '../providers/search-provider';
+import WriteFeedBack from '../screens/WriteFeedBack';
 
 const Stack = createStackNavigator();
 
@@ -72,6 +73,11 @@ const RootScreen = (props) => {
           presentationPoint: 0,
           formalityPoint: 0,
         }}
+      />
+      <Stack.Screen
+        name={ScreenName.WriteFeedBackScreen}
+        component={WriteFeedBack}
+        options={{headerShown: 'Write feedback'}}
       />
     </Stack.Navigator>
   );

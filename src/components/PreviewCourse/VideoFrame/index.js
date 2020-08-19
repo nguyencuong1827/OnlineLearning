@@ -24,7 +24,6 @@ const VideoFrame = (props) => {
   const [time, setTime] = useState('');
   const [timeRemaining, setTimeRemaining] = useState('');
   var playerRef = useRef();
-
   useEffect(() => {
     if (isHide === false) {
       setTimeout(() => {
@@ -202,11 +201,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   videoContainer: {
-    height: Size.HEIGHT - Size.scaleSize(10),
+    height: Size.HEIGHT - Size.scaleSize(120),
     width: Size.WIDTH,
     backgroundColor: 'black',
-    justifyContent: 'center',
-    alignItems: 'center',
+    alignSelf: 'stretch',
   },
   container: {
     position: 'absolute',

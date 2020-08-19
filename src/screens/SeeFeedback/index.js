@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import {ScrollView, Text, View, StyleSheet} from 'react-native';
 import StarRating from 'react-native-star-rating';
-import RatingComponent from '../../components/HeaderCourseDetail';
+import RatingComponent from '../../components/HeaderCourseDetail/RatingComponent';
 
 import FeedbackItem from '../../components/FeedBackItem';
 import PrimaryButton from '../../components/Authentication/PrimaryButton';
@@ -17,7 +17,7 @@ import {WriteFeedBackScreen} from '../../globals/constants/screen-name';
 
 const SeeFeedBack = (props) => {
   const {navigation, route} = props;
-  const [ratings] = useState(route.params.params.item);
+  const [ratings] = useState(route.params.params.ratings);
   const [averagePoint] = useState(route.params.params.averagePoint);
   const [contentPoint] = useState(route.params.params.contentPoint);
   const [presentationPoint] = useState(route.params.params.presentationPoint);

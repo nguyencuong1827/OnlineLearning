@@ -13,7 +13,7 @@ const PLayVideo = (props) => {
     setTime(data.currentTime);
   };
   const readyPLayVideo = () => {
-    if (itemLesson.currentTime) {
+    if (itemLesson && itemLesson.currentTime) {
       playerRef.seek(itemLesson.currentTime);
       setTime(itemLesson.currentTime);
     }

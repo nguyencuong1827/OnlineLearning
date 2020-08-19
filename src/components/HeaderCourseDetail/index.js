@@ -33,6 +33,8 @@ import {
 import {ListCourseHorizontal} from '../ListCourses';
 import axiosClient from '../../api/axiosClient';
 import configToken from '../../api/config-token';
+import ImagePreview from './ImagePreview';
+import p from 'pretty-format';
 const Demo = () => {
   return (
     <View>
@@ -138,7 +140,7 @@ const HeaderCourseDetail = (props) => {
   const onPressStudentFeedback = () => {
     navigation.navigate(screenName.FeedBackStack, {
       params: {
-        item: item.ratings,
+        ratings: item.ratings,
         averagePoint: item.averagePoint,
         contentPoint: item.contentPoint,
         presentationPoint: item.presentationPoint,
@@ -146,6 +148,7 @@ const HeaderCourseDetail = (props) => {
         courseId: item.id,
       },
     });
+    // console.log(p(item.ratings));
   };
   const dismiss = () => {
     navigation.goBack();
@@ -161,7 +164,7 @@ const HeaderCourseDetail = (props) => {
   const onShare = async () => {
     try {
       const result = await Share.share({
-        title: 'Share',
+        title: `${item.title}`,
         message: 'This course is helpful',
         url: `https://itedu.me/course-detail/${item.id}`,
       });
@@ -180,51 +183,12 @@ const HeaderCourseDetail = (props) => {
   };
   return (
     <View style={{backgroundColor: theme2.themeColor}}>
-      <FastImage
-        style={[
-          styles.videoContainer,
-          Styles.fillRow,
-          {backgroundColor: theme2.backgroundColor},
-        ]}
-        source={{uri: item.imageUrl}}>
-        <View
-          style={{
-            ...Styles.fillRowBetween,
-            backgroundColor: theme2.blackWith05OpacityColor,
-          }}>
-          <TouchableHighlight
-            onPress={dismiss}
-            underlayColor={theme2.overlayColor}
-            style={styles.closeButon}>
-            <Ionicons
-              name="close-outline"
-              size={40}
-              color={theme2.whiteWith07OpacityColor}
-            />
-          </TouchableHighlight>
-          <TouchableHighlight
-            onPress={onPressPlayVideo}
-            underlayColor={theme2.overlayColor}
-            style={Styles.center}>
-            <MaterialIcons
-              name="play-arrow"
-              size={150}
-              color={theme2.whiteWith07OpacityColor}
-              style={Styles.center}
-            />
-          </TouchableHighlight>
-          <TouchableHighlight
-            onPress={onShare}
-            underlayColor={theme2.overlayColor}
-            style={styles.closeButon}>
-            <Feather
-              name="share"
-              size={30}
-              color={theme2.whiteWith07OpacityColor}
-            />
-          </TouchableHighlight>
-        </View>
-      </FastImage>
+      <ImagePreview
+        imageUrl={item.imageUrl}
+        dismiss={dismiss}
+        onShare={onShare}
+        onPressPlayVideo={onPressPlayVideo}
+      />
       <Title name={item.title} subtitle={item.subtitle} />
       <Author
         instructor={item.instructor}
@@ -266,6 +230,7 @@ const HeaderCourseDetail = (props) => {
       <StudentFeedBack
         averagePoint={item.averagePoint}
         ratings={item.ratings}
+        onPress={onPressStudentFeedback}
       />
       <Text style={[styles.title, {color: theme2.primaryTextColor}]}>
         Curriculum

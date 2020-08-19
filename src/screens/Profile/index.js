@@ -1,17 +1,14 @@
 import React, {useState, useContext, useLayoutEffect} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {Avatar} from 'react-native-elements';
-import {
-  ScaleSize,
-  Distance,
-  Typography,
-  Colors,
-} from '../../globals/styles';
+import {ScaleSize, Distance, Typography, Colors} from '../../globals/styles';
 import SettingItem from '../../components/SettingItem';
 import ButtonSubmit from '../../components/Authentication/ButtonSubmit';
 import {ThemeScreen, LoginScreen} from '../../globals/constants/screen-name';
 import {ThemeContext} from '../../providers/theme-propvider';
 import {AuthenticationContext} from '../../providers/authentication-provider';
+import ChangePassword from '../ChangePassword';
+import UpdateProfile from '../UpdateProfile';
 
 const setStyleWithTheme = (theme) => {
   styles.container = {
@@ -28,13 +25,15 @@ const setStyleWithTheme = (theme) => {
 const Profile = (props) => {
   const {theme} = useContext(ThemeContext);
   const {userState} = useContext(AuthenticationContext);
+  const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+  const [showUpdateProfileModal, setShowUpdateProfileModal] = useState(false);
   setStyleWithTheme(theme);
 
   const {navigation} = props;
   const {userInfo} = userState;
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.info}>
         <Avatar
           rounded={true}
@@ -46,14 +45,26 @@ const Profile = (props) => {
         <Text style={styles.email}>{userInfo.type}</Text>
       </View>
       <View style={styles.groupSetting}>
-        <SettingItem title1="Update profile" nameIcon="account-box-outline" />
-        <SettingItem title1="Change Password" nameIcon="key-outline" />
         <SettingItem
-          title1="Update favorite categories"
-          nameIcon="bookmark-outline"
+          title1="Update profile"
+          nameIcon="account-box-outline"
+          onPress={() => setShowUpdateProfileModal(true)}
+        />
+        <SettingItem
+          title1="Change Password"
+          nameIcon="key-outline"
+          onPress={() => setShowChangePasswordModal(true)}
         />
       </View>
-    </ScrollView>
+      <ChangePassword
+        showChangePasswordModal={showChangePasswordModal}
+        setShowChangePasswordModal={setShowChangePasswordModal}
+      />
+      <UpdateProfile
+        showUpdateProfileModal={showUpdateProfileModal}
+        setShowUpdateProfileModal={setShowUpdateProfileModal}
+      />
+    </View>
   );
 };
 

@@ -11,6 +11,8 @@ const themes = {
     headerFooterBackground: Colors.white,
     buttonSeeAllBackground: Colors.white85,
     searchBarBackground: Colors.white52,
+    backgroundColorModal: Colors.darkBlue,
+    colorTextModal: Colors.white,
   },
   dark: {
     name: 'dark',
@@ -22,6 +24,8 @@ const themes = {
     headerFooterBackground: Colors.black14,
     buttonSeeAllBackground: Colors.black14,
     searchBarBackground: Colors.white40,
+    backgroundColorModal: Colors.white95,
+    colorTextModal: Colors.black,
   },
   system: {
     name: 'system',
@@ -33,6 +37,8 @@ const themes = {
     headerFooterBackground: Colors.white,
     buttonSeeAllBackground: Colors.white85,
     searchBarBackground: Colors.white52,
+    backgroundColorModal: Colors.darkBlue,
+    colorTextModal: Colors.white,
   },
 };
 export default themes;

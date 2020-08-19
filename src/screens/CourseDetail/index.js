@@ -131,7 +131,7 @@ const CourseDetail = (props) => {
 
   const onPressPreviewLesson = (itemLesson) => {
     if (itemLesson.videoUrl && itemLesson.isPreview) {
-      navigation.navigate(screenName.PlayVideoScreenName, {
+      navigation.navigate(screenName.PlayVideoScreen, {
         urlVideo: itemLesson.videoUrl,
         typeUploadVideoLesson: item.typeUploadVideoLesson,
       });

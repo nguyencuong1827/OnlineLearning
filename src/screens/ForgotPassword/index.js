@@ -1,13 +1,35 @@
 import React, {useRef} from 'react';
-import {View, Text, Modal, TouchableOpacity, StyleSheet} from 'react-native';
+import {
+  View,
+  Text,
+  Modal,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+} from 'react-native';
 import {Distance, ScaleSize, Colors, Typography} from '../../globals/styles';
 import FormInput from '../../components/Authentication/FormInput';
 import {useState} from 'react';
 import ButtonSubmit from '../../components/Authentication/ButtonSubmit';
+import axiosClient from '../../api/axiosClient';
 
 const ForgotPassword = (props) => {
   const btnSendCode = useRef(null);
   const [email, setEmail] = useState('');
+  const handldeSubmit = async () => {
+    const url = '/user/forget-pass/send-email';
+    try {
+      let response = await axiosClient.post(url, {email});
+      if (response.status === 200) {
+        Alert.alert('Notification', 'Please check your email to get password!');
+        props.setShowForgotPasswordModal(false);
+      } else {
+        Alert.alert('Notification', 'Email not find!');
+      }
+    } catch ({response}) {
+      console.log(response);
+    }
+  };
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -33,6 +55,7 @@ const ForgotPassword = (props) => {
                 buttonSubmitStyle={styles.buttonContainer}
                 titleSubmitStyle={styles.buttonText}
                 title="SEND CODE"
+                onSubmit={handldeSubmit}
               />
               <TouchableOpacity
                 style={styles.btnCancel}

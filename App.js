@@ -2,19 +2,19 @@ import React from 'react';
 import {StyleSheet, View, StatusBar, Text} from 'react-native';
 import {AuthenticationProvider} from './src/providers/authentication-provider';
 import {ThemeProvider} from './src/providers/theme-propvider';
-import {BookmarkProvider} from './src/providers/bookmark-provider';
 import RootNavigator from './src/navigation';
+import {LanguageProvider} from './src/providers/language-provider';
 const App = () => {
   return (
     <ThemeProvider>
-      <AuthenticationProvider>
-        <BookmarkProvider>
+      <LanguageProvider>
+        <AuthenticationProvider>
           <View style={styles.container}>
             <StatusBar hidden={true} />
             <RootNavigator />
           </View>
-        </BookmarkProvider>
-      </AuthenticationProvider>
+        </AuthenticationProvider>
+      </LanguageProvider>
     </ThemeProvider>
   );
 };

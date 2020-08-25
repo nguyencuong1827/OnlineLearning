@@ -24,7 +24,7 @@ const SettingItem = (props) => {
           <Text style={styles.title}>{title1}</Text>
         </View>
         <View style={styles.viewIconTitle}>
-          <Text>{title2}</Text>
+          <Text style={styles.title}>{title2}</Text>
           <Icon
             size={ScaleSize.scaleSizeWidth(25)}
             name="chevron-right"

@@ -1,14 +1,15 @@
-import React, {useState, useContext, useLayoutEffect} from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useState, useContext, useEffect} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
 import {Avatar} from 'react-native-elements';
 import {ScaleSize, Distance, Typography, Colors} from '../../globals/styles';
 import SettingItem from '../../components/SettingItem';
-import ButtonSubmit from '../../components/Authentication/ButtonSubmit';
-import {ThemeScreen, LoginScreen} from '../../globals/constants/screen-name';
 import {ThemeContext} from '../../providers/theme-propvider';
 import {AuthenticationContext} from '../../providers/authentication-provider';
 import ChangePassword from '../ChangePassword';
 import UpdateProfile from '../UpdateProfile';
+import {useAsyncStorage} from '@react-native-community/async-storage';
+import {LanguageContext} from '../../providers/language-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.container = {
@@ -27,11 +28,22 @@ const Profile = (props) => {
   const {userState} = useContext(AuthenticationContext);
   const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
   const [showUpdateProfileModal, setShowUpdateProfileModal] = useState(false);
+  const [isLoginGoogle, setIsLoginGoogle] = useState(false);
   setStyleWithTheme(theme);
-
-  const {navigation} = props;
+  const {getItem} = useAsyncStorage('@userLogin');
   const {userInfo} = userState;
+  const {language} = useContext(LanguageContext);
 
+  const getUser = async () => {
+    const item = await getItem();
+    const jsonValue = JSON.parse(item);
+    if (jsonValue.password === undefined) {
+      setIsLoginGoogle(true);
+    }
+  };
+  useEffect(() => {
+    getUser();
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.info}>
@@ -46,15 +58,17 @@ const Profile = (props) => {
       </View>
       <View style={styles.groupSetting}>
         <SettingItem
-          title1="Update profile"
+          title1={language === 'eng' ? 'Update profile' : 'Cập nhật thông tin'}
           nameIcon="account-box-outline"
           onPress={() => setShowUpdateProfileModal(true)}
         />
-        <SettingItem
-          title1="Change Password"
-          nameIcon="key-outline"
-          onPress={() => setShowChangePasswordModal(true)}
-        />
+        {isLoginGoogle === false ? (
+          <SettingItem
+            title1={language === 'eng' ? 'Change Password' : 'Đổi mật khẩu'}
+            nameIcon="key-outline"
+            onPress={() => setShowChangePasswordModal(true)}
+          />
+        ) : null}
       </View>
       <ChangePassword
         showChangePasswordModal={showChangePasswordModal}

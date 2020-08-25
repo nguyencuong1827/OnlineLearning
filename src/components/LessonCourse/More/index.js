@@ -8,10 +8,12 @@ import {AuthenticationContext} from '../../../providers/authentication-provider'
 import axiosClient from '../../../api/axiosClient';
 import {Styles, BoxModel, Typography, Size} from '../../../globals/styles';
 import configToken from '../../../api/config-token';
+import {LanguageContext} from '../../../providers/language-provider';
 const MoreView = (props) => {
   const {theme2} = useContext(ThemeContext);
   const {itemCourse} = useContext(LessonContext);
   const {userState} = useContext(AuthenticationContext);
+  const {language} = useContext(LanguageContext);
   const [isLike, setLike] = useState(false);
   useEffect(() => {
     const checkLikeStatus = async () => {
@@ -35,8 +37,11 @@ const MoreView = (props) => {
   const onPressShareCourse = async () => {
     try {
       const result = await Share.share({
-        title: 'Share',
-        message: 'This course is heplful ',
+        title: language === 'eng' ? 'Share' : 'Chia sẻ',
+        message:
+          language === 'eng'
+            ? 'This course is heplful'
+            : 'Khóa học này rất hữu ích',
         url: `https://itedu.me/course-detail/${itemCourse.id}`,
       });
       if (result.action === Share.sharedAction) {
@@ -108,13 +113,36 @@ const MoreView = (props) => {
   };
   return (
     <ScrollView style={{backgroundColor: theme2.themeColor}}>
-      {renderRow('Download course', 'file-download')}
-      {renderRow('About this course', 'info-outline')}
-      {renderRow('Share this course', 'share', onPressShareCourse)}
-      {renderRow('Notes', 'library-books')}
-      {renderRow('Resources', 'dns')}
       {renderRow(
-        isLike ? 'Remove course From favorites' : 'Add course to favorites',
+        `${language === 'eng' ? 'Download course' : 'Tải về'}`,
+        'file-download',
+      )}
+      {renderRow(
+        `${language === 'eng' ? 'About this course' : 'Thông tin khóa học'}`,
+        'info-outline',
+      )}
+      {renderRow(
+        `${language === 'eng' ? 'Share this course' : 'Chia sẻ khóa học'}`,
+        'share',
+        onPressShareCourse,
+      )}
+      {renderRow(
+        `${language === 'eng' ? 'Notes' : 'Ghi chú'}`,
+        'library-books',
+      )}
+      {renderRow(`${language === 'eng' ? 'Resources' : 'Tài liệu'}`, 'dns')}
+      {renderRow(
+        isLike
+          ? `${
+              language === 'eng'
+                ? 'Remove course From favorites'
+                : 'Xóa khỏi danh sách yêu thích'
+            }`
+          : `${
+              language === 'eng'
+                ? 'Add course to favorites'
+                : 'Thêm vào danh sách yêu thích'
+            }`,
         'star-border',
         onPressLike,
         isLike,

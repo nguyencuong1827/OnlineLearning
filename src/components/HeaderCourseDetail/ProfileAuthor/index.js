@@ -12,17 +12,20 @@ import {
   Size,
 } from '../../../globals/styles';
 import PrimaryButton from '../../Authentication/PrimaryButton';
+import {LanguageContext} from '../../../providers/language-provider';
 
 const ProfileAuthor = (props) => {
   const {data, onPress} = props;
   const {theme2} = useContext(ThemeContext);
+  const {language} = useContext(LanguageContext);
   return (
     <View style={Styles.fillColumnStart}>
       <View style={[styles.divide, {backgroundColor: theme2.DialogColor}]} />
       {data ? (
         <View>
           <Text style={[styles.title, {color: theme2.primaryTextColor}]}>
-            Created by {data.name || data.email}
+            {language === 'eng' ? 'Created by' : 'Tạo bởi'}{' '}
+            {data.name || data.email}
           </Text>
           <View style={[Styles.fillRowStart, BoxModel.marginHorizontal]}>
             <FastImage
@@ -40,7 +43,8 @@ const ProfileAuthor = (props) => {
                 />
                 <Text
                   style={[styles.linkText, {color: theme2.primaryTextColor}]}>
-                  {data.soldNumber} Students
+                  {data.soldNumber}{' '}
+                  {language === 'eng' ? 'Students' : 'Học sinh'}
                 </Text>
               </View>
               <View style={styles.link}>
@@ -51,7 +55,8 @@ const ProfileAuthor = (props) => {
                 />
                 <Text
                   style={[styles.linkText, {color: theme2.primaryTextColor}]}>
-                  {data.totalCourse} Courses
+                  {data.totalCourse}{' '}
+                  {language === 'eng' ? 'Courses' : 'Khóa học'}
                 </Text>
               </View>
               <View style={styles.link}>
@@ -62,7 +67,10 @@ const ProfileAuthor = (props) => {
                 />
                 <Text
                   style={[styles.linkText, {color: theme2.primaryTextColor}]}>
-                  {data.averagePoint.toFixed(1)} Average Rating
+                  {data.averagePoint.toFixed(1)}{' '}
+                  {language === 'eng'
+                    ? 'Average Rating'
+                    : 'Xếp hạng trung bình'}
                 </Text>
               </View>
             </View>
@@ -70,7 +78,7 @@ const ProfileAuthor = (props) => {
         </View>
       ) : undefined}
       <PrimaryButton
-        title="View Profile"
+        title={language === 'eng' ? 'View Profile' : 'Xem trang cá nhân'}
         onPress={() => onPress(data)}
         active={true}
         icon="user"

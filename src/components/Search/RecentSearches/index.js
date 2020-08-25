@@ -6,6 +6,7 @@ import Separator from '../../Separator';
 import {Typography, Distance} from '../../../globals/styles';
 import {ThemeContext} from '../../../providers/theme-propvider';
 import {SearchContext} from '../../../providers/search-provider';
+import {LanguageContext} from '../../../providers/language-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.container = {
@@ -28,6 +29,7 @@ const setStyleWithTheme = (theme) => {
 
 const RecentSearches = (props) => {
   const {theme} = useContext(ThemeContext);
+  const {language} = useContext(LanguageContext);
   setStyleWithTheme(theme);
   const {navigation} = props;
   const {
@@ -44,14 +46,14 @@ const RecentSearches = (props) => {
     setSearchContent(item);
   };
   useEffect(() => {
-    // let timer;
-    // if (searchContent !== '') {
-    //   timer = setTimeout(() => {
-    //     navigation.navigate('ResultSearchScreen');
-    //   }, 2000);
-    // }
-    // return () => clearTimeout(timer);
-    navigation.navigate('ResultSearchScreen');
+    let timer;
+    if (searchContent !== '') {
+      timer = setTimeout(() => {
+        navigation.navigate('ResultSearchScreen');
+      }, 500);
+    }
+    return () => clearTimeout(timer);
+    // navigation.navigate('ResultSearchScreen');
   }, [searchContent]);
 
   const renderItem = (item) => {
@@ -74,9 +76,13 @@ const RecentSearches = (props) => {
   return (
     <View style={styles.container}>
       <View style={styles.title}>
-        <Text style={styles.recent}>Recent searches</Text>
+        <Text style={styles.recent}>
+          {language === 'eng' ? 'Recent searches' : 'Tìm kiếm gần đây'}
+        </Text>
         <TouchableOpacity onPress={clearListSearch}>
-          <Text style={styles.clear}>Clear</Text>
+          <Text style={styles.clear}>
+            {language === 'eng' ? 'Clear all' : 'Xóa tất cả'}{' '}
+          </Text>
         </TouchableOpacity>
       </View>
       <FlatList

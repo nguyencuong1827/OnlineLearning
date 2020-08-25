@@ -13,6 +13,7 @@ import {ThemeContext} from '../../../../providers/theme-propvider';
 import Separator from '../../../Separator';
 import {SearchContext} from '../../../../providers/search-provider';
 import NoResults from '../NoResults';
+import {LanguageContext} from '../../../../providers/language-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.header = {
@@ -28,6 +29,7 @@ const setStyleWithTheme = (theme) => {
 const AllResult = (props) => {
   const {navigation} = props;
   const {theme} = useContext(ThemeContext);
+  const {language} = useContext(LanguageContext);
   setStyleWithTheme(theme);
 
   const {listCourseResult, listAuthorResult} = useContext(SearchContext);
@@ -43,7 +45,7 @@ const AllResult = (props) => {
         onPress={() => showAll(content)}>
         <Text style={styles.header}>{content}</Text>
         <Text style={styles.result}>
-          {result} results {'>'}
+          {result} {language === 'eng' ? 'results' : 'kết quả'} {'>'}
         </Text>
       </TouchableOpacity>
     );
@@ -53,7 +55,10 @@ const AllResult = (props) => {
       {listCourseResult.length !== 0 ? (
         <ListCoursesVertical
           data={listCourseResult}
-          renderHeader={renderHeader('Courses', listCourseResult.length)}
+          renderHeader={renderHeader(
+            `${language === 'eng' ? 'Courses' : 'Khóa học'}`,
+            listCourseResult.length,
+          )}
           navigation={navigation}
         />
       ) : null}
@@ -62,7 +67,10 @@ const AllResult = (props) => {
           <Separator />
           <ListAuthorsVertical
             data={listAuthorResult}
-            renderHeader={renderHeader('Authors', listAuthorResult.length)}
+            renderHeader={renderHeader(
+              `${language === 'eng' ? 'Instructor' : 'Tác giả'}`,
+              listAuthorResult.length,
+            )}
             navigation={navigation}
           />
         </View>

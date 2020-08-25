@@ -18,6 +18,9 @@ import ButtonSubmit from '../../components/Authentication/ButtonSubmit';
 import axiosClient from '../../api/axiosClient';
 import {AuthenticationContext} from '../../providers/authentication-provider';
 import {ThemeContext} from '../../providers/theme-propvider';
+import configToken from '../../api/config-token';
+import {useAsyncStorage} from '@react-native-community/async-storage';
+import {LanguageContext} from '../../providers/language-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.modalView = {
@@ -41,13 +44,21 @@ const ChangePassword = (props) => {
   const [errorOldPassword, setErrorOldPassword] = useState('');
   const [errorNewPassword, setErrorNewPassword] = useState('');
   const [errorConfirmPassword, setErrorConfirmPassword] = useState('');
-
   const {showChangePasswordModal, setShowChangePasswordModal} = props;
+  const {language} = useContext(LanguageContext);
+  const {setItem} = useAsyncStorage('@userLogin');
   setStyleWithTheme(theme);
+
   const handleEditOldPassword = (text) => {
     setOldPassword(text);
     if (text === '') {
-      setErrorOldPassword('Please enter your password!');
+      setErrorOldPassword(
+        `${
+          language === 'eng'
+            ? 'Please enter your password!'
+            : 'Vui lòng nhập mật khẩu!'
+        }`,
+      );
     } else {
       setErrorOldPassword('');
     }
@@ -55,9 +66,21 @@ const ChangePassword = (props) => {
   const handleEditNewPassword = (text) => {
     setNewPassword(text);
     if (text === '') {
-      setErrorNewPassword('Please enter your password!');
+      setErrorNewPassword(
+        `${
+          language === 'eng'
+            ? 'Please enter your password!'
+            : 'Vui lòng nhập mật khẩu!'
+        }`,
+      );
     } else if (text.length < 8) {
-      setErrorNewPassword('Password is at least 8 characters!');
+      setErrorNewPassword(
+        `${
+          language === 'eng'
+            ? 'Password is at least 8 characters!'
+            : 'Mật khẩu phải ít nhất 8 ký tự'
+        }`,
+      );
     } else {
       setErrorNewPassword('');
     }
@@ -66,23 +89,62 @@ const ChangePassword = (props) => {
   const handleEditConfirmPassword = (text) => {
     setConfirmPassword(text);
     if (text === '') {
-      setErrorConfirmPassword('Please enter your confirm password!');
+      setErrorConfirmPassword(
+        `${
+          language === 'eng'
+            ? 'Please enter your confirm password!'
+            : 'Vui lòng nhập xác nhận mật khẩu!'
+        }`,
+      );
     } else if (text !== newPassword) {
-      setErrorConfirmPassword('Confirm password is not correct!');
+      setErrorConfirmPassword(
+        `${
+          language === 'eng'
+            ? 'Confirm password is not correct!'
+            : 'Xác nhận mật khẩu không đúng!'
+        }`,
+      );
     } else {
       setErrorConfirmPassword('');
     }
   };
 
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await setItem(jsonValue);
+    } catch (e) {
+      // saving error
+    }
+  };
+
   const handleSubmit = async () => {
     if (newPassword === '') {
-      setErrorNewPassword('Please enter your password!');
+      setErrorNewPassword(
+        `${
+          language === 'eng'
+            ? 'Please enter your password!'
+            : 'Vui lòng nhập mật khẩu!'
+        }`,
+      );
     }
     if (oldPassword === '') {
-      setErrorOldPassword('Please enter your password!');
+      setErrorOldPassword(
+        `${
+          language === 'eng'
+            ? 'Please enter your password!'
+            : 'Vui lòng nhập mật khẩu!'
+        }`,
+      );
     }
     if (confirmPassword === '') {
-      setErrorConfirmPassword('Please enter your confirm password!');
+      setErrorConfirmPassword(
+        `${
+          language === 'eng'
+            ? 'Please enter your confirm password!'
+            : 'Vui lòng nhập xác nhận mật khẩu!'
+        }`,
+      );
     }
 
     if (
@@ -100,12 +162,32 @@ const ChangePassword = (props) => {
         oldPass: oldPassword,
         newPass: newPassword,
       };
-      const response = await axiosClient.post(url, body);
+      const response = await axiosClient.post(
+        url,
+        body,
+        configToken(userState.token),
+      );
       if (response.status === 200) {
-        Alert.alert('Notification', 'Password has been changed');
+        Alert.alert(
+          `${language === 'eng' ? 'Notification' : 'Thông báo'}`,
+          `${
+            language === 'eng'
+              ? 'Password has been changed'
+              : 'Đổi mật khẩu thành công'
+          }`,
+        );
+        storeData({email: userState.userInfo.email, password: newPassword});
+
         props.setShowChangePasswordModal(false);
       } else {
-        Alert.alert('Notification', 'Old password not correct');
+        Alert.alert(
+          `${language === 'eng' ? 'Notification' : 'Thông báo'}`,
+          `${
+            language === 'eng'
+              ? 'Old password not correct'
+              : 'Mật khẩu cũ không đúng'
+          }`,
+        );
       }
     } catch (error) {
       console.log(error);
@@ -124,11 +206,15 @@ const ChangePassword = (props) => {
             style={styles.centeredView}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.title}>CHANGE PASSWORD</Text>
+                <Text style={styles.title}>
+                  {language === 'eng' ? 'CHANGE PASSWORD' : 'ĐỔI MẬT KHẨU'}
+                </Text>
                 <View style={styles.infoContainer}>
                   <FormInput
                     styleInput={styles.input}
-                    placeholder="Old password"
+                    placeholder={
+                      language === 'eng' ? 'Old password' : 'Mật khẩu cũ'
+                    }
                     placeholderTextColor="gray"
                     secureTextEntry
                     autoCorrect={false}
@@ -138,7 +224,9 @@ const ChangePassword = (props) => {
                   <Text style={styles.txtErrror}>{errorOldPassword}</Text>
                   <FormInput
                     styleInput={styles.input}
-                    placeholder="New password"
+                    placeholder={
+                      language === 'eng' ? 'New password' : 'Mật khẩu mới'
+                    }
                     placeholderTextColor="gray"
                     secureTextEntry
                     autoCorrect={false}
@@ -148,7 +236,11 @@ const ChangePassword = (props) => {
                   <Text style={styles.txtErrror}>{errorNewPassword}</Text>
                   <FormInput
                     styleInput={styles.input}
-                    placeholder="Confirm password"
+                    placeholder={
+                      language === 'eng'
+                        ? 'Confirm password'
+                        : 'Xác nhận mật khẩu'
+                    }
                     placeholderTextColor="gray"
                     secureTextEntry
                     autoCorrect={false}
@@ -160,13 +252,15 @@ const ChangePassword = (props) => {
                   <ButtonSubmit
                     buttonSubmitStyle={styles.buttonContainer}
                     titleSubmitStyle={styles.buttonText}
-                    title="SUBMIT"
+                    title={language === 'eng' ? 'SUBMIT' : 'ĐỔI MẬT KHẨU'}
                     onSubmit={handleSubmit}
                   />
                   <TouchableOpacity
                     style={styles.btnCancel}
                     onPress={() => setShowChangePasswordModal(false)}>
-                    <Text style={styles.txtCancel}>Cancel</Text>
+                    <Text style={styles.txtCancel}>
+                      {language === 'eng' ? 'Cancel' : 'Thoát'}
+                    </Text>
                   </TouchableOpacity>
                 </View>
               </View>

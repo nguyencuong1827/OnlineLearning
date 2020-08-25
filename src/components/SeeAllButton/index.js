@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import {ThemeContext} from '../../providers/theme-propvider';
 import {Typography, Distance, ScaleSize} from '../../globals/styles';
+import {LanguageContext} from '../../providers/language-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.title = {...styles.title, color: theme.colorMainText};
@@ -14,12 +15,15 @@ const setStyleWithTheme = (theme) => {
 
 const SeeAllButton = (props) => {
   const {theme} = useContext(ThemeContext);
+  const {language} = useContext(LanguageContext);
   setStyleWithTheme(theme);
   return (
     <TouchableOpacity style={styles.seeAllButton} onPress={props.onPress}>
       <Text style={styles.title}>{props.title}</Text>
       {props.turnOffSeeAll ? null : (
-        <Text style={styles.seeAll}>See all {'>'}</Text>
+        <Text style={styles.seeAll}>
+          {language === 'eng' ? 'See all' : 'Thêm'} {'>'}
+        </Text>
       )}
     </TouchableOpacity>
   );

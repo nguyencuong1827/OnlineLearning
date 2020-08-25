@@ -7,6 +7,7 @@ import {Typography, Colors} from '../../globals/styles';
 import axiosClient from '../../api/axiosClient';
 import SearchPage from '../../components/Search';
 import {SearchContext} from '../../providers/search-provider';
+import {LanguageContext} from '../../providers/language-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.searchContainer = {
@@ -23,8 +24,9 @@ const setStyleWithTheme = (theme) => {
 
 const Search = (props) => {
   const {theme} = useContext(ThemeContext);
-  const [keyword, setKeywork] = useState('');
+  const [keyword, setKeyword] = useState('');
   const [isShowRealSearch, setIsShowRealSearch] = useState(false);
+  const {language} = useContext(LanguageContext);
 
   let listAuhthorTemp = [];
   const {
@@ -44,31 +46,36 @@ const Search = (props) => {
     if (content === 1) {
       setSearchContent('');
     }
-    setKeywork(content);
+    setKeyword(content);
   };
 
   const handleClear = (e) => {
-    setKeywork('');
+    setKeyword('');
     setSearchContent('');
   };
 
   const handleCancel = () => {
-    setKeywork('');
+    setKeyword('');
     setIsShowRealSearch(false);
     setSearchContent('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setListSearch([...listSearch, keyword]);
-    await search();
+    const fResult = listSearch.find(
+      (item) => item.toLowerCase() === keyword.toLowerCase(),
+    );
+    if (!fResult) {
+      setListSearch([...listSearch, keyword]);
+    }
+    await search(keyword);
     setSearchContent(keyword);
   };
 
-  const searchCourse = async () => {
+  const searchCourse = async (content) => {
     try {
       const response = await axiosClient.post('/course/search', {
-        keyword: keyword,
+        keyword: content,
         opt: {},
         limit: 10,
         offset: 0,
@@ -125,13 +132,14 @@ const Search = (props) => {
   }, []);
 
   useEffect(() => {
-    if (keyword === '') {
-      setKeywork(searchContent);
+    if (keyword === '' && searchContent !== '') {
+      setKeyword(searchContent);
+      search(searchContent);
     }
   }, [searchContent]);
 
-  const search = async () => {
-    const courses = await searchCourse();
+  const search = async (content) => {
+    const courses = await searchCourse(content);
     setListCourseResult(courses);
   };
 
@@ -140,7 +148,7 @@ const Search = (props) => {
       {isShowRealSearch === false ? (
         <SearchBar
           platform={Platform.OS}
-          placeholder="Search"
+          placeholder={language === 'eng' ? 'Search' : 'Tìm kiếm'}
           value={keyword}
           showCancel={Platform.OS === 'ios'}
           inputContainerStyle={[
@@ -154,7 +162,7 @@ const Search = (props) => {
       ) : (
         <SearchBar
           platform={Platform.OS}
-          placeholder="Search"
+          placeholder={language === 'eng' ? 'Search' : 'Tìm kiếm'}
           onChangeText={(e) => handleChange(e)}
           value={keyword}
           showCancel={Platform.OS === 'ios'}

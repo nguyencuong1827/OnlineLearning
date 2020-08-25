@@ -4,6 +4,8 @@ import {
   login,
   logout,
   updateListFavoriteCategory,
+  loginWithGoogle,
+  updateUserInfo,
 } from '../actions/authentication-action';
 
 const initState = {
@@ -21,7 +23,9 @@ export const AuthenticationProvider = (props) => {
         userState,
         login: login(dispatch),
         logout: logout(dispatch),
+        loginWithGoogle: loginWithGoogle(dispatch),
         updateListFavoriteCategory: updateListFavoriteCategory(dispatch),
+        updateUserInfo: updateUserInfo(dispatch),
       }}>
       {props.children}
     </AuthenticationContext.Provider>

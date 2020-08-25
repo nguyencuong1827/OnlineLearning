@@ -10,6 +10,7 @@ import NoResults from './NoResults';
 import {ThemeContext} from '../../../providers/theme-propvider';
 import {Typography} from '../../../globals/styles';
 import {SearchContext} from '../../../providers/search-provider';
+import {LanguageContext} from '../../../providers/language-provider';
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -17,6 +18,7 @@ const SearchResults = (props) => {
   const {navigation} = props;
   const {theme} = useContext(ThemeContext);
   const {searchContent} = useContext(SearchContext);
+  const {language} = useContext(LanguageContext);
   useEffect(() => {
     if (searchContent === '') {
       navigation.navigate('RecentSearchScreen');
@@ -37,9 +39,21 @@ const SearchResults = (props) => {
       }}
       sceneContainerStyle={{backgroundColor: theme.backgroundColor}}
       initialRouteName="All">
-      <Tab.Screen name="All" component={AllResults} />
-      <Tab.Screen name="Courses" component={CourseResults} />
-      <Tab.Screen name="Authors" component={AuthorResults} />
+      <Tab.Screen
+        name="All"
+        component={AllResults}
+        options={{title: language === 'eng' ? 'All' : 'Tất cả'}}
+      />
+      <Tab.Screen
+        name="Courses"
+        component={CourseResults}
+        options={{title: language === 'eng' ? 'Courses' : 'Khóa học'}}
+      />
+      <Tab.Screen
+        name="Instructors"
+        component={AuthorResults}
+        options={{title: language === 'eng' ? 'Authors' : 'Tác giả'}}
+      />
     </Tab.Navigator>
   );
 };

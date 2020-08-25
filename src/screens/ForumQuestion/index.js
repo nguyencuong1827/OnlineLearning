@@ -5,11 +5,13 @@ import QuestionComponent from '../../components/LessonCourse/QuestionComponent';
 import Moment from 'moment';
 import {ThemeContext} from '../../providers/theme-propvider';
 import {BoxModel, Typography, Size, Styles} from '../../globals/styles';
+import {LanguageContext} from '../../providers/language-provider';
 
 const onPressResponse = () => {};
 const ForumQuestion = (props) => {
   const {route} = props;
   const [itemQuestion] = useState(route.params.itemQuestion);
+  const {language} = useContext(LanguageContext);
   const {theme2} = useContext(ThemeContext);
   const getCorrectAnswer = () => {
     if (itemQuestion.forumAnswers) {
@@ -65,7 +67,7 @@ const ForumQuestion = (props) => {
                   Typography.fontBold,
                   {color: theme2.whiteColor, fontSize: Typography.fontSize18},
                 ]}>
-                Answer
+                {language === 'eng' ? 'Answer' : 'Trả lời'}
               </Text>
             </View>
             <Text
@@ -74,7 +76,7 @@ const ForumQuestion = (props) => {
                 BoxModel.tinyMarginVertical,
                 {color: theme2.grayColor, fontSize: Typography.fontSize16},
               ]}>
-              Update at {''}
+              {language === 'eng' ? 'Update at' : 'Cập nhật'} {''}
               {Moment(itemQuestion.forumAnswers.updatedAt).format(
                 'MMM DD, yyyy',
               )}

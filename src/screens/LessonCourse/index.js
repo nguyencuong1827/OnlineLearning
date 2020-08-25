@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useEffect, useContext, useMemo} from 'react';
 import {SafeAreaView, View, StyleSheet, TouchableHighlight} from 'react-native';
 import {useSafeArea} from 'react-native-safe-area-context';
@@ -35,7 +36,7 @@ const LessonCourse = (props) => {
           configToken(userState.token),
         );
         if (response.status === 200) {
-          console.log(response.data.message);
+          //console.log(response.data.message);
         } else {
           console.log(response.data.message);
         }
@@ -47,20 +48,6 @@ const LessonCourse = (props) => {
     return unsubscribe;
   }, [navigation, time, userState, itemLesson]);
 
-  const fetchProcessCourse = async () => {
-    const url = '/course/process-course';
-    try {
-      // let response = await getProcessCourseAPI(configToken(userState.token), route.params.id);
-      let response = await axiosClient.get(
-        `${url}/${route.params.id}`,
-        configToken(userState.token),
-      );
-
-      console.log(response.data.payload);
-    } catch ({response}) {
-      console.log(response);
-    }
-  };
   const fetchDetail = async () => {
     const url = '/lesson/detail';
     try {
@@ -69,31 +56,18 @@ const LessonCourse = (props) => {
         configToken(userState.token),
       );
       if (response.status === 200) {
-        console.log(response.data.payload.nextLessonId);
+        //console.log(response.data.payload.nextLessonId);
         setNextLessonID(response.data.payload.nextLessonId);
       }
     } catch (err) {
       console.log(err);
     }
   };
+
   useEffect(() => {
     fetchDetail();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [route, userState, itemLesson]);
-  const fetchCourseDetailLesson = async () => {
-    const url = '/course/detail-with-lesson';
-    try {
-      let response = await axiosClient.get(
-        `${url}/${route.params.id}`,
-        configToken(userState.token),
-      );
-      if (response.status === 200) {
-        setItemCourse(response.data.payload);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+
   useEffect(() => {
     const fetchCourseDetailWithLesson = async () => {
       const url = '/course/detail-with-lesson';
@@ -132,40 +106,46 @@ const LessonCourse = (props) => {
       }
     };
     fetchCourseDetailWithLesson();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [route, userState]);
+
   const dismiss = () => {
     navigation.goBack();
   };
 
-  const renderVideo = useMemo(() => {
+  const onCompleteVideo = async () => {
     const url = '/lesson/update-status';
-    const onCompleteVideo = async () => {
-      try {
-        let response = await axiosClient.post(
-          url,
-          {lessonId: itemLesson.id},
-          configToken(userState.token),
-        );
-        if (response.status === 200) {
-          console.log(response.data.message);
-        } else {
-          console.log(response.data.message);
-        }
-      } catch (err) {
-        console.log(err);
+    try {
+      let response = await axiosClient.post(
+        url,
+        {lessonId: itemLesson.id},
+        configToken(userState.token),
+      );
+      if (response.status === 200) {
+        //console.log(response.data.message);
+      } else {
+        console.log(response.data.message);
       }
-    };
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
+  const renderVideo = useMemo(() => {
     return (
       <Video
         urlVideo={itemLesson.videoUrl || ''}
         onCompleteVideo={onCompleteVideo}
       />
     );
-  }, [itemLesson, userState]);
+  }, [itemLesson]);
+
   const renderYouTube = useMemo(() => {
-    return <YouTube urlVideo={itemLesson.videoUrl || ''} />;
+    return (
+      <YouTube
+        urlVideo={itemLesson.videoUrl || ''}
+        onCompleteVideo={onCompleteVideo}
+      />
+    );
   }, [itemLesson]);
 
   const renderVideoComponent = () => {

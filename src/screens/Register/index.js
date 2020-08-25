@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useContext} from 'react';
 import {
   View,
   Text,
@@ -16,6 +16,7 @@ import FormInput from '../../components/Authentication/FormInput';
 import {useState} from 'react';
 import ButtonSubmit from '../../components/Authentication/ButtonSubmit';
 import userApi from '../../api/user-api';
+import {LanguageContext} from '../../providers/language-provider';
 
 function validateEmail(email) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -43,15 +44,28 @@ const Register = (props) => {
   const [errorPassword, setErrorPassword] = useState('');
   const [errorConfirmPassword, setErrorConfirmPassword] = useState('');
   const [errorPhone, setErrorPhone] = useState('');
+  const {language} = useContext(LanguageContext);
 
   const {showRegisterModal, setShowRegisterModal} = props;
 
   const handleEditUsername = (text) => {
     setUsername(text);
     if (text === '') {
-      setErrorUsername('Please enter your full name!');
+      setErrorUsername(
+        `${
+          language === 'eng'
+            ? 'Please enter your full name!'
+            : 'Vui lòng nhập họ tên!'
+        }`,
+      );
     } else if (text.length <= 1) {
-      setErrorUsername('Full name is at least two characters!');
+      setErrorUsername(
+        `${
+          language === 'eng'
+            ? 'Full name is at least two characters!'
+            : 'Họ tên phải ít nhất 2 ký tự'
+        }`,
+      );
     } else {
       setErrorUsername('');
     }
@@ -60,9 +74,17 @@ const Register = (props) => {
   const handleEditEmail = (text) => {
     setEmail(text);
     if (text === '') {
-      setErrorEmail('Please enter your email!');
+      setErrorEmail(
+        `${
+          language === 'eng'
+            ? 'Please enter your email!'
+            : 'Vui lòng nhập email!'
+        }`,
+      );
     } else if (validateEmail(text) === false) {
-      setErrorEmail('Invalid email!');
+      setErrorEmail(
+        `${language === 'eng' ? 'Invalid email!' : 'Email không hợp lệ!'}`,
+      );
     } else {
       setErrorEmail('');
     }
@@ -71,9 +93,21 @@ const Register = (props) => {
   const handleEditPassword = (text) => {
     setPassword(text);
     if (text === '') {
-      setErrorPassword('Please enter your password!');
+      setErrorPassword(
+        `${
+          language === 'eng'
+            ? 'Please enter your password!'
+            : 'Vui lòng nhập mật khẩu!'
+        }`,
+      );
     } else if (text.length < 8) {
-      setErrorPassword('Password is at least 8 characters!');
+      setErrorPassword(
+        `${
+          language === 'eng'
+            ? 'Password is at least 8 characters!'
+            : 'Mật khẩu phải ít nhất 8 ký tự!'
+        }`,
+      );
     } else {
       setErrorPassword('');
     }
@@ -82,9 +116,21 @@ const Register = (props) => {
   const handleEditConfirmPassword = (text) => {
     setConfirmPassword(text);
     if (text === '') {
-      setErrorConfirmPassword('Please enter your confirm password!');
+      setErrorConfirmPassword(
+        `${
+          language === 'eng'
+            ? 'Please enter your confirm password!'
+            : 'Vui lòng nhập xác nhận mật khẩu!'
+        }`,
+      );
     } else if (text !== password) {
-      setErrorConfirmPassword('Confirm password is not correct!');
+      setErrorConfirmPassword(
+        `${
+          language === 'eng'
+            ? 'Confirm password is not correct!'
+            : 'Xác nhận mật khẩu không đúng!'
+        }`,
+      );
     } else {
       setErrorConfirmPassword('');
     }
@@ -93,9 +139,21 @@ const Register = (props) => {
   const handleEditPhone = (text) => {
     setPhone(text);
     if (text === '') {
-      setErrorPhone('Please enter your number phone!');
+      setErrorPhone(
+        `${
+          language === 'eng'
+            ? 'Please enter your number phone!'
+            : 'Vui lòng nhập số điện thoại'
+        }`,
+      );
     } else if (text.length < 10 || validateNumber(text) === false) {
-      setErrorPhone('Invalid number phone!');
+      setErrorPhone(
+        `${
+          language === 'eng'
+            ? 'Invalid number phone!'
+            : 'Số điện thoại không hợp lệ!'
+        }`,
+      );
     } else {
       setErrorPhone('');
     }
@@ -109,19 +167,49 @@ const Register = (props) => {
       password,
     };
     if (username === '') {
-      setErrorUsername('Please enter your full name!');
+      setErrorUsername(
+        `${
+          language === 'eng'
+            ? 'Please enter your full name!'
+            : 'Vui lòng nhập họ tên!'
+        }`,
+      );
     }
     if (email === '') {
-      setErrorEmail('Please enter your email!');
+      setErrorEmail(
+        `${
+          language === 'eng'
+            ? 'Please enter your email!'
+            : 'Vui lòng nhập email!'
+        }`,
+      );
     }
     if (password === '') {
-      setErrorPassword('Please enter your password!');
+      setErrorPassword(
+        `${
+          language === 'eng'
+            ? 'Please enter your password!'
+            : 'Vui lòng nhập mật khẩu!'
+        }`,
+      );
     }
     if (confirmPassword === '') {
-      setErrorConfirmPassword('Please enter your confirm password!');
+      setErrorConfirmPassword(
+        `${
+          language === 'eng'
+            ? 'Please enter your confirm password!'
+            : 'Vui lòng nhập xác nhận mật khẩu!'
+        }`,
+      );
     }
     if (phone === '') {
-      setErrorPhone('Please enter your phone!');
+      setErrorPhone(
+        `${
+          language === 'eng'
+            ? 'Please enter your phone!'
+            : 'Vui lòng nhập số điện thoại!'
+        }`,
+      );
     }
 
     if (
@@ -141,17 +229,22 @@ const Register = (props) => {
       if (status === 200) {
         setShowRegisterModal(false);
         Alert.alert(
-          'Notification',
-          'Account created successfully, please visit your gmail to activate your account',
+          `${language === 'eng' ? 'Notification' : 'Thông báo'}`,
+          `${
+            language === 'eng'
+              ? 'Account created successfully, please visit your gmail to activate your account'
+              : 'Tạo tài khoản thành công, vui lòng vào email của bạn để kích hoạt tài khoản'
+          }`,
         );
       }
       if (status === 400) {
         let message = '';
         if (data.message === 'Số điện thoại đã tồn tại') {
-          message = 'Phone number already exists';
+          message =
+            language === 'eng' ? 'Phone number already exists' : data.message;
         }
         if (data.message === 'Email đã tồn tại') {
-          message = 'Email already exists';
+          message = language === 'eng' ? 'Email already exists' : data.message;
         }
         ToastAndroid.showWithGravity(
           message,
@@ -176,11 +269,13 @@ const Register = (props) => {
             style={styles.centeredView}>
             <View style={styles.centeredView}>
               <View style={styles.modalView}>
-                <Text style={styles.title}>CREATE ACCOUNT</Text>
+                <Text style={styles.title}>
+                  {language === 'eng' ? 'CREATE ACCOUNT' : 'TẠO TÀI KHOẢN'}
+                </Text>
                 <View style={styles.infoContainer}>
                   <FormInput
                     styleInput={styles.input}
-                    placeholder="Full name"
+                    placeholder={language === 'eng' ? 'Full name' : 'Họ tên'}
                     placeholderTextColor="gray"
                     returnKeyType="next"
                     defaultValue={username}
@@ -190,7 +285,7 @@ const Register = (props) => {
                   <Text style={styles.txtErrror}>{errorUsername}</Text>
                   <FormInput
                     styleInput={styles.input}
-                    placeholder="Phone"
+                    placeholder={language === 'eng' ? 'Phone' : 'Số điện thoại'}
                     placeholderTextColor="gray"
                     returnKeyType="next"
                     defaultValue={phone}
@@ -213,7 +308,7 @@ const Register = (props) => {
                   <Text style={styles.txtErrror}>{errorEmail}</Text>
                   <FormInput
                     styleInput={styles.input}
-                    placeholder="Password"
+                    placeholder={language === 'eng' ? 'Password' : 'Mật khẩu'}
                     placeholderTextColor="gray"
                     secureTextEntry
                     autoCorrect={false}
@@ -225,7 +320,11 @@ const Register = (props) => {
                   <Text style={styles.txtErrror}>{errorPassword}</Text>
                   <FormInput
                     styleInput={styles.input}
-                    placeholder="Confirm password"
+                    placeholder={
+                      language === 'eng'
+                        ? 'Confirm password'
+                        : 'Xác nhận mật khẩu'
+                    }
                     placeholderTextColor="gray"
                     secureTextEntry
                     autoCorrect={false}
@@ -240,13 +339,15 @@ const Register = (props) => {
                     ref={btnRegister}
                     buttonSubmitStyle={styles.buttonContainer}
                     titleSubmitStyle={styles.buttonText}
-                    title="REGISTER"
+                    title={language === 'eng' ? 'REGISTER' : 'ĐĂNG KÝ'}
                     onSubmit={handleSubmit}
                   />
                   <TouchableOpacity
                     style={styles.btnCancel}
                     onPress={() => setShowRegisterModal(false)}>
-                    <Text style={styles.txtCancel}>Cancel</Text>
+                    <Text style={styles.txtCancel}>
+                      {language === 'eng' ? 'Cancel' : 'Thoát'}
+                    </Text>
                   </TouchableOpacity>
                 </View>
               </View>

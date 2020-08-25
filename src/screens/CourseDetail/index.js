@@ -17,12 +17,14 @@ import {ThemeContext} from '../../providers/theme-propvider';
 import HeaderCourseDetail from '../../components/HeaderCourseDetail';
 import axiosClient from '../../api/axiosClient';
 import {Size, Styles, Typography, BoxModel} from '../../globals/styles';
+import {LanguageContext} from '../../providers/language-provider';
 const CourseDetail = (props) => {
   const {theme2} = useContext(ThemeContext);
   const {navigation, route} = props;
   const [item, setItem] = useState({});
   const [collapsibleItems, setCollapsibleItems] = useState([]);
   const insets = useSafeArea();
+  const {language} = useContext(LanguageContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -119,7 +121,7 @@ const CourseDetail = (props) => {
                 ]}>
                 <Text
                   style={[styles.previewText, {color: theme2.primaryColor}]}>
-                  Preview
+                  {language === 'eng' ? 'Preview' : 'Xem thử'}
                 </Text>
               </View>
             ) : undefined}

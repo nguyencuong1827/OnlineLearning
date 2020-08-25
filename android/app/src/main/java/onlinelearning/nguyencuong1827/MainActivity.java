@@ -1,4 +1,4 @@
-package com.onlinelearning;
+package onlinelearning.nguyencuong1827;
 
 import com.facebook.react.ReactActivity;
 

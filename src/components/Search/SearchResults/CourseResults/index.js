@@ -5,6 +5,7 @@ import {Typography, Distance} from '../../../../globals/styles';
 import {ThemeContext} from '../../../../providers/theme-propvider';
 import {SearchContext} from '../../../../providers/search-provider';
 import NoResults from '../NoResults';
+import {LanguageContext} from '../../../../providers/language-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.header = {
@@ -16,6 +17,7 @@ const setStyleWithTheme = (theme) => {
 const CourseResults = (props) => {
   const {navigation} = props;
   const {theme} = useContext(ThemeContext);
+  const {language} = useContext(LanguageContext);
   setStyleWithTheme(theme);
 
   const {listCourseResult} = useContext(SearchContext);
@@ -23,7 +25,9 @@ const CourseResults = (props) => {
   const renderHeader = () => {
     return (
       <View>
-        <Text style={styles.header}>{listCourseResult.length} results</Text>
+        <Text style={styles.header}>
+          {listCourseResult.length} {language === 'eng' ? 'results' : 'kết quả'}
+        </Text>
       </View>
     );
   };

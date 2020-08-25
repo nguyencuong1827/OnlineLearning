@@ -18,6 +18,7 @@ import PrimaryButton from '../../Authentication/PrimaryButton';
 import SubPrimaryButton from '../../Authentication/SubPrimaryButton';
 import configToken from '../../../api/config-token';
 import ButtonSubmit from '../../Authentication/ButtonSubmit';
+import {LanguageContext} from '../../../providers/language-provider';
 
 const onPressAddQuestion = () => {};
 const onPressForumQuestion = () => {};
@@ -26,6 +27,7 @@ const QuestionView = (props) => {
   const {theme2} = useContext(ThemeContext);
   const {itemCourse} = useContext(LessonContext);
   const {userState} = useContext(AuthenticationContext);
+  const {language} = useContext(LanguageContext);
   const [question, setQuestion] = useState({});
   const {navigation} = props;
   useEffect(() => {
@@ -46,7 +48,6 @@ const QuestionView = (props) => {
       }
     };
     fetchQuestion();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [itemCourse, userState]);
 
   const onPressResponse = (itemQuestion) => {
@@ -67,14 +68,14 @@ const QuestionView = (props) => {
     <ScrollView style={{backgroundColor: theme2.themeColor}}>
       {questionContent()}
       <PrimaryButton
-        title="Forum Question"
+        title={language === 'eng' ? 'Forum Question' : 'Diễn đàng'}
         onPress={onPressForumQuestion}
         active={true}
         icon="star-o"
         style={[styles.buttonContainer, {backgroundColor: theme2.primaryColor}]}
       />
       <ButtonSubmit
-        title="Add Question"
+        title={language === 'eng' ? 'Add Question' : 'Thêm câu hỏi'}
         onPress={onPressAddQuestion}
         buttonSubmitStyle={styles.buttonContainerSb}
         titleSubmitStyle={styles.buttonText}

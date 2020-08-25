@@ -12,6 +12,7 @@ import {CourseDetailScreen} from '../../../../globals/constants/screen-name';
 import {ThemeContext} from '../../../../providers/theme-propvider';
 import Moment from 'moment';
 import {Bar} from 'react-native-progress';
+import {LanguageContext} from '../../../../providers/language-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.name = {...styles.name, color: theme.colorMainText};
@@ -21,12 +22,15 @@ const setStyleWithTheme = (theme) => {
 const CourseItemVertical = (props) => {
   const {navigation, item} = props;
   const {theme} = useContext(ThemeContext);
+  const {language} = useContext(LanguageContext);
   setStyleWithTheme(theme);
 
   const showCourseDetail = () => {
     navigation.navigate(CourseDetailScreen, {id: item.id});
   };
-  const unit = item.totalHours ? 'hours' : 'students';
+  const unit = item.totalHours
+    ? `${language === 'eng' ? 'hours' : 'giờ'}`
+    : `${language === 'eng' ? 'students' : 'học sinh'}`;
   const renderViewRating = () => {
     return (
       <View>
@@ -49,7 +53,9 @@ const CourseItemVertical = (props) => {
           </Text>
         </View>
         <Text style={styles.price}>
-          {item.prince !== '0' ? 'Miễn phí' : price}
+          {item.prince !== '0'
+            ? `${language === 'eng' ? 'Free' : 'Miễn phí'}`
+            : price}
         </Text>
       </View>
     );
@@ -97,7 +103,9 @@ const CourseItemVertical = (props) => {
         {item.totalHours || item.courseSoldNumber ? renderDateUpdated() : null}
         {item.process > 0 ? renderProcess() : null}
         {item.process === 0 && item.process !== undefined ? (
-          <Text style={styles.start}>START NOW</Text>
+          <Text style={styles.start}>
+            {language === 'eng' ? 'START NOW' : 'BẮT ĐẦU'}
+          </Text>
         ) : null}
         {item.process === undefined ? renderViewRating() : null}
       </View>

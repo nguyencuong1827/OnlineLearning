@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useRef, useState, useContext, useEffect} from 'react';
 import {
   View,
@@ -9,8 +10,6 @@ import {
   Keyboard,
   ToastAndroid,
   Text,
-  Alert,
-  ImageBackground,
 } from 'react-native';
 import FormInput from '../../components/Authentication/FormInput';
 import ButtonSubmit from '../../components/Authentication/ButtonSubmit';
@@ -21,6 +20,19 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import Register from '../Register';
 import ForgotPassword from '../ForgotPassword';
 import {AppNavigatorScreen} from '../../globals/constants/screen-name';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-community/google-signin';
+
+const configGoogle = {
+  scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+  webClientId:
+    '116025677018-nbtn7gpt2oe8oivild3n3h0f79aqckhc.apps.googleusercontent.com',
+  offlineAccess: true,
+  forceCodeForRefreshToken: true,
+};
 
 const Login = (props) => {
   const {navigation} = props;
@@ -30,7 +42,7 @@ const Login = (props) => {
   const [password, setPassword] = useState('');
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
-  const {userState, login} = useContext(AuthenticationContext);
+  const {userState, login, loginWithGoogle} = useContext(AuthenticationContext);
 
   const handleSubmit = () => {
     if (!email || !password) {
@@ -42,10 +54,7 @@ const Login = (props) => {
       return;
     }
     login(email, password);
-    if (userState.token) {
-      navigation.replace(AppNavigatorScreen);
-    }
-    if (userState.token === null && userState.messageError !== '') {
+    if (userState.messageError !== '') {
       ToastAndroid.showWithGravity(
         'Email or password not correct',
         ToastAndroid.LONG,
@@ -53,6 +62,47 @@ const Login = (props) => {
       );
     }
   };
+  const handleLoginWithGoogle = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const response = await GoogleSignin.signIn();
+      //console.log('login google - login screen: ', response.user);
+      loginWithGoogle(response.user.email, response.user.id);
+      if (userState.token) {
+        navigation.replace(AppNavigatorScreen, {firstLogin: true});
+      }
+      if (userState.messageError !== '') {
+        ToastAndroid.showWithGravity(
+          'System error',
+          ToastAndroid.LONG,
+          ToastAndroid.TOP,
+        );
+      }
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        console.log(error);
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        console.log(error);
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        console.log(error);
+        // play services not available or outdated
+      } else {
+        // some other error happened
+        console.log(error);
+      }
+    }
+  };
+  useEffect(() => {
+    GoogleSignin.configure(configGoogle);
+  }, []);
+
+  useEffect(() => {
+    if (userState.token) {
+      navigation.replace(AppNavigatorScreen, {firstLogin: true});
+    }
+  }, [userState]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -64,7 +114,7 @@ const Login = (props) => {
           style={styles.container}
           onPress={Keyboard.dismiss}>
           <View style={styles.logoContainer}>
-            <View style={styles.logoContainer}>
+            <View style={styles.logo}>
               <Image source={logo} />
             </View>
             <View style={styles.infoContainer}>
@@ -102,6 +152,12 @@ const Login = (props) => {
                 titleSubmitStyle={styles.buttonText}
                 title="SIGN IN"
                 onSubmit={handleSubmit}
+              />
+              <GoogleSigninButton
+                style={styles.buttonGoogle}
+                size={GoogleSigninButton.Size.Wide}
+                color={GoogleSigninButton.Color.Dark}
+                onPress={handleLoginWithGoogle}
               />
               <TouchableOpacity
                 style={styles.signUp}
@@ -141,7 +197,7 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
 
-    height: ScaleSize.scaleSizeHeight(180),
+    height: ScaleSize.scaleSizeHeight(220),
     padding: Distance.spacing_16,
   },
   input: {
@@ -160,7 +216,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.orange,
     paddingVertical: Distance.spacing_12,
     borderRadius: 10,
-
+    height: ScaleSize.scaleSizeHeight(32),
     marginTop: Distance.spacing_12,
   },
   buttonText: {
@@ -186,5 +242,19 @@ const styles = StyleSheet.create({
   txtSignUp: {
     color: Colors.white,
     fontSize: Typography.fontSize14,
+  },
+  buttonGoogle: {
+    borderRadius: 10,
+    marginTop: Distance.spacing_5,
+    height: ScaleSize.scaleSizeHeight(35),
+    width: '100%',
+  },
+  logo: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: ScaleSize.HEIGHT / 2 - 100,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

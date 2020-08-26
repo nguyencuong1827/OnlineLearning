@@ -25,6 +25,7 @@ import {
   GoogleSigninButton,
   statusCodes,
 } from '@react-native-community/google-signin';
+import {LanguageContext} from '../../providers/language-provider';
 
 const configGoogle = {
   scopes: ['https://www.googleapis.com/auth/drive.readonly'],
@@ -43,11 +44,16 @@ const Login = (props) => {
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
   const {userState, login, loginWithGoogle} = useContext(AuthenticationContext);
+  const {language} = useContext(LanguageContext);
 
   const handleSubmit = () => {
     if (!email || !password) {
       ToastAndroid.showWithGravity(
-        "Email or password can't null",
+        `${
+          language === 'eng'
+            ? "Email or password can't null"
+            : 'Email hoặc mật khẩu không thể bỏ trống!'
+        }`,
         ToastAndroid.LONG,
         ToastAndroid.TOP,
       );
@@ -56,7 +62,11 @@ const Login = (props) => {
     login(email, password);
     if (userState.messageError !== '') {
       ToastAndroid.showWithGravity(
-        'Email or password not correct',
+        `${
+          language === 'eng'
+            ? 'Email or password not correct'
+            : 'Email hoặc mật khẩu không đúng!'
+        }`,
         ToastAndroid.LONG,
         ToastAndroid.TOP,
       );
@@ -73,7 +83,7 @@ const Login = (props) => {
       }
       if (userState.messageError !== '') {
         ToastAndroid.showWithGravity(
-          'System error',
+          `${language === 'eng' ? 'System error' : 'Hệ thống bị lỗi'}`,
           ToastAndroid.LONG,
           ToastAndroid.TOP,
         );

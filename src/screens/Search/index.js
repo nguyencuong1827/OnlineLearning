@@ -8,6 +8,7 @@ import axiosClient from '../../api/axiosClient';
 import SearchPage from '../../components/Search';
 import {SearchContext} from '../../providers/search-provider';
 import {LanguageContext} from '../../providers/language-provider';
+import {useAsyncStorage} from '@react-native-community/async-storage';
 
 const setStyleWithTheme = (theme) => {
   styles.searchContainer = {
@@ -40,6 +41,8 @@ const Search = (props) => {
     setSearchContent,
   } = useContext(SearchContext);
 
+  const {setItem, getItem, removeItem} = useAsyncStorage('@listSearch');
+
   setStyleWithTheme(theme);
 
   const handleChange = (content) => {
@@ -49,7 +52,12 @@ const Search = (props) => {
     setKeyword(content);
   };
 
-  const handleClear = (e) => {
+  const handleClear = async () => {
+    try {
+      await removeItem();
+    } catch (error) {
+      console.log(error);
+    }
     setKeyword('');
     setSearchContent('');
   };
@@ -67,6 +75,7 @@ const Search = (props) => {
     );
     if (!fResult) {
       setListSearch([...listSearch, keyword]);
+      storeListSearch([...listSearch, keyword]);
     }
     await search(keyword);
     setSearchContent(keyword);
@@ -127,7 +136,30 @@ const Search = (props) => {
     }
   };
 
+  const storeListSearch = async (value) => {
+    // console.log('value store: ', value);
+    try {
+      const jsonValue = JSON.stringify({listSearch: value});
+      await setItem(jsonValue);
+    } catch (e) {
+      // saving error
+    }
+  };
+  const getListSearch = async () => {
+    try {
+      const item = await getItem();
+      if (item !== null) {
+        const jsonValue = JSON.parse(item);
+        // console.log(jsonValue.listSearch);
+        setListSearch(jsonValue.listSearch);
+      }
+    } catch (e) {
+      // saving error
+    }
+  };
+
   useEffect(() => {
+    getListSearch();
     getListAuthor();
   }, []);
 

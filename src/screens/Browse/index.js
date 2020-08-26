@@ -12,6 +12,7 @@ import configToken from '../../api/config-token';
 import {ListAuthorsHorizontal} from '../../components/ListAuthors';
 import {NewRelease, RecommendCourse} from '../../globals/constants/screen-name';
 import {LanguageContext} from '../../providers/language-provider';
+import {CategoryContext} from '../../providers/category-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.container = {
@@ -28,6 +29,7 @@ const Browse = (props) => {
   const [favorite, setFavorite] = useState([]);
   const {userState} = useContext(AuthenticationContext);
   const {language} = useContext(LanguageContext);
+  const {listCourseLike} = useContext(CategoryContext);
 
   const [listInstructor, setListInstructor] = useState([]);
   const getInstructor = async () => {
@@ -58,9 +60,10 @@ const Browse = (props) => {
   const showListCourse = (screenName) => {
     navigation.navigate(screenName, {id: screenName});
   };
-
   useEffect(() => {
     getFavoriteCourse();
+  }, [listCourseLike]);
+  useEffect(() => {
     getInstructor();
   }, [userState]);
   return (

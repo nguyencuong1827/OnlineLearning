@@ -16,6 +16,7 @@ import axiosClient from '../../api/axiosClient';
 import configToken from '../../api/config-token';
 import ImagePreview from './ImagePreview';
 import {LanguageContext} from '../../providers/language-provider';
+import {CategoryContext} from '../../providers/category-provider';
 
 const HeaderCourseDetail = (props) => {
   const {item, navigation} = props;
@@ -24,6 +25,7 @@ const HeaderCourseDetail = (props) => {
   const {language} = useContext(LanguageContext);
   const [isOwn, setIsOwn] = useState({});
   const [isLike, setLike] = useState(false);
+  const {listCourseLike, setListCourseLike} = useContext(CategoryContext);
 
   useEffect(() => {
     const checkOwnCourse = async () => {
@@ -105,6 +107,7 @@ const HeaderCourseDetail = (props) => {
 
       if (response.status === 200) {
         setLike(response.data.likeStatus);
+        setListCourseLike(...listCourseLike, item.id);
       } else {
         console.log('user like course: ', response.data.message);
       }

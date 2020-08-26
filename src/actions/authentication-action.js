@@ -89,6 +89,7 @@ const logoutRequest = () => {
 };
 export const logout = (dispatch) => async () => {
   const {getItem, removeItem} = useAsyncStorage('@userLogin');
+  const getListDownload = useAsyncStorage('@listDownload');
   try {
     const item = await getItem();
     const jsonValue = JSON.parse(item);
@@ -98,6 +99,7 @@ export const logout = (dispatch) => async () => {
       await GoogleSignin.signOut();
     }
     await removeItem();
+    await getListDownload.removeItem();
   } catch (error) {
     console.log('Logout fail: ', error);
   }

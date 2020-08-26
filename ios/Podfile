@@ -41,6 +41,9 @@ target 'OnlineLearning' do
 
   pod 'RNFBAuth', :path => '../node_modules/@react-native-firebase/auth'
 
+
+  pod 'rn-fetch-blob', :path => '../node_modules/rn-fetch-blob'
+
   target 'OnlineLearningTests' do
     inherit! :complete
     # Pods for testing

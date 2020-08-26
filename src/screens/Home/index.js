@@ -145,6 +145,13 @@ const Home = (props) => {
       <ScrollView>
         <WelcomeImage />
         <ListCoursesHorizontal
+          data={state3}
+          title={language === 'eng' ? 'Top rating' : 'Xếp hạng cao'}
+          navigation={navigation}
+          id={screenName.TopRating}
+          showAll={() => showListCourse(screenName.TopRating)}
+        />
+        <ListCoursesHorizontal
           data={state2}
           title={language === 'eng' ? 'Best seller' : 'Nhiều học viên nhất'}
           navigation={navigation}
@@ -156,13 +163,6 @@ const Home = (props) => {
           title={language === 'eng' ? 'New releases' : 'Mới thực hiện'}
           navigation={navigation}
           showAll={() => showListCourse(screenName.NewRelease)}
-        />
-        <ListCoursesHorizontal
-          data={state3}
-          title={language === 'eng' ? 'Top rating' : 'Xếp hạng cao'}
-          navigation={navigation}
-          id={screenName.TopRating}
-          showAll={() => showListCourse(screenName.TopRating)}
         />
       </ScrollView>
     </SafeAreaView>

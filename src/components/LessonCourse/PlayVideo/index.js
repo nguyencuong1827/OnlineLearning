@@ -1,4 +1,5 @@
-import React, {useContext, useRef} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useContext, useRef, useEffect, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Video from 'react-native-video';
 import {LessonContext} from '../../../providers/lesson-provider';
@@ -6,7 +7,8 @@ import {Typography, Distance} from '../../../globals/styles';
 
 const PLayVideo = (props) => {
   const {urlVideo, onCompleteVideo} = props;
-  const {itemLesson, setTime} = useContext(LessonContext);
+  const {itemLesson, setTime, listDownload} = useContext(LessonContext);
+  const [uri, setUri] = useState('');
   var playerRef = useRef();
 
   const onProgress = (data) => {
@@ -18,6 +20,17 @@ const PLayVideo = (props) => {
       setTime(itemLesson.currentTime);
     }
   };
+  const checkDownload = () => {
+    const fResult = listDownload.find((item) => item.id === itemLesson.id);
+    if (!fResult) {
+      setUri(urlVideo);
+      return;
+    }
+    setUri(fResult.uri);
+  };
+  useEffect(() => {
+    checkDownload();
+  }, [itemLesson]);
 
   return (
     <View style={styles.videoContainer}>
@@ -25,7 +38,7 @@ const PLayVideo = (props) => {
         onProgress={onProgress}
         controls={true}
         resizeMode="contain"
-        source={{uri: urlVideo}}
+        source={{uri: uri}}
         ref={(ref) => {
           playerRef = ref;
         }}

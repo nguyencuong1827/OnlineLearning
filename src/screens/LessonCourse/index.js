@@ -12,17 +12,21 @@ import {LessonContext} from '../../providers/lesson-provider';
 import axiosClient from '../../api/axiosClient';
 import {Size, BoxModel, Typography} from '../../globals/styles';
 import configToken from '../../api/config-token';
+import {useAsyncStorage} from '@react-native-community/async-storage';
 
 const LessonCourse = (props) => {
   const {theme2} = useContext(ThemeContext);
   const {navigation, route} = props;
   const {userState} = useContext(AuthenticationContext);
-  const [nextLessonID, setNextLessonID] = useState('');
   const insets = useSafeArea();
 
-  const {setItemCourse, itemLesson, setItemLesson, time} = useContext(
-    LessonContext,
-  );
+  const {
+    setItemCourse,
+    itemLesson,
+    setItemLesson,
+    time,
+    setListDownload,
+  } = useContext(LessonContext);
   useEffect(() => {
     const unsubscribe = navigation.addListener('blur', async () => {
       const url = '/lesson/update-current-time-learn-video';
@@ -48,72 +52,75 @@ const LessonCourse = (props) => {
     return unsubscribe;
   }, [navigation, time, userState, itemLesson]);
 
-  const fetchDetail = async () => {
-    const url = '/lesson/detail';
+  // const fetchDetail = async () => {
+  //   const url = '/lesson/detail';
+  //   try {
+  //     let response = await axiosClient.get(
+  //       `${url}/${route.params.id}/${itemLesson.id}`,
+  //       configToken(userState.token),
+  //     );
+  //     if (response.status === 200) {
+  //       setNextLessonID(response.data.payload.nextLessonId);
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
+
+  const findLesson = (section, lessonId) => {
+    if (section) {
+      const resultSection = section.find(({lesson}) =>
+        lesson.find(({id}) => id === lessonId),
+      );
+      const result = resultSection.lesson.find(({id}) => id === lessonId);
+      return result;
+    }
+    return null;
+  };
+
+  const fetchCourseDetailWithLesson = async () => {
+    console.log('fetch');
     try {
-      let response = await axiosClient.get(
-        `${url}/${route.params.id}/${itemLesson.id}`,
+      let url = '/course/detail-with-lesson';
+      let resCourseDetail = await axiosClient.get(
+        `${url}/${route.params.id}`,
         configToken(userState.token),
       );
-      if (response.status === 200) {
-        //console.log(response.data.payload.nextLessonId);
-        setNextLessonID(response.data.payload.nextLessonId);
+      url = '/course/last-watched-lesson';
+      let resLastLesson = await axiosClient.get(
+        `${url}/${route.params.id}`,
+        configToken(userState.token),
+      );
+      if (resCourseDetail.status === 200) {
+        setItemCourse(resCourseDetail.data.payload);
+        if (resLastLesson.status === 200) {
+          const result = findLesson(
+            resCourseDetail.data.payload.section,
+            resLastLesson.data.payload.lessonId,
+          );
+          setItemLesson({
+            ...result,
+            videoUrl: resLastLesson.data.payload.videoUrl,
+            currentTime: resLastLesson.data.payload.currentTime,
+          });
+        }
       }
-    } catch (err) {
-      console.log(err);
+    } catch ({response}) {
+      console.log(response);
     }
   };
 
   useEffect(() => {
-    fetchDetail();
-  }, [route, userState, itemLesson]);
-
-  useEffect(() => {
-    const fetchCourseDetailWithLesson = async () => {
-      const url = '/course/detail-with-lesson';
-      try {
-        let response = await axiosClient.get(
-          `${url}/${route.params.id}`,
-          configToken(userState.token),
-        );
-        const url2 = '/course/last-watched-lesson';
-        let response1 = await axiosClient.get(
-          `${url2}/${route.params.id}`,
-          configToken(userState.token),
-        );
-        if (response.status === 200) {
-          setItemCourse(response.data.payload);
-          if (response1.status === 200) {
-            const resultSection = response.data.payload.section.find(
-              ({lesson}) => {
-                return lesson.find(
-                  ({id}) => id === response1.data.payload.lessonId,
-                );
-              },
-            );
-            const result = resultSection.lesson.find(
-              ({id}) => id === response1.data.payload.lessonId,
-            );
-            setItemLesson({
-              ...result,
-              videoUrl: response1.data.payload.videoUrl,
-              currentTime: response1.data.payload.currentTime,
-            });
-          }
-        }
-      } catch ({response}) {
-        console.log(response);
-      }
-    };
     fetchCourseDetailWithLesson();
   }, [route, userState]);
 
   const dismiss = () => {
     navigation.goBack();
   };
-
   const onCompleteVideo = async () => {
-    const url = '/lesson/update-status';
+    console.log('complete');
+
+    let url = '/lesson/update-status';
     try {
       let response = await axiosClient.post(
         url,
@@ -121,9 +128,10 @@ const LessonCourse = (props) => {
         configToken(userState.token),
       );
       if (response.status === 200) {
+        await fetchCourseDetailWithLesson();
         //console.log(response.data.message);
       } else {
-        console.log(response.data.message);
+        console.log(response.data);
       }
     } catch (err) {
       console.log(err);
@@ -157,6 +165,26 @@ const LessonCourse = (props) => {
       }
     }
   };
+
+  const {getItem} = useAsyncStorage('@listDownload');
+  const getListDownload = async () => {
+    try {
+      const item = await getItem();
+      console.log(item);
+      if (item !== null) {
+        const jsonValue = JSON.parse(item);
+        console.log(jsonValue);
+        // console.log(jsonValue.listSearch);
+        setListDownload(jsonValue.listDownload);
+      }
+    } catch (e) {
+      // saving error
+    }
+  };
+
+  useEffect(() => {
+    getListDownload();
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
       <View style={[styles.container, {backgroundColor: theme2.themeColor}]}>

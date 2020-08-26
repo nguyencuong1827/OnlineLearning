@@ -71,7 +71,8 @@ const CourseItemVertical = (props) => {
     return (
       <View>
         <Text style={styles.info}>
-          Lastest learn: {`${Moment(item.latestLearnTime).format('MMMM Do')}`}
+          {language === 'eng' ? 'Lastest learn:' : 'Lần học cuối: '}{' '}
+          {`${Moment(item.latestLearnTime).format('MMMM Do')}`}
         </Text>
         <View style={styles.ratingContainer}>
           <Bar

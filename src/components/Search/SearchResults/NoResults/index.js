@@ -5,6 +5,7 @@ import {ThemeContext} from '../../../../providers/theme-propvider';
 import {SearchContext} from '../../../../providers/search-provider';
 import {HEIGHT} from '../../../../globals/styles/scale-size';
 import {Typography, Distance} from '../../../../globals/styles';
+import {LanguageContext} from '../../../../providers/language-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.container = {
@@ -23,13 +24,17 @@ const setStyleWithTheme = (theme) => {
 const NoResults = (props) => {
   const {theme} = useContext(ThemeContext);
   const {searchContent} = useContext(SearchContext);
+  const {language} = useContext(LanguageContext);
   setStyleWithTheme(theme);
   return (
     <View style={styles.container}>
       <Icon name="search1" size={80} color="#bdc3c7" />
       <Text style={styles.noResults}>No results</Text>
       <Text style={styles.title}>
-        We couldn't find any math for {searchContent}
+        {language === 'eng'
+          ? 'We cannot find any math for'
+          : 'Chúng tôi không tìm thấy kết quả cho'}{' '}
+        {searchContent}
       </Text>
     </View>
   );

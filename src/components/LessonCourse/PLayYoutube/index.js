@@ -1,15 +1,15 @@
-import React, {useRef, useEffect, useState, useContext} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useRef, useEffect, useState, useCallback} from 'react';
 import {View, StyleSheet} from 'react-native';
 
 import YoutubePlayer, {getYoutubeMeta} from 'react-native-youtube-iframe';
-import {LessonContext} from '../../../providers/lesson-provider';
 import {Size, Typography, Distance} from '../../../globals/styles';
 
 const getYouTubeID = (str) => {
   return str.substring(str.lastIndexOf('/') + 1, str.length);
 };
 const PLayYouTube = (props) => {
-  const {urlVideo} = props;
+  const {urlVideo, onCompleteVideo} = props;
   const playerRef = useRef();
   // const {itemLesson, setTime} = useContext(LessonContext);
   const [widthVid, setWidth] = useState(0);
@@ -34,6 +34,11 @@ const PLayYouTube = (props) => {
     return 300;
   };
 
+  const onStateChange = useCallback((state) => {
+    if (state === 'ended') {
+      onCompleteVideo();
+    }
+  }, []);
   // const readyPLayVideo = () => {
   //   if (itemLesson && itemLesson.currentTime) {
   //     playerRef.current.seekTo(itemLesson.currentTime);
@@ -57,6 +62,7 @@ const PLayYouTube = (props) => {
           cc_lang_pref: 'us',
           controls: true,
         }}
+        onChangeState={onStateChange}
       />
     </View>
   );

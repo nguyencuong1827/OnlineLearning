@@ -3,11 +3,13 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {MyCoursesScreen} from '../../../globals/constants/screen-name';
 import {ThemeContext} from '../../../providers/theme-propvider';
 import MyCourses from '../../../screens/MyCourses';
+import {LanguageContext} from '../../../providers/language-provider';
 
 const Stack = createStackNavigator();
 
 const MyCoursesStack = () => {
   const {theme} = useContext(ThemeContext);
+  const {language} = useContext(LanguageContext);
   const screenOptions = {
     headerStyle: {
       backgroundColor: theme.headerFooterBackground,
@@ -22,7 +24,7 @@ const MyCoursesStack = () => {
         name={MyCoursesScreen}
         component={MyCourses}
         options={{
-          title: 'My Courses',
+          title: language === 'eng' ? 'My Courses' : 'Khóa học đăng ký',
         }}
       />
     </Stack.Navigator>

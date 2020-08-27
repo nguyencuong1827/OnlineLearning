@@ -8,5 +8,12 @@ const authenticationApi = {
       password,
     });
   },
+  loginWithGoogle: (email, id) => {
+    const url = '/user/login-google-mobile';
+    return axiosClient.post(url, {
+      email,
+      id,
+    });
+  },
 };
 export default authenticationApi;

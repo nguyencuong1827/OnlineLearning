@@ -5,6 +5,7 @@ import {Typography, Distance} from '../../../../globals/styles';
 import {ThemeContext} from '../../../../providers/theme-propvider';
 import {SearchContext} from '../../../../providers/search-provider';
 import NoResults from '../NoResults';
+import {LanguageContext} from '../../../../providers/language-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.header = {
@@ -15,13 +16,16 @@ const setStyleWithTheme = (theme) => {
 const AuthorResults = (props) => {
   const {navigation} = props;
   const {theme} = useContext(ThemeContext);
+  const {language} = useContext(LanguageContext);
   setStyleWithTheme(theme);
 
   const {listAuthorResult} = useContext(SearchContext);
   const renderHeader = () => {
     return (
       <View>
-        <Text style={styles.header}>{listAuthorResult.length} results</Text>
+        <Text style={styles.header}>
+          {listAuthorResult.length} {language === 'eng' ? 'results' : 'kết quả'}
+        </Text>
       </View>
     );
   };

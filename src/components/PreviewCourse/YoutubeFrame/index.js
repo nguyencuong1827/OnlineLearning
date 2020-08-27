@@ -18,7 +18,6 @@ const YoutubeFrame = (props) => {
         setWidth(response.width);
         setHeight(response.height);
 
-        console.log(response);
       } catch (err) {
         console.log(err);
       }

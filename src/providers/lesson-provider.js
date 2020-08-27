@@ -6,7 +6,7 @@ const LessonProvider = (props) => {
   const [itemCourse, setItemCourse] = useState({});
   const [itemLesson, setItemLesson] = useState({});
   const [time, setTime] = useState(0);
-  const [videoUrl, setVideoUrl] = useState('');
+  const [listDownload, setListDownload] = useState([]);
   return (
     <LessonContext.Provider
       value={{
@@ -16,6 +16,8 @@ const LessonProvider = (props) => {
         setItemLesson,
         time,
         setTime,
+        listDownload,
+        setListDownload,
       }}>
       {props.children}
     </LessonContext.Provider>

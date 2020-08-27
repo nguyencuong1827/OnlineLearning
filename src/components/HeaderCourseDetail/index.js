@@ -1,21 +1,9 @@
 import React, {useContext, useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableHighlight,
-  Share,
-  Alert,
-} from 'react-native';
+import {View, Text, StyleSheet, Share, Alert} from 'react-native';
 import Title from './TitleItem';
 import Author from './AuthorItem';
 import InfoCourse from './InfoCourse';
 import Feature from './SomeFeature';
-import Feather from 'react-native-vector-icons/Feather';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
-import FastImage from 'react-native-fast-image';
 import WhatLearn from './WhatLearn';
 import StudentFeedBack from './StudentFeedback';
 import ProfileAuthor from './ProfileAuthor';
@@ -23,32 +11,21 @@ import ProfileAuthor from './ProfileAuthor';
 import * as screenName from '../../globals/constants/screen-name';
 import {ThemeContext} from '../../providers/theme-propvider';
 import {AuthenticationContext} from '../../providers/authentication-provider';
-import {
-  Styles,
-  BoxModel,
-  Typography,
-  Size,
-  Distance,
-} from '../../globals/styles';
-import {ListCourseHorizontal} from '../ListCourses';
+import {BoxModel, Typography, Size, Distance} from '../../globals/styles';
 import axiosClient from '../../api/axiosClient';
 import configToken from '../../api/config-token';
 import ImagePreview from './ImagePreview';
-import p from 'pretty-format';
-const Demo = () => {
-  return (
-    <View>
-      <Text>Demoo2</Text>
-    </View>
-  );
-};
+import {LanguageContext} from '../../providers/language-provider';
+import {CategoryContext} from '../../providers/category-provider';
 
 const HeaderCourseDetail = (props) => {
-  const {item, navigation, route} = props;
+  const {item, navigation} = props;
   const {theme2} = useContext(ThemeContext);
   const {userState} = useContext(AuthenticationContext);
+  const {language} = useContext(LanguageContext);
   const [isOwn, setIsOwn] = useState({});
   const [isLike, setLike] = useState(false);
+  const {listCourseLike, setListCourseLike} = useContext(CategoryContext);
 
   useEffect(() => {
     const checkOwnCourse = async () => {
@@ -130,6 +107,7 @@ const HeaderCourseDetail = (props) => {
 
       if (response.status === 200) {
         setLike(response.data.likeStatus);
+        setListCourseLike(...listCourseLike, item.id);
       } else {
         console.log('user like course: ', response.data.message);
       }
@@ -233,7 +211,7 @@ const HeaderCourseDetail = (props) => {
         onPress={onPressStudentFeedback}
       />
       <Text style={[styles.title, {color: theme2.primaryTextColor}]}>
-        Curriculum
+        {language === 'eng' ? 'Curriculum' : 'Giáo trình'}
       </Text>
       {/* <LearningCheck /> */}
       {/* <SegmentControl /> */}

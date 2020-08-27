@@ -1,23 +1,45 @@
-import React, {useContext} from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, {useContext, useState, useEffect} from 'react';
 import {View, Text, TouchableHighlight, StyleSheet} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import Moment from 'moment';
 import {ThemeContext} from '../../../providers/theme-propvider';
 import {Styles, BoxModel, Typography, Size} from '../../../globals/styles';
+import {LanguageContext} from '../../../providers/language-provider';
 
 const QuestionComponent = (props) => {
   const {theme2} = useContext(ThemeContext);
+  const {language} = useContext(LanguageContext);
   const {itemQuestion, onPressResponse} = props;
+  const [role, setRole] = useState('');
   const getThemeUser = (title) => {
     switch (title) {
-      case 'INSTRUCTOR':
+      case 'INSTRUCTOR': {
         return theme2.warningColor;
-      case 'STUDENT':
+      }
+      case 'STUDENT': {
         return theme2.StudentColor;
+      }
       default:
         return theme2.primaryColor;
     }
   };
+
+  useEffect(() => {
+    if (itemQuestion.user.type === 'INSTRUCTOR') {
+      if (language === 'vn') {
+        setRole('TÁC GIẢ');
+      } else {
+        setRole('INSTRUCTOR');
+      }
+    } else {
+      if (language === 'vn') {
+        setRole('HỌC SINH');
+      } else {
+        setRole('STUDENT');
+      }
+    }
+  }, []);
   return (
     <View key={itemQuestion.id} style={Styles.fillColumn}>
       <View style={Styles.fillRowStart}>
@@ -46,7 +68,7 @@ const QuestionComponent = (props) => {
                 Typography.fontBold,
                 {color: theme2.whiteColor, fontSize: Typography.fontSize14},
               ]}>
-              {itemQuestion.user.type.toLowerCase()}
+              {role}
             </Text>
           </View>
         </View>
@@ -91,7 +113,7 @@ const QuestionComponent = (props) => {
             {color: theme2.primaryColor, fontSize: Typography.fontSize14},
           ]}>
           {itemQuestion.repliedNumber === 0 ? 'No' : itemQuestion.repliedNumber}{' '}
-          responses
+          {language === 'eng' ? 'responses' : 'phản hổi'}
         </Text>
       </TouchableHighlight>
       <View style={[styles.divide, {backgroundColor: theme2.DialogColor}]} />

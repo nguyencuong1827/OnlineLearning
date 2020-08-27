@@ -3,15 +3,17 @@ import {StyleSheet, View} from 'react-native';
 import {ThemeContext} from '../../../providers/theme-propvider';
 import PrimaryButton from '../../Authentication/PrimaryButton';
 import {Styles, BoxModel, Size, Colors} from '../../../globals/styles';
+import {LanguageContext} from '../../../providers/language-provider';
 
 const Feature = (props) => {
   const {onPressLike, onPressJoin, isOwnCourse, isLike} = props;
   const {theme2} = useContext(ThemeContext);
+  const {language} = useContext(LanguageContext);
   const titlePrimary = () => {
     if (isOwnCourse.isUserOwnCourse) {
-      return 'Continue';
+      return language === 'eng' ? 'Continue' : 'Tiếp tục';
     } else {
-      return 'Join Now';
+      return language === 'eng' ? 'Join Now' : 'Tham gia';
     }
   };
   return (
@@ -34,7 +36,11 @@ const Feature = (props) => {
       </View>
       <View style={styles.mainContainer}>
         <PrimaryButton
-          title={isLike ? 'Liked' : 'Like'}
+          title={
+            isLike
+              ? `${language === 'eng' ? 'Liked' : 'Đã thích'}`
+              : `${language === 'eng' ? 'Like' : 'Thích'}`
+          }
           onPress={onPressLike}
           active={true}
           icon="heart-o"

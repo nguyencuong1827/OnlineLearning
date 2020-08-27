@@ -10,18 +10,19 @@ import Login from '../screens/Login';
 import {ThemeContext} from '../providers/theme-propvider';
 import SplashScreen from '../screens/SplashScreen';
 import {useAsyncStorage} from '@react-native-community/async-storage';
-import {AuthenticationContext} from '../providers/authentication-provider';
 import LessonCourseNavigatorStack from './AppNavigator/LessonNavigator';
 import PlayReview from '../screens/PlayReview';
 import SeeFeedBack from '../screens/SeeFeedback';
 import {CategoryProvider} from '../providers/category-provider';
 import {SearchProvider} from '../providers/search-provider';
 import WriteFeedBack from '../screens/WriteFeedBack';
+import {LanguageContext} from '../providers/language-provider';
 
 const Stack = createStackNavigator();
 
 const RootScreen = (props) => {
   const {screenOptions} = props;
+  const {language} = useContext(LanguageContext);
   return (
     <Stack.Navigator mode="modal" screenOptions={screenOptions}>
       <Stack.Screen
@@ -38,7 +39,7 @@ const RootScreen = (props) => {
         name={ScreenName.LessonCourseScreenStack}
         component={LessonCourseNavigatorStack}
         options={({route}) => ({
-          title: route.params.title,
+          title: language === 'eng' ? 'Lesson' : 'Bài học',
           animationEnabled: true,
         })}
       />
@@ -50,7 +51,7 @@ const RootScreen = (props) => {
       <Stack.Screen
         name={ScreenName.AuthorDetailScreen}
         component={AuthorDetail}
-        options={{title: 'Instructor'}}
+        options={{title: language === 'eng' ? 'Instructor' : 'Tác giả'}}
       />
       <Stack.Screen
         name={ScreenName.PlayVideoScreen}
@@ -65,7 +66,7 @@ const RootScreen = (props) => {
       <Stack.Screen
         name={ScreenName.FeedBackStack}
         component={SeeFeedBack}
-        options={{title: 'Feedback'}}
+        options={{title: language === 'eng' ? 'Feedback' : 'Đánh giá'}}
         initialParams={{
           item: 'item',
           averagePoint: 0,
@@ -77,16 +78,17 @@ const RootScreen = (props) => {
       <Stack.Screen
         name={ScreenName.WriteFeedBackScreen}
         component={WriteFeedBack}
-        options={{headerShown: 'Write feedback'}}
+        options={{
+          headerShown: language === 'eng' ? 'Write feedback' : 'Viết đánh giá',
+        }}
       />
     </Stack.Navigator>
   );
 };
 
 const RootNavigator = () => {
-  const {theme} = useContext(ThemeContext);
-  const {login} = useContext(AuthenticationContext);
-
+  const {theme, setTheme, setTheme2} = useContext(ThemeContext);
+  const {setLanguage} = useContext(LanguageContext);
   const screenOptions = {
     headerStyle: {
       backgroundColor: theme.headerFooterBackground,
@@ -95,22 +97,38 @@ const RootNavigator = () => {
     headerTitleAlign: 'center',
   };
 
-  const {getItem} = useAsyncStorage('@userLogin');
-
-  const readItemFromStorage = async () => {
-    const item = await getItem();
-    const jsonValue = JSON.parse(item);
-    if (item !== null) {
-      try {
-        return await login(jsonValue.email, jsonValue.password);
-      } catch ({response}) {
-        console.log(response);
+  const getLanguage = useAsyncStorage('@language');
+  const readLanguageFormStorage = async () => {
+    try {
+      const item = await getLanguage.getItem();
+      if (item) {
+        const jsonValue = JSON.parse(item);
+        setLanguage(jsonValue);
       }
+    } catch (error) {
+      console.log(error);
     }
   };
+
+  const getTheme = useAsyncStorage('@theme');
+  const readThemeFormStorage = async () => {
+    try {
+      const item = await getTheme.getItem();
+      if (item) {
+        const jsonValue = JSON.parse(item);
+        setTheme(jsonValue.theme);
+        setTheme2(jsonValue.theme2);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    readItemFromStorage();
+    readLanguageFormStorage();
+    readThemeFormStorage();
   }, []);
+
   return (
     <CategoryProvider>
       <SearchProvider>

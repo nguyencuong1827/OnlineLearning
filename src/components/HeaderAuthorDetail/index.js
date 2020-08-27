@@ -11,10 +11,12 @@ import {
   Typography,
   BoxModel,
 } from '../../globals/styles';
+import {LanguageContext} from '../../providers/language-provider';
 
 const Header = (props) => {
   const {theme2} = useContext(ThemeContext);
   const {data} = props;
+  const {language} = useContext(LanguageContext);
   const skillComponent = () => {
     if (data.skills) {
       return data.skills.map((item) => (
@@ -69,7 +71,7 @@ const Header = (props) => {
             {data.soldNumber}
           </Text>
           <Text style={[Styles.textCenter, {color: theme2.primaryTextColor}]}>
-            Students
+            {language === 'eng' ? 'Students' : 'Học sinh'}
           </Text>
         </View>
 
@@ -83,7 +85,7 @@ const Header = (props) => {
             {data.totalCourse}
           </Text>
           <Text style={[Styles.textCenter, {color: theme2.primaryTextColor}]}>
-            Courses
+            {language === 'eng' ? 'Courses' : 'Khóa học'}
           </Text>
         </View>
         <View style={Styles.fillColumn}>
@@ -91,14 +93,20 @@ const Header = (props) => {
             {averagePointRating()}/5
           </Text>
           <Text style={[Styles.textCenter, {color: theme2.primaryTextColor}]}>
-            Rating
+            {language === 'eng' ? 'Rating' : 'Xếp hạng'}
           </Text>
         </View>
       </View>
       <View>
         <Text
           style={[styles.descriptionText, {color: theme2.primaryTextColor}]}>
-          {data.intro ? data.intro : 'Nothing to update'}
+          {data.intro
+            ? data.intro
+            : `${
+                language === 'eng'
+                  ? 'Nothing to update'
+                  : 'Không có gì để cập nhật'
+              }`}
         </Text>
       </View>
       {skillComponent()}

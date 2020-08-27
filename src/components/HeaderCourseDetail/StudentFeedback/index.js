@@ -10,24 +10,27 @@ import {
   Size,
 } from '../../../globals/styles';
 import PrimaryButton from '../../Authentication/PrimaryButton';
+import {LanguageContext} from '../../../providers/language-provider';
 
 const StudentFeedback = (props) => {
   const {ratings, onPress, averagePoint} = props;
   const {theme2} = useContext(ThemeContext);
+  const {language} = useContext(LanguageContext);
   return (
     <View style={[Styles.fillColumnStart, BoxModel.marginVertical]}>
       <View style={[styles.divide, {backgroundColor: theme2.DialogColor}]} />
       <Text style={[styles.title, {color: theme2.primaryTextColor}]}>
-        Student feedback
+        {language === 'eng' ? 'Student feedback' : 'Đánh giá của học sinh'}
       </Text>
       {averagePoint ? (
         <Text style={[styles.title, {color: theme2.primaryTextColor}]}>
-          {Number(averagePoint)} average rating
+          {Number(averagePoint)}{' '}
+          {language === 'eng' ? 'average rating' : 'xếp hạng trung bình'}
         </Text>
       ) : undefined}
       {ratings ? <RatingComponent ratings={ratings} /> : undefined}
       <PrimaryButton
-        title="See All Feedback"
+        title={language === 'eng' ? 'See All Feedback' : 'Xem tất cả đánh giá'}
         onPress={() => onPress()}
         active={true}
         icon="star-o"

@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef, useContext} from 'react';
 import {
   View,
   Text,
@@ -12,19 +12,32 @@ import FormInput from '../../components/Authentication/FormInput';
 import {useState} from 'react';
 import ButtonSubmit from '../../components/Authentication/ButtonSubmit';
 import axiosClient from '../../api/axiosClient';
+import {LanguageContext} from '../../providers/language-provider';
 
 const ForgotPassword = (props) => {
   const btnSendCode = useRef(null);
   const [email, setEmail] = useState('');
+  const {language} = useContext(LanguageContext);
+
   const handldeSubmit = async () => {
     const url = '/user/forget-pass/send-email';
     try {
       let response = await axiosClient.post(url, {email});
       if (response.status === 200) {
-        Alert.alert('Notification', 'Please check your email to get password!');
+        Alert.alert(
+          `${language === 'eng' ? 'Notification' : 'Thông báo'}`,
+          `${
+            language === 'eng'
+              ? 'Please check your email to get password!'
+              : 'Vui lòng kiểm tra email để lấy lại mật khẩu!'
+          }`,
+        );
         props.setShowForgotPasswordModal(false);
       } else {
-        Alert.alert('Notification', 'Email not find!');
+        Alert.alert(
+          `${language === 'eng' ? 'Notification' : 'Thông báo'}`,
+          `${language === 'eng' ? 'Email not find!' : 'Không tìm thấy email!'}`,
+        );
       }
     } catch ({response}) {
       console.log(response);
@@ -38,11 +51,15 @@ const ForgotPassword = (props) => {
         visible={props.showForgotPasswordModal}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.title}>FORGOT PASSWORD</Text>
+            <Text style={styles.title}>
+              {language === 'eng' ? 'FORGOT PASSWORD' : 'QUÊN MẬT KHẨU'}
+            </Text>
             <View style={styles.infoContainer}>
               <FormInput
                 styleInput={styles.input}
-                placeholder="Your email"
+                placeholder={
+                  language === 'eng' ? 'Your email' : 'Email đăng ký'
+                }
                 placeholderTextColor="gray"
                 keyboardType="email-address"
                 returnKeyType="go"
@@ -54,13 +71,15 @@ const ForgotPassword = (props) => {
                 ref={btnSendCode}
                 buttonSubmitStyle={styles.buttonContainer}
                 titleSubmitStyle={styles.buttonText}
-                title="SEND CODE"
+                title={language === 'eng' ? 'SEND CODE' : 'GỬI MÃ'}
                 onSubmit={handldeSubmit}
               />
               <TouchableOpacity
                 style={styles.btnCancel}
                 onPress={() => props.setShowForgotPasswordModal(false)}>
-                <Text style={styles.txtCancel}>Cancel</Text>
+                <Text style={styles.txtCancel}>
+                  {language === 'eng' ? 'Cancel' : 'Thoát'}
+                </Text>
               </TouchableOpacity>
             </View>
           </View>

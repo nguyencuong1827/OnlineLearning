@@ -8,10 +8,12 @@ import {LessonProvider} from '../../../providers/lesson-provider';
 import AuthorDetail from '../../../screens/AuthorDetail';
 import ForumQuestion from '../../../screens/ForumQuestion';
 import LessonCourse from '../../../screens/LessonCourse';
+import {LanguageContext} from '../../../providers/language-provider';
 const LessonCourseStack = createStackNavigator();
 const LessonCourseNavigatorStack = (props) => {
   const {navigation, route} = props;
   const {theme2} = useContext(ThemeContext);
+  const {language} = useContext(LanguageContext);
   return (
     <LessonProvider>
       <LessonCourseStack.Navigator
@@ -42,20 +44,22 @@ const LessonCourseNavigatorStack = (props) => {
         <LessonCourseStack.Screen
           name={screenName.LessonCourseScreen}
           component={LessonCourse}
-          options={{headerShown: false}}
+          options={{
+            headerShown: false,
+          }}
           initialParams={{id: 1}}
         />
         <LessonCourseStack.Screen
           name={screenName.AuthorDetailScreen}
           component={AuthorDetail}
-          options={{title: 'Author'}}
+          options={{title: language === 'eng' ? 'Instructor' : 'Tác giả'}}
         />
         <LessonCourseStack.Screen
           name={screenName.ForumQuestion}
           component={ForumQuestion}
           initialParams={{itemQuestion: 1}}
           options={{
-            title: 'Q&A',
+            title: language === 'eng' ? 'Q&A' : 'Hỏi đáp',
           }}
         />
       </LessonCourseStack.Navigator>

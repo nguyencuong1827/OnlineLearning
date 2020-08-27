@@ -11,6 +11,7 @@ import Title from '../../HeaderCourseDetail/TitleItem';
 import Collapsible from 'react-native-collapsible';
 import {useSafeArea} from 'react-native-safe-area-context';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Size, Styles, Typography, BoxModel} from '../../../globals/styles';
 import {ThemeContext} from '../../../providers/theme-propvider';
 import {LessonContext} from '../../../providers/lesson-provider';
@@ -20,7 +21,9 @@ import configToken from '../../../api/config-token';
 
 const LessonList = (props) => {
   const {theme2} = useContext(ThemeContext);
-  const {itemCourse, itemLesson, setItemLesson} = useContext(LessonContext);
+  const {itemCourse, itemLesson, setItemLesson, listDownload} = useContext(
+    LessonContext,
+  );
   const [collapsibleItems, setCollapsibleItems] = useState([]);
   const {userState} = useContext(AuthenticationContext);
   const insets = useSafeArea();
@@ -44,7 +47,15 @@ const LessonList = (props) => {
       />
     );
   };
+  const checkDownload = (lessonId) => {
+    const fResult = listDownload.find((item) => item.id === lessonId);
+    if (!fResult) {
+      return false;
+    }
+    return true;
+  };
   const renderListItem = (ItemLesson) => {
+    const isDownload = checkDownload(ItemLesson.id);
     return (
       <Collapsible collapsed={collapsibleItems.includes(ItemLesson.sectionId)}>
         <TouchableHighlight
@@ -63,6 +74,13 @@ const LessonList = (props) => {
               ]}>
               {ItemLesson.name}
             </Text>
+            {isDownload === true ? (
+              <Ionicons
+                name="md-cloud-download-outline"
+                size={20}
+                color={theme2.successColor}
+              />
+            ) : null}
             {ItemLesson.isFinish ? (
               <FontAwesome
                 name="check-circle"

@@ -13,9 +13,11 @@ import {
   Size,
   Colors,
 } from '../../../globals/styles';
+import {LanguageContext} from '../../../providers/language-provider';
 
 const InfoCourse = (props) => {
   const {theme2} = useContext(ThemeContext);
+  const {language} = useContext(LanguageContext);
   return (
     <View>
       <View style={styles.container}>
@@ -46,7 +48,7 @@ const InfoCourse = (props) => {
             color={theme2.grayColor}
           />
           <Text style={[styles.text, {color: theme2.grayColor}]}>
-            {props.totalHour} hours
+            {props.totalHour} {language === 'eng' ? 'hours' : 'giờ'}
           </Text>
         </View>
         <View
@@ -81,7 +83,7 @@ const InfoCourse = (props) => {
             color={theme2.grayColor}
           />
           <Text style={[styles.text, {color: theme2.grayColor}]}>
-            {props.soldNumber} Enrolled
+            {props.soldNumber} {language === 'eng' ? 'Enrolled' : 'Đăng ký'}
           </Text>
         </View>
         <View
@@ -96,7 +98,8 @@ const InfoCourse = (props) => {
             color={theme2.grayColor}
           />
           <Text style={[styles.text, {color: theme2.grayColor}]}>
-            Updated {Moment(props.updatedAt).format('MMM DD, yyyy')}
+            {language === 'eng' ? 'Updated' : 'Cập nhật'}{' '}
+            {Moment(props.updatedAt).format('MMM DD, yyyy')}
           </Text>
         </View>
       </View>

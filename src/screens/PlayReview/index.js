@@ -15,8 +15,6 @@ const PlayReview = (props) => {
     navigation.goBack();
   };
 
-  //   console.log(props);
-
   return (
     <SafeAreaView style={styles.backgroundVideo}>
       <TouchableHighlight onPress={dismiss} underlayColor={theme2.overlayColor}>

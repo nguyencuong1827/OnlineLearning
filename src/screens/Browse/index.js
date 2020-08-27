@@ -11,6 +11,8 @@ import axiosClient from '../../api/axiosClient';
 import configToken from '../../api/config-token';
 import {ListAuthorsHorizontal} from '../../components/ListAuthors';
 import {NewRelease, RecommendCourse} from '../../globals/constants/screen-name';
+import {LanguageContext} from '../../providers/language-provider';
+import {CategoryContext} from '../../providers/category-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.container = {
@@ -26,6 +28,8 @@ const Browse = (props) => {
 
   const [favorite, setFavorite] = useState([]);
   const {userState} = useContext(AuthenticationContext);
+  const {language} = useContext(LanguageContext);
+  const {listCourseLike} = useContext(CategoryContext);
 
   const [listInstructor, setListInstructor] = useState([]);
   const getInstructor = async () => {
@@ -56,9 +60,10 @@ const Browse = (props) => {
   const showListCourse = (screenName) => {
     navigation.navigate(screenName, {id: screenName});
   };
-
   useEffect(() => {
     getFavoriteCourse();
+  }, [listCourseLike]);
+  useEffect(() => {
     getInstructor();
   }, [userState]);
   return (
@@ -68,8 +73,8 @@ const Browse = (props) => {
           buttonStyle={{button: styles.newAndRecommendButton}}
           title1Style={{title1: styles.newAndRecommendTitle}}
           title2Style={{title2: styles.newAndRecommendTitle}}
-          title1="NEW"
-          title2="RELEASES"
+          title1={language === 'eng' ? 'NEW' : 'MỚI'}
+          title2={language === 'eng' ? 'RELEASES' : 'THỰC HIỆN'}
           source={
             'https://image.freepik.com/free-photo/colorful-hot-air-balloon-flying-sky-sunset-travel-air-transportation-concept-balloon-carnival-thailand_1484-949.jpg'
           }
@@ -79,8 +84,8 @@ const Browse = (props) => {
           buttonStyle={{button: styles.newAndRecommendButton}}
           title1Style={{title1: styles.newAndRecommendTitle}}
           title2Style={{title2: styles.newAndRecommendTitle}}
-          title1="RECOMMEND"
-          title2="FOR YOU"
+          title1={language === 'eng' ? 'RECOMMEND' : 'GỢI Ý'}
+          title2={language === 'eng' ? 'FOR YOU' : 'CHO BẠN'}
           source={
             'https://fiverr-res.cloudinary.com/images/q_auto,f_auto/gigs/130238819/original/d4096d4950eba421600f21c6c753c19375222eb6/draw-you-a-landscape-image-with-ms-paint.png'
           }
@@ -90,12 +95,16 @@ const Browse = (props) => {
         <ListCoursesHorizontal
           data={favorite}
           navigation={navigation}
-          title="Your favorite courses"
+          title={
+            language === 'eng' ? 'Your favorite courses' : 'Khóa học yêu thích'
+          }
           turnOffSeeAll={true}
         />
         <ListAuthorsHorizontal
           data={listInstructor.slice(0, 7)}
-          title="Top instroductors"
+          title={
+            language === 'eng' ? 'Top instroductors' : 'Giáo viên hàng đầu'
+          }
           navigation={navigation}
         />
       </ScrollView>

@@ -3,8 +3,10 @@ import {View, Text, StyleSheet} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {ThemeContext} from '../../../providers/theme-propvider';
 import {Styles, BoxModel, Distance, Typography} from '../../../globals/styles';
+import {LanguageContext} from '../../../providers/language-provider';
 const WhatLearn = (props) => {
   const {theme2} = useContext(ThemeContext);
+  const {language} = useContext(LanguageContext);
   const skillComponent = () => {
     if (props.WhatLearnItem) {
       return props.WhatLearnItem.map((item) => (
@@ -17,7 +19,7 @@ const WhatLearn = (props) => {
       ));
     } else {
       <Text style={[styles.linkText, {color: theme2.primaryTextColor}]}>
-        (Not required)
+        ({language === 'eng' ? 'Not required' : 'Không yêu cầu'})
       </Text>;
     }
   };
@@ -33,7 +35,7 @@ const WhatLearn = (props) => {
       ));
     } else {
       <Text style={[styles.linkText, {color: theme2.primaryTextColor}]}>
-        (Not required)
+        ({language === 'eng' ? 'Not required' : 'Không yêu cầu'})
       </Text>;
     }
   };
@@ -41,17 +43,17 @@ const WhatLearn = (props) => {
     <View>
       <View style={[styles.divide, {backgroundColor: theme2.DialogColor}]} />
       <Text style={[styles.title, {color: theme2.primaryTextColor}]}>
-        What will you learn?
+        {language === 'eng' ? 'What will you learn?' : 'Bạn sẽ học được gì?'}
       </Text>
       {skillComponent()}
       <View style={[styles.divide, {backgroundColor: theme2.DialogColor}]} />
       <Text style={[styles.title, {color: theme2.primaryTextColor}]}>
-        Requirements
+        {language === 'eng' ? 'Requirements' : 'Yêu cầu'}
       </Text>
       {requirementComponent()}
       <View style={[styles.divide, {backgroundColor: theme2.DialogColor}]} />
       <Text style={[styles.title, {color: theme2.primaryTextColor}]}>
-        Description
+        {language === 'eng' ? 'Description' : 'Mô tả'}
       </Text>
       <Text style={[styles.description, {color: theme2.primaryTextColor}]}>
         {props.description ? props.description : 'Not found'}

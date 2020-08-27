@@ -1,17 +1,11 @@
 import React, {useContext} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {
-  ScaleSize,
-  Distance,
-  Typography,
-  lightTheme,
-  darkTheme,
-} from '../../globals/styles';
+import {ScaleSize, Distance, Typography} from '../../globals/styles';
 import Separator from '../../components/Separator';
 import {ThemeContext} from '../../providers/theme-propvider';
-import themes from '../../globals/styles/themes';
 import {useAsyncStorage} from '@react-native-community/async-storage';
+import {LanguageContext} from '../../providers/language-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.container = {
@@ -20,9 +14,10 @@ const setStyleWithTheme = (theme) => {
   };
   styles.title = {...styles.title, color: theme.colorMainText};
 };
-const Theme = () => {
-  const {theme, setTheme, setTheme2} = useContext(ThemeContext);
-  const {setItem} = useAsyncStorage('@theme');
+const Language = () => {
+  const {theme} = useContext(ThemeContext);
+  const {language, setLanguage} = useContext(LanguageContext);
+  const {setItem} = useAsyncStorage('@language');
   const storeData = async (value) => {
     try {
       const jsonValue = JSON.stringify(value);
@@ -31,25 +26,17 @@ const Theme = () => {
       // saving error
     }
   };
-  const checkAndSetTheme = (name) => {
-    if (name === theme.name) {
+  const checkAndSetLanguage = (select) => {
+    if (select === language) {
       return;
     }
-    if (name === 'system') {
-      setTheme(themes.system);
-      setTheme2(lightTheme);
-      storeData({theme: themes.system, theme2: lightTheme});
+    if (select === 'vn') {
+      setLanguage('vn');
+      storeData('vn');
       return;
     }
-    if (name === 'light') {
-      setTheme(themes.light);
-      setTheme2(lightTheme);
-      storeData({theme: themes.light, theme2: lightTheme});
-      return;
-    }
-    setTheme(themes.dark);
-    setTheme2(darkTheme);
-    storeData({theme: themes.dark, theme2: darkTheme});
+    setLanguage('eng');
+    storeData('eng');
   };
 
   setStyleWithTheme(theme);
@@ -58,9 +45,11 @@ const Theme = () => {
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.option}
-        onPress={() => checkAndSetTheme('system')}>
-        <Text style={styles.title}>System</Text>
-        {theme.name === 'system' ? (
+        onPress={() => checkAndSetLanguage('vn')}>
+        <Text style={styles.title}>
+          {language === 'eng' ? 'Vietnamese' : 'Việt Nam'}
+        </Text>
+        {language === 'vn' ? (
           <Icon
             size={ScaleSize.scaleSizeWidth(20)}
             name="check"
@@ -71,22 +60,11 @@ const Theme = () => {
       <Separator />
       <TouchableOpacity
         style={styles.option}
-        onPress={() => checkAndSetTheme('light')}>
-        <Text style={styles.title}>Light</Text>
-        {theme.name === 'light' ? (
-          <Icon
-            size={ScaleSize.scaleSizeWidth(20)}
-            name="check"
-            color={theme.colorMainText}
-          />
-        ) : null}
-      </TouchableOpacity>
-      <Separator />
-      <TouchableOpacity
-        style={styles.option}
-        onPress={() => checkAndSetTheme('dark')}>
-        <Text style={styles.title}>Dark</Text>
-        {theme.name === 'dark' ? (
+        onPress={() => checkAndSetLanguage('eng')}>
+        <Text style={styles.title}>
+          {language === 'eng' ? 'English' : 'Tiếng Anh'}
+        </Text>
+        {language === 'eng' ? (
           <Icon
             size={ScaleSize.scaleSizeWidth(20)}
             name="check"
@@ -98,7 +76,7 @@ const Theme = () => {
   );
 };
 
-export default Theme;
+export default Language;
 
 const styles = StyleSheet.create({
   container: {

@@ -7,6 +7,8 @@ import {Typography, Colors} from '../../globals/styles';
 import axiosClient from '../../api/axiosClient';
 import SearchPage from '../../components/Search';
 import {SearchContext} from '../../providers/search-provider';
+import {LanguageContext} from '../../providers/language-provider';
+import {useAsyncStorage} from '@react-native-community/async-storage';
 
 const setStyleWithTheme = (theme) => {
   styles.searchContainer = {
@@ -23,8 +25,9 @@ const setStyleWithTheme = (theme) => {
 
 const Search = (props) => {
   const {theme} = useContext(ThemeContext);
-  const [keyword, setKeywork] = useState('');
+  const [keyword, setKeyword] = useState('');
   const [isShowRealSearch, setIsShowRealSearch] = useState(false);
+  const {language} = useContext(LanguageContext);
 
   let listAuhthorTemp = [];
   const {
@@ -38,37 +41,50 @@ const Search = (props) => {
     setSearchContent,
   } = useContext(SearchContext);
 
+  const {setItem, getItem, removeItem} = useAsyncStorage('@listSearch');
+
   setStyleWithTheme(theme);
 
   const handleChange = (content) => {
     if (content === 1) {
       setSearchContent('');
     }
-    setKeywork(content);
+    setKeyword(content);
   };
 
-  const handleClear = (e) => {
-    setKeywork('');
+  const handleClear = async () => {
+    try {
+      await removeItem();
+    } catch (error) {
+      console.log(error);
+    }
+    setKeyword('');
     setSearchContent('');
   };
 
   const handleCancel = () => {
-    setKeywork('');
+    setKeyword('');
     setIsShowRealSearch(false);
     setSearchContent('');
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setListSearch([...listSearch, keyword]);
-    await search();
+    const fResult = listSearch.find(
+      (item) => item.toLowerCase() === keyword.toLowerCase(),
+    );
+    if (!fResult) {
+      setListSearch([...listSearch, keyword]);
+      storeListSearch([...listSearch, keyword]);
+    }
+    await search(keyword);
     setSearchContent(keyword);
   };
 
-  const searchCourse = async () => {
+  const searchCourse = async (content) => {
     try {
       const response = await axiosClient.post('/course/search', {
-        keyword: keyword,
+        keyword: content,
         opt: {},
         limit: 10,
         offset: 0,
@@ -120,18 +136,42 @@ const Search = (props) => {
     }
   };
 
+  const storeListSearch = async (value) => {
+    // console.log('value store: ', value);
+    try {
+      const jsonValue = JSON.stringify({listSearch: value});
+      await setItem(jsonValue);
+    } catch (e) {
+      // saving error
+    }
+  };
+  const getListSearch = async () => {
+    try {
+      const item = await getItem();
+      if (item !== null) {
+        const jsonValue = JSON.parse(item);
+        // console.log(jsonValue.listSearch);
+        setListSearch(jsonValue.listSearch);
+      }
+    } catch (e) {
+      // saving error
+    }
+  };
+
   useEffect(() => {
+    getListSearch();
     getListAuthor();
   }, []);
 
   useEffect(() => {
-    if (keyword === '') {
-      setKeywork(searchContent);
+    if (keyword === '' && searchContent !== '') {
+      setKeyword(searchContent);
+      search(searchContent);
     }
   }, [searchContent]);
 
-  const search = async () => {
-    const courses = await searchCourse();
+  const search = async (content) => {
+    const courses = await searchCourse(content);
     setListCourseResult(courses);
   };
 
@@ -140,7 +180,7 @@ const Search = (props) => {
       {isShowRealSearch === false ? (
         <SearchBar
           platform={Platform.OS}
-          placeholder="Search"
+          placeholder={language === 'eng' ? 'Search' : 'Tìm kiếm'}
           value={keyword}
           showCancel={Platform.OS === 'ios'}
           inputContainerStyle={[
@@ -154,7 +194,7 @@ const Search = (props) => {
       ) : (
         <SearchBar
           platform={Platform.OS}
-          placeholder="Search"
+          placeholder={language === 'eng' ? 'Search' : 'Tìm kiếm'}
           onChangeText={(e) => handleChange(e)}
           value={keyword}
           showCancel={Platform.OS === 'ios'}

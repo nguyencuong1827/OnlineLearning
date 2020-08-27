@@ -21,9 +21,11 @@ import {AuthenticationContext} from '../../../providers/authentication-provider'
 import {LessonContext} from '../../../providers/lesson-provider';
 import axiosClient from '../../../api/axiosClient';
 import configToken from '../../../api/config-token';
+import {LanguageContext} from '../../../providers/language-provider';
 const NoteView = (props) => {
   const {theme2} = useContext(ThemeContext);
   const {userState} = useContext(AuthenticationContext);
+  const {language} = useContext(LanguageContext);
   const {itemCourse} = useContext(LessonContext);
   const [allNote, setAllNote] = useState([]);
 
@@ -155,14 +157,18 @@ const NoteView = (props) => {
               Typography.fontBold,
               {fontSize: Typography.fontSize20, color: theme2.primaryTextColor},
             ]}>
-            There's nothing here yet
+            {language === 'eng'
+              ? 'There is nothing here yet'
+              : 'Không có ghi chú nào'}
           </Text>
           <Text
             style={[
               Typography.fontRegular,
               {fontSize: Typography.fontSize14, color: theme2.grayColor},
             ]}>
-            Tap create note to make your first note
+            {language === 'eng'
+              ? 'Tap create note to make your first note'
+              : 'Nhấp để tạo ghi chú mới'}
           </Text>
         </View>
       ) : (

@@ -6,10 +6,6 @@ import {AuthenticationContext} from '../../providers/authentication-provider';
 import axiosClient from '../../api/axiosClient';
 import configToken from '../../api/config-token';
 import {
-  LessonCourseScreen,
-  LessonCourseScreenStack,
-} from '../../globals/constants/screen-name';
-import {
   Size,
   Styles,
   BoxModel,

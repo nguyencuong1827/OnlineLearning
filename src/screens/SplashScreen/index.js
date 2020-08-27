@@ -5,7 +5,6 @@ import {HEIGHT} from '../../globals/styles/scale-size';
 import {Colors} from '../../globals/styles';
 import {useAsyncStorage} from '@react-native-community/async-storage';
 import * as ScreenName from '../../globals/constants/screen-name';
-import {userTokenKey} from '../../globals/constants/key-storage';
 import axiosClient from '../../api/axiosClient';
 import {CategoryContext} from '../../providers/category-provider';
 
@@ -46,6 +45,7 @@ const SplashScreen = (props) => {
         () =>
           navigation.replace(ScreenName.AppNavigatorScreen, {
             screen: ScreenName.HomeScreen,
+            firstLogin: false,
           }),
         2500,
       );

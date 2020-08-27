@@ -13,6 +13,7 @@ import {CategoryContext} from '../../providers/category-provider';
 import {ThemeContext} from '../../providers/theme-propvider';
 import CategoryItem from './CategoryItem';
 import {CategoryScreen} from '../../globals/constants/screen-name';
+import {LanguageContext} from '../../providers/language-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.title2 = {...styles.title2, color: theme.colorMainText};
@@ -21,7 +22,9 @@ const ListTopicsHorizontal = (props) => {
   const {listCategory} = useContext(CategoryContext);
   const {theme} = useContext(ThemeContext);
   setStyleWithTheme(theme);
+
   const {navigation} = props;
+  const {language} = useContext(LanguageContext);
 
   const findImage = (itemId) => {
     const result = categoryImage.find(({id}) => id === itemId);
@@ -52,7 +55,9 @@ const ListTopicsHorizontal = (props) => {
   };
   return (
     <View>
-      <Text style={styles.title2}>Category</Text>
+      <Text style={styles.title2}>
+        {language === 'eng' ? 'Category' : 'Thể loại'}
+      </Text>
       <ScrollView
         horizontal={true}
         style={styles.container}

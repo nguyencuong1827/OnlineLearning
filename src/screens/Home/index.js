@@ -22,6 +22,7 @@ import configToken from '../../api/config-token';
 import {AuthenticationContext} from '../../providers/authentication-provider';
 import * as screenName from '../../globals/constants/screen-name';
 import p from 'pretty-format';
+import {LanguageContext} from '../../providers/language-provider';
 
 const WelcomeImage = () => (
   <ImageBackground
@@ -66,6 +67,7 @@ const Home = (props) => {
   const {navigation} = props;
   const {theme} = useContext(ThemeContext);
   const {userState} = useContext(AuthenticationContext);
+  const {language} = useContext(LanguageContext);
   setStyleWithTheme(theme);
 
   const [state1, setState1] = useState([]);
@@ -143,24 +145,24 @@ const Home = (props) => {
       <ScrollView>
         <WelcomeImage />
         <ListCoursesHorizontal
+          data={state3}
+          title={language === 'eng' ? 'Top rating' : 'Xếp hạng cao'}
+          navigation={navigation}
+          id={screenName.TopRating}
+          showAll={() => showListCourse(screenName.TopRating)}
+        />
+        <ListCoursesHorizontal
           data={state2}
-          title="Best seller"
+          title={language === 'eng' ? 'Best seller' : 'Nhiều học viên nhất'}
           navigation={navigation}
           id={screenName.BestSeller}
           showAll={() => showListCourse(screenName.BestSeller)}
         />
         <ListCoursesHorizontal
           data={state1}
-          title="New releases"
+          title={language === 'eng' ? 'New releases' : 'Mới thực hiện'}
           navigation={navigation}
           showAll={() => showListCourse(screenName.NewRelease)}
-        />
-        <ListCoursesHorizontal
-          data={state3}
-          title="Top rating"
-          navigation={navigation}
-          id={screenName.TopRating}
-          showAll={() => showListCourse(screenName.TopRating)}
         />
       </ScrollView>
     </SafeAreaView>

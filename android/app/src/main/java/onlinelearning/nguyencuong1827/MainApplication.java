@@ -1,9 +1,15 @@
-package com.onlinelearning;
+package onlinelearning.nguyencuong1827;
 
 import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
+import io.invertase.firebase.storage.ReactNativeFirebaseStoragePackage;
+import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
+import com.imagepicker.ImagePickerPackage;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.dylanvann.fastimage.FastImageViewPackage;

@@ -7,10 +7,12 @@ import NoteView from '../Note';
 import MoreView from '../More';
 import {ThemeContext} from '../../../providers/theme-propvider';
 import {Typography} from '../../../globals/styles';
+import {LanguageContext} from '../../../providers/language-provider';
 
 const Tab = createMaterialTopTabNavigator();
 const LessonCourseNavigator = (props) => {
   const {theme2} = useContext(ThemeContext);
+  const {language} = useContext(LanguageContext);
   return (
     <Tab.Navigator
       initialRouteName={screenName.LectureTab}
@@ -27,22 +29,22 @@ const LessonCourseNavigator = (props) => {
       <Tab.Screen
         name={screenName.LectureTab}
         component={LessonList}
-        options={{tabBarLabel: 'Lecture'}}
+        options={{tabBarLabel: language === 'eng' ? 'Lesson' : 'Bài học'}}
       />
       <Tab.Screen
         name={screenName.MoreTab}
         component={QuestionView}
-        options={{tabBarLabel: 'Q&A'}}
+        options={{tabBarLabel: language === 'eng' ? 'Q&A' : 'Hỏi đáp'}}
       />
       <Tab.Screen
         name={screenName.QuestionTab}
         component={NoteView}
-        options={{tabBarLabel: 'Note'}}
+        options={{tabBarLabel: language === 'eng' ? 'Note' : 'Ghi chú'}}
       />
       <Tab.Screen
         name={screenName.NoteTab}
         component={MoreView}
-        options={{tabBarLabel: 'More'}}
+        options={{tabBarLabel: language === 'eng' ? 'More' : 'Khác'}}
       />
     </Tab.Navigator>
   );

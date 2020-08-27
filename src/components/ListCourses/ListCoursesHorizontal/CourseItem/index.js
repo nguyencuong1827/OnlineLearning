@@ -10,6 +10,7 @@ import Rating from 'react-native-star-rating';
 import {CourseDetailScreen} from '../../../../globals/constants/screen-name';
 import {ThemeContext} from '../../../../providers/theme-propvider';
 import Moment from 'moment';
+import {LanguageContext} from '../../../../providers/language-provider';
 
 const setStyleWithTheme = (theme) => {
   styles.content = {
@@ -22,12 +23,15 @@ const setStyleWithTheme = (theme) => {
 const CourseItemHorizontal = (props) => {
   const {navigation, item} = props;
   const {theme} = useContext(ThemeContext);
+  const {language} = useContext(LanguageContext);
   setStyleWithTheme(theme);
 
   const showCourseDetail = () => {
     navigation.navigate(CourseDetailScreen, {id: item.id});
   };
-  const unit = item.totalHours ? 'hours' : 'students';
+  const unit = item.totalHours
+    ? `${language === 'eng' ? 'hours' : 'giờ'}`
+    : `${language === 'eng' ? 'students' : 'học sinh'}`;
   const price = `${item.price} đ`;
   return (
     <TouchableOpacity style={styles.container} onPress={showCourseDetail}>
@@ -63,7 +67,9 @@ const CourseItemHorizontal = (props) => {
           </Text>
         </View>
         <Text style={styles.price}>
-          {item.prince !== '0' ? 'Miễn phí' : price}
+          {item.prince !== '0'
+            ? `${language === 'eng' ? 'Free' : 'Miễn phí'}`
+            : price}
         </Text>
       </View>
     </TouchableOpacity>
@@ -74,7 +80,7 @@ const styles = StyleSheet.create({
   container: {
     marginRight: Distance.spacing_12,
     width: ScaleSize.scaleSizeWidth(210),
-    height: ScaleSize.scaleSizeHeight(220),
+    height: ScaleSize.scaleSizeWidth(260),
     shadowColor: '#000',
     shadowOffset: {
       width: 5,
@@ -86,12 +92,12 @@ const styles = StyleSheet.create({
   },
   img: {
     width: ScaleSize.scaleSizeWidth(210),
-    height: ScaleSize.scaleSizeHeight(110),
+    height: ScaleSize.scaleSizeWidth(130),
     resizeMode: 'cover',
   },
   content: {
     padding: Distance.spacing_10,
-    height: ScaleSize.scaleSizeWidth(200),
+    height: ScaleSize.scaleSizeWidth(130),
   },
   info: {
     color: 'gray',

@@ -4,6 +4,7 @@ import {
   LOGIN_FAILED,
   LOGOUT_REQUEST,
   UPDATE_FAVORITE_CATEGORY,
+  UPDATE_USER_INFO,
 } from '../globals/constants/actions-constant';
 const AuthenticationReducer = (prevState, action) => {
   switch (action.type) {
@@ -11,6 +12,7 @@ const AuthenticationReducer = (prevState, action) => {
       return {
         ...prevState,
         isLoggingIn: true,
+        messageError: '',
       };
     }
     case LOGIN_SUCCESSED: {
@@ -26,26 +28,35 @@ const AuthenticationReducer = (prevState, action) => {
       return {
         ...prevState,
         isLoggingIn: false,
-        userInfo: null,
         token: null,
         messageError: action.messageError,
       };
     }
     case LOGOUT_REQUEST: {
       return {
+        ...prevState,
         isLoggingIn: false,
-        userInfo: null,
         token: null,
-        message: '',
+        messageError: '',
       };
     }
     case UPDATE_FAVORITE_CATEGORY: {
-      console.log(action);
       return {
         ...prevState,
         userInfo: {
           ...prevState.userInfo,
           favoriteCategories: action.listNewFavorite,
+        },
+      };
+    }
+    case UPDATE_USER_INFO: {
+      return {
+        ...prevState,
+        userInfo: {
+          ...prevState.userInfo,
+          name: action.newInfo.name,
+          phone: action.newInfo.phone,
+          avatar: action.newInfo.avatar,
         },
       };
     }

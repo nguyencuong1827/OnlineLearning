@@ -11,6 +11,7 @@ import {
   TopRating,
   RecommendCourse,
   BestSeller,
+  LanguageScreen,
 } from '../../../globals/constants/screen-name';
 import Profile from '../../../screens/Profile';
 import Theme from '../../../screens/Theme';
@@ -18,11 +19,14 @@ import {ThemeContext} from '../../../providers/theme-propvider';
 import {BookmarksVertical} from '../../../components/ListBookmarks';
 import Setting from '../../../screens/Setting';
 import ListOfCourse from '../../../screens/ListOfCourse';
+import Language from '../../../screens/Language';
+import {LanguageContext} from '../../../providers/language-provider';
 
 const Stack = createStackNavigator();
 
 const HomeStack = () => {
   const {theme} = useContext(ThemeContext);
+  const {language} = useContext(LanguageContext);
   const screenOptions = {
     headerStyle: {
       backgroundColor: theme.headerFooterBackground,
@@ -35,47 +39,51 @@ const HomeStack = () => {
       <Stack.Screen
         name={HomeScreen}
         component={Home}
-        options={{title: 'Home'}}
+        options={{title: language === 'eng' ? 'Home' : 'Trang chủ'}}
       />
       <Stack.Screen
         name={ProfileScreen}
         component={Profile}
-        options={{title: 'Profile'}}
+        options={{title: language === 'eng' ? 'Profile' : 'Cá nhân'}}
       />
       <Stack.Screen
         name={SettingScreen}
         component={Setting}
-        options={{title: 'Setting'}}
+        options={{title: language === 'eng' ? 'Setting' : 'Cài đặt'}}
       />
       <Stack.Screen
         name={ThemeScreen}
         component={Theme}
-        options={{title: 'Theme'}}
+        options={{title: language === 'eng' ? 'Theme' : 'Chủ đề'}}
       />
       <Stack.Screen
         name={NewRelease}
         component={ListOfCourse}
-        options={{title: 'New release'}}
+        options={{title: language === 'eng' ? 'New release' : 'Mới thực hiện'}}
       />
       <Stack.Screen
         name={RecommendCourse}
         component={ListOfCourse}
-        options={{title: 'Recommend for you'}}
+        options={{
+          title: language === 'eng' ? 'Recommend for you' : 'Gợi ý cho bạn',
+        }}
       />
       <Stack.Screen
         name={TopRating}
         component={ListOfCourse}
-        options={{title: 'Top rating'}}
+        options={{title: language === 'eng' ? 'Top rating' : 'Xếp hạng cao'}}
       />
       <Stack.Screen
         name={BestSeller}
         component={ListOfCourse}
-        options={{title: 'Best seller'}}
+        options={{
+          title: language === 'eng' ? 'Best seller' : 'Nhiều học viên nhất',
+        }}
       />
       <Stack.Screen
-        name={BookmarkScreen}
-        component={BookmarksVertical}
-        options={{title: 'Bookmarks'}}
+        name={LanguageScreen}
+        component={Language}
+        options={{title: language === 'eng' ? 'Language' : 'Ngôn ngữ'}}
       />
     </Stack.Navigator>
   );
